@@ -43,7 +43,8 @@ const GameInner: React.FC<Props> = (props) => {
     };
 
     const onWrong = () => {
-      markWordAsRepeated(currentWord.id, (currentWord.step ?? 0));
+      const step  = currentWord.step ? currentWord.step - 1 : 0
+      markWordAsRepeated(currentWord.id, step);
       setWrongCounter(wrongCounter + 1);
       goNext();
     };

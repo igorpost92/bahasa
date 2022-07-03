@@ -3,6 +3,6 @@ export interface Word {
   text: string;
   meaning: string;
   created_at: Date;
-  last_date?: Date;
-  step?: number;
+  last_date: Date | null;
+  step: number | null;
 }
