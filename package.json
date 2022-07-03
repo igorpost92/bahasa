@@ -1,0 +1,29 @@
+{
+  "name": "bahasa-vite",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "surge": "surge --domain ip92-bahasa.surge.sh --project /Users/user/Documents/projects/bahasa-vite/dist",
+    "pub": "npm run build && npm run surge"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^1.35.4",
+    "classnames": "^2.3.1",
+    "node-sass": "^7.0.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.3.0",
+    "sass": "^1.53.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^1.3.0",
+    "surge": "^0.23.1",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.9"
+  }
+}

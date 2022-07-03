@@ -1,0 +1,55 @@
+.wrap {
+  padding: 12px;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  margin-top: 12px;
+}
+
+.linksWrap {
+  display: flex;
+  align-items: center;
+
+  * + * {
+    margin-left: 6px;
+  }
+}
+
+.wordCounter {
+  margin-left: auto;
+}
+
+.list {
+  padding: 15px;
+  margin: 20px -10px 0;
+  flex: auto;
+  overflow: auto;
+}
+
+.word {
+  display: block;
+  text-decoration: none !important;
+  color: inherit !important;
+
+  box-shadow: 0 1px 4px 2px #cecece;
+  border-radius: 4px;
+  padding: 12px;
+
+  & + & {
+    margin-top: 12px;
+  }
+}
+
+.text {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.meaning {
+  font-size: 18px;
+  margin-top: 4px;
+}

@@ -1,0 +1,22 @@
+.status {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.card {
+  flex: auto;
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 12px;
+}
+
+.btn {
+  margin: 6px;
+  flex: auto;
+}
