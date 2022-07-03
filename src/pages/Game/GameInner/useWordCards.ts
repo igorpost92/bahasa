@@ -5,8 +5,7 @@ import { calcNextRepeatTime } from '../../../constants/steps';
 
 const isWordNeedToRepeat = (word: Word) => {
   if (!word.last_date) {
-  // TODO:
-    return true
+    return true;
   }
 
   const lastDate = word.last_date || word.created_at;

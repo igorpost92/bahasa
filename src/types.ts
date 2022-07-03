@@ -2,7 +2,7 @@ export interface Word {
   id: string;
   text: string;
   meaning: string;
-  created_at: string;
-  last_date?: string;
+  created_at: Date;
+  last_date?: Date;
   step?: number;
 }

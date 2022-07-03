@@ -3,7 +3,8 @@ import { supabase } from './sendRequest';
 const wordsTable = () => supabase.from('words');
 
 export const getAllWords = () => {
-  return wordsTable().select('id, text, meaning, created_at, step, last_date');
+  return wordsTable()
+    .select('id, text, meaning, created_at, step, last_date')
 };
 
 export const getWord = (id: string) => {
@@ -23,7 +24,7 @@ export const addWord = async (text: string, meaning: string) => {
   throw new Error('error addWord');
 };
 
-export const bulkAdd = async (words: {text: string, meaning: string}[]) => {
+export const bulkAdd = async (words: { text: string, meaning: string }[]) => {
   const { data, error } = await wordsTable().insert(words);
 
   if (data) {
@@ -31,7 +32,7 @@ export const bulkAdd = async (words: {text: string, meaning: string}[]) => {
   }
 
   throw new Error('error bulkAdd');
-}
+};
 
 export const updateWord = async (id: string, text: string, meaning: string) => {
   const { data, error } = await wordsTable()

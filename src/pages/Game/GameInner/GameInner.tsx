@@ -11,14 +11,11 @@ interface Props {
   invertedMode: boolean;
 }
 
-type Step = 'question' | 'know' | 'dont know';
 
 const GameInner: React.FC<Props> = (props) => {
-  const [step, setStep] = useState<Step>('question');
+  const [showAnswer, setShowAnswer] = useState(false);
   const [counter, setCounter] = useState(0);
   const [wrongCounter, setWrongCounter] = useState(0);
-
-  const showAnswer = step !== 'question';
 
   const cards = useWordCards(props.words);
 
@@ -27,17 +24,8 @@ const GameInner: React.FC<Props> = (props) => {
   if (counter >= cards.length) {
     content = 'Done!';
   } else {
-    const markToRepeat = () => {
-      markWordAsRepeated(currentWord.id, (currentWord.step ?? 0));
-      setWrongCounter(wrongCounter + 1);
-    };
-
-    const onClick = (flag: boolean) => {
-      setStep(flag ? 'know' : 'dont know');
-
-      if (!flag) {
-        markToRepeat();
-      }
+    const doShowAnswer = () => {
+      setShowAnswer(true);
     };
 
     const currentWord = cards[counter];
@@ -46,40 +34,19 @@ const GameInner: React.FC<Props> = (props) => {
 
     const goNext = () => {
       setCounter(counter + 1);
-      setStep('question');
+      setShowAnswer(false);
     };
 
     const onSuccess = () => {
-      markWordAsRepeated(currentWord.id, (currentWord.step ?? 0) + 1);
+      markWordAsRepeated(currentWord.id, (currentWord.step ?? -1) + 1);
       goNext();
     };
 
     const onWrong = () => {
-      markToRepeat();
+      markWordAsRepeated(currentWord.id, (currentWord.step ?? 0));
+      setWrongCounter(wrongCounter + 1);
       goNext();
     };
-
-    let buttons;
-
-    if (step === 'question') {
-      buttons = (
-        <>
-          <Button size={'xl'} className={styles.btn} type={'success'} onClick={() => onClick(true)}>Yes</Button>
-          <Button size={'xl'} className={styles.btn} type={'danger'} onClick={() => onClick(false)}>No</Button>
-        </>
-      );
-    } else if (step === 'know') {
-      buttons = (
-        <>
-          <Button size={'xl'} className={styles.btn} type={'success'} onClick={onSuccess}>Correct</Button>
-          <Button size={'xl'} className={styles.btn} type={'danger'} onClick={onWrong}>Wrong</Button>
-        </>
-      );
-    } else {
-      buttons = (
-        <Button size={'xl'} className={styles.btn} onClick={goNext}>Next</Button>
-      );
-    }
 
     content = (
       <>
@@ -91,7 +58,14 @@ const GameInner: React.FC<Props> = (props) => {
         />
 
         <div className={styles.buttons}>
-          {buttons}
+          {showAnswer ? (
+            <>
+              <Button size={'xl'} className={styles.btn} type={'success'} onClick={onSuccess}>Correct</Button>
+              <Button size={'xl'} className={styles.btn} type={'danger'} onClick={onWrong}>Wrong</Button>
+            </>
+          ) : (
+            <Button size={'xl'} className={styles.btn} onClick={doShowAnswer}>Show answer</Button>
+          )}
         </div>
       </>
     );

@@ -9,20 +9,24 @@ const Words: React.FC = () => {
   const { isLoading, data } = useWords();
   const [searchInput, setSearchInput] = useState('');
 
-  const items = useMemo(() => {
-    if (!data) {
-      return [];
-    }
+  const sortedWords = useMemo(() => {
+    return (data ?? []).sort((a, b) => {
+      const dateA = a.created_at.getTime();
+      const dateB = b.created_at.getTime();
+      return dateB - dateA;
+    });
+  }, [data])
 
+  const items = useMemo(() => {
     if (!searchInput) {
-      return data;
+      return sortedWords;
     }
 
     const searchStr = searchInput.toLowerCase();
 
-    return data.filter(item => item.text.toLowerCase().includes(searchStr)
+    return sortedWords.filter(item => item.text.toLowerCase().includes(searchStr)
       || item.meaning.toLowerCase().includes(searchStr));
-  }, [searchInput, data]);
+  }, [searchInput, sortedWords]);
 
   return (
     <div className={styles.wrap}>

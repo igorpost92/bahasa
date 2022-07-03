@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getWord } from '../index';
 import { Word } from '../../types';
+import { parseWordFromServer } from '../utils/parseWordFromServer';
 
 export const useWord = (id?: string) => {
   const [isLoading, setLoading] = useState(true);
@@ -14,7 +15,7 @@ export const useWord = (id?: string) => {
 
     const { data: result, error } = await getWord(id);
     if (result) {
-      setData(result);
+      setData(parseWordFromServer(result));
     }
 
     setLoading(false);

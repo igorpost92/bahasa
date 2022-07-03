@@ -22,7 +22,7 @@ export const steps = [
   99 * DAY,
 ];
 
-export const calcNextRepeatTime = (lastDate: string, step: number) => {
-  const nextDate = new Date(new Date(lastDate).getTime() + steps[step])
+export const calcNextRepeatTime = (lastDate: Date, step: number) => {
+  const nextDate = new Date(lastDate.getTime() + steps[step])
   return nextDate
 }

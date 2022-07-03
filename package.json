@@ -1,9 +1,9 @@
 {
-  "name": "bahasa-vite",
+  "name": "bahasa",
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "surge": "surge --domain ip92-bahasa.surge.sh --project /Users/user/Documents/projects/bahasa-vite/dist",

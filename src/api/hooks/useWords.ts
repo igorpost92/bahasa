@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAllWords } from '../index';
 import { Word } from '../../types';
+import { parseWordFromServer } from '../utils/parseWordFromServer';
 
 export const useWords = () => {
   const [isLoading, setLoading] = useState(true);
@@ -9,7 +10,7 @@ export const useWords = () => {
   const sendRequest = async () => {
     const { data: result, error } = await getAllWords();
     if (result) {
-      setData(result);
+      setData(result.map(parseWordFromServer));
     }
 
     setLoading(false);
