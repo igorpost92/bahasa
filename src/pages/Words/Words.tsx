@@ -4,18 +4,38 @@ import { useWords } from '../../api/hooks/useWords';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
+import { Word } from '../../types';
+
+const sorts = [
+  {
+    name: 'Date added (desc)', getField: (word: Word) => word.created_at.getTime(), sortK: -1,
+  },
+  {
+    name: 'Date added (asc)', getField: (word: Word) => word.created_at.getTime(),
+  },
+  {
+    name: 'Step (desc)', getField: (word: Word) => word.step ?? 0, sortK: -1,
+  },
+  {
+    name: 'Step (asc)', getField: (word: Word) => word.step ?? 0,
+  },
+];
 
 const Words: React.FC = () => {
   const { isLoading, data } = useWords();
   const [searchInput, setSearchInput] = useState('');
+  const [sort, setSort] = useState(0);
 
   const sortedWords = useMemo(() => {
+    const sortRule = sorts[sort];
+
     return (data ?? []).sort((a, b) => {
-      const dateA = a.created_at.getTime();
-      const dateB = b.created_at.getTime();
-      return dateB - dateA;
+      const valueA = sortRule.getField(a);
+      const valueB = sortRule.getField(b);
+      const sortNumber = valueA - valueB
+      return sortNumber * (sortRule.sortK ?? 1)
     });
-  }, [data])
+  }, [data, sort]);
 
   const items = useMemo(() => {
     if (!searchInput) {
@@ -55,6 +75,16 @@ const Words: React.FC = () => {
         placeholder={'Search...'}
       />
 
+      <select
+        className={styles.sortSelect}
+        value={sort}
+        onChange={(e) => setSort(Number(e.target.value))}
+      >
+        {sorts.map((item, idx) => (
+          <option value={idx}>{item.name}</option>
+        ))}
+      </select>
+
       {isLoading && <div>loading...</div>}
 
       {!isLoading && !items.length && <div>no words</div>}
@@ -64,7 +94,12 @@ const Words: React.FC = () => {
           {items
             .map(item => (
               <Link key={item.id} to={`/words/${item.id}`} className={styles.word}>
-                <div className={styles.text}>{item.text}</div>
+                <div className={styles.topRow}>
+                  <div className={styles.text}>{item.text}</div>
+                  {!!item.step && (
+                    <div className={styles.step}>{item.step}</div>
+                  )}
+                </div>
                 <div className={styles.meaning}>{item.meaning}</div>
               </Link>
             ))}
