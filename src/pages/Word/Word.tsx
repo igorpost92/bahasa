@@ -17,6 +17,8 @@ const Word: React.FC = () => {
 
   const { isLoading, data } = useWord(id);
 
+  const [saveInProgress, setSaveInProgress] = useState(false);
+
   useEffect(() => {
     if (data) {
       setText(data.text);
@@ -25,9 +27,11 @@ const Word: React.FC = () => {
   }, [data]);
 
   const onSave = async () => {
-    if (!text || !meaning) {
+    if (saveInProgress || !text || !meaning) {
       return;
     }
+
+    setSaveInProgress(true);
 
     let action;
 
@@ -38,6 +42,9 @@ const Word: React.FC = () => {
     }
 
     const result = await action();
+
+    setSaveInProgress(false);
+
     if (result) {
       navigate('/words');
     } else {
@@ -69,7 +76,7 @@ const Word: React.FC = () => {
         <Link to="/">
           <Button>Back</Button>
         </Link>
-        <Button type={'success'} onClick={onSave}>Save</Button>
+        <Button type={'success'} onClick={onSave}>Save {saveInProgress && <span>(loading...)</span>}</Button>
         <Button type={'danger'} onClick={onDelete}>Delete</Button>
       </div>
 
