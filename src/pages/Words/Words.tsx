@@ -32,8 +32,8 @@ const Words: React.FC = () => {
     return (data ?? []).sort((a, b) => {
       const valueA = sortRule.getField(a);
       const valueB = sortRule.getField(b);
-      const sortNumber = valueA - valueB
-      return sortNumber * (sortRule.sortK ?? 1)
+      const sortNumber = valueA - valueB;
+      return sortNumber * (sortRule.sortK ?? 1);
     });
   }, [data, sort]);
 

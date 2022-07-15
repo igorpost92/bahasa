@@ -5,6 +5,7 @@ import { useWord } from '../../api/hooks/useWord';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { addWord, deleteWord, updateWord } from '../../api';
+import ListenButton from '../../components/ListenButton/ListenButton';
 
 const Word: React.FC = () => {
   const navigate = useNavigate();
@@ -81,6 +82,8 @@ const Word: React.FC = () => {
         Meaning
         <Input className={styles.input} value={meaning} onChange={setMeaning} />
       </label>
+
+      <ListenButton text={text} className={styles.listenBtn} />
     </div>
   );
 };

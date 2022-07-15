@@ -6,7 +6,7 @@
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "surge": "surge --domain ip92-bahasa.surge.sh --project /Users/user/Documents/projects/bahasa-vite/dist",
+    "surge": "surge --domain ip92-bahasa.surge.sh --project ./dist",
     "pub": "npm run build && npm run surge"
   },
   "dependencies": {
