@@ -36,9 +36,9 @@ const Word: React.FC = () => {
     let action;
 
     if (isNew) {
-      action = () => addWord(text, meaning);
+      action = () => addWord(text.trim(), meaning.trim());
     } else {
-      action = () => updateWord(id, text, meaning);
+      action = () => updateWord(id, text.trim(), meaning.trim());
     }
 
     const result = await action();
