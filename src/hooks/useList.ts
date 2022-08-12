@@ -11,7 +11,7 @@ export function useList<T extends any>(initialState: T[] = []) {
       setList(value => [...value, element]);
     },
     remove: (element: T) => {
-      setList(value => value.filter(el => el === element));
+      setList(value => value.filter(el => el !== element));
     },
   }), [list]);
 

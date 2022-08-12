@@ -112,6 +112,7 @@ const GameInner: React.FC<Props> = (props) => {
       markWordAsRepeated(prevWord.id, step);
     }
 
+    setShowAnswer(false);
     setCounter(counter - 1);
   };
 
