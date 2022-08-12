@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import { Word } from '../../types';
+import WordMini from '../../components/WordMini/WordMini';
 
 const sorts = [
   {
@@ -99,15 +100,13 @@ const Words: React.FC = () => {
         <div className={styles.list}>
           {items
             .map(item => (
-              <Link key={item.id} to={`/words/${item.id}`} className={styles.word}>
-                <div className={styles.topRow}>
-                  <div className={styles.text}>{item.text}</div>
-                  {!!item.step && (
-                    <div className={styles.step}>{item.step}</div>
-                  )}
-                </div>
-                <div className={styles.meaning}>{item.meaning}</div>
-              </Link>
+              <WordMini
+                key={item.id}
+                url={`/words/${item.id}`}
+                text={item.text}
+                meaning={item.meaning}
+                step={item.step}
+              />
             ))}
         </div>
       )}

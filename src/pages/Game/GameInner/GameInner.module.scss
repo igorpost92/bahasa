@@ -20,3 +20,30 @@
   margin: 6px;
   flex: auto;
 }
+
+.doneLabel {
+  text-align: center;
+}
+
+.resultWrap {
+  display: flex;
+  flex-direction: column;
+  flex: auto;
+  height: 1%;
+  width: 100%;
+}
+
+.toRepeatWrap {
+  margin-top: 20px;
+}
+
+.repeatLabel {
+  text-align: center;
+}
+
+.repeatList {
+  padding: 15px;
+  margin: 8px -10px 0;
+  flex: auto;
+  overflow: auto;
+}

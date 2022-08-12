@@ -1,0 +1,41 @@
+.word {
+  display: block;
+  text-decoration: none !important;
+  color: inherit !important;
+
+  box-shadow: 0 1px 4px 2px #cecece;
+  border-radius: 4px;
+  padding: 12px;
+
+  & + & {
+    margin-top: 12px;
+  }
+}
+
+.topRow {
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  flex: auto;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.step {
+  margin-left: 10px;
+  flex: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  background: #cecece;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.meaning {
+  font-size: 18px;
+  margin-top: 4px;
+}

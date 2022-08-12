@@ -5,6 +5,8 @@ import Card from '../../../components/Card/Card';
 import Button from '../../../components/Button/Button';
 import { useWordCards } from './useWordCards';
 import { markWordAsRepeated } from '../../../api';
+import WordMini from '../../../components/WordMini/WordMini';
+import { useList } from '../../../hooks/useList';
 
 interface Props {
   words: Word[];
@@ -15,14 +17,34 @@ interface Props {
 const GameInner: React.FC<Props> = (props) => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [counter, setCounter] = useState(0);
-  const [wrongCounter, setWrongCounter] = useState(0);
 
   const cards = useWordCards(props.words, props.globalRepeatMode);
+  const [wrongWords, wrongWordsActions] = useList<Word>([]);
 
   let content;
 
   if (counter >= cards.length) {
-    content = 'Done!';
+    content = (
+      <div className={styles.resultWrap}>
+        <div className={styles.doneLabel}>Done!</div>
+
+        {!!wrongWords.length && (
+          <>
+            <div className={styles.repeatLabel}>Words to repeat again:</div>
+            <div className={styles.repeatList}>
+              {wrongWords.map(word => (
+                <WordMini
+                  key={word.id}
+                  text={word.text}
+                  meaning={word.meaning}
+                  step={word.step}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    );
   } else {
     const doShowAnswer = () => {
       setShowAnswer(true);
@@ -45,9 +67,11 @@ const GameInner: React.FC<Props> = (props) => {
     };
 
     const onWrong = () => {
+      wrongWordsActions.add(currentWord);
+      
       const step = currentWord.step ? currentWord.step - 1 : 0;
       markWordAsRepeated(currentWord.id, step);
-      setWrongCounter(wrongCounter + 1);
+      
       goNext();
     };
 
@@ -82,7 +106,7 @@ const GameInner: React.FC<Props> = (props) => {
         </div>
 
         <div>
-          wrong: {wrongCounter}
+          wrong: {wrongWords.length}
         </div>
       </div>
 
