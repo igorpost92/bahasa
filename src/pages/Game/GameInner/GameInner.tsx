@@ -9,15 +9,15 @@ import { markWordAsRepeated } from '../../../api';
 interface Props {
   words: Word[];
   invertedMode: boolean;
+  globalRepeatMode?: boolean;
 }
-
 
 const GameInner: React.FC<Props> = (props) => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [counter, setCounter] = useState(0);
   const [wrongCounter, setWrongCounter] = useState(0);
 
-  const cards = useWordCards(props.words);
+  const cards = useWordCards(props.words, props.globalRepeatMode);
 
   let content;
 
@@ -38,12 +38,14 @@ const GameInner: React.FC<Props> = (props) => {
     };
 
     const onSuccess = () => {
-      markWordAsRepeated(currentWord.id, (currentWord.step ?? -1) + 1);
+      if (!props.globalRepeatMode) {
+        markWordAsRepeated(currentWord.id, (currentWord.step ?? -1) + 1);
+      }
       goNext();
     };
 
     const onWrong = () => {
-      const step  = currentWord.step ? currentWord.step - 1 : 0
+      const step = currentWord.step ? currentWord.step - 1 : 0;
       markWordAsRepeated(currentWord.id, step);
       setWrongCounter(wrongCounter + 1);
       goNext();

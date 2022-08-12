@@ -5,7 +5,11 @@ import { Link } from 'react-router-dom';
 import { useWords } from '../../api/hooks/useWords';
 import GameInner from './GameInner/GameInner';
 
-const Game: React.FC = () => {
+interface Props {
+  globalRepeatMode?: boolean;
+}
+
+const Game: React.FC<Props> = (props: Props) => {
   const [invertedMode, setInvertedMode] = useState(true);
 
   const { isLoading, data: words = [] } = useWords();
@@ -16,7 +20,11 @@ const Game: React.FC = () => {
     content = 'Loading...';
   } else {
     content = (
-      <GameInner words={words} invertedMode={invertedMode} />
+      <GameInner
+        words={words}
+        invertedMode={invertedMode}
+        globalRepeatMode={props.globalRepeatMode}
+      />
     );
   }
 

@@ -63,6 +63,12 @@ const Words: React.FC = () => {
           </Button>
         </Link>
 
+        <Link to={'/global-repeat'} className={styles.repeatBtn}>
+          <Button>
+            GR
+          </Button>
+        </Link>
+
         <div className={styles.wordCounter}>
           Words: {items.length}
         </div>

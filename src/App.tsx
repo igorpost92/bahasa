@@ -14,6 +14,7 @@ function App() {
       <Routes>
         <Route path={'/'} element={<Words />} />
         <Route path={'/game'} element={<Game />} />
+        <Route path={'/global-repeat'} element={<Game globalRepeatMode />} />
         <Route path={'/words'} element={<Words />} />
         <Route path={'/words/new'} element={<Word />} />
         <Route path={'/words/:id'} element={<Word />} />

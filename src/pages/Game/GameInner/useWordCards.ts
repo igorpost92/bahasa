@@ -14,8 +14,16 @@ const isWordNeedToRepeat = (word: Word) => {
   return new Date() >= nextDate;
 };
 
-export const useWordCards = (words: Word[]) => {
+export const useWordCards = (words: Word[], globalRepeatMode = false) => {
   const cards = useMemo(() => {
+    if (globalRepeatMode) {
+      return words.sort((a, b) => {
+        const stepA = a.step ?? 0;
+        const stepB = b.step ?? 0;
+        return stepB - stepA;
+      });
+    }
+
     const wordsToRepeat = words.filter(isWordNeedToRepeat);
     return shuffle(wordsToRepeat);
   }, [words]);
