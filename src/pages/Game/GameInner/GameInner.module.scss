@@ -5,6 +5,12 @@
   width: 100%;
 }
 
+.actionsWrap {
+  display: flex;
+  //todo
+  align-self: start;
+}
+
 .card {
   flex: auto;
 }

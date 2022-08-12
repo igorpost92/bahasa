@@ -68,10 +68,10 @@ const GameInner: React.FC<Props> = (props) => {
 
     const onWrong = () => {
       wrongWordsActions.add(currentWord);
-      
+
       const step = currentWord.step ? currentWord.step - 1 : 0;
       markWordAsRepeated(currentWord.id, step);
-      
+
       goNext();
     };
 
@@ -98,6 +98,23 @@ const GameInner: React.FC<Props> = (props) => {
     );
   }
 
+  const goToPrevWord = () => {
+    if (counter <= 0) {
+      return;
+    }
+
+    const prevWord = cards[counter - 1];
+
+    if (wrongWordsActions.has(prevWord)) {
+      wrongWordsActions.remove(prevWord);
+    } else if (!props.globalRepeatMode) {
+      const step = prevWord.step ?? 0;
+      markWordAsRepeated(prevWord.id, step);
+    }
+
+    setCounter(counter - 1);
+  };
+
   return (
     <>
       <div className={styles.status}>
@@ -108,6 +125,10 @@ const GameInner: React.FC<Props> = (props) => {
         <div>
           wrong: {wrongWords.length}
         </div>
+      </div>
+
+      <div className={styles.actionsWrap}>
+        <Button onClick={goToPrevWord}>Prev word</Button>
       </div>
 
       {content}
