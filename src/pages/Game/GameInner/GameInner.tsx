@@ -7,6 +7,7 @@ import { useWordCards } from './useWordCards';
 import { markWordAsRepeated } from '../../../api';
 import WordMini from '../../../components/WordMini/WordMini';
 import { useList } from '../../../hooks/useList';
+import Refresh from '../../../icons/Refresh';
 
 interface Props {
   words: Word[];
@@ -22,6 +23,24 @@ const GameInner: React.FC<Props> = (props) => {
   const [wrongWords, wrongWordsActions] = useList<Word>([]);
 
   let content;
+
+  const goToPrevWord = () => {
+    if (counter <= 0) {
+      return;
+    }
+
+    const prevWord = cards[counter - 1];
+
+    if (wrongWordsActions.has(prevWord)) {
+      wrongWordsActions.remove(prevWord);
+    } else if (!props.globalRepeatMode) {
+      const step = prevWord.step ?? 0;
+      markWordAsRepeated(prevWord.id, step);
+    }
+
+    setShowAnswer(false);
+    setCounter(counter - 1);
+  };
 
   if (counter >= cards.length) {
     content = (
@@ -43,6 +62,10 @@ const GameInner: React.FC<Props> = (props) => {
             </div>
           </>
         )}
+
+        <div className={styles.buttons}>
+          <Button size={'xl'} className={styles.btn} onClick={goToPrevWord}><Refresh size={24} /></Button>
+        </div>
       </div>
     );
   } else {
@@ -87,34 +110,19 @@ const GameInner: React.FC<Props> = (props) => {
         <div className={styles.buttons}>
           {showAnswer ? (
             <>
-              <Button size={'xl'} className={styles.btn} type={'success'} onClick={onSuccess}>Correct</Button>
               <Button size={'xl'} className={styles.btn} type={'danger'} onClick={onWrong}>Wrong</Button>
+              <Button size={'xl'} className={styles.btn} type={'success'} onClick={onSuccess}>Correct</Button>
             </>
           ) : (
-            <Button size={'xl'} className={styles.btn} onClick={doShowAnswer}>Show answer</Button>
+            <>
+              <Button size={'xl'} className={styles.revertBtn} onClick={goToPrevWord}><Refresh size={24} /></Button>
+              <Button size={'xl'} className={styles.btn} onClick={doShowAnswer}>Show answer</Button>
+            </>
           )}
         </div>
       </>
     );
   }
-
-  const goToPrevWord = () => {
-    if (counter <= 0) {
-      return;
-    }
-
-    const prevWord = cards[counter - 1];
-
-    if (wrongWordsActions.has(prevWord)) {
-      wrongWordsActions.remove(prevWord);
-    } else if (!props.globalRepeatMode) {
-      const step = prevWord.step ?? 0;
-      markWordAsRepeated(prevWord.id, step);
-    }
-
-    setShowAnswer(false);
-    setCounter(counter - 1);
-  };
 
   return (
     <>
@@ -126,10 +134,6 @@ const GameInner: React.FC<Props> = (props) => {
         <div>
           wrong: {wrongWords.length}
         </div>
-      </div>
-
-      <div className={styles.actionsWrap}>
-        <Button onClick={goToPrevWord}>Prev word</Button>
       </div>
 
       {content}
