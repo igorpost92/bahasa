@@ -1,5 +1,11 @@
-export const speak = (text: string) => {
-  const voice = window.speechSynthesis.getVoices().find(i => i.lang === 'id-ID');
+export const speak = (text: string, lang: string) => {
+  const regex = new RegExp(`^${lang.toLowerCase()}-`, 'i');
+
+  const voices = window.speechSynthesis.getVoices().filter(i => regex.test(i.lang) && i.localService);
+  // console.log(voices);
+
+  // TODO: spanish has 5
+  const voice = voices[voices.length - 1];
 
   if (!voice) {
     alert('no voice found');
