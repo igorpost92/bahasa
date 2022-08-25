@@ -1,14 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { getAllWords } from '../index';
 import { Word } from '../../types';
 import { parseWordFromServer } from '../utils/parseWordFromServer';
 
-export const useWords = () => {
+export const useWords = (lang: string) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<Word[]>();
 
   const sendRequest = async () => {
-    const { data: result, error } = await getAllWords();
+    setLoading(true);
+    setData([]);
+
+    // TODO: error
+    const { data: result, error } = await getAllWords(lang);
     if (result) {
       setData(result.map(parseWordFromServer));
     }
@@ -16,9 +20,9 @@ export const useWords = () => {
     setLoading(false);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     sendRequest();
-  }, []);
+  }, [lang]);
 
   return { isLoading, data };
 };

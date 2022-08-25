@@ -1,0 +1,18 @@
+.btnPanel {
+  * + * {
+    margin-left: 6px;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+
+  & + & {
+    margin-top: 20px;
+  }
+}
+
+.input {
+  margin-top: 8px;
+}

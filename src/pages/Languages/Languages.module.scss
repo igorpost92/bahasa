@@ -1,0 +1,25 @@
+.btnPanel {
+  * + * {
+    margin-left: 12px;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.langLink {
+  & + & {
+    margin-top: 12px;
+  }
+}
+
+.lang {
+  display: flex;
+  align-items: center;
+}
+
+.langTitle {
+  margin-left: 12px;
+}

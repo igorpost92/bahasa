@@ -5,22 +5,26 @@ import { Link } from 'react-router-dom';
 import { useWords } from '../../api/hooks/useWords';
 import GameInner from './GameInner/GameInner';
 import Page from '../../components/Page/Page';
+import { useCurrentLanguage } from '../../context/LanguageContext';
 
 interface Props {
   globalRepeatMode?: boolean;
 }
 
 const Game: React.FC<Props> = (props: Props) => {
+  const { lang } = useCurrentLanguage();
   const [invertedMode, setInvertedMode] = useState(true);
 
-  const { isLoading, data: words = [] } = useWords();
+  const { isLoading, data: words = [] } = useWords(lang);
 
   let content;
 
   if (isLoading) {
     content = 'Loading...';
   } else {
-    content = <GameInner words={words} invertedMode={invertedMode} globalRepeatMode={props.globalRepeatMode} />;
+    content = (
+      <GameInner key={lang} words={words} invertedMode={invertedMode} globalRepeatMode={props.globalRepeatMode} />
+    );
   }
 
   return (

@@ -1,0 +1,18 @@
+.header {
+  margin: 8px 0 20px;
+  text-align: center;
+}
+
+.lang {
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+
+  &.selected {
+    background: lightblue;
+  }
+}
+
+.icon {
+  margin-right: 12px;
+}

@@ -15,7 +15,7 @@ interface Props {
   globalRepeatMode?: boolean;
 }
 
-const GameInner: React.FC<Props> = (props) => {
+const GameInner: React.FC<Props> = props => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [counter, setCounter] = useState(0);
 
@@ -52,12 +52,7 @@ const GameInner: React.FC<Props> = (props) => {
             <div className={styles.repeatLabel}>Words to repeat again:</div>
             <div className={styles.repeatList}>
               {wrongWords.map(word => (
-                <WordMini
-                  key={word.id}
-                  text={word.text}
-                  meaning={word.meaning}
-                  step={word.step}
-                />
+                <WordMini key={word.id} text={word.text} meaning={word.meaning} step={word.step} />
               ))}
             </div>
           </>
@@ -137,7 +132,7 @@ const GameInner: React.FC<Props> = (props) => {
         </div>
 
         <div>wrong: {wrongWords.length}</div>
-        </div>
+      </div>
 
       {content}
     </div>

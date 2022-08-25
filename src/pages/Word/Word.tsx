@@ -7,8 +7,11 @@ import Button from '../../components/Button/Button';
 import { addWord, deleteWord, updateWord } from '../../api';
 import ListenButton from '../../components/ListenButton/ListenButton';
 import Page from '../../components/Page/Page';
+import { useCurrentLanguage } from '../../context/LanguageContext';
 
 const Word: React.FC = () => {
+  const { lang } = useCurrentLanguage();
+
   const navigate = useNavigate();
   const { id } = useParams();
   const isNew = id == undefined;
@@ -37,9 +40,9 @@ const Word: React.FC = () => {
     let action;
 
     if (isNew) {
-      action = () => addWord(text.trim(), meaning.trim());
+      action = () => addWord(text, meaning, lang);
     } else {
-      action = () => updateWord(id, text.trim(), meaning.trim());
+      action = () => updateWord(id, text, meaning);
     }
 
     const result = await action();
@@ -73,7 +76,6 @@ const Word: React.FC = () => {
 
   return (
     <Page
-      showLang={false}
       headerLeft={
         <div className={styles.btnPanel}>
           <Link to="/">

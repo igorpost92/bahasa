@@ -8,6 +8,7 @@ import { Word } from '../../types';
 import WordMini from '../../components/WordMini/WordMini';
 import Page from '../../components/Page/Page';
 import SelectedLangButton from '../../components/Page/Header/SelectedLangButton/SelectedLangButton';
+import { useCurrentLanguage } from '../../context/LanguageContext';
 
 const sorts = [
   {
@@ -31,7 +32,9 @@ const sorts = [
 ];
 
 const Words: React.FC = () => {
-  const { isLoading, data } = useWords();
+  const { lang } = useCurrentLanguage();
+
+  const { isLoading, data } = useWords(lang);
   const [searchInput, setSearchInput] = useState('');
   const [sort, setSort] = useState(0);
 
