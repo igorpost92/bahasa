@@ -7,15 +7,16 @@ interface Props {
   type?: 'primary' | 'secondary' | 'success' | 'danger';
   children: React.ReactNode;
   onClick?: () => void;
-  size?: 'm' | 'xl';
+  size?: 'l' | 'xl';
+  fullWidth?: boolean;
 }
 
-const Button: React.FC<Props> = (props) => {
+const Button: React.FC<Props> = props => {
   const { type = 'secondary', size = 'x' } = props;
 
   return (
     <button
-      className={cn(styles.wrap, styles[type], styles[size], props.className)}
+      className={cn(styles.wrap, styles[type], styles[size], props.fullWidth && styles.fullWidth, props.className)}
       onClick={props.onClick}
     >
       {props.children}

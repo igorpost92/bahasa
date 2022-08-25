@@ -63,8 +63,10 @@ const GameInner: React.FC<Props> = (props) => {
           </>
         )}
 
-        <div className={styles.buttons}>
-          <Button size={'xl'} className={styles.btn} onClick={goToPrevWord}><Refresh size={24} /></Button>
+        <div className={styles.endStageButtons}>
+          <Button fullWidth size={'l'} onClick={goToPrevWord}>
+            <Refresh size={24} />
+          </Button>
         </div>
       </div>
     );
@@ -100,23 +102,26 @@ const GameInner: React.FC<Props> = (props) => {
 
     content = (
       <>
-        <Card
-          className={styles.card}
-          text={text}
-          meaning={meaning}
-          showAnswer={showAnswer}
-        />
+        <Card className={styles.card} text={text} meaning={meaning} showAnswer={showAnswer} />
 
         <div className={styles.buttons}>
           {showAnswer ? (
             <>
-              <Button size={'xl'} className={styles.btn} type={'danger'} onClick={onWrong}>Wrong</Button>
-              <Button size={'xl'} className={styles.btn} type={'success'} onClick={onSuccess}>Correct</Button>
+              <Button size={'xl'} className={styles.btn} type={'danger'} onClick={onWrong}>
+                Wrong
+              </Button>
+              <Button size={'xl'} className={styles.btn} type={'success'} onClick={onSuccess}>
+                Correct
+              </Button>
             </>
           ) : (
             <>
-              <Button size={'xl'} className={styles.revertBtn} onClick={goToPrevWord}><Refresh size={24} /></Button>
-              <Button size={'xl'} className={styles.btn} onClick={doShowAnswer}>Show answer</Button>
+              <Button size={'xl'} className={styles.revertBtn} onClick={goToPrevWord}>
+                <Refresh size={24} />
+              </Button>
+              <Button size={'xl'} className={styles.btn} onClick={doShowAnswer}>
+                Show answer
+              </Button>
             </>
           )}
         </div>
@@ -125,19 +130,17 @@ const GameInner: React.FC<Props> = (props) => {
   }
 
   return (
-    <>
+    <div className={styles.wrap}>
       <div className={styles.status}>
         <div>
           {counter} / {cards.length}
         </div>
 
-        <div>
-          wrong: {wrongWords.length}
+        <div>wrong: {wrongWords.length}</div>
         </div>
-      </div>
 
       {content}
-    </>
+    </div>
   );
 };
 

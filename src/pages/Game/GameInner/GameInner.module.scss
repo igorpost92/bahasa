@@ -1,3 +1,9 @@
+.wrap {
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+}
+
 .status {
   padding: 20px 40px;
   display: flex;
@@ -7,6 +13,15 @@
 
 .card {
   flex: auto;
+}
+
+/* todo name, refacto */
+.endStageButtons {
+  margin: -12px;
+  padding: 12px;
+  position: sticky;
+  bottom: 0;
+  background: white;
 }
 
 .buttons {

@@ -10,4 +10,5 @@ html, body, #root {
 
 a, a:hover {
   text-decoration: none;
+  color: inherit;
 }

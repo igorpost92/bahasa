@@ -6,6 +6,7 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { addWord, deleteWord, updateWord } from '../../api';
 import ListenButton from '../../components/ListenButton/ListenButton';
+import Page from '../../components/Page/Page';
 
 const Word: React.FC = () => {
   const navigate = useNavigate();
@@ -71,15 +72,22 @@ const Word: React.FC = () => {
   };
 
   return (
-    <div className={styles.wrap}>
-      <div className={styles.linksWrap}>
-        <Link to="/">
-          <Button>Back</Button>
-        </Link>
-        <Button type={'success'} onClick={onSave}>Save {saveInProgress && <span>(loading...)</span>}</Button>
-        <Button type={'danger'} onClick={onDelete}>Delete</Button>
-      </div>
-
+    <Page
+      showLang={false}
+      headerLeft={
+        <div className={styles.btnPanel}>
+          <Link to="/">
+            <Button>Back</Button>
+          </Link>
+          <Button type={'success'} onClick={onSave}>
+            Save {saveInProgress && <span>(loading...)</span>}
+          </Button>
+          <Button type={'danger'} onClick={onDelete}>
+            Delete
+          </Button>
+        </div>
+      }
+    >
       <label className={styles.field}>
         Text
         <Input className={styles.input} value={text} onChange={setText} />
@@ -91,7 +99,7 @@ const Word: React.FC = () => {
       </label>
 
       <ListenButton text={text} className={styles.listenBtn} />
-    </div>
+    </Page>
   );
 };
 
