@@ -6,6 +6,7 @@ import { addLanguage } from '../../api/methods/languages';
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import Page from '../../components/Page/Page';
+import Spinner from '../../components/Spinner/Spinner';
 
 const Language: React.FC = () => {
   const navigate = useNavigate();
@@ -64,7 +65,12 @@ const Language: React.FC = () => {
             <Button>Back</Button>
           </Link>
           <Button type={'success'} onClick={onSave}>
-            Save {saveInProgress && <span>(loading...)</span>}
+            Save{' '}
+            {saveInProgress && (
+              <>
+                (<Spinner />)
+              </>
+            )}
           </Button>
           {/*<Button type={'danger'} onClick={onDelete}>Delete</Button>*/}
         </div>

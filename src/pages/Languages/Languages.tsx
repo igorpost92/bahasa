@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import LangIcon from '../../components/LangIcon/LangIcon';
 import ListElement from '../../components/ListElement/ListElement';
 import Page from '../../components/Page/Page';
+import Spinner from '../../components/Spinner/Spinner';
 
 interface Props {}
 
@@ -29,7 +30,7 @@ const Languages: React.FC<Props> = props => {
       }
     >
       {isLoading ? (
-        <div>Loading...</div>
+        <Spinner />
       ) : (
         <div>
           {listData.map(lang => (

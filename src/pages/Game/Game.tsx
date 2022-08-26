@@ -6,6 +6,7 @@ import { useWords } from '../../api/hooks/useWords';
 import GameInner from './GameInner/GameInner';
 import Page from '../../components/Page/Page';
 import { useCurrentLanguage } from '../../context/LanguageContext';
+import Spinner from '../../components/Spinner/Spinner';
 
 interface Props {
   globalRepeatMode?: boolean;
@@ -20,7 +21,7 @@ const Game: React.FC<Props> = (props: Props) => {
   let content;
 
   if (isLoading) {
-    content = 'Loading...';
+    content = <Spinner />;
   } else {
     content = (
       <GameInner key={lang} words={words} invertedMode={invertedMode} globalRepeatMode={props.globalRepeatMode} />

@@ -102,7 +102,12 @@ const Word: React.FC = () => {
             <Button>Back</Button>
           </Link>
           <Button type={'success'} onClick={onSave}>
-            Save {saveInProgress && <span>(loading...)</span>}
+            Save{' '}
+            {saveInProgress && (
+              <>
+                (<Spinner />)
+              </>
+            )}
           </Button>
           <Button type={'danger'} onClick={onDelete}>
             Delete

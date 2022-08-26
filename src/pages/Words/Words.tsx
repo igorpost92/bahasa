@@ -9,6 +9,7 @@ import WordMini from '../../components/WordMini/WordMini';
 import Page from '../../components/Page/Page';
 import SelectedLangButton from '../../components/Page/Header/SelectedLangButton/SelectedLangButton';
 import { useCurrentLanguage } from '../../context/LanguageContext';
+import Spinner from '../../components/Spinner/Spinner';
 
 const sorts = [
   {
@@ -100,7 +101,7 @@ const Words: React.FC = () => {
         </>
       }
     >
-      {isLoading && <div>loading...</div>}
+      {isLoading && <Spinner />}
 
       {!isLoading && !items.length && <div>no words</div>}
 
