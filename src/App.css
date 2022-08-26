@@ -1,3 +1,8 @@
+:root {
+  --safe-area-inset-top: env(safe-area-inset-top, 0px);
+  --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +11,14 @@
 
 html, body, #root {
   height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+
+  /*todo strange*/
+  height: calc(100% + var(--safe-area-inset-top));
 }
 
 a, a:hover {

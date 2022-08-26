@@ -1,0 +1,17 @@
+{
+  "name": "Bahasa",
+  "short_name": "Bahasa",
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "background_color": "#00ff00",
+  "theme_color": "#ff0000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "120x120",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
