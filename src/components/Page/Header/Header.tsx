@@ -1,7 +1,7 @@
 import React from 'react';
+import cn from 'classnames';
 import styles from './Header.module.scss';
 import SelectedLangButton from './SelectedLangButton/SelectedLangButton';
-import cn from 'classnames';
 
 interface Props {
   className?: string;

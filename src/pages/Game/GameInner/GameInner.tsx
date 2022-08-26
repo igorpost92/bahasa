@@ -42,7 +42,16 @@ const GameInner: React.FC<Props> = props => {
     setCounter(counter - 1);
   };
 
-  if (counter >= cards.length) {
+  if (!cards.length) {
+    content = (
+      <div className={styles.resultWrap}>
+        <div className={styles.doneLabel}>
+          <div>No words to repeat.</div>
+          <div>Try a bit later</div>
+        </div>
+      </div>
+    );
+  } else if (counter >= cards.length) {
     content = (
       <div className={styles.resultWrap}>
         <div className={styles.doneLabel}>Done!</div>
@@ -126,13 +135,15 @@ const GameInner: React.FC<Props> = props => {
 
   return (
     <div className={styles.wrap}>
-      <div className={styles.status}>
-        <div>
-          {counter} / {cards.length}
-        </div>
+      {!!cards.length && (
+        <div className={styles.status}>
+          <div>
+            {counter} / {cards.length}
+          </div>
 
-        <div>wrong: {wrongWords.length}</div>
-      </div>
+          <div>wrong: {wrongWords.length}</div>
+        </div>
+      )}
 
       {content}
     </div>

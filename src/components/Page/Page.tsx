@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Page.module.scss';
-import Header from './Header/Header';
 import cn from 'classnames';
+import Header from './Header/Header';
+import styles from './Page.module.scss';
 
 interface Props {
   children: React.ReactNode;

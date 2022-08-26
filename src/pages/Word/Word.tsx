@@ -8,6 +8,7 @@ import { addWord, deleteWord, updateWord } from '../../api';
 import ListenButton from '../../components/ListenButton/ListenButton';
 import Page from '../../components/Page/Page';
 import { useCurrentLanguage } from '../../context/LanguageContext';
+import Spinner from '../../components/Spinner/Spinner';
 
 const Word: React.FC = () => {
   const { lang } = useCurrentLanguage();
@@ -74,6 +75,25 @@ const Word: React.FC = () => {
     }
   };
 
+  const content =
+    !isNew && isLoading ? (
+      <Spinner />
+    ) : (
+      <>
+        <label className={styles.field}>
+          Text
+          <Input className={styles.input} value={text} onChange={setText} />
+        </label>
+
+        <label className={styles.field}>
+          Meaning
+          <Input className={styles.input} value={meaning} onChange={setMeaning} />
+        </label>
+
+        <ListenButton text={text} className={styles.listenBtn} />
+      </>
+    );
+
   return (
     <Page
       headerLeft={
@@ -90,17 +110,7 @@ const Word: React.FC = () => {
         </div>
       }
     >
-      <label className={styles.field}>
-        Text
-        <Input className={styles.input} value={text} onChange={setText} />
-      </label>
-
-      <label className={styles.field}>
-        Meaning
-        <Input className={styles.input} value={meaning} onChange={setMeaning} />
-      </label>
-
-      <ListenButton text={text} className={styles.listenBtn} />
+      {content}
     </Page>
   );
 };
