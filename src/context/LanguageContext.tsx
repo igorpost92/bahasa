@@ -28,7 +28,7 @@ const localStorageKey = 'current-lang-code';
 
 export const LanguageContextLayer = (props: Props) => {
   const [lang, setLang] = useState(() => {
-    return localStorage.getItem(localStorageKey) ?? '';
+    return localStorage.getItem(localStorageKey) ?? 'ES';
   });
 
   const [isDrawerOpen, setDrawerOpen] = useState(false);

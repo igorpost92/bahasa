@@ -11,13 +11,14 @@ interface Props {
   size?: 'l' | 'xl';
   fullWidth?: boolean;
   isLoading?: boolean;
+  isDisabled?: boolean;
 }
 
 const Button: React.FC<Props> = props => {
   const { type = 'secondary', size = 'x' } = props;
 
   const onClick = () => {
-    if (props.isLoading) {
+    if (props.isLoading || props.isDisabled) {
       return;
     }
 
@@ -26,6 +27,7 @@ const Button: React.FC<Props> = props => {
 
   return (
     <button
+      disabled={props.isDisabled}
       className={cn(
         styles.wrap,
         styles[type],

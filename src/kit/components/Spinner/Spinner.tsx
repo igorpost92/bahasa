@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Spinner: React.FC<Props> = props => {
-  return <SpinnerIcon key={1} className={cn(styles.icon, props.className)} />;
+  return <SpinnerIcon width={20} height={20} className={cn(styles.icon, props.className)} />;
 };
 
 export default Spinner;

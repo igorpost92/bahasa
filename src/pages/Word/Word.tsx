@@ -95,8 +95,6 @@ const Word: React.FC = () => {
       </>
     );
 
-  const isActionInProgress = savingPromise.isLoading || deletingPromise.isLoading;
-
   return (
     <AppPage
       headerLeft={
@@ -104,11 +102,21 @@ const Word: React.FC = () => {
           <Link to="/">
             <Button>Back</Button>
           </Link>
-          <Button type={'success'} onClick={savingPromise.send} isLoading={isActionInProgress}>
+          <Button
+            type={'success'}
+            onClick={savingPromise.send}
+            isLoading={savingPromise.isLoading}
+            isDisabled={deletingPromise.isLoading}
+          >
             Save
           </Button>
           {!isNew && (
-            <Button type={'danger'} onClick={deletingPromise.send} isLoading={isActionInProgress}>
+            <Button
+              type={'danger'}
+              onClick={deletingPromise.send}
+              isLoading={deletingPromise.isLoading}
+              isDisabled={savingPromise.isLoading}
+            >
               Delete
             </Button>
           )}

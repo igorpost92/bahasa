@@ -1,4 +1,6 @@
 .btnPanel {
+  display: flex;
+
   * + * {
     margin-left: 6px;
   }
