@@ -1,13 +1,22 @@
 import { supabase } from './sendRequest';
+import { getUser } from './methods/auth';
+import { FAKE_EMAIL } from '../constants/fakeEmail';
 
-const wordsTable = () => supabase.from('words');
+const wordsTable = () => {
+  const email = supabase.auth.user()?.email;
+  const useSecondaryTable = !email || email === FAKE_EMAIL;
+  return supabase.from(useSecondaryTable ? 'words_2' : 'words');
+};
 
 export const getAllWords = (lang: string) => {
   return wordsTable().select('id, text, meaning, created_at, step, last_date').match({ lang });
 };
 
 export const getWord = (id: string) => {
-  return wordsTable().select('id, text, meaning, created_at, step, last_date').eq('id', id).single();
+  return wordsTable()
+    .select('id, text, meaning, created_at, step, last_date')
+    .eq('id', id)
+    .single();
 };
 
 export const addWord = async (text: string, meaning: string, lang: string) => {
@@ -15,6 +24,7 @@ export const addWord = async (text: string, meaning: string, lang: string) => {
     text: text.trim(),
     meaning: meaning.trim(),
     lang,
+    email: getUser()?.email,
   });
 
   if (data) {
@@ -33,6 +43,10 @@ export const bulkAdd = async (words: { text: string; meaning: string; lang: stri
 
   throw new Error('error bulkAdd');
 };
+
+// bulkAdd([
+//   { text: 'hola', meaning: 'привет', lang: 'ES' },
+// ]);
 
 export const updateWord = async (id: string, text: string, meaning: string) => {
   const { data, error } = await wordsTable()
