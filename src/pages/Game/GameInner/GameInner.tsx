@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './GameInner.module.scss';
 import { Word } from '../../../types';
-import Card from '../../../components/Card/Card';
-import Button from '../../../components/Button/Button';
+import WordCard from './WordCard/WordCard';
+import Button from '../../../kit/components/Button/Button';
 import { useWordCards } from './useWordCards';
 import { markWordAsRepeated } from '../../../api';
 import WordMini from '../../../components/WordMini/WordMini';
@@ -106,7 +106,7 @@ const GameInner: React.FC<Props> = props => {
 
     content = (
       <>
-        <Card className={styles.card} text={text} meaning={meaning} showAnswer={showAnswer} />
+        <WordCard className={styles.card} text={text} meaning={meaning} showAnswer={showAnswer} />
 
         <div className={styles.buttons}>
           {showAnswer ? (

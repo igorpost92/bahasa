@@ -2,14 +2,14 @@ import React, { useMemo, useState } from 'react';
 import styles from './Words.module.scss';
 import { useWords } from '../../api/hooks/useWords';
 import { Link } from 'react-router-dom';
-import Button from '../../components/Button/Button';
-import Input from '../../components/Input/Input';
+import Button from '../../kit/components/Button/Button';
+import Input from '../../kit/components/Input/Input';
 import { Word } from '../../types';
 import WordMini from '../../components/WordMini/WordMini';
-import Page from '../../components/Page/Page';
-import SelectedLangButton from '../../components/Page/Header/SelectedLangButton/SelectedLangButton';
+import AppPage from '../../components/AppPage/AppPage';
+import SelectedLangButton from '../../components/AppPage/AppHeader/SelectedLangButton/SelectedLangButton';
 import { useCurrentLanguage } from '../../context/LanguageContext';
-import Spinner from '../../components/Spinner/Spinner';
+import Spinner from '../../kit/components/Spinner/Spinner';
 
 const sorts = [
   {
@@ -58,12 +58,14 @@ const Words: React.FC = () => {
     const searchStr = searchInput.toLowerCase();
 
     return sortedWords.filter(
-      item => item.text.toLowerCase().includes(searchStr) || item.meaning.toLowerCase().includes(searchStr),
+      item =>
+        item.text.toLowerCase().includes(searchStr) ||
+        item.meaning.toLowerCase().includes(searchStr),
     );
   }, [searchInput, sortedWords]);
 
   return (
-    <Page
+    <AppPage
       customHeader={
         <>
           <div className={styles.linksWrap}>
@@ -92,9 +94,15 @@ const Words: React.FC = () => {
           <div className={styles.searchRow}>
             <Input value={searchInput} onChange={setSearchInput} placeholder={'Search...'} />
 
-            <select className={styles.sortSelect} value={sort} onChange={e => setSort(Number(e.target.value))}>
+            <select
+              className={styles.sortSelect}
+              value={sort}
+              onChange={e => setSort(Number(e.target.value))}
+            >
               {sorts.map((item, idx) => (
-                <option value={idx}>{item.name}</option>
+                <option key={idx} value={idx}>
+                  {item.name}
+                </option>
               ))}
             </select>
           </div>
@@ -118,7 +126,7 @@ const Words: React.FC = () => {
           ))}
         </div>
       )}
-    </Page>
+    </AppPage>
   );
 };
 

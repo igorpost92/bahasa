@@ -1,4 +1,5 @@
 import './App.css';
+import './kit/index.css';
 import Game from './pages/Game/Game';
 import { MemoryRouter, BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Words from './pages/Words/Words';

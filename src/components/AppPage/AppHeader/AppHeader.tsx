@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from './Header.module.scss';
+import styles from './AppHeader.module.scss';
 import SelectedLangButton from './SelectedLangButton/SelectedLangButton';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   showLang?: boolean;
 }
 
-const Header: React.FC<Props> = ({ showLang = true, ...props }) => {
+const AppHeader: React.FC<Props> = ({ showLang = true, ...props }) => {
   const showHeader = Boolean(props.children || props.leftSlot || showLang);
 
   if (!showHeader) {
@@ -36,4 +36,4 @@ const Header: React.FC<Props> = ({ showLang = true, ...props }) => {
   );
 };
 
-export default Header;
+export default AppHeader;

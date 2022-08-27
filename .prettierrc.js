@@ -1,6 +1,6 @@
 module.exports = {
   tabWidth: 2,
-  printWidth: 120,
+  printWidth: 100,
   trailingComma: 'all',
   htmlWhitespaceSensitivity: 'strict',
   semi: true,

@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './WordMini.module.scss';
 import { Word } from '../../types';
 import { Link } from 'react-router-dom';
-import ListElement from '../ListElement/ListElement';
+import Card from '../../kit/components/Card/Card';
 
 interface Props extends Pick<Word, 'text' | 'meaning' | 'step'> {
   url?: string;
@@ -10,13 +10,13 @@ interface Props extends Pick<Word, 'text' | 'meaning' | 'step'> {
 
 const WordMini: React.FC<Props> = props => {
   const content = (
-    <ListElement>
+    <Card>
       <div className={styles.topRow}>
         <div className={styles.text}>{props.text}</div>
         {!!props.step && <div className={styles.step}>{props.step}</div>}
       </div>
       <div className={styles.meaning}>{props.meaning}</div>
-    </ListElement>
+    </Card>
   );
 
   if (props.url) {

@@ -1,6 +1,9 @@
 .wrap {
   padding: 12px;
   background: white;
+
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .row {

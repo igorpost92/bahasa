@@ -1,0 +1,13 @@
+.icon {
+  display: inline-block;
+  animation: spinner-rotator 0.7s linear infinite;
+}
+
+@keyframes spinner-rotator {
+  0% {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(1turn)
+  }
+}

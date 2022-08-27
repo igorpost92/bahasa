@@ -8,6 +8,10 @@
   font-size: 16px;
   line-height: 20px;
   cursor: pointer;
+
+  //todo reuse
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .success {
@@ -35,4 +39,8 @@
 
 .fullWidth {
   width: 100%;
+}
+
+.spinner {
+  margin-right: 8px;
 }

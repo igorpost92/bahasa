@@ -3,10 +3,10 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import styles from './Language.module.scss';
 import { useLanguage } from '../../api/hooks/languages/useLanguage';
 import { addLanguage } from '../../api/methods/languages';
-import Button from '../../components/Button/Button';
-import Input from '../../components/Input/Input';
-import Page from '../../components/Page/Page';
-import Spinner from '../../components/Spinner/Spinner';
+import Button from '../../kit/components/Button/Button';
+import Input from '../../kit/components/Input/Input';
+import AppPage from '../../components/AppPage/AppPage';
+import Spinner from '../../kit/components/Spinner/Spinner';
 
 const Language: React.FC = () => {
   const navigate = useNavigate();
@@ -57,20 +57,15 @@ const Language: React.FC = () => {
   };
 
   return (
-    <Page
+    <AppPage
       showLang={false}
       headerLeft={
         <div className={styles.btnPanel}>
           <Link to="/languages">
             <Button>Back</Button>
           </Link>
-          <Button type={'success'} onClick={onSave}>
-            Save{' '}
-            {saveInProgress && (
-              <>
-                (<Spinner />)
-              </>
-            )}
+          <Button type={'success'} onClick={onSave} isLoading={saveInProgress}>
+            Save
           </Button>
           {/*<Button type={'danger'} onClick={onDelete}>Delete</Button>*/}
         </div>
@@ -85,7 +80,7 @@ const Language: React.FC = () => {
         Name
         <Input className={styles.input} value={name} onChange={setName} />
       </label>
-    </Page>
+    </AppPage>
   );
 };
 

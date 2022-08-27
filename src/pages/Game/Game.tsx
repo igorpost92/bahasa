@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styles from './Game.module.scss';
-import Button from '../../components/Button/Button';
+import Button from '../../kit/components/Button/Button';
 import { Link } from 'react-router-dom';
 import { useWords } from '../../api/hooks/useWords';
 import GameInner from './GameInner/GameInner';
-import Page from '../../components/Page/Page';
+import AppPage from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
-import Spinner from '../../components/Spinner/Spinner';
+import Spinner from '../../kit/components/Spinner/Spinner';
 
 interface Props {
   globalRepeatMode?: boolean;
@@ -24,12 +24,17 @@ const Game: React.FC<Props> = (props: Props) => {
     content = <Spinner />;
   } else {
     content = (
-      <GameInner key={lang} words={words} invertedMode={invertedMode} globalRepeatMode={props.globalRepeatMode} />
+      <GameInner
+        key={lang}
+        words={words}
+        invertedMode={invertedMode}
+        globalRepeatMode={props.globalRepeatMode}
+      />
     );
   }
 
   return (
-    <Page
+    <AppPage
       showHeaderBorder={false}
       headerLeft={
         <div className={styles.linksWrap}>
@@ -44,7 +49,7 @@ const Game: React.FC<Props> = (props: Props) => {
       }
     >
       {content}
-    </Page>
+    </AppPage>
   );
 };
 

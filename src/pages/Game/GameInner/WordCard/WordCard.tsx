@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from './Card.module.scss';
-import ListenButton from '../ListenButton/ListenButton';
+import styles from './WordCard.module.scss';
+import ListenButton from '../../../../components/ListenButton/ListenButton';
 
 interface Props {
   className?: string;
@@ -10,7 +10,7 @@ interface Props {
   showAnswer: boolean;
 }
 
-const Card: React.FC<Props> = (props) => {
+const WordCard: React.FC<Props> = props => {
   return (
     <div className={cn(props.className, styles.wrap)}>
       <div className={styles.text}>{props.text}</div>
@@ -25,4 +25,4 @@ const Card: React.FC<Props> = (props) => {
   );
 };
 
-export default Card;
+export default WordCard;

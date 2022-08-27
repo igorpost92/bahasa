@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import styles from './Word.module.scss';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useWord } from '../../api/hooks/useWord';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
+import Input from '../../kit/components/Input/Input';
+import Button from '../../kit/components/Button/Button';
 import { addWord, deleteWord, updateWord } from '../../api';
 import ListenButton from '../../components/ListenButton/ListenButton';
-import Page from '../../components/Page/Page';
+import AppPage from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
-import Spinner from '../../components/Spinner/Spinner';
+import Spinner from '../../kit/components/Spinner/Spinner';
+import { usePromise } from '../../hooks/usePromise';
 
 const Word: React.FC = () => {
   const { lang } = useCurrentLanguage();
@@ -22,8 +23,6 @@ const Word: React.FC = () => {
 
   const { isLoading, data } = useWord(id);
 
-  const [saveInProgress, setSaveInProgress] = useState(false);
-
   useEffect(() => {
     if (data) {
       setText(data.text);
@@ -31,12 +30,10 @@ const Word: React.FC = () => {
     }
   }, [data]);
 
-  const onSave = async () => {
-    if (saveInProgress || !text || !meaning) {
+  const savingPromise = usePromise(async () => {
+    if (!text || !meaning) {
       return;
     }
-
-    setSaveInProgress(true);
 
     let action;
 
@@ -48,16 +45,14 @@ const Word: React.FC = () => {
 
     const result = await action();
 
-    setSaveInProgress(false);
-
     if (result) {
       navigate('/words');
     } else {
       alert('error');
     }
-  };
+  });
 
-  const onDelete = async () => {
+  const deletingPromise = usePromise(async () => {
     if (isNew) {
       return;
     }
@@ -73,7 +68,13 @@ const Word: React.FC = () => {
     } else {
       alert('error');
     }
-  };
+  });
+
+  useEffect(() => {
+    if (savingPromise.isError || deletingPromise.isError) {
+      alert('error');
+    }
+  }, [savingPromise.isError, deletingPromise.isError]);
 
   const content =
     !isNew && isLoading ? (
@@ -94,29 +95,28 @@ const Word: React.FC = () => {
       </>
     );
 
+  const isActionInProgress = savingPromise.isLoading || deletingPromise.isLoading;
+
   return (
-    <Page
+    <AppPage
       headerLeft={
         <div className={styles.btnPanel}>
           <Link to="/">
             <Button>Back</Button>
           </Link>
-          <Button type={'success'} onClick={onSave}>
-            Save{' '}
-            {saveInProgress && (
-              <>
-                (<Spinner />)
-              </>
-            )}
+          <Button type={'success'} onClick={savingPromise.send} isLoading={isActionInProgress}>
+            Save
           </Button>
-          <Button type={'danger'} onClick={onDelete}>
-            Delete
-          </Button>
+          {!isNew && (
+            <Button type={'danger'} onClick={deletingPromise.send} isLoading={isActionInProgress}>
+              Delete
+            </Button>
+          )}
         </div>
       }
     >
       {content}
-    </Page>
+    </AppPage>
   );
 };
 
