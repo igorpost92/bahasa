@@ -1,6 +1,6 @@
 .wrap {
   margin-top: calc(0px - var(--safe-area-inset-top));
-  padding-top: var(--safe-area-inset-top);
+  padding-top: calc(var(--safe-area-inset-top) - 16px);
   position: sticky;
   top: 0;
   background: white;
