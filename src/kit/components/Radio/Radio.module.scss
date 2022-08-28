@@ -1,0 +1,41 @@
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.marker {
+  --checked-bg: forestgreen;
+
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid white;
+    border-radius: 50%;
+  }
+
+  &.checked {
+    border-color: var(--checked-bg);
+    background: var(--checked-bg);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+.label {
+  margin-left: 8px;
+}

@@ -1,0 +1,33 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid gray;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.input {
+  cursor: inherit;
+  border: none;
+  outline: none;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.icon {
+  margin-left: auto;
+  padding-left: 4px;
+}
+
+.optionsWrap {
+  margin-top: 6px;
+}
+
+.optionWrap {
+  //todo +4 height without it
+  display: flex;
+  padding: 10px 0;
+}

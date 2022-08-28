@@ -1,18 +1,29 @@
 import React from 'react';
 import styles from './Drawer.module.scss';
+import { Portal } from '../Portal/Portal';
 
 interface Props {
   isOpen: boolean;
   children: React.ReactNode;
+  onClose: () => void;
+  // TODO:
+  // canClose?: boolean;
+
   // TODO: position left
 }
 
 const Drawer: React.FC<Props> = props => {
+  if (!props.isOpen) {
+    return null;
+  }
+
   return (
-    <div className={styles.wrap}>
-      <div className={styles.backdrop} />
-      <div className={styles.content}>{props.children}</div>
-    </div>
+    <Portal>
+      <div className={styles.wrap}>
+        <div className={styles.backdrop} onClick={props.onClose} />
+        <div className={styles.content}>{props.children}</div>
+      </div>
+    </Portal>
   );
 };
 

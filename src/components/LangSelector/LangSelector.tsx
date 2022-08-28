@@ -8,13 +8,14 @@ import Spinner from '../../kit/components/Spinner/Spinner';
 
 interface Props {
   isOpen: boolean;
-  canClose?: boolean;
+  // canClose?: boolean; todo
   onClose: () => void;
   selectedLang: string;
   onLangChange: (lang: string) => void;
 }
 
 const LangSelector: React.FC<Props> = props => {
+  // TODO:
   const { isLoading, data } = useLanguages();
 
   if (!props.isOpen) {
@@ -26,7 +27,7 @@ const LangSelector: React.FC<Props> = props => {
   }
 
   return (
-    <Drawer isOpen={props.isOpen}>
+    <Drawer isOpen={props.isOpen} onClose={props.onClose}>
       <div className={styles.header}>Select language</div>
       <div className={styles.list}>
         {(data ?? []).map(lang => {
