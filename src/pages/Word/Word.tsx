@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useWord } from '../../api/hooks/useWord';
 import Input from '../../kit/components/Input/Input';
 import Button from '../../kit/components/Button/Button';
-import { addWord, deleteWord, updateWord } from '../../api';
+import { addWord, deleteWord, updateWord } from '../../api/methods/words';
 import ListenButton from '../../components/ListenButton/ListenButton';
 import AppPage from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';

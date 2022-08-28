@@ -1,27 +1,19 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
-import { getAllWords } from '../index';
-import { Word } from '../../types';
+import { useLayoutEffect } from 'react';
+import { getAllWords } from '../methods/words';
 import { parseWordFromServer } from '../utils/parseWordFromServer';
+import { usePromise } from '../../hooks/usePromise';
 
 export const useWords = (lang: string) => {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState<Word[]>();
+  const { isLoading, data, send } = usePromise(async () => {
+    const result = await getAllWords(lang);
+    console.log('prom', result);
+    return result.map(parseWordFromServer);
+  });
 
-  const sendRequest = async () => {
-    setLoading(true);
-    setData([]);
-
-    // TODO: error
-    const { data: result, error } = await getAllWords(lang);
-    if (result) {
-      setData(result.map(parseWordFromServer));
-    }
-
-    setLoading(false);
-  };
+  // TODO: error
 
   useLayoutEffect(() => {
-    sendRequest();
+    send();
   }, [lang]);
 
   return { isLoading, data };

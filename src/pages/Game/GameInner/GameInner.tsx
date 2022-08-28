@@ -4,7 +4,7 @@ import { Word } from '../../../types';
 import WordCard from './WordCard/WordCard';
 import Button from '../../../kit/components/Button/Button';
 import { useWordCards } from './useWordCards';
-import { markWordAsRepeated } from '../../../api';
+import { markWordAsRepeated } from '../../../api/methods/words';
 import WordMini from '../../../components/WordMini/WordMini';
 import { useList } from '../../../hooks/useList';
 import Refresh from '../../../icons/Refresh';
@@ -103,6 +103,8 @@ const GameInner: React.FC<Props> = props => {
 
       goNext();
     };
+
+    // TODO: next repeat interval
 
     content = (
       <>

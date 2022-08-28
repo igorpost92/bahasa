@@ -1,6 +1,6 @@
-import { supabase } from './sendRequest';
-import { getUser } from './methods/auth';
-import { FAKE_EMAIL } from '../constants/fakeEmail';
+import { supabase } from '../sendRequest';
+import { getUser } from './auth';
+import { FAKE_EMAIL } from '../../constants/fakeEmail';
 
 const wordsTable = () => {
   const email = supabase.auth.user()?.email;
@@ -8,8 +8,27 @@ const wordsTable = () => {
   return supabase.from(useSecondaryTable ? 'words_2' : 'words');
 };
 
-export const getAllWords = (lang: string) => {
-  return wordsTable().select('id, text, meaning, created_at, step, last_date').match({ lang });
+// TODO: words interfaces
+
+interface Word2 {
+  id: string;
+  text: string;
+  meaning: string;
+  created_at: string;
+  last_date: string | null;
+  step: number | null;
+}
+
+export const getAllWords = async (lang: string) => {
+  const { data, error } = await wordsTable()
+    .select('id, text, meaning, created_at, step, last_date')
+    .match({ lang });
+
+  if (data) {
+    return data as Word2[];
+  }
+
+  throw new Error('error getAllWords');
 };
 
 export const getWord = (id: string) => {

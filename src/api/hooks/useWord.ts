@@ -1,28 +1,27 @@
-import { useEffect, useState } from 'react';
-import { getWord } from '../index';
-import { Word } from '../../types';
+import { useEffect } from 'react';
+import { getWord } from '../methods/words';
 import { parseWordFromServer } from '../utils/parseWordFromServer';
+import { usePromise } from '../../hooks/usePromise';
 
 export const useWord = (id?: string) => {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState<Word>();
-
-  const sendRequest = async () => {
+  const { isLoading, data, send } = usePromise(async () => {
+    // TODO: need here?
     if (!id) {
-      setLoading(false);
-      return
+      return null;
     }
 
     const { data: result, error } = await getWord(id);
     if (result) {
-      setData(parseWordFromServer(result));
+      return parseWordFromServer(result);
     }
-
-    setLoading(false);
-  };
+  });
 
   useEffect(() => {
-      sendRequest();
+    if (!id) {
+      return;
+    }
+
+    send();
   }, [id]);
 
   return { isLoading, data };
