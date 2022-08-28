@@ -4,9 +4,11 @@ import { shuffle } from '../../../utils/shuffle';
 import { VerbData } from '../../../api/methods/verbs';
 import VerbValue from '../VerbValue/VerbValue';
 import Button from '../../../kit/components/Button/Button';
+import AppPage from '../../../components/AppPage/AppPage';
 
 interface Props {
   words: VerbData[];
+  onGoBack: () => void;
 }
 
 const titlesMap = {
@@ -42,28 +44,31 @@ const Inner: React.FC<Props> = props => {
   };
 
   return (
-    <div>
-      <div className={styles.statusRow}>
-        <div>
-          {counter + 1} / {words.length}
+    <AppPage
+      headerLeft={<Button onClick={props.onGoBack}>Back</Button>}
+      headerTitle={currentWord.name}
+    >
+      {words.length > 1 && (
+        <div className={styles.statusRow}>
+          <div>
+            {counter + 1} / {words.length}
+          </div>
+
+          <Button className={styles.prevBtn} size={'m'} onClick={goPrev}>
+            prev
+          </Button>
+          <Button size={'m'} onClick={goNext}>
+            next
+          </Button>
         </div>
-
-        <Button className={styles.prevBtn} size={'m'} onClick={goPrev}>
-          prev
-        </Button>
-        <Button size={'m'} onClick={goNext}>
-          next
-        </Button>
-      </div>
-
-      <div className={styles.infinitive}>{currentWord.name}</div>
+      )}
 
       <div key={String(counter)}>
         {Object.keys(titlesMap).map(key => {
           const title = titlesMap[key];
 
           return (
-            <div key={key}>
+            <div className={styles.tenseWrap} key={key}>
               <div className={styles.tenseTitle}>{title}</div>
 
               {currentWord.data[key].map((item, idx) => (
@@ -73,7 +78,7 @@ const Inner: React.FC<Props> = props => {
           );
         })}
       </div>
-    </div>
+    </AppPage>
   );
 };
 

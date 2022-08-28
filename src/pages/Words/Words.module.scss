@@ -3,14 +3,15 @@
 }
 
 .searchRow {
-  margin-top: 12px;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .linksWrap {
   display: flex;
   align-items: center;
+  flex: auto;
 
   * + * {
     margin-left: 6px;
@@ -18,17 +19,30 @@
 }
 
 .repeatBtn {
-  margin-left: auto;
+  margin-right: 10px;
 }
 
 .sortSelect {
+  width: 170px;
   text-align: right;
-  font-size: 16px;
   padding: 12px 7px;
   border: none;
   color: gray;
+
+  input {
+    border: none;
+    color: inherit;
+    width: 100%;
+  }
 }
 
 .list {
   flex: auto;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: gray;
+  text-align: center;
+  margin-bottom: 12px;
 }

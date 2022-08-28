@@ -6,13 +6,20 @@
   user-select: none;
 }
 
+.topRow {
+  justify-content: space-between;
+}
+
+.bottomRow {
+  margin-top: 12px;
+}
+
 .row {
-  height: 50px;
-  box-sizing: content-box;
   display: flex;
   align-items: center;
 }
 
 .lang {
-  margin-left: auto;
+  //todo if no other slots
+  //margin-left: 8px;
 }

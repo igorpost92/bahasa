@@ -8,6 +8,8 @@ interface Props {
   children: React.ReactNode;
   customHeader?: React.ReactNode;
   headerLeft?: React.ReactNode;
+  headerTitle?: React.ReactNode;
+  headerBottom?: React.ReactNode;
   showHeader?: boolean;
   showLang?: boolean;
   showHeaderBorder?: boolean;
@@ -26,6 +28,8 @@ const AppPage: React.FC<Props> = props => {
             className={cn(showHeaderBorder && styles.headerBorder)}
             showLang={props.showLang}
             leftSlot={props.headerLeft}
+            titleSlot={props.headerTitle}
+            bottomSlot={props.headerBottom}
           >
             {props.customHeader}
           </AppHeader>

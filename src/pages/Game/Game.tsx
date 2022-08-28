@@ -41,7 +41,7 @@ const Game: React.FC<Props> = (props: Props) => {
       headerLeft={
         <div className={styles.linksWrap}>
           <Link to={'/'}>
-            <Button>Words</Button>
+            <Button>Back</Button>
           </Link>
 
           {/*<Button onClick={() => setInvertedMode(!invertedMode)}>*/}

@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from 'react';
-import styles from './Words.module.scss';
 import { useWords } from '../../api/hooks/useWords';
 import { Link } from 'react-router-dom';
 import Button from '../../kit/components/Button/Button';
@@ -7,26 +6,31 @@ import Input from '../../kit/components/Input/Input';
 import { Word } from '../../types';
 import WordMini from '../../components/WordMini/WordMini';
 import AppPage from '../../components/AppPage/AppPage';
-import SelectedLangButton from '../../components/AppPage/AppHeader/SelectedLangButton/SelectedLangButton';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 import Spinner from '../../kit/components/Spinner/Spinner';
+import Select from '../../kit/components/Select/Select';
+import styles from './Words.module.scss';
 
 const sorts = [
   {
+    value: 'date-desc',
     name: 'Date added (desc)',
     getField: (word: Word) => word.created_at.getTime(),
     sortK: -1,
   },
   {
+    value: 'date-asc',
     name: 'Date added (asc)',
     getField: (word: Word) => word.created_at.getTime(),
   },
   {
+    value: 'step-desc',
     name: 'Step (desc)',
     getField: (word: Word) => word.step ?? 0,
     sortK: -1,
   },
   {
+    value: 'step-asc',
     name: 'Step (asc)',
     getField: (word: Word) => word.step ?? 0,
   },
@@ -37,11 +41,14 @@ const Words: React.FC = () => {
 
   const { isLoading, data } = useWords();
   const [searchInput, setSearchInput] = useState('');
-  const [sort, setSort] = useState(0);
+  const [sort, setSort] = useState(sorts[0].value);
 
   const sortedWords = useMemo(() => {
-    const sortRule = sorts[sort];
+    const sortRule = sorts.find(item => item.value === sort);
 
+    if (!sortRule) {
+      return data ?? [];
+    }
     return (data ?? []).sort((a, b) => {
       const valueA = sortRule.getField(a);
       const valueB = sortRule.getField(b);
@@ -66,56 +73,49 @@ const Words: React.FC = () => {
 
   return (
     <AppPage
-      customHeader={
-        <>
-          <div className={styles.linksWrap}>
-            {/*// TODO: menu*/}
+      headerLeft={
+        <div className={styles.linksWrap}>
+          {/*// TODO: menu*/}
 
-            <Link to={'/game'}>
-              <Button>Game</Button>
-            </Link>
+          <Link to={'/game'}>
+            <Button>Game</Button>
+          </Link>
 
-            <Link to={'/words/new'}>
-              <Button type={'success'}>Add</Button>
-            </Link>
+          <Link to={'/words/new'}>
+            <Button type={'success'}>Add</Button>
+          </Link>
 
+          {lang === 'ES' && (
             <Link to={'/verbs'}>
               <Button>Verbs</Button>
             </Link>
+          )}
 
-            <div className={styles.spacer} />
+          <div className={styles.spacer} />
 
-            {/*todo*/}
-            <Link to={'/global-repeat'} className={styles.repeatBtn}>
-              <Button>GR</Button>
-            </Link>
-
-            <div className={styles.wordCounter}>Words: {items.length}</div>
-
-            <SelectedLangButton />
-          </div>
-
-          <div className={styles.searchRow}>
-            <Input value={searchInput} onChange={setSearchInput} placeholder={'Search...'} />
-
-            <select
-              className={styles.sortSelect}
-              value={sort}
-              onChange={e => setSort(Number(e.target.value))}
-            >
-              {sorts.map((item, idx) => (
-                <option key={idx} value={idx}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </>
+          {/*todo*/}
+          <Link to={'/global-repeat'} className={styles.repeatBtn}>
+            <Button>GR</Button>
+          </Link>
+        </div>
+      }
+      headerBottom={
+        <div className={styles.searchRow}>
+          <Input value={searchInput} onChange={setSearchInput} placeholder={'Search...'} />
+          <Select
+            className={styles.sortSelect}
+            onChange={setSort as any}
+            options={sorts}
+            value={sort}
+          />
+        </div>
       }
     >
       {isLoading && <Spinner />}
 
       {!isLoading && !items.length && <div>no words</div>}
+
+      {!!items.length && <div className={styles.subtitle}>Count: {items.length}</div>}
 
       {!!items.length && (
         <div className={styles.list}>
@@ -125,8 +125,8 @@ const Words: React.FC = () => {
               url={`/words/${item.id}`}
               text={item.text}
               meaning={item.meaning}
-              step={item.step}
-              type={item.type ?? undefined}
+              step={item.step ?? undefined}
+              tag={item.type ?? undefined}
             />
           ))}
         </div>

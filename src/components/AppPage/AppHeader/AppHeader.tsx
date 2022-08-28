@@ -6,12 +6,20 @@ import SelectedLangButton from './SelectedLangButton/SelectedLangButton';
 interface Props {
   className?: string;
   leftSlot?: React.ReactNode;
+  titleSlot?: React.ReactNode;
+  bottomSlot?: React.ReactNode;
   children?: React.ReactNode;
   showLang?: boolean;
 }
 
+// TODO: centering if no left slot
+// TODO: only only right
+// TODO: right slot | null
+
 const AppHeader: React.FC<Props> = ({ showLang = true, ...props }) => {
-  const showHeader = Boolean(props.children || props.leftSlot || showLang);
+  const showHeader = Boolean(
+    props.children || props.leftSlot || props.titleSlot || props.bottomSlot || showLang,
+  );
 
   if (!showHeader) {
     return null;
@@ -24,13 +32,21 @@ const AppHeader: React.FC<Props> = ({ showLang = true, ...props }) => {
   }
 
   return (
-    <div className={cn(className, styles.row)}>
-      {props.leftSlot}
+    <div className={className}>
+      <div className={cn(styles.row, styles.topRow)}>
+        {props.leftSlot}
 
-      {showLang && (
-        <div className={styles.lang}>
-          <SelectedLangButton />
-        </div>
+        {props.titleSlot && <h3>{props.titleSlot}</h3>}
+
+        {showLang && (
+          <div className={styles.lang}>
+            <SelectedLangButton />
+          </div>
+        )}
+      </div>
+
+      {props.bottomSlot && (
+        <div className={cn(styles.row, styles.bottomRow)}>{props.bottomSlot}</div>
       )}
     </div>
   );
