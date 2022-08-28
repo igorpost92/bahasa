@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './ListenButton.module.scss';
 import { speak } from '../../utils/speak';
 import cn from 'classnames';
-import Listen from '../../icons/Listen';
+import { Listen } from '../../icons';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 
 interface Props {
@@ -15,7 +15,7 @@ const ListenButton: React.FC<Props> = props => {
 
   return (
     <button onClick={() => speak(props.text, lang)} className={cn(props.className, styles.wrap)}>
-      <Listen size={24} />
+      <Listen width={24} height={24} />
     </button>
   );
 };

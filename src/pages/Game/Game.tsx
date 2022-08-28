@@ -14,9 +14,11 @@ interface Props {
 
 const Game: React.FC<Props> = (props: Props) => {
   const { lang } = useCurrentLanguage();
-  const [invertedMode, setInvertedMode] = useState(true);
+  // const [invertedMode, setInvertedMode] = useState(true);
 
-  const { isLoading, data: words = [] } = useWords(lang);
+  const { isLoading, data } = useWords();
+
+  const words = data ?? [];
 
   let content;
 
@@ -27,7 +29,7 @@ const Game: React.FC<Props> = (props: Props) => {
       <GameInner
         key={lang}
         words={words}
-        invertedMode={invertedMode}
+        invertedMode={true}
         globalRepeatMode={props.globalRepeatMode}
       />
     );

@@ -1,6 +1,7 @@
 import { supabase } from '../sendRequest';
 import { getUser } from './auth';
 import { FAKE_EMAIL } from '../../constants/fakeEmail';
+import { WordTypes } from '../../types';
 
 const wordsTable = () => {
   const email = supabase.auth.user()?.email;
@@ -14,6 +15,7 @@ interface Word2 {
   id: string;
   text: string;
   meaning: string;
+  type: WordTypes | null;
   created_at: string;
   last_date: string | null;
   step: number | null;
@@ -21,7 +23,7 @@ interface Word2 {
 
 export const getAllWords = async (lang: string) => {
   const { data, error } = await wordsTable()
-    .select('id, text, meaning, created_at, step, last_date')
+    .select('id, text, meaning, created_at, type, step, last_date')
     .match({ lang });
 
   if (data) {
@@ -33,16 +35,24 @@ export const getAllWords = async (lang: string) => {
 
 export const getWord = (id: string) => {
   return wordsTable()
-    .select('id, text, meaning, created_at, step, last_date')
+    .select('id, text, meaning, created_at, type, step, last_date')
     .eq('id', id)
     .single();
 };
 
-export const addWord = async (text: string, meaning: string, lang: string) => {
+interface NewWord {
+  text: string;
+  meaning: string;
+  type?: string;
+  lang: string;
+}
+
+export const addWord = async (payload: NewWord) => {
   const { data, error } = await wordsTable().insert({
-    text: text.trim(),
-    meaning: meaning.trim(),
-    lang,
+    text: payload.text.trim(),
+    meaning: payload.meaning.trim(),
+    lang: payload.lang,
+    type: payload.type,
     email: getUser()?.email,
   });
 
@@ -53,7 +63,7 @@ export const addWord = async (text: string, meaning: string, lang: string) => {
   throw new Error('error addWord');
 };
 
-export const bulkAdd = async (words: { text: string; meaning: string; lang: string }[]) => {
+export const bulkAdd = async (words: NewWord[]) => {
   const { data, error } = await wordsTable().insert(words);
 
   if (data) {
@@ -67,11 +77,18 @@ export const bulkAdd = async (words: { text: string; meaning: string; lang: stri
 //   { text: 'hola', meaning: 'привет', lang: 'ES' },
 // ]);
 
-export const updateWord = async (id: string, text: string, meaning: string) => {
+interface UpdateWord {
+  text: string;
+  meaning: string;
+  type?: string;
+}
+
+export const updateWord = async (id: string, payload: UpdateWord) => {
   const { data, error } = await wordsTable()
     .update({
-      text: text.trim(),
-      meaning: meaning.trim(),
+      text: payload.text.trim(),
+      meaning: payload.meaning.trim(),
+      type: payload.type,
     })
     .match({ id });
 

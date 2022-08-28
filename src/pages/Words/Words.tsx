@@ -35,7 +35,7 @@ const sorts = [
 const Words: React.FC = () => {
   const { lang } = useCurrentLanguage();
 
-  const { isLoading, data } = useWords(lang);
+  const { isLoading, data } = useWords();
   const [searchInput, setSearchInput] = useState('');
   const [sort, setSort] = useState(0);
 
@@ -77,6 +77,10 @@ const Words: React.FC = () => {
 
             <Link to={'/words/new'}>
               <Button type={'success'}>Add</Button>
+            </Link>
+
+            <Link to={'/verbs'}>
+              <Button>Verbs</Button>
             </Link>
 
             <div className={styles.spacer} />
@@ -122,6 +126,7 @@ const Words: React.FC = () => {
               text={item.text}
               meaning={item.meaning}
               step={item.step}
+              type={item.type ?? undefined}
             />
           ))}
         </div>

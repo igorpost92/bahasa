@@ -10,6 +10,16 @@ import AppPage from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 import Spinner from '../../kit/components/Spinner/Spinner';
 import { usePromise } from '../../hooks/usePromise';
+import { WordTypes } from '../../types';
+import Select from '../../kit/components/Select/Select';
+import ControlGroup from '../../kit/components/ControlGroup/ControlGroup';
+
+const wordTypes = [
+  { value: WordTypes.Noun, name: WordTypes.Noun },
+  { value: WordTypes.Verb, name: WordTypes.Verb },
+  { value: WordTypes.Adjective, name: WordTypes.Adjective },
+  { value: WordTypes.Phrase, name: WordTypes.Phrase },
+];
 
 const Word: React.FC = () => {
   const { lang } = useCurrentLanguage();
@@ -20,6 +30,7 @@ const Word: React.FC = () => {
 
   const [text, setText] = useState('');
   const [meaning, setMeaning] = useState('');
+  const [wordType, setWordType] = useState<WordTypes>();
 
   const { isLoading, data } = useWord(id);
 
@@ -27,6 +38,7 @@ const Word: React.FC = () => {
     if (data) {
       setText(data.text);
       setMeaning(data.meaning);
+      setWordType(data.type ?? undefined);
     }
   }, [data]);
 
@@ -38,9 +50,9 @@ const Word: React.FC = () => {
     let action;
 
     if (isNew) {
-      action = () => addWord(text, meaning, lang);
+      action = () => addWord({ text, meaning, lang, type: wordType });
     } else {
-      action = () => updateWord(id, text, meaning);
+      action = () => updateWord(id, { text, meaning, type: wordType });
     }
 
     const result = await action();
@@ -81,17 +93,21 @@ const Word: React.FC = () => {
       <Spinner />
     ) : (
       <>
-        <label className={styles.field}>
-          Text
-          <Input className={styles.input} value={text} onChange={setText} />
-        </label>
+        <ControlGroup id={'text'} label={'Text'}>
+          <Input value={text} onChange={setText} />
+        </ControlGroup>
 
-        <label className={styles.field}>
-          Meaning
-          <Input className={styles.input} value={meaning} onChange={setMeaning} />
-        </label>
+        <ControlGroup id={'meaning'} label={'Meaning'}>
+          <Input value={meaning} onChange={setMeaning} />
+        </ControlGroup>
 
-        <ListenButton text={text} className={styles.listenBtn} />
+        <ControlGroup id={'type'} label={'Type'}>
+          <Select options={wordTypes} value={wordType} onChange={setWordType as any} />
+        </ControlGroup>
+
+        <div className={styles.btnWrap}>
+          <ListenButton text={text} className={styles.listenBtn} />
+        </div>
       </>
     );
 

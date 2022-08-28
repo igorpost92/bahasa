@@ -8,6 +8,7 @@ import Languages from './pages/Languages/Languages';
 import Language from './pages/Language/Language';
 import { LanguageContextLayer } from './context/LanguageContext';
 import AuthGuard from './components/AuthGuard/AuthGuard';
+import VerbsTenses from './pages/VerbsTenses/VerbsTenses';
 
 const isProd = location.hostname !== 'localhost';
 
@@ -24,6 +25,7 @@ function App() {
             <Route path={'/languages/new'} element={<Language />} />
             <Route path={'/languages/:id'} element={<Language />} />
             <Route path={'/game'} element={<Game />} />
+            <Route path={'/verbs'} element={<VerbsTenses />} />
             <Route path={'/global-repeat'} element={<Game globalRepeatMode />} />
             <Route path={'/words'} element={<Words />} />
             <Route path={'/words/new'} element={<Word />} />

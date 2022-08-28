@@ -1,0 +1,40 @@
+.wrap {
+  padding: 4px 0;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.wordWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: auto;
+}
+
+.title {
+  width: 100px;
+  margin-right: 10px;
+  text-align: end;
+}
+
+.text {
+
+}
+
+.showBtn {
+  width: 100%;
+  padding: 10px 30px;
+  border-radius: 8px;
+  border: 1px solid lightgray;
+  text-align: center;
+}
+
+.speakBtn {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

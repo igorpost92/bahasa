@@ -8,14 +8,14 @@ interface Props {
   type?: 'primary' | 'secondary' | 'success' | 'danger';
   children: React.ReactNode;
   onClick?: () => void;
-  size?: 'l' | 'xl';
+  size?: 'm' | 'l' | 'xl';
   fullWidth?: boolean;
   isLoading?: boolean;
   isDisabled?: boolean;
 }
 
 const Button: React.FC<Props> = props => {
-  const { type = 'secondary', size = 'x' } = props;
+  const { type = 'secondary', size = 'l' } = props;
 
   const onClick = () => {
     if (props.isLoading || props.isDisabled) {

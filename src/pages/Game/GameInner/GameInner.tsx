@@ -7,7 +7,7 @@ import { useWordCards } from './useWordCards';
 import { markWordAsRepeated } from '../../../api/methods/words';
 import WordMini from '../../../components/WordMini/WordMini';
 import { useList } from '../../../hooks/useList';
-import Refresh from '../../../icons/Refresh';
+import { Refresh } from '../../../icons';
 
 interface Props {
   words: Word[];
@@ -69,7 +69,7 @@ const GameInner: React.FC<Props> = props => {
 
         <div className={styles.endStageButtons}>
           <Button fullWidth size={'l'} onClick={goToPrevWord}>
-            <Refresh size={24} />
+            <Refresh />
           </Button>
         </div>
       </div>
@@ -123,7 +123,7 @@ const GameInner: React.FC<Props> = props => {
           ) : (
             <>
               <Button size={'xl'} className={styles.revertBtn} onClick={goToPrevWord}>
-                <Refresh size={24} />
+                <Refresh />
               </Button>
               <Button size={'xl'} className={styles.btn} onClick={doShowAnswer}>
                 Show answer

@@ -1,0 +1,25 @@
+.statusRow {
+  display: flex;
+  align-items: center;
+}
+
+.prevBtn {
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.infinitive {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.tenseTitle {
+  margin-top: 20px;
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.pair {
+  display: flex;
+}
