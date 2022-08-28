@@ -4,9 +4,10 @@ import { FAKE_EMAIL } from '../../constants/fakeEmail';
 import { WordTypes } from '../../types';
 
 const wordsTable = () => {
-  const email = supabase.auth.user()?.email;
-  const useSecondaryTable = !email || email === FAKE_EMAIL;
-  return supabase.from(useSecondaryTable ? 'words_2' : 'words');
+  // const email = supabase.auth.user()?.email;
+  // const useSecondaryTable = !email || email === FAKE_EMAIL;
+  // return supabase.from(useSecondaryTable ? 'words_2' : 'words');
+  return supabase.from('words');
 };
 
 // TODO: words interfaces
