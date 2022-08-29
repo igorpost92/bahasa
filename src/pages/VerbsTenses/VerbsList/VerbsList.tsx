@@ -49,8 +49,8 @@ const VerbsList: React.FC<Props> = props => {
         <div className={styles.subtitle}>Count: {data.length}</div>
 
         {data.map(item => (
-          <div className={styles.word} onClick={() => props.onSelect([item])}>
-            <WordMini key={item.id} text={item.name} />
+          <div key={item.word_id} className={styles.word} onClick={() => props.onSelect([item])}>
+            <WordMini text={item.name} />
           </div>
         ))}
       </div>

@@ -27,10 +27,7 @@ const pronouns = [
 ];
 
 const Inner: React.FC<Props> = props => {
-  const words = useMemo(() => {
-    // TODO: take level in account
-    return shuffle(props.words);
-  }, [props.words]);
+  const { words } = props;
 
   const [counter, setCounter] = useState(0);
   const currentWord = words[counter];
