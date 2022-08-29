@@ -22,10 +22,10 @@ const VerbValue: React.FC<Props> = props => {
   };
 
   return (
-    <div className={styles.wrap}>
+    <div className={styles.wrap} onClick={onClick}>
       <div className={styles.title}>{props.title}</div>
 
-      <div className={styles.wordWrap} onClick={onClick}>
+      <div className={styles.wordWrap}>
         {isShown ? (
           <>
             <div className={styles.speakBtn}>
