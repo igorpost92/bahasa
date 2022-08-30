@@ -22,8 +22,13 @@
   margin-right: 10px;
 }
 
+.searchInput {
+  flex: auto;
+}
+
 .sortSelect {
-  width: 170px;
+  flex: auto;
+  width: 100px;
   text-align: right;
   padding: 12px 7px;
   border: none;
@@ -33,6 +38,7 @@
     border: none;
     color: inherit;
     width: 100%;
+    text-align: right;
   }
 }
 

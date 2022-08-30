@@ -14,14 +14,25 @@ import styles from './Words.module.scss';
 const sorts = [
   {
     value: 'date-desc',
-    name: 'Date added (desc)',
+    name: 'Date (desc)',
     getField: (word: Word) => word.created_at.getTime(),
     sortK: -1,
   },
   {
     value: 'date-asc',
-    name: 'Date added (asc)',
+    name: 'Date (asc)',
     getField: (word: Word) => word.created_at.getTime(),
+  },
+  {
+    value: 'name-asc',
+    name: 'Name (asc)',
+    getField: (word: Word) => word.text.toLowerCase(),
+  },
+  {
+    value: 'name-desc',
+    name: 'Name (desc)',
+    getField: (word: Word) => word.text.toLowerCase(),
+    sortK: -1,
   },
   {
     value: 'step-desc',
@@ -52,7 +63,14 @@ const Words: React.FC = () => {
     return (data ?? []).sort((a, b) => {
       const valueA = sortRule.getField(a);
       const valueB = sortRule.getField(b);
-      const sortNumber = valueA - valueB;
+
+      let sortNumber = 0;
+      if (valueA > valueB) {
+        sortNumber = 1;
+      } else if (valueB > valueA) {
+        sortNumber = -1;
+      }
+
       return sortNumber * (sortRule.sortK ?? 1);
     });
   }, [data, sort]);
@@ -101,7 +119,12 @@ const Words: React.FC = () => {
       }
       headerBottom={
         <div className={styles.searchRow}>
-          <Input value={searchInput} onChange={setSearchInput} placeholder={'Search...'} />
+          <Input
+            className={styles.searchInput}
+            value={searchInput}
+            onChange={setSearchInput}
+            placeholder={'Search...'}
+          />
           <Select
             className={styles.sortSelect}
             onChange={setSort as any}
