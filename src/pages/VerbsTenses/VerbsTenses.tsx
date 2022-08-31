@@ -6,7 +6,7 @@ import Button from '../../kit/components/Button/Button';
 import Spinner from '../../kit/components/Spinner/Spinner';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 import Inner from './Inner/Inner';
-import { useVerbTenses } from './useVerbTenses';
+import { useVerbTenses } from '../../api/hooks/verbs/useVerbTenses';
 import VerbsList from './VerbsList/VerbsList';
 import { VerbData } from '../../api/methods/verbs';
 
@@ -15,7 +15,7 @@ interface Props {}
 const VerbsTenses: React.FC<Props> = props => {
   const { lang } = useCurrentLanguage();
 
-  const { isLoading, data, isError } = useVerbTenses();
+  const { isLoading, data, error } = useVerbTenses();
   const words = data ?? [];
 
   const [selectedData, setSelectedData] = useState<VerbData[]>();
@@ -26,8 +26,8 @@ const VerbsTenses: React.FC<Props> = props => {
     content = <div>Only spanish supported at the moment</div>;
   } else if (isLoading) {
     content = <Spinner />;
-  } else if (isError) {
-    content = <div>Unknown error</div>;
+  } else if (error) {
+    content = <div>{error}</div>;
   } else if (!words.length) {
     content = <div>No verbs found in dictionary</div>;
   }

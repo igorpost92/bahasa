@@ -166,7 +166,7 @@ const prepareVerbs = async () => {
 
   let save;
   save = false;
-  // save = true;
+  save = true;
   if (save) {
     syncData(result);
   }

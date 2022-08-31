@@ -4,7 +4,7 @@ import ControlGroup from '../../../kit/components/ControlGroup/ControlGroup';
 import Input from '../../../kit/components/Input/Input';
 import Button from '../../../kit/components/Button/Button';
 import AppPage from '../../AppPage/AppPage';
-import { singIn } from '../../../api/methods/auth';
+import { singIn } from '../../../api/methods';
 import { usePromise } from '../../../hooks/usePromise';
 import { FAKE_EMAIL } from '../../../constants/fakeEmail';
 
@@ -16,16 +16,16 @@ const Login: React.FC<Props> = props => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
-  const { isLoading, isError, data, send } = usePromise(() => {
+  const { isLoading, error, data, send } = usePromise(() => {
     const correctedEmail = login.toLowerCase() === 'juan' ? FAKE_EMAIL : login;
     return singIn(correctedEmail, password);
   });
 
   useEffect(() => {
-    if (isError) {
-      alert('Error');
+    if (error) {
+      alert(error);
     }
-  }, [isError]);
+  }, [error]);
 
   useEffect(() => {
     if (data) {

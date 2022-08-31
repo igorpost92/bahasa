@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { useWords } from '../../api/hooks/useWords';
+import { useWords } from '../../api/hooks/words/useWords';
 import { Link } from 'react-router-dom';
 import Button from '../../kit/components/Button/Button';
 import Input from '../../kit/components/Input/Input';
@@ -145,7 +145,7 @@ const Words: React.FC = () => {
           {items.map(item => (
             <WordMini
               key={item.id}
-              url={`/words/${item.id}`}
+              url={String(item.id)}
               text={item.text}
               meaning={item.meaning}
               step={item.step ?? undefined}

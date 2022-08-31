@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Word.module.scss';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useWord } from '../../api/hooks/useWord';
+import { useParams } from 'react-router-dom';
+import { useWord } from '../../api/hooks/words/useWord';
 import Input from '../../kit/components/Input/Input';
-import Button from '../../kit/components/Button/Button';
 import { addWord, deleteWord, updateWord } from '../../api/methods/words';
 import ListenButton from '../../components/ListenButton/ListenButton';
-import AppPage from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
-import Spinner from '../../kit/components/Spinner/Spinner';
-import { usePromise } from '../../hooks/usePromise';
 import { WordTypes } from '../../types';
 import Select from '../../kit/components/Select/Select';
 import ControlGroup from '../../kit/components/ControlGroup/ControlGroup';
+import ElementForm from '../../components/ElementForm/ElementForm';
 
 const wordTypes = [
   { value: WordTypes.Noun, name: WordTypes.Noun },
@@ -24,7 +21,6 @@ const wordTypes = [
 const Word: React.FC = () => {
   const { lang } = useCurrentLanguage();
 
-  const navigate = useNavigate();
   const { id } = useParams();
   const isNew = id == undefined;
 
@@ -32,7 +28,7 @@ const Word: React.FC = () => {
   const [meaning, setMeaning] = useState('');
   const [wordType, setWordType] = useState<WordTypes>();
 
-  const { isLoading, data } = useWord(id);
+  const { isLoading, data, error } = useWord(id);
 
   useEffect(() => {
     if (data) {
@@ -42,9 +38,10 @@ const Word: React.FC = () => {
     }
   }, [data]);
 
-  const savingPromise = usePromise(async () => {
+  const onSave = async () => {
     if (!text || !meaning) {
-      return;
+      // TODO: submit disabed
+      throw new Error('no fields data');
     }
 
     let action;
@@ -55,92 +52,38 @@ const Word: React.FC = () => {
       action = () => updateWord(id, { text, meaning, type: wordType });
     }
 
-    const result = await action();
+    return action();
+  };
 
-    if (result) {
-      navigate('/words');
-    } else {
-      alert('error');
-    }
-  });
-
-  const deletingPromise = usePromise(async () => {
-    if (isNew) {
-      return;
-    }
-
-    const res = confirm('Are you sure?');
-    if (!res) {
-      return;
-    }
-
-    const result = await deleteWord(id);
-    if (result) {
-      navigate('/words');
-    } else {
-      alert('error');
-    }
-  });
-
-  useEffect(() => {
-    if (savingPromise.isError || deletingPromise.isError) {
-      alert('error');
-    }
-  }, [savingPromise.isError, deletingPromise.isError]);
-
-  const content =
-    !isNew && isLoading ? (
-      <Spinner />
-    ) : (
-      <>
-        <ControlGroup id={'text'} label={'Text'}>
-          <Input value={text} onChange={setText} />
-        </ControlGroup>
-
-        <ControlGroup id={'meaning'} label={'Meaning'}>
-          <Input value={meaning} onChange={setMeaning} />
-        </ControlGroup>
-
-        <ControlGroup id={'type'} label={'Type'}>
-          <Select options={wordTypes} value={wordType} onChange={setWordType as any} />
-        </ControlGroup>
-
-        <div className={styles.btnWrap}>
-          <ListenButton text={text} className={styles.listenBtn} />
-        </div>
-      </>
-    );
+  const onDelete = () => deleteWord(id);
 
   return (
-    <AppPage
-      headerLeft={
-        <div className={styles.btnPanel}>
-          <Link to="/">
-            <Button>Back</Button>
-          </Link>
-          <Button
-            type={'success'}
-            onClick={savingPromise.send}
-            isLoading={savingPromise.isLoading}
-            isDisabled={deletingPromise.isLoading}
-          >
-            Save
-          </Button>
-          {!isNew && (
-            <Button
-              type={'danger'}
-              onClick={deletingPromise.send}
-              isLoading={deletingPromise.isLoading}
-              isDisabled={savingPromise.isLoading}
-            >
-              Delete
-            </Button>
-          )}
-        </div>
-      }
+    <ElementForm
+      listUrl={'/words'}
+      isNew={isNew}
+      // todo
+      isLoading={!isNew && isLoading}
+      error={error}
+      onSave={onSave}
+      onDelete={onDelete}
     >
-      {content}
-    </AppPage>
+      <ControlGroup id={'text'} label={'Text'}>
+        <Input value={text} onChange={setText} />
+      </ControlGroup>
+
+      <ControlGroup id={'meaning'} label={'Meaning'}>
+        <Input value={meaning} onChange={setMeaning} />
+      </ControlGroup>
+
+      <ControlGroup id={'type'} label={'Type'}>
+        <Select options={wordTypes} value={wordType} onChange={setWordType as any} />
+      </ControlGroup>
+
+      <div className={styles.btnWrap}>
+        {/*// TODO: move up*/}
+        <ListenButton text={text} className={styles.listenBtn} />
+      </div>
+    </ElementForm>
   );
 };
 

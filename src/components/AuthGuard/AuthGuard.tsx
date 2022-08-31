@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUser } from '../../api/methods/auth';
+import { getUser } from '../../api/methods';
 import Login from './Login/Login';
 import { useForceRerender } from '../../hooks/useForceRerender';
 

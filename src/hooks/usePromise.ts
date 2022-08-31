@@ -1,21 +1,22 @@
 import { useRef, useState } from 'react';
 
-export const usePromise = <T>(fn: () => Promise<T>, initialLoading = false) => {
+// TODO: initial as true
+export const usePromise = <T, P>(fn: (...args: P[]) => Promise<T>, initialLoading = false) => {
   const [isLoading, setLoading] = useState(initialLoading);
   const [data, setData] = useState<T | null>(null);
-  const [isError, setError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const callIdRef = useRef(0);
 
-  const send = async () => {
+  const send = async (...args: P[]) => {
     const currentId = ++callIdRef.current;
 
     setLoading(true);
     setData(null);
-    setError(false);
+    setError(null);
 
     try {
-      const result = await fn();
+      const result = await fn(...args);
       if (currentId !== callIdRef.current) {
         return;
       }
@@ -26,11 +27,11 @@ export const usePromise = <T>(fn: () => Promise<T>, initialLoading = false) => {
         return;
       }
 
-      setError(true);
+      setError((e as Error)?.message ?? 'Unknown error');
     }
 
     setLoading(false);
   };
 
-  return { isLoading, data, isError, send: send };
+  return { isLoading, data, error, send };
 };

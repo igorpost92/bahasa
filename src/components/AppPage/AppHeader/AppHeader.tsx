@@ -34,12 +34,12 @@ const AppHeader: React.FC<Props> = ({ showLang = true, ...props }) => {
   return (
     <div className={className}>
       <div className={cn(styles.row, styles.topRow)}>
-        {props.leftSlot}
+        <div className={styles.left}>{props.leftSlot}</div>
 
         {props.titleSlot && <h3>{props.titleSlot}</h3>}
 
         {showLang && (
-          <div className={styles.lang}>
+          <div className={styles.right}>
             <SelectedLangButton />
           </div>
         )}

@@ -1,11 +1,3 @@
-.btnPanel {
-  display: flex;
-
-  * + * {
-    margin-left: 6px;
-  }
-}
-
 .btnWrap {
   margin-top: 30px;
   display: flex;

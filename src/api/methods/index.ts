@@ -1,4 +1,4 @@
-import { supabase } from '../../sendRequest';
+import { supabase } from '../sendRequest';
 
 export const getUser = () => {
   return supabase.auth.user();

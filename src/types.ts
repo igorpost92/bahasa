@@ -1,5 +1,5 @@
 export interface Word {
-  id: string;
+  id: number;
   text: string;
   meaning: string;
   type: WordTypes | null;
