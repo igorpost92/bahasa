@@ -1,0 +1,19 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid lightgray;
+  min-height: 50px;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+  flex: 1 1 0;
+
+  &.active {
+    color: black;
+    font-weight: 600;
+  }
+}

@@ -3,6 +3,8 @@ import styles from './AppPage.module.scss';
 import Page from '../../kit/components/Page/Page';
 import AppHeader from './AppHeader/AppHeader';
 import cn from 'classnames';
+import TabBar from '../../kit/components/Page/TabBar/TabBar';
+import TabBarItem from '../../kit/components/Page/TabBar/TabBarItem';
 
 interface Props {
   children: React.ReactNode;
@@ -14,6 +16,7 @@ interface Props {
   showLang?: boolean;
   showHeaderBorder?: boolean;
   contentClassName?: string;
+  showTabBar?: boolean;
 }
 
 const AppPage: React.FC<Props> = props => {
@@ -33,6 +36,15 @@ const AppPage: React.FC<Props> = props => {
           >
             {props.customHeader}
           </AppHeader>
+        )
+      }
+      footer={
+        props.showTabBar && (
+          <TabBar>
+            <TabBarItem url={'/words'}>Words</TabBarItem>
+            <TabBarItem url={'/game'}>Game</TabBarItem>
+            <TabBarItem url={'/categories'}>Categories</TabBarItem>
+          </TabBar>
         )
       }
     >

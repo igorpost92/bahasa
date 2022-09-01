@@ -91,13 +91,10 @@ const Words: React.FC = () => {
 
   return (
     <AppPage
+      showTabBar
       headerLeft={
         <div className={styles.linksWrap}>
           {/*// TODO: menu*/}
-
-          <Link to={'/game'}>
-            <Button>Game</Button>
-          </Link>
 
           <Link to={'/words/new'}>
             <Button type={'success'}>Add</Button>

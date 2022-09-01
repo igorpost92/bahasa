@@ -11,3 +11,11 @@
   flex: auto;
   height: 1%;
 }
+
+.footer {
+  padding-bottom: var(--safe-area-inset-bottom);
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  background: white;
+}
