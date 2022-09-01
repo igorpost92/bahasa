@@ -17,7 +17,7 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   flex: auto;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -42,9 +42,9 @@
 }
 
 .meaning {
+  margin-top: 2px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 18px;
-  margin-top: 4px;
+  font-size: 14px;
 }

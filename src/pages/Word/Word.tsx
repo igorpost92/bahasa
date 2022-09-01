@@ -21,8 +21,9 @@ const wordTypes = [
 const Word: React.FC = () => {
   const { lang } = useCurrentLanguage();
 
-  const { id } = useParams();
-  const isNew = id == undefined;
+  const params = useParams();
+  const isNew = params.id === undefined;
+  const id = Number(params.id);
 
   const [text, setText] = useState('');
   const [meaning, setMeaning] = useState('');
@@ -49,6 +50,7 @@ const Word: React.FC = () => {
     if (isNew) {
       action = () => addWord({ text, meaning, lang, type: wordType });
     } else {
+      // TODO: dont show lang on existing
       action = () => updateWord(id, { text, meaning, type: wordType });
     }
 

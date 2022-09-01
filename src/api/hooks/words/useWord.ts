@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import { getWord } from '../../methods/words';
 import { usePromise } from '../../../hooks/usePromise';
 
-export const useWord = (id?: string) => {
+export const useWord = (id?: number) => {
   const { send, ...promise } = usePromise(async () => {
-    if (!id) {
+    if (id === undefined) {
       return null;
     }
 
@@ -12,11 +12,6 @@ export const useWord = (id?: string) => {
   }, true);
 
   useEffect(() => {
-    // TODO: need here?
-    // if (!id) {
-    //   return;
-    // }
-
     send();
   }, [id]);
 

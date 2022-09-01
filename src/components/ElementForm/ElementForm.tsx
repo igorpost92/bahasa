@@ -51,9 +51,12 @@ function ElementForm<T>(props: Props<T>) {
   });
 
   useEffect(() => {
-    if (savingPromise.error || deletingPromise.error) {
-      // TODO:
-      alert('error');
+    // TODO: alert
+
+    if (savingPromise.error) {
+      alert(savingPromise.error);
+    } else if (deletingPromise.error) {
+      alert(deletingPromise.error);
     }
   }, [savingPromise.error, deletingPromise.error]);
 

@@ -33,7 +33,7 @@ export const getWords = async (lang: string) => {
     return data.map(parseWordFromServer);
   }
 
-  throw new Error('error getWords');
+  throw new Error(error.message ?? 'error getWords');
 };
 
 export const getWord = async (id: number) => {
@@ -46,7 +46,7 @@ export const getWord = async (id: number) => {
     return parseWordFromServer(data);
   }
 
-  throw new Error('error getWords');
+  throw new Error(error.message ?? 'error getWords');
 };
 
 interface NewWord {
@@ -60,16 +60,17 @@ export const addWord = async (payload: NewWord) => {
   const { data, error } = await wordsTable().insert({
     text: payload.text.trim(),
     meaning: payload.meaning.trim(),
-    lang: payload.lang,
     type: payload.type,
-    email: getUser()?.email,
+    // TODO: fix types
+    ['lang' as any]: payload.lang,
+    ['email' as any]: getUser()?.email,
   });
 
   if (data) {
     return data;
   }
 
-  throw new Error('error addWord');
+  throw new Error(error.message ?? 'error addWord');
 };
 
 export const bulkAdd = async (words: NewWord[]) => {
@@ -105,7 +106,7 @@ export const updateWord = async (id: number, payload: UpdateWord) => {
     return data;
   }
 
-  throw new Error('error updateWord');
+  throw new Error(error.message ?? 'error updateWord');
 };
 
 export const markWordAsRepeated = async (id: number, step: number) => {
@@ -120,7 +121,7 @@ export const markWordAsRepeated = async (id: number, step: number) => {
     return data;
   }
 
-  throw new Error('error markWordAsRepeated');
+  throw new Error(error.message ?? 'error markWordAsRepeated');
 };
 
 export const deleteWord = async (id: number) => {
@@ -130,5 +131,5 @@ export const deleteWord = async (id: number) => {
     return data;
   }
 
-  throw new Error('error deleteWord');
+  throw new Error(error.message ?? 'error deleteWord');
 };
