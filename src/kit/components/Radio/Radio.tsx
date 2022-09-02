@@ -9,7 +9,7 @@ interface Props {
   label?: string;
 }
 
-const Radio: React.FC<Props> = props => {
+export const Radio: React.FC<Props> = props => {
   return (
     <div className={cn(styles.wrap, props.className)} onClick={props.onChange}>
       <div className={cn(styles.marker, props.isChecked && styles.checked)} />
@@ -17,5 +17,3 @@ const Radio: React.FC<Props> = props => {
     </div>
   );
 };
-
-export default Radio;

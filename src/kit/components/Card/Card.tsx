@@ -7,8 +7,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Card: React.FC<Props> = props => {
+export const Card: React.FC<Props> = props => {
   return <div className={cn(styles.wrap, props.className)}>{props.children}</div>;
 };
-
-export default Card;

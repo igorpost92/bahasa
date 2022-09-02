@@ -1,10 +1,8 @@
 import React from 'react';
 import styles from './AppPage.module.scss';
-import Page from '../../kit/components/Page/Page';
+import { Page, TabBar, TabBarItem } from '../../kit';
 import AppHeader from './AppHeader/AppHeader';
 import cn from 'classnames';
-import TabBar from '../../kit/components/Page/TabBar/TabBar';
-import TabBarItem from '../../kit/components/Page/TabBar/TabBarItem';
 
 interface Props {
   children: React.ReactNode;

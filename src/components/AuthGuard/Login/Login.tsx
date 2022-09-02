@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Login.module.scss';
-import ControlGroup from '../../../kit/components/ControlGroup/ControlGroup';
-import Input from '../../../kit/components/Input/Input';
-import Button from '../../../kit/components/Button/Button';
+import { ControlGroup, Input, Button } from '../../../kit';
 import AppPage from '../../AppPage/AppPage';
 import { singIn } from '../../../api/methods';
 import { usePromise } from '../../../hooks/usePromise';

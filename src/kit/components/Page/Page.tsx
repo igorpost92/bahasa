@@ -13,7 +13,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const Page: React.FC<Props> = props => {
+export const Page: React.FC<Props> = props => {
   return (
     <div className={cn(styles.wrap, props.className)}>
       {props.header && <Header className={props.headerClassName}>{props.header}</Header>}
@@ -22,5 +22,3 @@ const Page: React.FC<Props> = props => {
     </div>
   );
 };
-
-export default Page;

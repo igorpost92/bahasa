@@ -7,8 +7,6 @@ interface Props {
   className?: string;
 }
 
-const Spinner: React.FC<Props> = props => {
+export const Spinner: React.FC<Props> = props => {
   return <SpinnerIcon width={20} height={20} className={cn(styles.icon, props.className)} />;
 };
-
-export default Spinner;

@@ -1,6 +1,6 @@
 import { createContext, useState, ReactNode, useMemo, useEffect, useContext } from 'react';
 import { useLanguages } from '../api/hooks/languages/useLanguages';
-import Spinner from '../kit/components/Spinner/Spinner';
+import { Spinner } from '../kit';
 import LangSelector from '../components/LangSelector/LangSelector';
 
 // todo name

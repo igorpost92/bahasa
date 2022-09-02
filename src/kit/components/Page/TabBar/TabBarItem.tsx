@@ -8,7 +8,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-const TabBarItem: React.FC<Props> = props => {
+export const TabBarItem: React.FC<Props> = props => {
   return (
     <NavLink
       to={props.url}
@@ -18,5 +18,3 @@ const TabBarItem: React.FC<Props> = props => {
     </NavLink>
   );
 };
-
-export default TabBarItem;

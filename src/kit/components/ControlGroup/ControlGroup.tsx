@@ -9,7 +9,7 @@ interface Props {
   children: React.ReactElement;
 }
 
-const ControlGroup: React.FC<Props> = props => {
+export const ControlGroup: React.FC<Props> = props => {
   return (
     <div className={cn(styles.wrap, props.className)}>
       {props.label && (
@@ -21,5 +21,3 @@ const ControlGroup: React.FC<Props> = props => {
     </div>
   );
 };
-
-export default ControlGroup;

@@ -1,14 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { useWords } from '../../api/hooks/words/useWords';
 import { Link } from 'react-router-dom';
-import Button from '../../kit/components/Button/Button';
-import Input from '../../kit/components/Input/Input';
+import { Button, Input, Spinner, Select } from '../../kit';
 import { Word } from '../../types';
 import WordMini from '../../components/WordMini/WordMini';
 import AppPage from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
-import Spinner from '../../kit/components/Spinner/Spinner';
-import Select from '../../kit/components/Select/Select';
 import styles from './Words.module.scss';
 
 const sorts = [

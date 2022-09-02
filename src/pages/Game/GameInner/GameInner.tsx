@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './GameInner.module.scss';
 import { Word } from '../../../types';
 import WordCard from './WordCard/WordCard';
-import Button from '../../../kit/components/Button/Button';
+import { Button } from '../../../kit';
 import { useWordCards } from './useWordCards';
 import { markWordAsRepeated } from '../../../api/methods/words';
 import WordMini from '../../../components/WordMini/WordMini';

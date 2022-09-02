@@ -1,10 +1,9 @@
 import React from 'react';
 import styles from './LangSelector.module.scss';
-import Drawer from '../../kit/components/Drawer/Drawer';
+import { Drawer, Spinner } from '../../kit';
 import { useLanguages } from '../../api/hooks/languages/useLanguages';
 import LangIcon from '../LangIcon/LangIcon';
 import cn from 'classnames';
-import Spinner from '../../kit/components/Spinner/Spinner';
 
 interface Props {
   isOpen: boolean;

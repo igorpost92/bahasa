@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { ChevronDown } from '../../icons';
 import cn from 'classnames';
-import Drawer from '../Drawer/Drawer';
-import Radio from '../Radio/Radio';
+import { Drawer, Radio } from '../';
 import styles from './Select.module.scss';
 
 interface Option {
@@ -20,7 +19,7 @@ interface Props<T extends Option> {
 
 const placeholder = 'Select';
 
-function Select<T extends Option>(props: Props<T>) {
+export function Select<T extends Option>(props: Props<T>) {
   const [isModalOpen, setModalOpen] = useState(false);
 
   const label =
@@ -72,5 +71,3 @@ function Select<T extends Option>(props: Props<T>) {
     </>
   );
 }
-
-export default Select;

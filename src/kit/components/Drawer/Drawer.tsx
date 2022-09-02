@@ -12,7 +12,7 @@ interface Props {
   // TODO: position left
 }
 
-const Drawer: React.FC<Props> = props => {
+export const Drawer: React.FC<Props> = props => {
   if (!props.isOpen) {
     return null;
   }
@@ -26,5 +26,3 @@ const Drawer: React.FC<Props> = props => {
     </Portal>
   );
 };
-
-export default Drawer;

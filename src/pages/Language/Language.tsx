@@ -3,10 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import styles from './Language.module.scss';
 import { useLanguage } from '../../api/hooks/languages/useLanguage';
 import { addLanguage } from '../../api/methods/languages';
-import Button from '../../kit/components/Button/Button';
-import Input from '../../kit/components/Input/Input';
+import { Button, Input, Spinner } from '../../kit';
 import AppPage from '../../components/AppPage/AppPage';
-import Spinner from '../../kit/components/Spinner/Spinner';
 
 const Language: React.FC = () => {
   const navigate = useNavigate();

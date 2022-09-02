@@ -10,7 +10,7 @@ interface Props {
   onChange: (value: string) => void;
 }
 
-const Input: React.FC<Props> = props => {
+export const Input: React.FC<Props> = props => {
   return (
     <input
       id={props.id}
@@ -23,5 +23,3 @@ const Input: React.FC<Props> = props => {
     />
   );
 };
-
-export default Input;

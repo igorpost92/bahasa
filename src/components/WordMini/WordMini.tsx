@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './WordMini.module.scss';
 import { WordTypes } from '../../types';
 import { Link } from 'react-router-dom';
-import Card from '../../kit/components/Card/Card';
+import { Card } from '../../kit';
 import cn from 'classnames';
 
 interface Props {

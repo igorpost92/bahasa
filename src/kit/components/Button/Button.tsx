@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Button.module.scss';
 import cn from 'classnames';
-import Spinner from '../Spinner/Spinner';
+import { Spinner } from '..';
 
 interface Props {
   className?: string;
@@ -14,7 +14,7 @@ interface Props {
   isDisabled?: boolean;
 }
 
-const Button: React.FC<Props> = props => {
+export const Button: React.FC<Props> = props => {
   const { type = 'secondary', size = 'l' } = props;
 
   const onClick = () => {
@@ -42,5 +42,3 @@ const Button: React.FC<Props> = props => {
     </button>
   );
 };
-
-export default Button;

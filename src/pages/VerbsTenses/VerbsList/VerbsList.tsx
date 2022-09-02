@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import styles from './VerbsList.module.scss';
 import { VerbData } from '../../../api/methods/verbs';
-import Input from '../../../kit/components/Input/Input';
-import Button from '../../../kit/components/Button/Button';
+import { Input, Button } from '../../../kit';
 import WordMini from '../../../components/WordMini/WordMini';
 import { Link } from 'react-router-dom';
 import AppPage from '../../../components/AppPage/AppPage';

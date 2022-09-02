@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Game.module.scss';
-import Button from '../../kit/components/Button/Button';
+import { Button, Spinner } from '../../kit';
 import { Link } from 'react-router-dom';
 import { useWords } from '../../api/hooks/words/useWords';
 import GameInner from './GameInner/GameInner';
 import AppPage from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
-import Spinner from '../../kit/components/Spinner/Spinner';
 
 interface Props {
   globalRepeatMode?: boolean;

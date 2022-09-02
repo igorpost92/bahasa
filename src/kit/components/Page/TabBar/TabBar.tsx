@@ -7,8 +7,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-const TabBar: React.FC<Props> = props => {
+export const TabBar: React.FC<Props> = props => {
   return <div className={cn(styles.wrap, props.className)}>{props.children}</div>;
 };
-
-export default TabBar;

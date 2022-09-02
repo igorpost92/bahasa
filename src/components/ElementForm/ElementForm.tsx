@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import styles from './ElementForm.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../../kit/components/Button/Button';
+import { Button, Spinner } from '../../kit';
 import AppPage from '../AppPage/AppPage';
-import Spinner from '../../kit/components/Spinner/Spinner';
 import { usePromise } from '../../hooks/usePromise';
 
 interface Config {
@@ -11,6 +10,8 @@ interface Config {
 }
 
 interface Props<T> {
+  // todo
+  // isSubmitDisabled?: boolean
   listUrl: string;
   // TODO: naming
   children: React.ReactNode | ((config: Config) => React.ReactNode);

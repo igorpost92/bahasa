@@ -1,12 +1,10 @@
 import React from 'react';
 import styles from './Languages.module.scss';
 import { useLanguages } from '../../api/hooks/languages/useLanguages';
-import Button from '../../kit/components/Button/Button';
+import { Button, Card, Spinner } from '../../kit';
 import { Link } from 'react-router-dom';
 import LangIcon from '../../components/LangIcon/LangIcon';
-import Card from '../../kit/components/Card/Card';
 import AppPage from '../../components/AppPage/AppPage';
-import Spinner from '../../kit/components/Spinner/Spinner';
 
 interface Props {}
 

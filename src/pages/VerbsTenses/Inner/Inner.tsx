@@ -1,9 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Inner.module.scss';
-import { shuffle } from '../../../utils/shuffle';
 import { VerbData } from '../../../api/methods/verbs';
 import VerbValue from '../VerbValue/VerbValue';
-import Button from '../../../kit/components/Button/Button';
+import { Button } from '../../../kit';
 import AppPage from '../../../components/AppPage/AppPage';
 
 interface Props {
