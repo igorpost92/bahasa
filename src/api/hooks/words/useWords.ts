@@ -1,6 +1,6 @@
 import { useLayoutEffect } from 'react';
 import { getWords } from '../../methods/words';
-import { usePromise } from '../../../hooks/usePromise';
+import { usePromise } from '../../../kit/hooks';
 import { useCurrentLanguage } from '../../../context/LanguageContext';
 
 export const useWords = () => {

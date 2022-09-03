@@ -1,7 +1,7 @@
 .wrap {
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 8px 12px;
   border: 1px solid gray;
   font-size: 16px;
   line-height: 20px;
@@ -10,11 +10,13 @@
 }
 
 .input {
+  flex: auto;
   cursor: inherit;
   border: none;
   outline: none;
   font-size: inherit;
   line-height: inherit;
+  background: none;
 }
 
 .icon {

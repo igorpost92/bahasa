@@ -4,7 +4,7 @@ import styles from './Language.module.scss';
 import { useLanguage } from '../../api/hooks/languages/useLanguage';
 import { addLanguage } from '../../api/methods/languages';
 import { Button, Input, Spinner } from '../../kit';
-import AppPage from '../../components/AppPage/AppPage';
+import { AppPage } from '../../components/AppPage/AppPage';
 
 const Language: React.FC = () => {
   const navigate = useNavigate();
@@ -62,10 +62,10 @@ const Language: React.FC = () => {
           <Link to="/languages">
             <Button>Back</Button>
           </Link>
-          <Button type={'success'} onClick={onSave} isLoading={saveInProgress}>
+          <Button intent={'success'} onClick={onSave} isLoading={saveInProgress}>
             Save
           </Button>
-          {/*<Button type={'danger'} onClick={onDelete}>Delete</Button>*/}
+          {/*<Button intent={'danger'} onClick={onDelete}>Delete</Button>*/}
         </div>
       }
     >

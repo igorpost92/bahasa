@@ -4,7 +4,7 @@ import { Button, Spinner } from '../../kit';
 import { Link } from 'react-router-dom';
 import { useWords } from '../../api/hooks/words/useWords';
 import GameInner from './GameInner/GameInner';
-import AppPage from '../../components/AppPage/AppPage';
+import { AppPage } from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 
 interface Props {

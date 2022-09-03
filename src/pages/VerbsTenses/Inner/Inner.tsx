@@ -3,7 +3,7 @@ import styles from './Inner.module.scss';
 import { VerbData } from '../../../api/methods/verbs';
 import VerbValue from '../VerbValue/VerbValue';
 import { Button } from '../../../kit';
-import AppPage from '../../../components/AppPage/AppPage';
+import { AppPage } from '../../../components/AppPage/AppPage';
 
 interface Props {
   words: VerbData[];

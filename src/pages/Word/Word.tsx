@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import styles from './Word.module.scss';
 import { useParams } from 'react-router-dom';
 import { useWord } from '../../api/hooks/words/useWord';
-import { Input, Select, ControlGroup } from '../../kit';
+import { Input, Select, ControlGroup, ElementForm } from '../../kit';
 import { addWord, deleteWord, updateWord } from '../../api/methods/words';
 import ListenButton from '../../components/ListenButton/ListenButton';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 import { WordTypes } from '../../types';
-import ElementForm from '../../components/ElementForm/ElementForm';
 
 const wordTypes = [
   { value: WordTypes.Noun, name: WordTypes.Noun },

@@ -4,7 +4,7 @@ import { VerbData } from '../../../api/methods/verbs';
 import { Input, Button } from '../../../kit';
 import WordMini from '../../../components/WordMini/WordMini';
 import { Link } from 'react-router-dom';
-import AppPage from '../../../components/AppPage/AppPage';
+import { AppPage } from '../../../components/AppPage/AppPage';
 import { shuffle } from '../../../utils/shuffle';
 
 interface Props {

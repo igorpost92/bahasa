@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Login.module.scss';
 import { ControlGroup, Input, Button } from '../../../kit';
-import AppPage from '../../AppPage/AppPage';
+import { AppPage } from '../../AppPage/AppPage';
 import { singIn } from '../../../api/methods';
-import { usePromise } from '../../../hooks/usePromise';
+import { usePromise } from '../../../kit/hooks';
 import { FAKE_EMAIL } from '../../../constants/fakeEmail';
 
 interface Props {
@@ -41,7 +41,7 @@ const Login: React.FC<Props> = props => {
           <Input value={password} onChange={setPassword} />
         </ControlGroup>
       </div>
-      <Button className={styles.btnWrap} type={'success'} onClick={send} isLoading={isLoading}>
+      <Button className={styles.btnWrap} intent={'success'} onClick={send} isLoading={isLoading}>
         Login
       </Button>
     </AppPage>

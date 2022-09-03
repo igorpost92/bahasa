@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button, Input, Spinner, Select } from '../../kit';
 import { Word } from '../../types';
 import WordMini from '../../components/WordMini/WordMini';
-import AppPage from '../../components/AppPage/AppPage';
+import { AppPage } from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 import styles from './Words.module.scss';
 
@@ -94,7 +94,7 @@ const Words: React.FC = () => {
           {/*// TODO: menu*/}
 
           <Link to={'/words/new'}>
-            <Button type={'success'}>Add</Button>
+            <Button intent={'success'}>Add</Button>
           </Link>
 
           {lang === 'ES' && (

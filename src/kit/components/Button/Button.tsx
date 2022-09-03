@@ -5,17 +5,18 @@ import { Spinner } from '..';
 
 interface Props {
   className?: string;
-  type?: 'primary' | 'secondary' | 'success' | 'danger';
+  intent?: 'primary' | 'secondary' | 'success' | 'danger';
   children: React.ReactNode;
   onClick?: () => void;
   size?: 'm' | 'l' | 'xl';
   fullWidth?: boolean;
   isLoading?: boolean;
   isDisabled?: boolean;
+  type?: JSX.IntrinsicElements['button']['type']
 }
 
 export const Button: React.FC<Props> = props => {
-  const { type = 'secondary', size = 'l' } = props;
+  const { intent = 'secondary', size = 'l', type = 'button' } = props;
 
   const onClick = () => {
     if (props.isLoading || props.isDisabled) {
@@ -30,12 +31,13 @@ export const Button: React.FC<Props> = props => {
       disabled={props.isDisabled}
       className={cn(
         styles.wrap,
-        styles[type],
+        styles[intent],
         styles[size],
         props.fullWidth && styles.fullWidth,
         props.className,
       )}
       onClick={onClick}
+      type={type}
     >
       {props.isLoading && <Spinner className={styles.spinner} />}
       {props.children}

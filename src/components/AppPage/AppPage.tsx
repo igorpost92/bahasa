@@ -17,7 +17,7 @@ interface Props {
   showTabBar?: boolean;
 }
 
-const AppPage: React.FC<Props> = props => {
+export const AppPage: React.FC<Props> = props => {
   const { showHeaderBorder = true, showHeader = true } = props;
 
   return (
@@ -50,5 +50,3 @@ const AppPage: React.FC<Props> = props => {
     </Page>
   );
 };
-
-export default AppPage;

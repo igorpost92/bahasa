@@ -1,7 +1,7 @@
 import React from 'react';
 import { getUser } from '../../api/methods';
 import Login from './Login/Login';
-import { useForceRerender } from '../../hooks/useForceRerender';
+import { useForceRerender } from '../../kit/hooks';
 
 interface Props {
   children: React.ReactNode;

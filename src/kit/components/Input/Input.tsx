@@ -8,6 +8,7 @@ interface Props {
   placeholder?: string;
   value: string;
   onChange: (value: string) => void;
+  type?: JSX.IntrinsicElements['input']['type']
 }
 
 export const Input: React.FC<Props> = props => {
@@ -20,6 +21,7 @@ export const Input: React.FC<Props> = props => {
       autoComplete={'off'}
       value={props.value}
       onChange={e => props.onChange(e.target.value)}
+      type={props.type}
     />
   );
 };

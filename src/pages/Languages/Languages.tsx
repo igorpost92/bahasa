@@ -4,7 +4,7 @@ import { useLanguages } from '../../api/hooks/languages/useLanguages';
 import { Button, Card, Spinner } from '../../kit';
 import { Link } from 'react-router-dom';
 import LangIcon from '../../components/LangIcon/LangIcon';
-import AppPage from '../../components/AppPage/AppPage';
+import { AppPage } from '../../components/AppPage/AppPage';
 
 interface Props {}
 
@@ -22,7 +22,7 @@ const Languages: React.FC<Props> = props => {
           </Link>
 
           <Link to={'/languages/new'}>
-            <Button type={'success'}>Add</Button>
+            <Button intent={'success'}>Add</Button>
           </Link>
         </div>
       }

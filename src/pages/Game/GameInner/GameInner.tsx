@@ -6,7 +6,7 @@ import { Button } from '../../../kit';
 import { useWordCards } from './useWordCards';
 import { markWordAsRepeated } from '../../../api/methods/words';
 import WordMini from '../../../components/WordMini/WordMini';
-import { useList } from '../../../hooks/useList';
+import { useList } from '../../../kit/hooks';
 import { Refresh } from '../../../icons';
 
 interface Props {
@@ -118,10 +118,10 @@ const GameInner: React.FC<Props> = props => {
         <div className={styles.buttons}>
           {showAnswer ? (
             <>
-              <Button size={'xl'} className={styles.btn} type={'danger'} onClick={onWrong}>
+              <Button size={'xl'} className={styles.btn} intent={'danger'} onClick={onWrong}>
                 Wrong
               </Button>
-              <Button size={'xl'} className={styles.btn} type={'success'} onClick={onSuccess}>
+              <Button size={'xl'} className={styles.btn} intent={'success'} onClick={onSuccess}>
                 Correct
               </Button>
             </>
