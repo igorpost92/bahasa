@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import styles from './ElementForm.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, Spinner } from '../../kit';
-import AppPage from '../AppPage/AppPage';
+import { Button, Spinner } from '../../index';
+import { AppPage } from '../../../components/AppPage/AppPage';
 import { usePromise } from '../../hooks/usePromise';
 
 interface Config {
@@ -19,22 +19,29 @@ interface Props<T> {
   isLoading?: boolean;
   error?: string | null;
   // TODO: not ok for language, change code => id
-  onSave: () => Promise<{ id: number }[]>;
+  onAdd: () => Promise<{ id: number | string }[]>;
+  onUpdate: () => Promise<unknown>;
   onDelete: () => Promise<unknown>;
 }
 
-function ElementForm<T>(props: Props<T>) {
+export function ElementForm<T>(props: Props<T>) {
   const navigate = useNavigate();
 
   const savingPromise = usePromise(async (goBack = true) => {
-    const result = await props.onSave();
+    if (props.isNew) {
+      const result = await props.onAdd();
 
-    if (goBack) {
-      navigate(props.listUrl);
+      if (!goBack) {
+        const id = result[0].id;
+        navigate(`${props.listUrl}/${id}`, { replace: true });
+
+        return;
+      }
     } else {
-      const id = result[0].id;
-      navigate(`${props.listUrl}/${id}`, { replace: true });
+      await props.onUpdate();
     }
+
+    navigate(props.listUrl);
   });
 
   const deletingPromise = usePromise(async () => {
@@ -78,7 +85,7 @@ function ElementForm<T>(props: Props<T>) {
         {content}
         {!props.isNew && (
           <Button
-            type={'danger'}
+            intent={'danger'}
             onClick={deletingPromise.send}
             className={styles.deleteBtn}
             isLoading={deletingPromise.isLoading}
@@ -100,7 +107,7 @@ function ElementForm<T>(props: Props<T>) {
           </Link>
 
           <Button
-            type={'success'}
+            intent={'success'}
             onClick={savingPromise.send}
             isLoading={savingPromise.isLoading}
             isDisabled={deletingPromise.isLoading}
@@ -115,5 +122,3 @@ function ElementForm<T>(props: Props<T>) {
     </AppPage>
   );
 }
-
-export default ElementForm;
