@@ -9,6 +9,7 @@
     "forms",
     "hooks",
     "icons",
+    "utils",
     "index.ts",
     "index.css"
   ],

@@ -3,6 +3,7 @@ import { ChevronDown } from '../../icons';
 import cn from 'classnames';
 import { Drawer, Input, Radio } from '../';
 import styles from './Select.module.scss';
+import { smartSearch } from '../../utils/smartSearch';
 
 interface Option {
   value: string;
@@ -47,8 +48,7 @@ export function Select<T extends Option>(props: Props<T>) {
       return props.options;
     }
 
-    const searchStr = searchInput.toLowerCase();
-    return props.options.filter(({ name }) => name.toLowerCase().includes(searchStr));
+    return smartSearch(props.options, 'name', searchInput);
   }, [props.options, searchInput]);
 
   return (
