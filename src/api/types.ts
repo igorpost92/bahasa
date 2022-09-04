@@ -1,4 +1,4 @@
-export interface Word {
+export interface WordEntry {
   id: number;
   text: string;
   meaning: string;

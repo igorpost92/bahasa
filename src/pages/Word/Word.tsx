@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './Word.module.scss';
 import { useParams } from 'react-router-dom';
-import { useWord } from '../../api/hooks/words/useWord';
 import { Input, Select, ControlGroup, ElementForm } from '../../kit';
-import { addWord, deleteWord, updateWord } from '../../api/methods/words';
+import { createWord, deleteWord, getWord, updateWord } from '../../api/methods/words';
 import ListenButton from '../../components/ListenButton/ListenButton';
 import { useCurrentLanguage } from '../../context/LanguageContext';
-import { WordTypes } from '../../types';
+import { WordEntry, WordTypes } from '../../api/types';
+import { useForm, Controller } from 'react-hook-form';
 
 const wordTypes = [
   { value: WordTypes.Noun, name: WordTypes.Noun },
@@ -15,72 +15,100 @@ const wordTypes = [
   { value: WordTypes.Phrase, name: WordTypes.Phrase },
 ];
 
+interface DataPayload {
+  text: string;
+  meaning: string;
+  type: WordTypes | null;
+}
+
 const Word: React.FC = () => {
   const { lang } = useCurrentLanguage();
 
+  // TODO: can move to Element form too, decide about string|number
   const params = useParams();
   const isNew = params.id === undefined;
   const id = Number(params.id);
 
-  const [text, setText] = useState('');
-  const [meaning, setMeaning] = useState('');
-  const [wordType, setWordType] = useState<WordTypes>();
+  const {
+    control,
+    formState: { errors },
+    ...form
+  } = useForm<DataPayload>({
+    defaultValues: {
+      text: '',
+      meaning: '',
+      type: null,
+    },
+  });
 
-  const { isLoading, data, error } = useWord(id);
-
-  useEffect(() => {
-    if (data) {
-      setText(data.text);
-      setMeaning(data.meaning);
-      setWordType(data.type ?? undefined);
-    }
-  }, [data]);
-
-  const onSave = async () => {
-    if (!text || !meaning) {
-      // TODO: submit disabed
-      throw new Error('no fields data');
-    }
-
-    let action;
-
-    if (isNew) {
-      action = () => addWord({ text, meaning, lang, type: wordType });
-    } else {
-      // TODO: dont show lang on existing
-      action = () => updateWord(id, { text, meaning, type: wordType });
-    }
-
-    return action();
+  const onDataLoaded = (data: WordEntry) => {
+    form.reset({
+      text: data.text,
+      meaning: data.meaning,
+      type: data.type,
+    });
   };
 
+  const onAdd = (data: DataPayload) => createWord({ ...data, lang });
+  const onUpdate = (data: DataPayload) => updateWord(id, data);
   const onDelete = () => deleteWord(id);
 
   return (
     <ElementForm
       listUrl={'/words'}
       isNew={isNew}
-      // todo
-      isLoading={!isNew && isLoading}
-      error={error}
-      onSave={onSave}
+      getData={() => getWord(id)}
+      onDataLoaded={onDataLoaded}
+      onSave={form.handleSubmit}
+      onCreate={onAdd}
+      onUpdate={onUpdate}
       onDelete={onDelete}
     >
-      <ControlGroup id={'text'} label={'Text'}>
-        <Input value={text} onChange={setText} />
-      </ControlGroup>
+      <Controller
+        control={control}
+        rules={{ required: true }}
+        name={'text'}
+        render={({ field }) => (
+          <ControlGroup
+            id={field.name}
+            label={'Text'}
+            intent={errors.text && 'danger'}
+            description={errors.text?.message || errors.text?.type}
+          >
+            <Input {...field} />
+          </ControlGroup>
+        )}
+      />
 
-      <ControlGroup id={'meaning'} label={'Meaning'}>
-        <Input value={meaning} onChange={setMeaning} />
-      </ControlGroup>
+      <Controller
+        control={control}
+        rules={{ required: true }}
+        name={'meaning'}
+        render={({ field }) => (
+          <ControlGroup
+            id={field.name}
+            label={'Meaning'}
+            intent={errors.meaning && 'danger'}
+            description={errors.meaning?.message || errors.meaning?.type}
+          >
+            <Input {...field} />
+          </ControlGroup>
+        )}
+      />
 
-      <ControlGroup id={'type'} label={'Type'}>
-        <Select options={wordTypes} value={wordType} onChange={setWordType as any} />
-      </ControlGroup>
+      <Controller
+        control={control}
+        name={'type'}
+        render={({ field }) => (
+          <ControlGroup id={field.name} label={'Type'}>
+            <Select {...field} value={field.value || undefined} options={wordTypes} />
+          </ControlGroup>
+        )}
+      />
 
       <div className={styles.btnWrap}>
         {/*// TODO: move up*/}
-        <ListenButton text={text} className={styles.listenBtn} />
+        <ListenButton text={() => form.getValues('text')} className={styles.listenBtn} />
       </div>
     </ElementForm>
   );

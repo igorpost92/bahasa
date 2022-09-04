@@ -1,9 +1,9 @@
-import { Word } from '../../../types';
+import { WordEntry } from '../../../api/types';
 import { useMemo } from 'react';
 import { shuffle } from '../../../utils/shuffle';
 import { calcNextRepeatTime } from '../../../constants/steps';
 
-const isWordNeedToRepeat = (word: Word) => {
+const isWordNeedToRepeat = (word: WordEntry) => {
   if (!word.last_date) {
     return true;
   }
@@ -14,7 +14,7 @@ const isWordNeedToRepeat = (word: Word) => {
   return new Date() >= nextDate;
 };
 
-export const useWordCards = (words: Word[], globalRepeatMode = false) => {
+export const useWordCards = (words: WordEntry[], globalRepeatMode = false) => {
   const cards = useMemo(() => {
     if (globalRepeatMode) {
       return words.sort((a, b) => {

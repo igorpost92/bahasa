@@ -1,8 +1,8 @@
 import { supabase } from '../sendRequest';
 import { getUser } from './index';
-import { Word, WordTypes } from '../../types';
+import { WordEntry, WordTypes } from '../types';
 
-interface WordServer extends Omit<Word, 'created_at' | 'last_date'> {
+interface WordServer extends Omit<WordEntry, 'created_at' | 'last_date'> {
   created_at: string;
   last_date: string | null;
 }
@@ -19,7 +19,7 @@ const parseWordFromServer = (wordRaw: WordServer) => {
     ...wordRaw,
     created_at: new Date(wordRaw.created_at),
     last_date: wordRaw.last_date ? new Date(wordRaw.last_date) : null,
-  } as Word;
+  } as WordEntry;
 };
 
 // TODO: words interfaces
@@ -49,14 +49,15 @@ export const getWord = async (id: number) => {
   throw new Error(error.message ?? 'error getWords');
 };
 
-interface NewWord {
+interface CreatePayload {
   text: string;
   meaning: string;
-  type?: WordTypes;
+  // TODO: test if send undefined during update
+  type?: WordTypes | null;
   lang: string;
 }
 
-export const addWord = async (payload: NewWord) => {
+export const createWord = async (payload: CreatePayload) => {
   const { data, error } = await wordsTable().insert({
     text: payload.text.trim(),
     meaning: payload.meaning.trim(),
@@ -73,7 +74,7 @@ export const addWord = async (payload: NewWord) => {
   throw new Error(error.message ?? 'error addWord');
 };
 
-export const bulkAdd = async (words: NewWord[]) => {
+export const bulkAdd = async (words: CreatePayload[]) => {
   const { data, error } = await wordsTable().insert(words);
 
   if (data) {
@@ -87,13 +88,13 @@ export const bulkAdd = async (words: NewWord[]) => {
 //   { text: 'hola', meaning: 'привет', lang: 'ES' },
 // ]);
 
-interface UpdateWord {
+interface UpdatePayload {
   text: string;
   meaning: string;
-  type?: WordTypes;
+  type: WordTypes | null;
 }
 
-export const updateWord = async (id: number, payload: UpdateWord) => {
+export const updateWord = async (id: number, payload: UpdatePayload) => {
   const { data, error } = await wordsTable()
     .update({
       text: payload.text.trim(),

@@ -7,14 +7,19 @@ import { useCurrentLanguage } from '../../context/LanguageContext';
 
 interface Props {
   className?: string;
-  text: string;
+  text: string | (() => string);
 }
 
 const ListenButton: React.FC<Props> = props => {
   const { lang } = useCurrentLanguage();
 
+  const handleClick = () => {
+    const text = typeof props.text === 'string' ? props.text : props.text();
+    speak(text, lang);
+  };
+
   return (
-    <button onClick={() => speak(props.text, lang)} className={cn(props.className, styles.wrap)}>
+    <button type={'button'} onClick={handleClick} className={cn(props.className, styles.wrap)}>
       <Listen width={24} height={24} />
     </button>
   );

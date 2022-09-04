@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useWords } from '../../api/hooks/words/useWords';
 import { Link } from 'react-router-dom';
 import { Button, Input, Spinner, Select } from '../../kit';
-import { Word } from '../../types';
+import { WordEntry } from '../../api/types';
 import WordMini from '../../components/WordMini/WordMini';
 import { AppPage } from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
@@ -12,35 +12,35 @@ const sorts = [
   {
     value: 'date-desc',
     name: 'Date (desc)',
-    getField: (word: Word) => word.created_at.getTime(),
+    getField: (word: WordEntry) => word.created_at.getTime(),
     sortK: -1,
   },
   {
     value: 'date-asc',
     name: 'Date (asc)',
-    getField: (word: Word) => word.created_at.getTime(),
+    getField: (word: WordEntry) => word.created_at.getTime(),
   },
   {
     value: 'name-asc',
     name: 'Name (asc)',
-    getField: (word: Word) => word.text.toLowerCase(),
+    getField: (word: WordEntry) => word.text.toLowerCase(),
   },
   {
     value: 'name-desc',
     name: 'Name (desc)',
-    getField: (word: Word) => word.text.toLowerCase(),
+    getField: (word: WordEntry) => word.text.toLowerCase(),
     sortK: -1,
   },
   {
     value: 'step-desc',
     name: 'Step (desc)',
-    getField: (word: Word) => word.step ?? 0,
+    getField: (word: WordEntry) => word.step ?? 0,
     sortK: -1,
   },
   {
     value: 'step-asc',
     name: 'Step (asc)',
-    getField: (word: Word) => word.step ?? 0,
+    getField: (word: WordEntry) => word.step ?? 0,
   },
 ];
 

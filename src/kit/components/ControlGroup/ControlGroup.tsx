@@ -7,6 +7,8 @@ interface Props {
   id: string;
   label?: string;
   children: React.ReactElement;
+  intent?: 'danger';
+  description?: string;
 }
 
 export const ControlGroup: React.FC<Props> = props => {
@@ -18,6 +20,11 @@ export const ControlGroup: React.FC<Props> = props => {
         </label>
       )}
       {cloneElement(props.children, { id: props.id })}
+      {props.description && (
+        <div className={cn(styles.description, props.intent === 'danger' && styles.danger)}>
+          {props.description}
+        </div>
+      )}
     </div>
   );
 };

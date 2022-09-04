@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './GameInner.module.scss';
-import { Word } from '../../../types';
+import { WordEntry } from '../../../api/types';
 import WordCard from './WordCard/WordCard';
 import { Button } from '../../../kit';
 import { useWordCards } from './useWordCards';
@@ -10,7 +10,7 @@ import { useList } from '../../../kit/hooks';
 import { Refresh } from '../../../icons';
 
 interface Props {
-  words: Word[];
+  words: WordEntry[];
   invertedMode: boolean;
   globalRepeatMode?: boolean;
 }
@@ -20,7 +20,7 @@ const GameInner: React.FC<Props> = props => {
   const [counter, setCounter] = useState(0);
 
   const cards = useWordCards(props.words, props.globalRepeatMode);
-  const [wrongWords, wrongWordsActions] = useList<Word>([]);
+  const [wrongWords, wrongWordsActions] = useList<WordEntry>([]);
 
   let content;
 

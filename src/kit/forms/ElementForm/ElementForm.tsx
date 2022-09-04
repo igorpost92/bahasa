@@ -3,33 +3,45 @@ import styles from './ElementForm.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, Spinner } from '../../index';
 import { AppPage } from '../../../components/AppPage/AppPage';
-import { usePromise } from '../../hooks/usePromise';
+import { usePromise } from '../../hooks';
 
-interface Config {
+interface Actions {
   save: (goBack: boolean) => void;
 }
 
-interface Props<T> {
-  // todo
-  // isSubmitDisabled?: boolean
+interface Props<T, P> {
   listUrl: string;
-  // TODO: naming
-  children: React.ReactNode | ((config: Config) => React.ReactNode);
+  children: React.ReactNode | ((actions: Actions) => React.ReactNode);
   isNew: boolean;
-  isLoading?: boolean;
-  error?: string | null;
+  getData: () => Promise<T>;
+  onDataLoaded: (data: T) => void;
+  onSave: (handler: (data: P) => void) => () => void;
   // TODO: not ok for language, change code => id
-  onAdd: () => Promise<{ id: number | string }[]>;
-  onUpdate: () => Promise<unknown>;
+  onCreate: (data: P) => Promise<{ id: number | string }[]>;
+  onUpdate: (data: P) => Promise<unknown>;
   onDelete: () => Promise<unknown>;
 }
 
-export function ElementForm<T>(props: Props<T>) {
+export function ElementForm<T, P>(props: Props<T, P>) {
   const navigate = useNavigate();
 
-  const savingPromise = usePromise(async (goBack = true) => {
+  const loadingRequest = usePromise(props.getData, !props.isNew);
+
+  useEffect(() => {
+    if (!props.isNew) {
+      loadingRequest.send();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (loadingRequest.data) {
+      props.onDataLoaded(loadingRequest.data);
+    }
+  }, [loadingRequest.data]);
+
+  const savingRequest = usePromise(async (data: P, goBack = true) => {
     if (props.isNew) {
-      const result = await props.onAdd();
+      const result = await props.onCreate(data);
 
       if (!goBack) {
         const id = result[0].id;
@@ -38,13 +50,21 @@ export function ElementForm<T>(props: Props<T>) {
         return;
       }
     } else {
-      await props.onUpdate();
+      await props.onUpdate(data);
     }
 
     navigate(props.listUrl);
   });
 
-  const deletingPromise = usePromise(async () => {
+  const onSave = (goBack = true) => {
+    const handler = props.onSave(data => {
+      savingRequest.send(data, goBack);
+    });
+
+    handler();
+  };
+
+  const deletingRequest = usePromise(async () => {
     if (props.isNew) {
       return;
     }
@@ -61,35 +81,35 @@ export function ElementForm<T>(props: Props<T>) {
   useEffect(() => {
     // TODO: alert
 
-    if (savingPromise.error) {
-      alert(savingPromise.error);
-    } else if (deletingPromise.error) {
-      alert(deletingPromise.error);
+    if (savingRequest.error) {
+      alert(savingRequest.error);
+    } else if (deletingRequest.error) {
+      alert(deletingRequest.error);
     }
-  }, [savingPromise.error, deletingPromise.error]);
+  }, [savingRequest.error, deletingRequest.error]);
 
   let content;
-  if (props.isLoading) {
+  if (loadingRequest.isLoading) {
     content = <Spinner />;
-  } else if (props.error) {
-    content = <div>{props.error}</div>;
+  } else if (loadingRequest.error) {
+    content = <div>{loadingRequest.error}</div>;
   } else {
     if (typeof props.children === 'function') {
-      content = props.children({ save: savingPromise.send });
+      content = props.children({ save: onSave });
     } else {
       content = props.children;
     }
 
     content = (
       <>
-        {content}
+        <form>{content}</form>
         {!props.isNew && (
           <Button
             intent={'danger'}
-            onClick={deletingPromise.send}
+            onClick={deletingRequest.send}
             className={styles.deleteBtn}
-            isLoading={deletingPromise.isLoading}
-            isDisabled={savingPromise.isLoading}
+            isLoading={deletingRequest.isLoading}
+            isDisabled={savingRequest.isLoading}
           >
             Delete
           </Button>
@@ -108,9 +128,10 @@ export function ElementForm<T>(props: Props<T>) {
 
           <Button
             intent={'success'}
-            onClick={savingPromise.send}
-            isLoading={savingPromise.isLoading}
-            isDisabled={deletingPromise.isLoading}
+            onClick={onSave}
+            isLoading={savingRequest.isLoading}
+            // TODO: form invalid
+            isDisabled={deletingRequest.isLoading}
           >
             Save
           </Button>
