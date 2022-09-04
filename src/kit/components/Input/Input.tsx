@@ -8,14 +8,15 @@ interface Props {
   placeholder?: string;
   value: string;
   onChange: (value: string) => void;
-  type?: JSX.IntrinsicElements['input']['type']
+  type?: JSX.IntrinsicElements['input']['type'];
+  fullWidth?: boolean;
 }
 
 export const Input: React.FC<Props> = props => {
   return (
     <input
       id={props.id}
-      className={cn(styles.wrap, props.className)}
+      className={cn(styles.wrap, props.className, props.fullWidth && styles.fullWidth)}
       placeholder={props.placeholder}
       autoCapitalize={'none'}
       autoComplete={'off'}

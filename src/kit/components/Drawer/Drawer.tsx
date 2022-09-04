@@ -1,4 +1,5 @@
 import React from 'react';
+import cn from 'classnames';
 import styles from './Drawer.module.scss';
 import { Portal } from '../Portal/Portal';
 
@@ -6,6 +7,7 @@ interface Props {
   isOpen: boolean;
   children: React.ReactNode;
   onClose: () => void;
+  big?: boolean;
   // TODO:
   // canClose?: boolean;
 
@@ -21,7 +23,7 @@ export const Drawer: React.FC<Props> = props => {
     <Portal>
       <div className={styles.wrap}>
         <div className={styles.backdrop} onClick={props.onClose} />
-        <div className={styles.content}>{props.children}</div>
+        <div className={cn(styles.content, props.big && styles.big)}>{props.children}</div>
       </div>
     </Portal>
   );

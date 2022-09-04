@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ChevronDown } from '../../icons';
 import cn from 'classnames';
-import { Drawer, Radio } from '../';
+import { Drawer, Input, Radio } from '../';
 import styles from './Select.module.scss';
 
 interface Option {
@@ -15,12 +15,16 @@ interface Props<T extends Option> {
   value?: string;
   onChange: (value?: string) => void;
   options: T[];
+  searchable?: boolean;
 }
 
 const placeholder = 'Select';
 
+// todo create new
+
 export function Select<T extends Option>(props: Props<T>) {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
 
   const label =
     (props.value && props.options.find(item => item.value === props.value)?.name) ?? placeholder;
@@ -38,6 +42,15 @@ export function Select<T extends Option>(props: Props<T>) {
     closeModal();
   };
 
+  const options = useMemo(() => {
+    if (!searchInput) {
+      return props.options;
+    }
+
+    const searchStr = searchInput.toLowerCase();
+    return props.options.filter(({ name }) => name.toLowerCase().includes(searchStr));
+  }, [props.options, searchInput]);
+
   return (
     <>
       <div className={cn(styles.wrap, props.className)} onClick={openModal}>
@@ -51,9 +64,17 @@ export function Select<T extends Option>(props: Props<T>) {
         <ChevronDown className={styles.icon} />
       </div>
 
-      <Drawer isOpen={isModalOpen} onClose={closeModal}>
+      <Drawer isOpen={isModalOpen} onClose={closeModal} big={props.searchable}>
+        {props.searchable && (
+          <Input
+            className={styles.search}
+            value={searchInput}
+            onChange={setSearchInput}
+            fullWidth
+          />
+        )}
         <div className={styles.optionsWrap}>
-          {props.options.map(option => {
+          {options.map(option => {
             const isChecked = props.value === option.value;
 
             return (
