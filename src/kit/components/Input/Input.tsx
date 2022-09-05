@@ -2,17 +2,20 @@ import React from 'react';
 import cn from 'classnames';
 import styles from './Input.module.scss';
 
-interface Props {
+type NativeElementProps = JSX.IntrinsicElements['input'];
+
+export interface InputProps {
   id?: string;
   className?: string;
   placeholder?: string;
   value: string;
   onChange: (value: string) => void;
-  type?: JSX.IntrinsicElements['input']['type'];
+  type?: NativeElementProps['type'];
+  inputMode?: NativeElementProps['inputMode'];
   fullWidth?: boolean;
 }
 
-export const Input: React.FC<Props> = props => {
+export const Input: React.FC<InputProps> = props => {
   return (
     <input
       id={props.id}
