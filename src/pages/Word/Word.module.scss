@@ -3,3 +3,22 @@
   display: flex;
   justify-content: center;
 }
+
+.nameWrap {
+  display: flex;
+
+  div {
+    flex: auto;
+  }
+}
+
+.listenBtn {
+  height: 38px;
+  width: 38px;
+  border-radius: 8px;
+  border: 1px solid gray;
+  background: white;
+  align-self: end;
+  margin-bottom: 12px;
+  margin-left: 6px;
+}

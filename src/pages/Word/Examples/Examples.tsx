@@ -1,0 +1,78 @@
+import React from 'react';
+import styles from './Examples.module.scss';
+import { Control, Controller, useFieldArray } from 'react-hook-form';
+import { DataPayload } from '../Word';
+import { Button, ControlGroup, Input } from '../../../kit';
+import ListenButton from '../../../components/ListenButton/ListenButton';
+
+interface Props {
+  control: Control<DataPayload>;
+}
+
+const Examples: React.FC<Props> = props => {
+  const { control } = props;
+
+  const { fields, ...methods } = useFieldArray({ control, name: 'examples' });
+
+  const addExample = () => {
+    methods.append({ text: '', meaning: '' });
+  };
+
+  return (
+    <>
+      {!!fields.length && (
+        <div>
+          <div>Examples</div>
+          {fields.map((field, idx) => {
+            const handleDelete = () => {
+              if (field.text.trim() || field.meaning.trim()) {
+                if (!confirm('Are you sure')) {
+                  return;
+                }
+              }
+
+              methods.remove(idx);
+            };
+
+            return (
+              <div key={field.id} className={styles.example}>
+                <div className={styles.fieldsWrap}>
+                  <div className={styles.textWrap}>
+                    <Controller
+                      control={control}
+                      name={`examples.${idx}.text`}
+                      render={({ field }) => (
+                        <ControlGroup id={field.name}>
+                          <Input {...field} placeholder={'Text'} />
+                        </ControlGroup>
+                      )}
+                    />
+                    <ListenButton text={field.text} className={styles.listenBtn} />
+                  </div>
+                  <Controller
+                    control={control}
+                    name={`examples.${idx}.meaning`}
+                    render={({ field }) => (
+                      <ControlGroup id={field.name}>
+                        <Input {...field} placeholder={'Translation'} />
+                      </ControlGroup>
+                    )}
+                  />
+                </div>
+                <Button onClick={handleDelete} className={styles.deleteBtn}>
+                  —
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      <Button fullWidth onClick={addExample}>
+        Add example
+      </Button>
+    </>
+  );
+};
+
+export default Examples;

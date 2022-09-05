@@ -6,6 +6,12 @@ export interface WordEntry {
   created_at: Date;
   last_date: Date | null;
   step: number | null;
+  examples: WordUsageExample[] | null;
+}
+
+export interface WordUsageExample {
+  text: string;
+  meaning: string;
 }
 
 export enum WordTypes {

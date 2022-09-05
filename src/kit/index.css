@@ -8,3 +8,7 @@
 input, button, textarea {
   font-family: inherit;
 }
+
+:root {
+  --red: #DD524C;
+}

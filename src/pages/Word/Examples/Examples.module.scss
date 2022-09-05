@@ -1,0 +1,53 @@
+.example {
+  display: flex;
+  align-items: center;
+  margin: 6px 0 12px;
+}
+
+.fieldsWrap {
+  flex: auto;
+
+  div {
+    margin: 0;
+  }
+
+  //todo refacto
+
+  div:nth-child(1) div {
+    flex: auto;
+
+    input {
+      border-radius: 8px 0 0 0;
+    }
+  }
+
+  div:nth-child(2) {
+    input {
+      border-top-color: transparent;
+      border-radius: 0 0 8px 8px;
+    }
+  }
+}
+
+.textWrap {
+  display: flex;
+}
+
+.listenBtn {
+  height: 38px;
+  width: 38px;
+  border-radius: 0 8px 0 0;
+  border: 1px solid gray;
+  background: white;
+  border-left-color: transparent;
+}
+
+.deleteBtn {
+  margin-left: 4px;
+  width: 40px;
+  height: 40px;
+  background: 0;
+  border-radius: 50%;
+  border: 1px solid var(--red);
+  color: var(--red);
+}

@@ -5,8 +5,9 @@ import { Input, Select, ControlGroup, ElementForm } from '../../kit';
 import { createWord, deleteWord, getWord, updateWord } from '../../api/methods/words';
 import ListenButton from '../../components/ListenButton/ListenButton';
 import { useCurrentLanguage } from '../../context/LanguageContext';
-import { WordEntry, WordTypes } from '../../api/types';
+import { WordEntry, WordTypes, WordUsageExample } from '../../api/types';
 import { useForm, Controller } from 'react-hook-form';
+import Examples from './Examples/Examples';
 
 const wordTypes = [
   { value: WordTypes.Noun, name: WordTypes.Noun },
@@ -15,10 +16,11 @@ const wordTypes = [
   { value: WordTypes.Phrase, name: WordTypes.Phrase },
 ];
 
-interface DataPayload {
+export interface DataPayload {
   text: string;
   meaning: string;
   type: WordTypes | null;
+  examples: WordUsageExample[] | null;
 }
 
 const Word: React.FC = () => {
@@ -38,6 +40,7 @@ const Word: React.FC = () => {
       text: '',
       meaning: '',
       type: null,
+      examples: [],
     },
   });
 
@@ -46,6 +49,7 @@ const Word: React.FC = () => {
       text: data.text,
       meaning: data.meaning,
       type: data.type,
+      examples: data.examples ?? [],
     });
   };
 
@@ -64,21 +68,26 @@ const Word: React.FC = () => {
       onUpdate={onUpdate}
       onDelete={onDelete}
     >
-      <Controller
-        control={control}
-        rules={{ required: true }}
-        name={'text'}
-        render={({ field }) => (
-          <ControlGroup
-            id={field.name}
-            label={'Text'}
-            intent={errors.text && 'danger'}
-            description={errors.text?.message || errors.text?.type}
-          >
-            <Input {...field} />
-          </ControlGroup>
-        )}
-      />
+      <div className={styles.nameWrap}>
+        <Controller
+          control={control}
+          rules={{ required: true }}
+          name={'text'}
+          render={({ field }) => (
+            <ControlGroup
+              className={'aaa'}
+              id={field.name}
+              label={'Text'}
+              intent={errors.text && 'danger'}
+              description={errors.text?.message || errors.text?.type}
+            >
+              <Input {...field} />
+            </ControlGroup>
+          )}
+        />
+
+        <ListenButton text={() => form.getValues('text')} className={styles.listenBtn} />
+      </div>
 
       <Controller
         control={control}
@@ -106,10 +115,7 @@ const Word: React.FC = () => {
         )}
       />
 
-      <div className={styles.btnWrap}>
-        {/*// TODO: move up*/}
-        <ListenButton text={() => form.getValues('text')} className={styles.listenBtn} />
-      </div>
+      <Examples control={control} />
     </ElementForm>
   );
 };

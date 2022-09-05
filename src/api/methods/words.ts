@@ -1,6 +1,6 @@
 import { supabase } from '../sendRequest';
 import { getUser } from './index';
-import { WordEntry, WordTypes } from '../types';
+import { WordEntry, WordTypes, WordUsageExample } from '../types';
 
 interface WordServer extends Omit<WordEntry, 'created_at' | 'last_date'> {
   created_at: string;
@@ -38,7 +38,7 @@ export const getWords = async (lang: string) => {
 
 export const getWord = async (id: number) => {
   const { data, error } = await wordsTable()
-    .select('id, text, meaning, created_at, type, step, last_date')
+    .select('id, text, meaning, created_at, type, step, last_date, examples')
     .eq('id', id)
     .single();
 
@@ -53,7 +53,8 @@ interface CreatePayload {
   text: string;
   meaning: string;
   // TODO: test if send undefined during update
-  type?: WordTypes | null;
+  type: WordTypes | null;
+  examples: WordUsageExample[] | null;
   lang: string;
 }
 
@@ -65,6 +66,7 @@ export const createWord = async (payload: CreatePayload) => {
     // TODO: fix types
     ['lang' as any]: payload.lang,
     ['email' as any]: getUser()?.email,
+    examples: payload.examples,
   });
 
   if (data) {
@@ -92,6 +94,7 @@ interface UpdatePayload {
   text: string;
   meaning: string;
   type: WordTypes | null;
+  examples: WordUsageExample[] | null;
 }
 
 export const updateWord = async (id: number, payload: UpdatePayload) => {
@@ -100,6 +103,7 @@ export const updateWord = async (id: number, payload: UpdatePayload) => {
       text: payload.text.trim(),
       meaning: payload.meaning.trim(),
       type: payload.type,
+      examples: payload.examples,
     })
     .match({ id });
 
