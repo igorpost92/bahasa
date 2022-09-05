@@ -5,6 +5,7 @@ import styles from './Card.module.scss';
 interface Props {
   className?: string;
   children: React.ReactNode;
+  // TODO: url?: string;
 }
 
 export const Card: React.FC<Props> = props => {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './VerbsTenses.module.scss';
 import { AppPage } from '../../components/AppPage/AppPage';
-import { Link } from 'react-router-dom';
 import { Button, Spinner } from '../../kit';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 import Inner from './Inner/Inner';
@@ -37,11 +36,7 @@ const VerbsTenses: React.FC<Props> = props => {
         showHeaderBorder={false}
         // TODO:
         // showLang={false}
-        headerLeft={
-          <Link to={'/'}>
-            <Button>Back</Button>
-          </Link>
-        }
+        headerLeft={<Button url={'/learn'}>Back</Button>}
         headerTitle={'Verbs'}
       >
         {content}

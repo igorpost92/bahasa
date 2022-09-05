@@ -40,7 +40,7 @@ export const AppPage: React.FC<Props> = props => {
         props.showTabBar && (
           <TabBar>
             <TabBarItem url={'/words'}>Words</TabBarItem>
-            <TabBarItem url={'/game'}>Game</TabBarItem>
+            <TabBarItem url={'/learn'}>Learn</TabBarItem>
             <TabBarItem url={'/categories'}>Categories</TabBarItem>
           </TabBar>
         )

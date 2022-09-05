@@ -1,0 +1,31 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnWrap {
+  & + & {
+    margin-top: 30px;
+  }
+}
+
+.disabledWrap {
+  pointer-events: none;
+
+  a {
+    opacity: 0.4;
+  }
+
+  .info {
+    display: block;
+  }
+}
+
+.info {
+  display: none;
+
+  margin-top: 6px;
+  color: gray;
+  font-size: 12px;
+}
+

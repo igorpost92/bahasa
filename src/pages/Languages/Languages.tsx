@@ -16,15 +16,12 @@ const Languages: React.FC<Props> = props => {
   return (
     <AppPage
       headerLeft={
-        <div className={styles.btnPanel}>
-          <Link to={'/'}>
-            <Button>Back</Button>
-          </Link>
-
-          <Link to={'/languages/new'}>
-            <Button intent={'success'}>Add</Button>
-          </Link>
-        </div>
+        <>
+          <Button url={'/'}>Back</Button>
+          <Button url={'/languages/new'} intent={'success'}>
+            Add
+          </Button>
+        </>
       }
     >
       {isLoading ? (

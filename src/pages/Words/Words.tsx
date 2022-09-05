@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react';
 import { useWords } from '../../api/hooks/words/useWords';
-import { Link } from 'react-router-dom';
 import { Button, Input, Spinner, Select } from '../../kit';
 import { WordEntry } from '../../api/types';
 import WordMini from '../../components/WordMini/WordMini';
@@ -89,26 +88,12 @@ const Words: React.FC = () => {
   return (
     <AppPage
       showTabBar
+      headerTitle={'Words'}
       headerLeft={
         <div className={styles.linksWrap}>
-          {/*// TODO: menu*/}
-
-          <Link to={'/words/new'}>
-            <Button intent={'success'}>Add</Button>
-          </Link>
-
-          {lang === 'ES' && (
-            <Link to={'/verbs'}>
-              <Button>Verbs</Button>
-            </Link>
-          )}
-
-          <div className={styles.spacer} />
-
-          {/*todo*/}
-          <Link to={'/global-repeat'} className={styles.repeatBtn}>
-            <Button>GR</Button>
-          </Link>
+          <Button url={'/words/new'} intent={'success'}>
+            Add
+          </Button>
         </div>
       }
       headerBottom={

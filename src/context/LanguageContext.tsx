@@ -3,8 +3,7 @@ import { useLanguages } from '../api/hooks/languages/useLanguages';
 import { Spinner } from '../kit';
 import LangSelector from '../components/LangSelector/LangSelector';
 
-// todo name
-export interface LanguageContextState {
+interface LanguageContextProps {
   lang: string;
   openSelector: () => void;
   setLang: (lang: string) => void;
@@ -18,7 +17,7 @@ const defaultValue = {
   setLang: () => undefined,
 };
 
-const LanguageContext = createContext<LanguageContextState>(defaultValue);
+const LanguageContext = createContext<LanguageContextProps>(defaultValue);
 
 interface Props {
   children: ReactNode;

@@ -3,7 +3,6 @@ import styles from './VerbsList.module.scss';
 import { VerbData } from '../../../api/methods/verbs';
 import { Input, Button } from '../../../kit';
 import WordMini from '../../../components/WordMini/WordMini';
-import { Link } from 'react-router-dom';
 import { AppPage } from '../../../components/AppPage/AppPage';
 import { shuffle } from '../../../utils/shuffle';
 
@@ -31,11 +30,7 @@ const VerbsList: React.FC<Props> = props => {
 
   return (
     <AppPage
-      headerLeft={
-        <Link to={'..'}>
-          <Button>Back</Button>
-        </Link>
-      }
+      headerLeft={<Button url={'/learn'}>Back</Button>}
       headerTitle={'Verbs'}
       headerBottom={
         <>

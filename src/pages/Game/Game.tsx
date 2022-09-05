@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Game.module.scss';
 import { Button, Spinner } from '../../kit';
-import { Link } from 'react-router-dom';
 import { useWords } from '../../api/hooks/words/useWords';
 import GameInner from './GameInner/GameInner';
 import { AppPage } from '../../components/AppPage/AppPage';
@@ -39,9 +38,7 @@ const Game: React.FC<Props> = (props: Props) => {
       showHeaderBorder={false}
       headerLeft={
         <div className={styles.linksWrap}>
-          <Link to={'/'}>
-            <Button>Back</Button>
-          </Link>
+          <Button url={'/learn'}>Back</Button>
 
           {/*<Button onClick={() => setInvertedMode(!invertedMode)}>*/}
           {/*  inverted: {invertedMode ? 'true' : 'false'}*/}

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './ElementForm.module.scss';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Button, Spinner } from '../../index';
 import { AppPage } from '../../../components/AppPage/AppPage';
 import { usePromise } from '../../hooks';
@@ -8,6 +8,8 @@ import { usePromise } from '../../hooks';
 interface Actions {
   save: (goBack: boolean) => void;
 }
+
+// TODO: confirm before leave
 
 interface Props<T, P> {
   listUrl: string;
@@ -122,10 +124,7 @@ export function ElementForm<T, P>(props: Props<T, P>) {
     <AppPage
       headerLeft={
         <>
-          <Link to={props.listUrl}>
-            <Button>Back</Button>
-          </Link>
-
+          <Button url={props.listUrl}>Back</Button>
           <Button
             intent={'success'}
             onClick={onSave}

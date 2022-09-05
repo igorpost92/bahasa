@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './Language.module.scss';
 import { useLanguage } from '../../api/hooks/languages/useLanguage';
 import { addLanguage } from '../../api/methods/languages';
-import { Button, Input, Spinner } from '../../kit';
+import { Button, Input } from '../../kit';
 import { AppPage } from '../../components/AppPage/AppPage';
 
 const Language: React.FC = () => {
@@ -59,13 +59,10 @@ const Language: React.FC = () => {
       showLang={false}
       headerLeft={
         <div className={styles.btnPanel}>
-          <Link to="/languages">
-            <Button>Back</Button>
-          </Link>
+          <Button url="/languages">Back</Button>
           <Button intent={'success'} onClick={onSave} isLoading={saveInProgress}>
             Save
           </Button>
-          {/*<Button intent={'danger'} onClick={onDelete}>Delete</Button>*/}
         </div>
       }
     >
