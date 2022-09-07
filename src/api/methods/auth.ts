@@ -4,6 +4,8 @@ export const getUser = () => {
   return supabase.auth.user();
 };
 
+export const onAuthStateChange = supabase.auth.onAuthStateChange;
+
 export const getSession = () => {
   return supabase.auth.session();
 };

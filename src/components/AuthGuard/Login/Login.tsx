@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './Login.module.scss';
 import { ControlGroup, Input, Button } from '../../../kit';
 import { AppPage } from '../../AppPage/AppPage';
-import { singIn } from '../../../api/methods';
+import { singIn } from '../../../api/methods/auth';
 import { usePromise } from '../../../kit/hooks';
 import { FAKE_EMAIL } from '../../../constants/fakeEmail';
 
