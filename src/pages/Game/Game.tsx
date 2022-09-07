@@ -37,13 +37,14 @@ const Game: React.FC<Props> = (props: Props) => {
     <AppPage
       showHeaderBorder={false}
       headerLeft={
-        <div className={styles.linksWrap}>
+        // TODO:
+        <>
           <Button url={'/learn'}>Back</Button>
 
           {/*<Button onClick={() => setInvertedMode(!invertedMode)}>*/}
           {/*  inverted: {invertedMode ? 'true' : 'false'}*/}
           {/*</Button>*/}
-        </div>
+        </>
       }
     >
       {content}

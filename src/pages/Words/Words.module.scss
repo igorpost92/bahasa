@@ -4,23 +4,12 @@
   width: 100%;
 }
 
-.linksWrap {
-  display: flex;
-  align-items: center;
-  flex: auto;
-
-  * + * {
-    margin-left: 6px;
-  }
-}
-
 .searchInput {
   flex: auto;
 }
 
 .sortSelect {
-  flex: auto;
-  width: 100px;
+  width: 130px;
   text-align: right;
   padding: 12px 7px;
   border: none;

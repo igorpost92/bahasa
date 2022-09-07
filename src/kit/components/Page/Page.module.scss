@@ -6,6 +6,15 @@
   flex-direction: column;
 }
 
+.header {
+  margin-top: calc(0px - var(--safe-area-inset-top));
+  padding-top: calc(var(--safe-area-inset-top) - 16px);
+  position: sticky;
+  background: white;
+  top: 0;
+  z-index: 10;
+}
+
 .content {
   padding: 12px;
   flex: auto;

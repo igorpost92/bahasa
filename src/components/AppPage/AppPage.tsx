@@ -1,39 +1,34 @@
 import React from 'react';
-import styles from './AppPage.module.scss';
-import { Page, TabBar, TabBarItem } from '../../kit';
-import AppHeader from './AppHeader/AppHeader';
-import cn from 'classnames';
+import { Page, Header, TabBar, TabBarItem } from '../../kit';
+import SelectedLangButton from '../SelectedLangButton/SelectedLangButton';
 
 interface Props {
   children: React.ReactNode;
-  customHeader?: React.ReactNode;
   headerLeft?: React.ReactNode;
   headerTitle?: React.ReactNode;
+  showLang?: boolean;
   headerBottom?: React.ReactNode;
   showHeader?: boolean;
-  showLang?: boolean;
   showHeaderBorder?: boolean;
   contentClassName?: string;
   showTabBar?: boolean;
 }
 
 export const AppPage: React.FC<Props> = props => {
-  const { showHeaderBorder = true, showHeader = true } = props;
+  const { showHeader = true, showLang = true } = props;
 
   return (
     <Page
       contentClassName={props.contentClassName}
       header={
         showHeader && (
-          <AppHeader
-            className={cn(showHeaderBorder && styles.headerBorder)}
-            showLang={props.showLang}
-            leftSlot={props.headerLeft}
-            titleSlot={props.headerTitle}
-            bottomSlot={props.headerBottom}
-          >
-            {props.customHeader}
-          </AppHeader>
+          <Header
+            showSeparator={props.showHeaderBorder}
+            left={props.headerLeft}
+            center={props.headerTitle}
+            right={showLang && <SelectedLangButton />}
+            bottom={props.headerBottom}
+          />
         )
       }
       footer={
@@ -41,7 +36,7 @@ export const AppPage: React.FC<Props> = props => {
           <TabBar>
             <TabBarItem url={'/words'}>Words</TabBarItem>
             <TabBarItem url={'/learn'}>Learn</TabBarItem>
-            <TabBarItem url={'/categories'}>Categories</TabBarItem>
+            {/*<TabBarItem url={'/categories'}>Categories</TabBarItem>*/}
           </TabBar>
         )
       }

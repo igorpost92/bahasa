@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Learn.module.scss';
-import { AppPage, Button } from '../../kit';
+import { Button } from '../../kit';
+import { AppPage } from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 import cn from 'classnames';
 

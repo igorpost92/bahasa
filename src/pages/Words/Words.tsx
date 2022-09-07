@@ -90,11 +90,9 @@ const Words: React.FC = () => {
       showTabBar
       headerTitle={'Words'}
       headerLeft={
-        <div className={styles.linksWrap}>
-          <Button url={'/words/new'} intent={'success'}>
-            Add
-          </Button>
-        </div>
+        <Button url={'/words/new'} intent={'success'}>
+          Add
+        </Button>
       }
       headerBottom={
         <div className={styles.searchRow}>
