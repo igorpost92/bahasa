@@ -1,5 +1,24 @@
+.wordsSelector {
+  background: #e7e7e7;
+  padding: 12px;
+  border: none;
+
+  input {
+    text-align: center;
+  }
+
+  svg {
+    display: none;
+  }
+}
+
+.wordsSection {
+  margin-top: 12px;
+}
+
 .wordRow {
   display: flex;
+  align-items: center;
   margin: 12px 0;
 }
 
@@ -11,4 +30,5 @@
 .deleteRowBtn {
   margin-left: 6px;
   width: 38px;
+  height: 38px;
 }

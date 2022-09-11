@@ -11,6 +11,7 @@ import {
 } from '../../storage/methods/categories';
 import { useWords } from '../../storage/hooks/words';
 import styles from './Category.module.scss';
+import WordMini from '../../components/WordMini/WordMini';
 
 type DataPayload = Omit<CategoryEntry, 'id'>;
 
@@ -68,35 +69,60 @@ const Category: React.FC = () => {
         )}
       />
 
+      <Controller
+        name={`words`}
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => {
+          return (
+            <ControlGroup id={field.name} className={styles.wordWrap}>
+              <Select
+                {...field}
+                placeholder={'Add words'}
+                className={styles.wordsSelector}
+                value={field.value.map(item => item.word_id)}
+                onChange={v => {
+                  form.setValue(
+                    'words',
+                    v.map(word_id => ({ word_id })),
+                  );
+                }}
+                options={wordsOptions}
+                searchable
+                multiple
+              />
+            </ControlGroup>
+          );
+        }}
+      />
+
       {/*// TODO: styles */}
       {!!words.length && (
-        <>
+        <div className={styles.wordsSection}>
           <div>Words</div>
-          {words.map((word, idx) => (
-            <div key={word.id} className={styles.wordRow}>
-              <Controller
-                name={`words.${idx}.word_id`}
-                control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <ControlGroup id={field.name} className={styles.wordWrap}>
-                    <Select {...field} options={wordsOptions} searchable />
-                  </ControlGroup>
-                )}
-              />
-              <Button
-                size={'m'}
-                className={styles.deleteRowBtn}
-                onClick={() => wordsMethods.remove(idx)}
-              >
-                x
-              </Button>
-            </div>
-          ))}
-        </>
-      )}
+          {words.map((wordField, idx) => {
+            const word = wordsRequest.data?.find(i => i.id === wordField.word_id);
 
-      <Button onClick={() => wordsMethods.append({ word_id: '' })}>Add word</Button>
+            return (
+              <div key={wordField.id} className={styles.wordRow}>
+                <WordMini
+                  text={word?.text ?? '—'}
+                  meaning={word?.meaning}
+                  className={styles.wordWrap}
+                />
+
+                <Button
+                  size={'m'}
+                  className={styles.deleteRowBtn}
+                  onClick={() => wordsMethods.remove(idx)}
+                >
+                  x
+                </Button>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </ElementForm>
   );
 };
