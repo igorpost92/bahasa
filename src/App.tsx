@@ -3,8 +3,6 @@ import Game from './pages/Game/Game';
 import { MemoryRouter, BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Words from './pages/Words/Words';
 import Word from './pages/Word/Word';
-import Languages from './pages/Languages/Languages';
-import Language from './pages/Language/Language';
 import { LanguageContextLayer } from './context/LanguageContext';
 import AuthGuard from './components/AuthGuard/AuthGuard';
 import VerbsTenses from './pages/VerbsTenses/VerbsTenses';
@@ -20,10 +18,6 @@ function App() {
       <LanguageContextLayer>
         <Router>
           <Routes>
-            <Route path={'/languages'} element={<Languages />} />
-            <Route path={'/languages/new'} element={<Language />} />
-            <Route path={'/languages/:id'} element={<Language />} />
-
             <Route path={'/words'} element={<Words />} />
             <Route path={'/words/new'} element={<Word />} />
             <Route path={'/words/:id'} element={<Word />} />

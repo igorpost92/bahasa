@@ -1,5 +1,5 @@
 import { createContext, useState, ReactNode, useMemo, useEffect, useContext } from 'react';
-import { useLanguages } from '../api/hooks/languages/useLanguages';
+import { useLanguages } from '../storage/hooks/languages';
 import { Spinner } from '../kit';
 import LangSelector from '../components/LangSelector/LangSelector';
 
@@ -32,22 +32,20 @@ export const LanguageContextLayer = (props: Props) => {
 
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
-  const { isLoading, data } = useLanguages();
+  const languages = useLanguages();
 
   useEffect(() => {
-    if (lang || !data?.length) {
+    if (lang || !languages?.length) {
       return;
     }
 
-    // TODO: if empty
-
-    if (data.length === 1) {
-      setLang(data[0].code);
+    if (languages.length === 1) {
+      setLang(languages[0].code);
       return;
     }
 
     setDrawerOpen(true);
-  }, [lang, data]);
+  }, [lang, languages]);
 
   useEffect(() => {
     if (lang) {
@@ -66,7 +64,8 @@ export const LanguageContextLayer = (props: Props) => {
 
   return (
     <LanguageContext.Provider value={state}>
-      {isLoading && !lang ? <Spinner /> : props.children}
+      {/*// TODO:why*/}
+      {!lang ? <Spinner /> : props.children}
 
       <LangSelector
         isOpen={isDrawerOpen}

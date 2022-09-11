@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './LangSelector.module.scss';
-import { Drawer, Spinner } from '../../kit';
-import { useLanguages } from '../../api/hooks/languages/useLanguages';
+import { Drawer } from '../../kit';
+import { useLanguages } from '../../storage/hooks/languages';
 import LangIcon from '../LangIcon/LangIcon';
 import cn from 'classnames';
 
@@ -14,22 +14,17 @@ interface Props {
 }
 
 const LangSelector: React.FC<Props> = props => {
-  // TODO:
-  const { isLoading, data } = useLanguages();
+  const languages = useLanguages();
 
   if (!props.isOpen) {
     return null;
-  }
-
-  if (isLoading) {
-    return <Spinner />;
   }
 
   return (
     <Drawer isOpen={props.isOpen} onClose={props.onClose}>
       <div className={styles.header}>Select language</div>
       <div className={styles.list}>
-        {(data ?? []).map(lang => {
+        {languages.map(lang => {
           const isSelected = lang.code === props.selectedLang;
 
           return (
