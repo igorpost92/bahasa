@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { Drawer, Input, Radio } from '../';
 import styles from './Select.module.scss';
 import { smartSearch } from '../../utils';
+import { removeDiacritics } from '../../../utils/removeDiacritics';
 
 interface Option {
   value: string;
@@ -23,6 +24,7 @@ const placeholder = 'Select';
 
 // todo create new
 // TODO: multiple
+// TODO: custom option format
 
 export function Select<T extends Option>(props: Props<T>) {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -49,7 +51,7 @@ export function Select<T extends Option>(props: Props<T>) {
       return props.options;
     }
 
-    return smartSearch(props.options, 'name', searchInput);
+    return smartSearch(props.options, 'name', searchInput, removeDiacritics);
   }, [props.options, searchInput]);
 
   return (

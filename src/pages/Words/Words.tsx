@@ -3,84 +3,48 @@ import { Button, Input, Select } from '../../kit';
 import WordMini from '../../components/WordMini/WordMini';
 import { AppPage } from '../../components/AppPage/AppPage';
 import styles from './Words.module.scss';
-import { useWords } from '../../storage/hooks/words';
-import { WordListEntry } from '../../storage/types';
-
-const sorts = [
-  {
-    value: 'date-desc',
-    name: 'Date (desc)',
-    getField: (word: WordListEntry) => word.created_at.getTime(),
-    sortK: -1,
-  },
-  {
-    value: 'date-asc',
-    name: 'Date (asc)',
-    getField: (word: WordListEntry) => word.created_at.getTime(),
-  },
-  {
-    value: 'name-asc',
-    name: 'Name (asc)',
-    getField: (word: WordListEntry) => word.text.toLowerCase(),
-  },
-  {
-    value: 'name-desc',
-    name: 'Name (desc)',
-    getField: (word: WordListEntry) => word.text.toLowerCase(),
-    sortK: -1,
-  },
-  {
-    value: 'step-desc',
-    name: 'Step (desc)',
-    getField: (word: WordListEntry) => word.step ?? 0,
-    sortK: -1,
-  },
-  {
-    value: 'step-asc',
-    name: 'Step (asc)',
-    getField: (word: WordListEntry) => word.step ?? 0,
-  },
-];
+import { useWords, wordsSorts } from '../../storage/hooks/words';
+import { smartSearch } from '../../kit/utils';
+import { removeDiacritics } from '../../utils/removeDiacritics';
 
 const Words: React.FC = () => {
-  const { isLoading, data } = useWords();
   const [searchInput, setSearchInput] = useState('');
-  const [sort, setSort] = useState(sorts[0].value);
+  const [sort, setSort] = useState(wordsSorts[0].value);
+  const wordsRequest = useWords({ live: true, sort });
 
-  const sortedWords = useMemo(() => {
-    const sortRule = sorts.find(item => item.value === sort);
-
-    if (!sortRule) {
-      return data ?? [];
-    }
-    return (data ?? []).sort((a, b) => {
-      const valueA = sortRule.getField(a);
-      const valueB = sortRule.getField(b);
-
-      let sortNumber = 0;
-      if (valueA > valueB) {
-        sortNumber = 1;
-      } else if (valueB > valueA) {
-        sortNumber = -1;
-      }
-
-      return sortNumber * (sortRule.sortK ?? 1);
-    });
-  }, [data, sort]);
-
-  const items = useMemo(() => {
+  const data = useMemo(() => {
     if (!searchInput) {
-      return sortedWords;
+      return wordsRequest.data;
     }
 
-    const searchStr = searchInput.toLowerCase();
+    return smartSearch(wordsRequest.data, ['text', 'meaning'], searchInput, removeDiacritics);
+  }, [searchInput, wordsRequest.data]);
 
-    return sortedWords.filter(
-      item =>
-        item.text.toLowerCase().includes(searchStr) ||
-        item.meaning.toLowerCase().includes(searchStr),
+  let content;
+
+  if (wordsRequest.isLoading) {
+    //
+  } else if (!data.length) {
+    content = <div>no words</div>;
+  } else {
+    content = (
+      <>
+        <div className={styles.subtitle}>Count: {data.length}</div>
+        <div className={styles.list}>
+          {data.map(item => (
+            <WordMini
+              key={item.id}
+              url={String(item.id)}
+              text={item.text}
+              meaning={item.meaning}
+              step={item.step ?? undefined}
+              tag={item.type ?? undefined}
+            />
+          ))}
+        </div>
+      </>
     );
-  }, [searchInput, sortedWords]);
+  }
 
   return (
     <AppPage
@@ -102,33 +66,13 @@ const Words: React.FC = () => {
           <Select
             className={styles.sortSelect}
             onChange={setSort as any}
-            options={sorts}
+            options={wordsSorts}
             value={sort}
           />
         </div>
       }
     >
-      {/*{isLoading && <Spinner />}*/}
-
-      {!isLoading && !items.length && <div>no words</div>}
-
-      {!!items.length && (
-        <>
-          <div className={styles.subtitle}>Count: {items.length}</div>
-          <div className={styles.list}>
-            {items.map(item => (
-              <WordMini
-                key={item.id}
-                url={String(item.id)}
-                text={item.text}
-                meaning={item.meaning}
-                step={item.step ?? undefined}
-                tag={item.type ?? undefined}
-              />
-            ))}
-          </div>
-        </>
-      )}
+      {content}
     </AppPage>
   );
 };

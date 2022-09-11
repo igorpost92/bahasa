@@ -72,6 +72,8 @@ export const updateWord = async (id: string, payload: UpdateWordPayload) => {
     await db.words.update(id, {
       text: payload.text.trim(),
       meaning: payload.meaning.trim(),
+      type: payload.type,
+      examples: payload.examples,
     });
 
     await setCategoriesForWord(id, payload.categories);

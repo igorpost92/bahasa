@@ -14,7 +14,7 @@ const Game: React.FC<Props> = (props: Props) => {
   const { lang } = useCurrentLanguage();
   // const [invertedMode, setInvertedMode] = useState(true);
 
-  const { isLoading, data } = useWords(false);
+  const { isLoading, data } = useWords();
 
   const words = data ?? [];
 

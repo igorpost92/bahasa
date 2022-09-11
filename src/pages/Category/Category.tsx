@@ -15,7 +15,7 @@ import styles from './Category.module.scss';
 type DataPayload = Omit<CategoryEntry, 'id'>;
 
 const Category: React.FC = () => {
-  const wordsRequest = useWords();
+  const wordsRequest = useWords({ sort: 'date-desc' });
 
   const { id = '' } = useParams();
   const isNew = !id;
@@ -73,9 +73,8 @@ const Category: React.FC = () => {
         <>
           <div>Words</div>
           {words.map((word, idx) => (
-            <div className={styles.wordRow}>
+            <div key={word.id} className={styles.wordRow}>
               <Controller
-                key={word.id}
                 name={`words.${idx}.word_id`}
                 control={control}
                 rules={{ required: true }}
