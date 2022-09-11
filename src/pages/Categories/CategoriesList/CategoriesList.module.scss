@@ -1,0 +1,12 @@
+.wrap {
+  position: relative;
+  height: 100%;
+}
+
+.category {
+  display: block;
+  
+  & + & {
+    margin-top: 12px;
+  }
+}

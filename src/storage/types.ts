@@ -16,6 +16,7 @@ export interface WordEntry {
   last_date: Date | null;
   step: number | null;
   examples: WordUsageExample[] | null;
+  categories: { category_id: string }[];
 }
 
 export interface WordUsageExample {
@@ -28,4 +29,16 @@ export enum WordTypes {
   Verb = 'verb',
   Adjective = 'adjective',
   Phrase = 'phrase',
+}
+
+export interface CategoryListEntry {
+  id: string;
+  name: string;
+  length: number;
+}
+
+export interface CategoryEntry {
+  id: string;
+  name: string;
+  words: { word_id: string }[];
 }

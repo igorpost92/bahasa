@@ -1,0 +1,14 @@
+.wordRow {
+  display: flex;
+  margin: 12px 0;
+}
+
+.wordWrap {
+  flex: auto;
+  margin: 0;
+}
+
+.deleteRowBtn {
+  margin-left: 6px;
+  width: 38px;
+}

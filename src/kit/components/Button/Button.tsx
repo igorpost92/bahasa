@@ -6,6 +6,7 @@ import styles from './Button.module.scss';
 
 type Props = {
   className?: string;
+  style?: React.CSSProperties;
   intent?: 'primary' | 'secondary' | 'success' | 'danger';
   children: React.ReactNode;
   onClick?: () => void;
@@ -46,14 +47,20 @@ export const Button: React.FC<Props> = props => {
   if (props.url) {
     // TODO: disabled
     return (
-      <Link to={props.url} className={className} onClick={onClick}>
+      <Link to={props.url} className={className} style={props.style} onClick={onClick}>
         {content}
       </Link>
     );
   }
 
   return (
-    <button className={className} onClick={onClick} type={type} disabled={props.isDisabled}>
+    <button
+      className={className}
+      style={props.style}
+      onClick={onClick}
+      type={type}
+      disabled={props.isDisabled}
+    >
       {content}
     </button>
   );

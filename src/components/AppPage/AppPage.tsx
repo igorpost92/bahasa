@@ -36,7 +36,7 @@ export const AppPage: React.FC<Props> = props => {
           <TabBar>
             <TabBarItem url={'/words'}>Words</TabBarItem>
             <TabBarItem url={'/learn'}>Learn</TabBarItem>
-            {/*<TabBarItem url={'/categories'}>Categories</TabBarItem>*/}
+            <TabBarItem url={'/categories'}>Categories</TabBarItem>
           </TabBar>
         )
       }

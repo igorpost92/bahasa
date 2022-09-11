@@ -14,8 +14,20 @@ interface WordEntryDB {
   examples: WordUsageExample[] | null;
 }
 
+interface CategoryEntryDB {
+  id: string;
+  name: string;
+}
+
+interface WordsInCategoriesDB {
+  word_id: string;
+  category_id: string;
+}
+
 class DB extends Dexie {
   words!: Table<WordEntryDB, string>;
+  categories!: Table<CategoryEntryDB, string>;
+  categories_words!: Table<WordsInCategoriesDB>;
 
   constructor() {
     super('espahasa-database');

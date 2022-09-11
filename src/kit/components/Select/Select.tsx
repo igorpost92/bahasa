@@ -3,7 +3,7 @@ import { ChevronDown } from '../../icons';
 import cn from 'classnames';
 import { Drawer, Input, Radio } from '../';
 import styles from './Select.module.scss';
-import { smartSearch } from '../../utils/smartSearch';
+import { smartSearch } from '../../utils';
 
 interface Option {
   value: string;
@@ -22,6 +22,7 @@ interface Props<T extends Option> {
 const placeholder = 'Select';
 
 // todo create new
+// TODO: multiple
 
 export function Select<T extends Option>(props: Props<T>) {
   const [isModalOpen, setModalOpen] = useState(false);
