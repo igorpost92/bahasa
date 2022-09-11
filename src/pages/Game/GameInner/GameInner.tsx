@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import styles from './GameInner.module.scss';
-import { WordEntry } from '../../../api/types';
 import WordCard from './WordCard/WordCard';
 import { Button } from '../../../kit';
 import { useWordCards } from './useWordCards';
-import { markWordAsRepeated } from '../../../api/methods/words';
 import WordMini from '../../../components/WordMini/WordMini';
 import { useList } from '../../../kit/hooks';
 import { Refresh } from '../../../icons';
+import { WordListEntry } from '../../../storage/types';
+import { markWordAsRepeated } from '../../../storage/methods/words';
 
 interface Props {
-  words: WordEntry[];
+  words: WordListEntry[];
   invertedMode: boolean;
   globalRepeatMode?: boolean;
 }
@@ -20,7 +20,7 @@ const GameInner: React.FC<Props> = props => {
   const [counter, setCounter] = useState(0);
 
   const cards = useWordCards(props.words, props.globalRepeatMode);
-  const [wrongWords, wrongWordsActions] = useList<WordEntry>([]);
+  const [wrongWords, wrongWordsActions] = useList<WordListEntry>([]);
 
   let content;
 
@@ -65,6 +65,7 @@ const GameInner: React.FC<Props> = props => {
                   key={word.id}
                   text={word.text}
                   meaning={word.meaning}
+                  // todo need?
                   step={word.step ?? undefined}
                 />
               ))}

@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './Word.module.scss';
 import { useParams } from 'react-router-dom';
 import { Input, Select, ControlGroup, ElementForm } from '../../kit';
-import { createWord, deleteWord, getWord, updateWord } from '../../api/methods/words';
 import ListenButton from '../../components/ListenButton/ListenButton';
 import { useCurrentLanguage } from '../../context/LanguageContext';
-import { WordEntry, WordTypes, WordUsageExample } from '../../api/types';
 import { useForm, Controller } from 'react-hook-form';
 import Examples from './Examples/Examples';
+import { createWord, deleteWord, getWord, updateWord } from '../../storage/methods/words';
+import { WordEntry, WordTypes } from '../../storage/types';
 
 const wordTypes = [
   { value: WordTypes.Noun, name: WordTypes.Noun },
@@ -16,20 +16,14 @@ const wordTypes = [
   { value: WordTypes.Phrase, name: WordTypes.Phrase },
 ];
 
-export interface DataPayload {
-  text: string;
-  meaning: string;
-  type: WordTypes | null;
-  examples: WordUsageExample[] | null;
-}
+export type DataPayload = Omit<WordEntry, 'id'>;
 
 const Word: React.FC = () => {
   const { lang } = useCurrentLanguage();
 
-  // TODO: can move to Element form too, decide about string|number
-  const params = useParams();
-  const isNew = params.id === undefined;
-  const id = Number(params.id);
+  // TODO: can move to Element form too
+  const { id = '' } = useParams();
+  const isNew = !id;
 
   const {
     control,
@@ -41,6 +35,7 @@ const Word: React.FC = () => {
       meaning: '',
       type: null,
       examples: [],
+      categories: [],
     },
   });
 
@@ -50,10 +45,11 @@ const Word: React.FC = () => {
       meaning: data.meaning,
       type: data.type,
       examples: data.examples ?? [],
+      categories: data.categories,
     });
   };
 
-  const onAdd = (data: DataPayload) => createWord({ ...data, lang });
+  const onCreate = (data: DataPayload) => createWord({ ...data, lang });
   const onUpdate = (data: DataPayload) => updateWord(id, data);
   const onDelete = () => deleteWord(id);
 
@@ -64,7 +60,7 @@ const Word: React.FC = () => {
       getData={() => getWord(id)}
       onDataLoaded={onDataLoaded}
       onSave={form.handleSubmit}
-      onCreate={onAdd}
+      onCreate={onCreate}
       onUpdate={onUpdate}
       onDelete={onDelete}
     >

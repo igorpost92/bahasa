@@ -6,6 +6,7 @@ import { Button, ControlGroup, Input } from '../../../kit';
 import ListenButton from '../../../components/ListenButton/ListenButton';
 
 interface Props {
+  // TODO: extend only needed fields
   control: Control<DataPayload>;
 }
 
@@ -34,6 +35,12 @@ const Examples: React.FC<Props> = props => {
               methods.remove(idx);
             };
 
+            const getTextToSpeak = () => {
+              // TODO: refacto
+              const { text } = control._formValues.examples[idx];
+              return text;
+            };
+
             return (
               <div key={field.id} className={styles.example}>
                 <div className={styles.fieldsWrap}>
@@ -47,7 +54,7 @@ const Examples: React.FC<Props> = props => {
                         </ControlGroup>
                       )}
                     />
-                    <ListenButton text={field.text} className={styles.listenBtn} />
+                    <ListenButton text={getTextToSpeak} className={styles.listenBtn} />
                   </div>
                   <Controller
                     control={control}

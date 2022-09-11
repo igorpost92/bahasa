@@ -13,23 +13,9 @@ export const usePromise = <
   const [isLoading, setLoading] = useState(initialLoading);
 
   const [data, setData] = useState<R | null>(null);
-  // const [data, setData] = useState<PromiseResult<ReturnType<T>> | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const callIdRef = useRef(0);
-
-  // export const debounce = <F extends (...args: any[]) => any>(func: F, waitFor: number) => {
-  //   let timeout
-  //
-  //   return (...args: Parameters<F>): Promise<ReturnType<F>> =>
-  //     new Promise(resolve => {
-  //       if (timeout) {
-  //         clearTimeout(timeout)
-  //       }
-  //
-  //       timeout = setTimeout(() => resolve(func(...args)), waitFor)
-  //     })
-  // }
 
   const send = async (...args: Parameters<T>) => {
     const currentId = ++callIdRef.current;
@@ -56,5 +42,33 @@ export const usePromise = <
     setLoading(false);
   };
 
-  return { isLoading, data, error, send };
+  const sendSilent = async (...args: Parameters<T>) => {
+    const currentId = ++callIdRef.current;
+
+    // TODO:
+    // setLoading(true);
+    // setData(null);
+    // setError(null);
+
+    try {
+      const result = await fn(...args);
+      if (currentId !== callIdRef.current) {
+        return;
+      }
+
+      setData(result);
+      setError(null);
+    } catch (e) {
+      if (currentId !== callIdRef.current) {
+        return;
+      }
+
+      setData(null);
+      setError((e as Error)?.message ?? 'Unknown error');
+    }
+
+    setLoading(false);
+  };
+
+  return { isLoading, data, error, send, sendSilent };
 };

@@ -1,9 +1,18 @@
-export interface WordEntry {
-  id: number;
+export interface WordListEntry {
+  id: string;
   text: string;
   meaning: string;
   type: WordTypes | null;
   created_at: Date;
+  last_date: Date | null;
+  step: number | null;
+}
+
+export interface WordEntry {
+  id: string;
+  text: string;
+  meaning: string;
+  type: WordTypes | null;
   last_date: Date | null;
   step: number | null;
   examples: WordUsageExample[] | null;

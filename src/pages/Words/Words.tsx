@@ -1,51 +1,48 @@
 import React, { useMemo, useState } from 'react';
-import { useWords } from '../../api/hooks/words/useWords';
-import { Button, Input, Spinner, Select } from '../../kit';
-import { WordEntry } from '../../api/types';
+import { Button, Input, Select } from '../../kit';
 import WordMini from '../../components/WordMini/WordMini';
 import { AppPage } from '../../components/AppPage/AppPage';
-import { useCurrentLanguage } from '../../context/LanguageContext';
 import styles from './Words.module.scss';
+import { useWords } from '../../storage/hooks/words';
+import { WordListEntry } from '../../storage/types';
 
 const sorts = [
   {
     value: 'date-desc',
     name: 'Date (desc)',
-    getField: (word: WordEntry) => word.created_at.getTime(),
+    getField: (word: WordListEntry) => word.created_at.getTime(),
     sortK: -1,
   },
   {
     value: 'date-asc',
     name: 'Date (asc)',
-    getField: (word: WordEntry) => word.created_at.getTime(),
+    getField: (word: WordListEntry) => word.created_at.getTime(),
   },
   {
     value: 'name-asc',
     name: 'Name (asc)',
-    getField: (word: WordEntry) => word.text.toLowerCase(),
+    getField: (word: WordListEntry) => word.text.toLowerCase(),
   },
   {
     value: 'name-desc',
     name: 'Name (desc)',
-    getField: (word: WordEntry) => word.text.toLowerCase(),
+    getField: (word: WordListEntry) => word.text.toLowerCase(),
     sortK: -1,
   },
   {
     value: 'step-desc',
     name: 'Step (desc)',
-    getField: (word: WordEntry) => word.step ?? 0,
+    getField: (word: WordListEntry) => word.step ?? 0,
     sortK: -1,
   },
   {
     value: 'step-asc',
     name: 'Step (asc)',
-    getField: (word: WordEntry) => word.step ?? 0,
+    getField: (word: WordListEntry) => word.step ?? 0,
   },
 ];
 
 const Words: React.FC = () => {
-  const { lang } = useCurrentLanguage();
-
   const { isLoading, data } = useWords();
   const [searchInput, setSearchInput] = useState('');
   const [sort, setSort] = useState(sorts[0].value);
@@ -111,25 +108,26 @@ const Words: React.FC = () => {
         </div>
       }
     >
-      {isLoading && <Spinner />}
+      {/*{isLoading && <Spinner />}*/}
 
       {!isLoading && !items.length && <div>no words</div>}
 
-      {!!items.length && <div className={styles.subtitle}>Count: {items.length}</div>}
-
       {!!items.length && (
-        <div className={styles.list}>
-          {items.map(item => (
-            <WordMini
-              key={item.id}
-              url={String(item.id)}
-              text={item.text}
-              meaning={item.meaning}
-              step={item.step ?? undefined}
-              tag={item.type ?? undefined}
-            />
-          ))}
-        </div>
+        <>
+          <div className={styles.subtitle}>Count: {items.length}</div>
+          <div className={styles.list}>
+            {items.map(item => (
+              <WordMini
+                key={item.id}
+                url={String(item.id)}
+                text={item.text}
+                meaning={item.meaning}
+                step={item.step ?? undefined}
+                tag={item.type ?? undefined}
+              />
+            ))}
+          </div>
+        </>
       )}
     </AppPage>
   );

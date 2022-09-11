@@ -1,6 +1,6 @@
 import { supabase } from '../sendRequest';
-import { getUser } from './index';
-import { WordEntry, WordTypes, WordUsageExample } from '../types';
+import { getUser } from './auth';
+import { WordEntry, WordTypes, WordUsageExample } from '../../storage/types';
 
 interface WordServer extends Omit<WordEntry, 'created_at' | 'last_date'> {
   created_at: string;
@@ -37,6 +37,8 @@ export const getWords = async (lang: string) => {
 };
 
 export const getWord = async (id: number) => {
+  throw new Error('disabled');
+
   const { data, error } = await wordsTable()
     .select('id, text, meaning, created_at, type, step, last_date, examples')
     .eq('id', id)
@@ -52,13 +54,14 @@ export const getWord = async (id: number) => {
 interface CreatePayload {
   text: string;
   meaning: string;
-  // TODO: test if send undefined during update
   type: WordTypes | null;
   examples: WordUsageExample[] | null;
   lang: string;
 }
 
 export const createWord = async (payload: CreatePayload) => {
+  throw new Error('disabled');
+
   const { data, error } = await wordsTable().insert({
     text: payload.text.trim(),
     meaning: payload.meaning.trim(),
@@ -77,6 +80,8 @@ export const createWord = async (payload: CreatePayload) => {
 };
 
 export const bulkAdd = async (words: CreatePayload[]) => {
+  throw new Error('disabled');
+
   const { data, error } = await wordsTable().insert(words);
 
   if (data) {
@@ -98,11 +103,13 @@ interface UpdatePayload {
 }
 
 export const updateWord = async (id: number, payload: UpdatePayload) => {
+  throw new Error('disabled');
+
   const { data, error } = await wordsTable()
     .update({
       text: payload.text.trim(),
       meaning: payload.meaning.trim(),
-      type: payload.type,
+      type: payload.type ?? null,
       examples: payload.examples,
     })
     .match({ id });
@@ -115,6 +122,8 @@ export const updateWord = async (id: number, payload: UpdatePayload) => {
 };
 
 export const markWordAsRepeated = async (id: number, step: number) => {
+  throw new Error('disabled');
+
   const { data, error } = await wordsTable()
     .update({
       last_date: new Date().toUTCString(),
@@ -130,6 +139,8 @@ export const markWordAsRepeated = async (id: number, step: number) => {
 };
 
 export const deleteWord = async (id: number) => {
+  throw new Error('disabled');
+
   const { data, error } = await wordsTable().delete().match({ id });
 
   if (data) {

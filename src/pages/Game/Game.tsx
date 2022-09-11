@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Game.module.scss';
 import { Button, Spinner } from '../../kit';
-import { useWords } from '../../api/hooks/words/useWords';
+import { useWords } from '../../storage/hooks/words';
 import GameInner from './GameInner/GameInner';
 import { AppPage } from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
@@ -14,14 +14,14 @@ const Game: React.FC<Props> = (props: Props) => {
   const { lang } = useCurrentLanguage();
   // const [invertedMode, setInvertedMode] = useState(true);
 
-  const { isLoading, data } = useWords();
+  const { isLoading, data } = useWords(false);
 
   const words = data ?? [];
 
   let content;
 
   if (isLoading) {
-    content = <Spinner />;
+    // content = <Spinner />;
   } else {
     content = (
       <GameInner
