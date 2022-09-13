@@ -6,11 +6,14 @@ import styles from './Words.module.scss';
 import { useWords, wordsSorts } from '../../storage/hooks/words';
 import { smartSearch } from '../../kit/utils';
 import { removeDiacritics } from '../../utils/removeDiacritics';
+import { Modals, useModal } from '../../modals/useModals';
 
 const Words: React.FC = () => {
   const [searchInput, setSearchInput] = useState('');
   const [sort, setSort] = useState(wordsSorts[0].value);
   const wordsRequest = useWords({ live: true, sort });
+
+  const wordModal = useModal(Modals.Word);
 
   const data = useMemo(() => {
     if (!searchInput) {
@@ -34,7 +37,7 @@ const Words: React.FC = () => {
           {data.map(item => (
             <WordMini
               key={item.id}
-              url={String(item.id)}
+              onClick={() => wordModal.open({ id: item.id })}
               text={item.text}
               meaning={item.meaning}
               step={item.step ?? undefined}
@@ -51,7 +54,7 @@ const Words: React.FC = () => {
       showTabBar
       headerTitle={'Words'}
       headerLeft={
-        <Button url={'/words/new'} intent={'success'}>
+        <Button intent={'success'} onClick={() => wordModal.open({ id: undefined })}>
           Add
         </Button>
       }

@@ -21,8 +21,13 @@
   width: 100%;
   border-radius: 12px 12px 0 0;
   background: white;
+  overflow: auto;
 }
 
-.big {
-  height: 80vh;
+.l {
+  height: 80%;
+}
+
+.xl {
+  height: calc(100% - 50px);
 }

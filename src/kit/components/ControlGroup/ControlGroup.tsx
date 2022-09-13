@@ -11,8 +11,6 @@ interface Props {
   description?: string;
 }
 
-// TODO: rm margins
-
 export const ControlGroup: React.FC<Props> = props => {
   return (
     <div className={cn(styles.wrap, props.className)}>

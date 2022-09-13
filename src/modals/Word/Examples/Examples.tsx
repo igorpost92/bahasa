@@ -23,7 +23,7 @@ const Examples: React.FC<Props> = props => {
     <>
       {!!fields.length && (
         <div>
-          <div>Examples</div>
+          <div className={styles.blockTitle}>Examples</div>
           {fields.map((field, idx) => {
             const handleDelete = () => {
               if (field.text.trim() || field.meaning.trim()) {
@@ -67,7 +67,7 @@ const Examples: React.FC<Props> = props => {
                   />
                 </div>
                 <Button onClick={handleDelete} className={styles.deleteBtn}>
-                  —
+                  {/*todo icon */}Х
                 </Button>
               </div>
             );

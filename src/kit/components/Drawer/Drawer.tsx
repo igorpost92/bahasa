@@ -4,20 +4,25 @@ import styles from './Drawer.module.scss';
 import { Portal } from '../Portal/Portal';
 
 interface Props {
+  className?: string;
   isOpen: boolean;
   children: React.ReactNode;
   onClose: () => void;
-  big?: boolean;
+  size?: 'm' | 'l' | 'xl';
   // TODO:
   // canClose?: boolean;
 
   // TODO: position left
 }
 
+// TODO: block background scroll
+
 export const Drawer: React.FC<Props> = props => {
   if (!props.isOpen) {
     return null;
   }
+
+  const { size = 'm' } = props;
 
   return (
     <Portal>
@@ -30,7 +35,14 @@ export const Drawer: React.FC<Props> = props => {
             e.preventDefault();
           }}
         />
-        <div className={cn(styles.content, props.big && styles.big)}>{props.children}</div>
+        <div
+          className={cn(styles.content, props.className, {
+            [styles.l]: size === 'l',
+            [styles.xl]: size === 'xl',
+          })}
+        >
+          {props.children}
+        </div>
       </div>
     </Portal>
   );

@@ -11,7 +11,7 @@ export interface InputProps {
   value: string;
   onChange: (value: string) => void;
   type?: NativeElementProps['type'];
-  inputMode?: NativeElementProps['inputMode'];
+  inputMode?: NativeElementProps['inputMode']; //todo not used
   fullWidth?: boolean;
 }
 

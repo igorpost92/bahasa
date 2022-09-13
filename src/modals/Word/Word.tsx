@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './Word.module.scss';
-import { useParams } from 'react-router-dom';
-import { Input, Select, ControlGroup, ElementForm } from '../../kit';
+import { ControlGroup, Drawer, ElementForm, Input, Select } from '../../kit';
 import ListenButton from '../../components/ListenButton/ListenButton';
 import { useCurrentLanguage } from '../../context/LanguageContext';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import Examples from './Examples/Examples';
 import { createWord, deleteWord, getWord, updateWord } from '../../storage/methods/words';
 import { WordEntry, WordTypes } from '../../storage/types';
+import { Modals, useModal } from '../useModals';
 
 const wordTypes = [
   { value: WordTypes.Noun, name: WordTypes.Noun },
@@ -18,11 +18,16 @@ const wordTypes = [
 
 export type DataPayload = Omit<WordEntry, 'id'>;
 
-const Word: React.FC = () => {
+interface Props {
+  id?: string | undefined;
+  onClose: () => void;
+}
+
+const Word: React.FC<Props> = props => {
   const { lang } = useCurrentLanguage();
 
   // TODO: can move to Element form too
-  const { id = '' } = useParams();
+  const { id = '' } = props;
   const isNew = !id;
 
   const {
@@ -49,6 +54,11 @@ const Word: React.FC = () => {
     });
   };
 
+  // TODO:
+  // created at
+  // next repeat
+  // reset progress
+
   const onCreate = (data: DataPayload) => createWord({ ...data, lang });
   const onUpdate = (data: DataPayload) => updateWord(id, data);
   const onDelete = () => deleteWord(id);
@@ -59,6 +69,7 @@ const Word: React.FC = () => {
       isNew={isNew}
       getData={() => getWord(id)}
       onDataLoaded={onDataLoaded}
+      onClose={props.onClose}
       onSave={form.handleSubmit}
       onCreate={onCreate}
       onUpdate={onUpdate}
@@ -116,4 +127,14 @@ const Word: React.FC = () => {
   );
 };
 
-export default Word;
+const WordModalWrap = () => {
+  const { isOpen, close, payload } = useModal(Modals.Word);
+
+  return (
+    <Drawer isOpen={isOpen} onClose={close} size={'xl'} className={styles.modalWrap}>
+      <Word id={payload?.id} onClose={close} />
+    </Drawer>
+  );
+};
+
+export default WordModalWrap;

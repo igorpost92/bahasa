@@ -11,7 +11,8 @@ interface Props {
   meaning?: string;
   step?: number;
   tag?: string;
-  url?: string;
+  url?: string; // TODO: rm
+  onClick?: () => void;
 }
 
 const WordMini: React.FC<Props> = props => {
@@ -38,7 +39,11 @@ const WordMini: React.FC<Props> = props => {
     );
   }
 
-  return <div className={className}>{content}</div>;
+  return (
+    <div onClick={props.onClick} className={className}>
+      {content}
+    </div>
+  );
 };
 
 export default WordMini;

@@ -6,6 +6,7 @@ interface Props {
   children: React.ReactNode;
   headerLeft?: React.ReactNode;
   headerTitle?: React.ReactNode;
+  headerRight?: React.ReactNode;
   showLang?: boolean;
   headerBottom?: React.ReactNode;
   showHeader?: boolean;
@@ -26,7 +27,7 @@ export const AppPage: React.FC<Props> = props => {
             showSeparator={props.showHeaderBorder}
             left={props.headerLeft}
             center={props.headerTitle}
-            right={showLang && <SelectedLangButton />}
+            right={props.headerRight || (showLang && <SelectedLangButton />)}
             bottom={props.headerBottom}
           />
         )

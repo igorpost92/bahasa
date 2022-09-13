@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './ElementForm.module.scss';
-import { useNavigate } from 'react-router-dom';
-import { Button, Spinner } from '../../index';
-import { AppPage } from '../../../components/AppPage/AppPage';
+import { Button } from '../../index';
 import { usePromise } from '../../hooks';
 
 interface Actions {
@@ -17,16 +15,15 @@ interface Props<T, P> {
   isNew: boolean;
   getData: () => Promise<T>;
   onDataLoaded: (data: T) => void;
-  onSave: (handler: (data: P) => void) => () => void;
-  // TODO: not ok for language, change code => id
-  onCreate: (data: P) => Promise<{ id: number | string }[]>;
+  onCreate: (data: P) => Promise<unknown>;
+  // onCreate: (data: P) => Promise<{ id: string }>;
   onUpdate: (data: P) => Promise<unknown>;
+  onSave: (handler: (data: P) => void) => () => void;
   onDelete: () => Promise<unknown>;
+  onClose: () => void;
 }
 
 export function ElementForm<T, P>(props: Props<T, P>) {
-  const navigate = useNavigate();
-
   const loadingRequest = usePromise(props.getData, !props.isNew);
 
   useEffect(() => {
@@ -45,17 +42,18 @@ export function ElementForm<T, P>(props: Props<T, P>) {
     if (props.isNew) {
       const result = await props.onCreate(data);
 
-      if (!goBack) {
-        const id = result[0].id;
-        navigate(`${props.listUrl}/${id}`, { replace: true });
+      // TODO: 
+      // if (!goBack) {
+      //   const id = result[0].id;
+      //   navigate(`${props.listUrl}/${id}`, { replace: true });
 
-        return;
-      }
+      // return;
+      // }
     } else {
       await props.onUpdate(data);
     }
 
-    navigate(props.listUrl);
+    props.onClose();
   });
 
   const onSave = (goBack = true) => {
@@ -77,7 +75,8 @@ export function ElementForm<T, P>(props: Props<T, P>) {
     }
 
     await props.onDelete();
-    navigate(props.listUrl);
+
+    props.onClose();
   });
 
   useEffect(() => {
@@ -92,7 +91,7 @@ export function ElementForm<T, P>(props: Props<T, P>) {
 
   let content;
   if (loadingRequest.isLoading) {
-    content = <Spinner />;
+    // content = <Spinner />;
   } else if (loadingRequest.error) {
     content = <div>{loadingRequest.error}</div>;
   } else {
@@ -104,7 +103,7 @@ export function ElementForm<T, P>(props: Props<T, P>) {
 
     content = (
       <>
-        <form>{content}</form>
+        <form className={styles.form}>{content}</form>
         {!props.isNew && (
           <Button
             intent={'danger'}
@@ -121,24 +120,20 @@ export function ElementForm<T, P>(props: Props<T, P>) {
   }
 
   return (
-    <AppPage
-      headerLeft={
-        <>
-          <Button url={props.listUrl}>Back</Button>
-          <Button
-            intent={'success'}
-            onClick={onSave}
-            isLoading={savingRequest.isLoading}
-            // TODO: form invalid
-            isDisabled={deletingRequest.isLoading}
-          >
-            Save
-          </Button>
-        </>
-      }
-      contentClassName={styles.contentWrap}
-    >
-      {content}
-    </AppPage>
+    <div className={styles.wrap}>
+      <div className={styles.header}>
+        <Button onClick={props.onClose}>Back</Button>
+        <Button
+          intent={'success'}
+          onClick={onSave}
+          isLoading={savingRequest.isLoading}
+          // TODO: form invalid
+          isDisabled={deletingRequest.isLoading}
+        >
+          Save
+        </Button>
+      </div>
+      <div className={styles.content}>{content}</div>
+    </div>
   );
 }
