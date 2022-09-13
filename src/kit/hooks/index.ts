@@ -1,3 +1,4 @@
+export * from './useScrollLock';
 export * from './useForceRerender';
 export * from './useList';
 export * from './usePromise';

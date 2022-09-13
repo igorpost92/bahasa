@@ -2,6 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import styles from './Drawer.module.scss';
 import { Portal } from '../Portal/Portal';
+import { useScrollLock } from '../../hooks';
 
 interface Props {
   className?: string;
@@ -15,9 +16,9 @@ interface Props {
   // TODO: position left
 }
 
-// TODO: block background scroll
-
 export const Drawer: React.FC<Props> = props => {
+  useScrollLock(props.isOpen);
+
   if (!props.isOpen) {
     return null;
   }
