@@ -28,7 +28,10 @@ export const getCategory = async (id: string) => {
 
 interface UpsertCategoryPayload {
   name: string;
-  words: { word_id: string }[];
+  words: {
+    word_id: string;
+    order_index: number | undefined;
+  }[];
 }
 
 export const createCategory = async (payload: UpsertCategoryPayload) => {

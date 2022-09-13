@@ -62,38 +62,11 @@ const Category: React.FC = () => {
         name={'name'}
         control={control}
         rules={{ required: true }}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <ControlGroup id={field.name} label={'Name'}>
             <Input {...field} />
           </ControlGroup>
         )}
-      />
-
-      <Controller
-        name={`words`}
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => {
-          return (
-            <ControlGroup id={field.name} className={styles.wordWrap}>
-              <Select
-                {...field}
-                placeholder={'Add words'}
-                className={styles.wordsSelector}
-                value={field.value.map(item => item.word_id)}
-                onChange={v => {
-                  form.setValue(
-                    'words',
-                    v.map(word_id => ({ word_id })),
-                  );
-                }}
-                options={wordsOptions}
-                searchable
-                multiple
-              />
-            </ControlGroup>
-          );
-        }}
       />
 
       {/*// TODO: styles */}
@@ -123,6 +96,41 @@ const Category: React.FC = () => {
           })}
         </div>
       )}
+
+      <Controller
+        name={`words`}
+        control={control}
+        render={({ field: { ref, ...field } }) => {
+          return (
+            <ControlGroup id={field.name} className={styles.wordWrap}>
+              <Select
+                {...field}
+                searchable
+                multiple
+                placeholder={'Add words'}
+                className={styles.wordsSelector}
+                options={wordsOptions}
+                value={field.value.map(item => item.word_id)}
+                onChange={value => {
+                  // TODO:
+                  // think of better way
+                  // need to store prev orders
+
+                  const newValue = value.map(word_id => {
+                    const order_index = field.value.find(
+                      word => word.word_id === word_id,
+                    )?.order_index;
+
+                    return { word_id, order_index };
+                  });
+
+                  form.setValue('words', newValue);
+                }}
+              />
+            </ControlGroup>
+          );
+        }}
+      />
     </ElementForm>
   );
 };

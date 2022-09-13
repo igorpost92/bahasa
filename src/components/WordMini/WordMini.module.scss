@@ -24,30 +24,6 @@
 
 .tag {
   margin-left: 6px;
-  height: 22px;
-  padding: 0 8px;
-  border-radius: 10px;
-  background: #cecece;
-
-  display: flex;
-  align-items: center;
-  //todo
-  line-height: 0;
-}
-
-.step {
-  margin-left: 6px;
-  flex: none;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  background: #cecece;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  //todo
-  line-height: 0;
 }
 
 .meaning {
@@ -55,4 +31,10 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }

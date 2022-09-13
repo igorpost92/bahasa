@@ -1,6 +1,7 @@
 import Dexie, { Table } from 'dexie';
 import { getWords } from '../api/methods/words';
 import { WordTypes, WordUsageExample } from './types';
+import { notifier } from '../services/notifier';
 
 interface WordEntryDB {
   id: string;
@@ -22,12 +23,15 @@ interface CategoryEntryDB {
 interface WordsInCategoriesDB {
   word_id: string;
   category_id: string;
+  order_index: number;
 }
 
 class DB extends Dexie {
   words!: Table<WordEntryDB, string>;
   categories!: Table<CategoryEntryDB, string>;
+
   categories_words!: Table<WordsInCategoriesDB>;
+  categoriesOrderIndex: number = 0;
 
   constructor() {
     super('espahasa-database');
@@ -37,6 +41,24 @@ class DB extends Dexie {
       categories_words: '[category_id+word_id],category_id,word_id',
     });
   }
+
+  initCategoriesOrderIndex = async () => {
+    const res = await this.categories_words.toCollection().sortBy('order_index');
+    const last = res.filter(item => !!item.order_index).at(-1)?.order_index ?? 0;
+
+    this.categoriesOrderIndex = last;
+  };
+
+  incrementCategoryOrderIndex = () => {
+    this.categoriesOrderIndex += 1;
+    return this.categoriesOrderIndex;
+  };
 }
 
-export const db = new DB();
+const initDB = () => {
+  const db = new DB();
+  db.initCategoriesOrderIndex();
+  return db;
+};
+
+export const db = initDB();

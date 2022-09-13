@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { ChevronDown } from '../../icons';
 import cn from 'classnames';
 import { Drawer, Input, Radio } from '../';
@@ -11,27 +11,39 @@ interface Option {
   name: string;
 }
 
-interface Props<T extends Option> {
+type ValueType<M extends boolean> = M extends true ? string[] : string | undefined;
+
+interface Props<T extends Option, M extends boolean> {
   id?: string;
   className?: string;
-  value?: string;
-  onChange: (value?: string) => void;
+  value: ValueType<M>;
+  onChange: (value: ValueType<M>) => void;
   options: T[];
   searchable?: boolean;
+  multiple?: M;
+  placeholder?: string;
 }
 
-const placeholder = 'Select';
-
-// todo create new
-// TODO: multiple
+// todo creating new element
 // TODO: custom option format
 
-export function Select<T extends Option>(props: Props<T>) {
+export function Select<T extends Option, M extends boolean = false>(props: Props<T, M>) {
+  const { placeholder = 'Select' } = props;
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
 
+  useEffect(() => {
+    if (!isModalOpen) {
+      setSearchInput('');
+    }
+  }, [isModalOpen]);
+
+  // TODO: label on multiple
+
   const label =
     (props.value && props.options.find(item => item.value === props.value)?.name) ?? placeholder;
+  // TODO: placeholder
 
   const openModal = () => {
     setModalOpen(true);
@@ -42,8 +54,21 @@ export function Select<T extends Option>(props: Props<T>) {
   };
 
   const onChange = (value: string) => {
-    props.onChange(value);
-    closeModal();
+    if (Array.isArray(props.value)) {
+      const currentValue = props.value as string[];
+
+      let newValue;
+      if (currentValue.includes(value)) {
+        newValue = currentValue.filter(option => option !== value);
+      } else {
+        newValue = currentValue.concat(value);
+      }
+
+      props.onChange(newValue as ValueType<M>);
+    } else {
+      props.onChange(value as ValueType<M>);
+      closeModal();
+    }
   };
 
   const options = useMemo(() => {
@@ -78,7 +103,14 @@ export function Select<T extends Option>(props: Props<T>) {
         )}
         <div className={styles.optionsWrap}>
           {options.map(option => {
-            const isChecked = props.value === option.value;
+            let isChecked;
+
+            if (Array.isArray(props.value)) {
+              const currentValue = props.value as string[];
+              isChecked = currentValue.includes(option.value);
+            } else {
+              isChecked = props.value === option.value;
+            }
 
             return (
               <Radio

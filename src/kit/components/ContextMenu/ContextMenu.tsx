@@ -6,6 +6,11 @@ interface Props {
   children: React.ReactElement;
 }
 
+// TODO:
+// think of setting one wrapper for all elements
+// like in the list
+// instead of setting a wrapper for every element
+
 export const ContextMenu: React.FC<Props> = props => {
   const targetRef = useRef<HTMLElement>();
 

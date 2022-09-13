@@ -43,8 +43,6 @@ export const NumericInput: React.FC<NumericInputProps> = props => {
   const handleInput = (inputValue: string) => {
     const sanitizedInput = sanitizeNumberInput(inputValue);
 
-    debugger;
-
     const isNegativePending = sanitizedInput.endsWith('-');
     const isDecimalPending = sanitizedInput.endsWith(',');
 

@@ -16,7 +16,10 @@ export interface WordEntry {
   last_date: Date | null;
   step: number | null;
   examples: WordUsageExample[] | null;
-  categories: { category_id: string }[];
+  categories: {
+    category_id: string;
+    order_index: number | undefined;
+  }[];
 }
 
 export interface WordUsageExample {
@@ -40,5 +43,8 @@ export interface CategoryListEntry {
 export interface CategoryEntry {
   id: string;
   name: string;
-  words: { word_id: string }[];
+  words: {
+    word_id: string;
+    order_index: number | undefined;
+  }[];
 }

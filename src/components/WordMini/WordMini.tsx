@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './WordMini.module.scss';
 import { WordTypes } from '../../storage/types';
 import { Link } from 'react-router-dom';
-import { Card } from '../../kit';
+import { Card, Tag } from '../../kit';
 import cn from 'classnames';
 
 interface Props {
@@ -21,8 +21,8 @@ const WordMini: React.FC<Props> = props => {
     <Card>
       <div className={styles.topRow}>
         <div className={styles.text}>{props.text}</div>
-        {tagLabel && <div className={styles.tag}>{tagLabel}</div>}
-        {!!props.step && <div className={styles.step}>{props.step}</div>}
+        {tagLabel && <Tag className={styles.tag}>{tagLabel}</Tag>}
+        {!!props.step && <Tag className={styles.tag}>{props.step}</Tag>}
       </div>
       {props.meaning && <div className={styles.meaning}>{props.meaning}</div>}
     </Card>

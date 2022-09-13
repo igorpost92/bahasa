@@ -64,7 +64,10 @@ interface UpdateWordPayload {
   meaning: string;
   type: WordTypes | null;
   examples: WordUsageExample[] | null;
-  categories: { category_id: string }[];
+  categories: {
+    category_id: string;
+    order_index: number | undefined;
+  }[];
 }
 
 export const updateWord = async (id: string, payload: UpdateWordPayload) => {

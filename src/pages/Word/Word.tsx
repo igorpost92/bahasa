@@ -69,7 +69,7 @@ const Word: React.FC = () => {
           control={control}
           rules={{ required: true }}
           name={'text'}
-          render={({ field }) => (
+          render={({ field: { ref, ...field } }) => (
             <ControlGroup
               className={'aaa'}
               id={field.name}
@@ -89,7 +89,7 @@ const Word: React.FC = () => {
         control={control}
         rules={{ required: true }}
         name={'meaning'}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <ControlGroup
             id={field.name}
             label={'Meaning'}
@@ -104,7 +104,7 @@ const Word: React.FC = () => {
       <Controller
         control={control}
         name={'type'}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <ControlGroup id={field.name} label={'Type'}>
             <Select {...field} value={field.value || undefined} options={wordTypes} />
           </ControlGroup>
