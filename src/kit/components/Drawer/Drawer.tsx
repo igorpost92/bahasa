@@ -22,7 +22,14 @@ export const Drawer: React.FC<Props> = props => {
   return (
     <Portal>
       <div className={styles.wrap}>
-        <div className={styles.backdrop} onClick={props.onClose} />
+        <div
+          className={styles.backdrop}
+          onClick={props.onClose}
+          onContextMenu={e => {
+            // for desktop
+            e.preventDefault();
+          }}
+        />
         <div className={cn(styles.content, props.big && styles.big)}>{props.children}</div>
       </div>
     </Portal>
