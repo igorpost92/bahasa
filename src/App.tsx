@@ -11,7 +11,8 @@ import Category from './pages/Category/Category';
 import Learn from './pages/Learn/Learn';
 import { ModalContextLayer } from './kit/contexts/ModalContext';
 
-const isProd = location.hostname !== 'localhost';
+// TODO: env var
+const isProd = location.hostname === 'http://ip92-bahasa.surge.sh';
 
 function App() {
   const Router = isProd ? MemoryRouter : BrowserRouter;
