@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Login.module.scss';
 import { ControlGroup, Input, Button } from '../../../kit';
-import { AppPage } from '../../AppPage/AppPage';
+import { AppPage } from '../../../components/AppPage/AppPage';
 import { singIn } from '../../../api/methods/auth';
 import { usePromise } from '../../../kit/hooks';
 import { FAKE_EMAIL } from '../../../constants/fakeEmail';
+import { useNavigate } from 'react-router-dom';
 
-interface Props {
-  onSuccess: () => void;
-}
+// TODO: form
 
-const Login: React.FC<Props> = props => {
+const Login: React.FC = () => {
+  const navigate = useNavigate();
+
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
 
@@ -27,12 +28,16 @@ const Login: React.FC<Props> = props => {
 
   useEffect(() => {
     if (data) {
-      props.onSuccess();
+      navigate('/settings');
     }
   }, [data]);
 
   return (
-    <AppPage showHeader={false} contentClassName={styles.pageWrap}>
+    <AppPage
+      headerLeft={<Button url={'/settings'}>Close</Button>}
+      headerRight={false}
+      contentClassName={styles.pageWrap}
+    >
       <div className={styles.form}>
         <ControlGroup id={'login'} label={'Login'}>
           <Input value={login} onChange={setLogin} />

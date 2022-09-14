@@ -33,9 +33,7 @@ const parseWordFromServer = (wordRaw: WordServerRaw): WordServer => {
 };
 
 export const getWords = async () => {
-  const { data, error } = await wordsTable().select(
-    'id, text, meaning, created_at, type, step, last_date',
-  );
+  const { data, error } = await wordsTable().select('*');
 
   if (data) {
     return data.map(parseWordFromServer);
@@ -44,3 +42,21 @@ export const getWords = async () => {
   throw new Error(error.message ?? 'error getWords');
 };
 
+export const uploadWords = async (words: WordServer[]) => {
+  const res1 = await wordsTable().delete().match({ email: getUser()?.email });
+  if (res1.error) {
+    alert(res1.error.message);
+    throw res1.error;
+  }
+
+  debugger;
+
+  // TODO: type
+  const res2 = await wordsTable().insert(words as any);
+  if (res2.error) {
+    alert(res2.error.message);
+    throw res2.error;
+  }
+
+  alert('ok');
+};
