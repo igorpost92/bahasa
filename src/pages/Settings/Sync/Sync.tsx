@@ -64,7 +64,7 @@ const Sync: React.FC<Props> = props => {
   return (
     <div className={styles.wrap}>
       <Button onClick={upload}>Upload words</Button>
-      {!isProd && <Button onClick={download}>Download words</Button>}
+      {!isProd() && <Button onClick={download}>Download words</Button>}
     </div>
   );
 };

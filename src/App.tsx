@@ -14,7 +14,7 @@ import Settings from './pages/Settings/Settings';
 import Login from './pages/Settings/Login/Login';
 
 function App() {
-  const Router = isProd ? MemoryRouter : BrowserRouter;
+  const Router = isProd() ? MemoryRouter : BrowserRouter;
 
   return (
     <ModalContextLayer>
