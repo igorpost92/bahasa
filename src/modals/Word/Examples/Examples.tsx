@@ -4,6 +4,7 @@ import { Control, Controller, useFieldArray } from 'react-hook-form';
 import { DataPayload } from '../Word';
 import { Button, ControlGroup, Input } from '../../../kit';
 import ListenButton from '../../../components/ListenButton/ListenButton';
+import { Close } from '../../../kit/icons';
 
 interface Props {
   // TODO: extend only needed fields
@@ -67,7 +68,7 @@ const Examples: React.FC<Props> = props => {
                   />
                 </div>
                 <Button onClick={handleDelete} className={styles.deleteBtn}>
-                  {/*todo icon */}Х
+                  <Close />
                 </Button>
               </div>
             );

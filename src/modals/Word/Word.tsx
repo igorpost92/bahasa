@@ -26,7 +26,6 @@ interface Props {
 const Word: React.FC<Props> = props => {
   const { lang } = useCurrentLanguage();
 
-  // TODO: can move to Element form too
   const { id = '' } = props;
   const isNew = !id;
 
@@ -65,7 +64,6 @@ const Word: React.FC<Props> = props => {
 
   return (
     <ElementForm
-      listUrl={'/words'}
       isNew={isNew}
       getData={() => getWord(id)}
       onDataLoaded={onDataLoaded}

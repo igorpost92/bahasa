@@ -1,33 +1,41 @@
 import { supabase } from '../sendRequest';
 import { getUser } from './auth';
-import { WordEntry, WordTypes, WordUsageExample } from '../../storage/types';
+import { WordTypes, WordUsageExample } from '../../storage/types';
 
-interface WordServer extends Omit<WordEntry, 'created_at' | 'last_date'> {
+interface WordServerRaw {
+  id: string;
+  text: string;
+  meaning: string;
+  type: WordTypes | null;
+  lang: string;
+  email: string;
   created_at: string;
   last_date: string | null;
+  step: number | null;
+  examples: WordUsageExample[] | null;
+}
+
+export interface WordServer extends Omit<WordServerRaw, 'created_at' | 'last_date'> {
+  created_at: Date;
+  last_date: Date | null;
 }
 
 const wordsTable = () => {
-  // const email = supabase.auth.user()?.email;
-  // const useSecondaryTable = !email || email === FAKE_EMAIL;
-  // return supabase.from(useSecondaryTable ? 'words_2' : 'words');
-  return supabase.from<WordServer>('words');
+  return supabase.from<WordServerRaw>('words');
 };
 
-const parseWordFromServer = (wordRaw: WordServer) => {
+const parseWordFromServer = (wordRaw: WordServerRaw): WordServer => {
   return {
     ...wordRaw,
     created_at: new Date(wordRaw.created_at),
     last_date: wordRaw.last_date ? new Date(wordRaw.last_date) : null,
-  } as WordEntry;
+  };
 };
 
-// TODO: words interfaces
-
-export const getWords = async (lang: string) => {
-  const { data, error } = await wordsTable()
-    .select('id, text, meaning, created_at, type, step, last_date')
-    .match({ lang });
+export const getWords = async () => {
+  const { data, error } = await wordsTable().select(
+    'id, text, meaning, created_at, type, step, last_date',
+  );
 
   if (data) {
     return data.map(parseWordFromServer);
@@ -36,116 +44,3 @@ export const getWords = async (lang: string) => {
   throw new Error(error.message ?? 'error getWords');
 };
 
-export const getWord = async (id: number) => {
-  throw new Error('disabled');
-
-  const { data, error } = await wordsTable()
-    .select('id, text, meaning, created_at, type, step, last_date, examples')
-    .eq('id', id)
-    .single();
-
-  if (data) {
-    return parseWordFromServer(data);
-  }
-
-  throw new Error(error.message ?? 'error getWords');
-};
-
-interface CreatePayload {
-  text: string;
-  meaning: string;
-  type: WordTypes | null;
-  examples: WordUsageExample[] | null;
-  lang: string;
-}
-
-export const createWord = async (payload: CreatePayload) => {
-  throw new Error('disabled');
-
-  const { data, error } = await wordsTable().insert({
-    text: payload.text.trim(),
-    meaning: payload.meaning.trim(),
-    type: payload.type,
-    // TODO: fix types
-    ['lang' as any]: payload.lang,
-    ['email' as any]: getUser()?.email,
-    examples: payload.examples,
-  });
-
-  if (data) {
-    return data;
-  }
-
-  throw new Error(error.message ?? 'error addWord');
-};
-
-export const bulkAdd = async (words: CreatePayload[]) => {
-  throw new Error('disabled');
-
-  const { data, error } = await wordsTable().insert(words);
-
-  if (data) {
-    return data;
-  }
-
-  throw new Error('error bulkAdd');
-};
-
-// bulkAdd([
-//   { text: 'hola', meaning: 'привет', lang: 'ES' },
-// ]);
-
-interface UpdatePayload {
-  text: string;
-  meaning: string;
-  type: WordTypes | null;
-  examples: WordUsageExample[] | null;
-}
-
-export const updateWord = async (id: number, payload: UpdatePayload) => {
-  throw new Error('disabled');
-
-  const { data, error } = await wordsTable()
-    .update({
-      text: payload.text.trim(),
-      meaning: payload.meaning.trim(),
-      type: payload.type ?? null,
-      examples: payload.examples,
-    })
-    .match({ id });
-
-  if (data) {
-    return data;
-  }
-
-  throw new Error(error.message ?? 'error updateWord');
-};
-
-export const markWordAsRepeated = async (id: number, step: number) => {
-  throw new Error('disabled');
-
-  const { data, error } = await wordsTable()
-    .update({
-      last_date: new Date().toUTCString(),
-      step,
-    })
-    .match({ id });
-
-  if (data) {
-    return data;
-  }
-
-  throw new Error(error.message ?? 'error markWordAsRepeated');
-};
-
-export const deleteWord = async (id: number) => {
-  throw new Error('disabled');
-
-  const { data, error } = await wordsTable().delete().match({ id });
-
-  if (data) {
-    return data;
-  }
-
-  throw new Error(error.message ?? 'error deleteWord');
-};

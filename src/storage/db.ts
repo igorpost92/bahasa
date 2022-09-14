@@ -1,7 +1,5 @@
 import Dexie, { Table } from 'dexie';
-import { getWords } from '../api/methods/words';
 import { WordTypes, WordUsageExample } from './types';
-import { notifier } from '../services/notifier';
 
 export interface WordEntryDB {
   id: string;

@@ -11,7 +11,7 @@ const getVerbs = async (full = false) => {
 
   if (!full) {
     const existingVerbs = await privateSupabase
-      .from<{ word_id: number }>('verbs')
+      .from<{ word_id: string }>('verbs')
       .select('word_id');
 
     // console.log('existingVerbs', { error: existingVerbs.error, data: existingVerbs.data });
