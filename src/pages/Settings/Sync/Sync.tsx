@@ -4,6 +4,7 @@ import { Button } from '../../../kit';
 import { db } from '../../../storage/db';
 import { getWords, uploadWords as uploadWordsServer, WordServer } from '../../../api/methods/words';
 import { getUser } from '../../../api/methods/auth';
+import { isProd } from '../../../utils/isProd';
 
 interface Props {}
 
@@ -63,7 +64,7 @@ const Sync: React.FC<Props> = props => {
   return (
     <div className={styles.wrap}>
       <Button onClick={upload}>Upload words</Button>
-      <Button onClick={download}>Download words</Button>
+      {!isProd && <Button onClick={download}>Download words</Button>}
     </div>
   );
 };

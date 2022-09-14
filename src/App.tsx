@@ -1,4 +1,5 @@
 import './kit/index.css';
+import { isProd } from './utils/isProd';
 import Game from './pages/Game/Game';
 import { MemoryRouter, BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Words from './pages/Words/Words';
@@ -11,9 +12,6 @@ import Learn from './pages/Learn/Learn';
 import { ModalContextLayer } from './kit/contexts/ModalContext';
 import Settings from './pages/Settings/Settings';
 import Login from './pages/Settings/Login/Login';
-
-// TODO: env var
-const isProd = location.hostname === 'http://ip92-bahasa.surge.sh';
 
 function App() {
   const Router = isProd ? MemoryRouter : BrowserRouter;
