@@ -2,12 +2,12 @@ import './kit/index.css';
 import Game from './pages/Game/Game';
 import { MemoryRouter, BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Words from './pages/Words/Words';
-import Word from './modals/Word/Word';
+import WordModal from './modals/Word/Word';
 import { LanguageContextLayer } from './context/LanguageContext';
 import AuthGuard from './components/AuthGuard/AuthGuard';
 import VerbsTenses from './pages/VerbsTenses/VerbsTenses';
 import Categories from './pages/Categories/Categories';
-import Category from './pages/Category/Category';
+import CategoryModal from './modals/Category/Category';
 import Learn from './pages/Learn/Learn';
 import { ModalContextLayer } from './kit/contexts/ModalContext';
 
@@ -21,14 +21,12 @@ function App() {
     <AuthGuard>
       <ModalContextLayer>
         <LanguageContextLayer>
-          <Word />
+          <WordModal />
+          <CategoryModal />
           <Router>
             <Routes>
               <Route path={'/words'} element={<Words />} />
-
               <Route path={'/categories'} element={<Categories />} />
-              <Route path={'/categories/new'} element={<Category />} />
-              <Route path={'/categories/:id'} element={<Category />} />
 
               <Route path={'/learn'} element={<Learn />} />
               <Route path={'/repeat'} element={<Game />} />

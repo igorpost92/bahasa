@@ -1,8 +1,25 @@
 import { db } from '../db';
+import { isPredefinedCategory, predefinedCategoriesConfig } from './categories';
+import { CategoryEntry } from '../types';
+import { getCurrentLang } from '../currentLang';
 
-export const getWordsByCategory = async (id: string) => {
-  const res = await db.categories_words.where({ category_id: id }).sortBy('order_index');
-  return res.map(w => ({
+export const getWordsByCategory = async (id: string): Promise<CategoryEntry['words']> => {
+  if (isPredefinedCategory(id)) {
+    const lang = getCurrentLang();
+
+    const words = await predefinedCategoriesConfig[id].getWords();
+
+    return words
+      .filter(item => item.lang === lang)
+      .map(word => ({
+        word_id: word.id,
+        // TODO: sort
+        order_index: undefined,
+      }));
+  }
+
+  const pairs = await db.categories_words.where({ category_id: id }).sortBy('order_index');
+  return pairs.map(w => ({
     word_id: w.word_id,
     order_index: w.order_index,
   }));

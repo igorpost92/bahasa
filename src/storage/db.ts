@@ -3,7 +3,7 @@ import { getWords } from '../api/methods/words';
 import { WordTypes, WordUsageExample } from './types';
 import { notifier } from '../services/notifier';
 
-interface WordEntryDB {
+export interface WordEntryDB {
   id: string;
   created_at: Date;
   text: string;
@@ -15,12 +15,12 @@ interface WordEntryDB {
   examples: WordUsageExample[] | null;
 }
 
-interface CategoryEntryDB {
+export interface CategoryEntryDB {
   id: string;
   name: string;
 }
 
-interface WordsInCategoriesDB {
+export interface WordsInCategoriesDB {
   word_id: string;
   category_id: string;
   order_index: number;

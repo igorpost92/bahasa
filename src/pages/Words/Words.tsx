@@ -15,6 +15,10 @@ const Words: React.FC = () => {
 
   const wordModal = useModal(Modals.Word);
 
+  const openWord = (id?: string) => {
+    wordModal.open({ id });
+  };
+
   const data = useMemo(() => {
     if (!searchInput) {
       return wordsRequest.data;
@@ -37,7 +41,7 @@ const Words: React.FC = () => {
           {data.map(item => (
             <WordMini
               key={item.id}
-              onClick={() => wordModal.open({ id: item.id })}
+              onClick={() => openWord(item.id)}
               text={item.text}
               meaning={item.meaning}
               step={item.step ?? undefined}
@@ -54,7 +58,7 @@ const Words: React.FC = () => {
       showTabBar
       headerTitle={'Words'}
       headerLeft={
-        <Button intent={'success'} onClick={() => wordModal.open({ id: undefined })}>
+        <Button intent={'success'} onClick={openWord}>
           Add
         </Button>
       }

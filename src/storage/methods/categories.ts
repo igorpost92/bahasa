@@ -1,22 +1,67 @@
 import { v4 } from 'uuid';
-import { db } from '../db';
+import { db, WordEntryDB } from '../db';
 import { getWordsByCategory, setWordsForCategory } from './categoriesWords';
-import { CategoryListEntry } from '../types';
+import { CategoryEntry, CategoryListEntry, WordTypes } from '../types';
 
-export const getCategories = async () => {
-  const categories = await db.categories.toArray();
+interface PredefinedCategoryConfig {
+  id: string;
+  name: string;
+  predefined: true;
+  getWords: () => Promise<WordEntryDB[]>;
+}
+
+export const predefinedCategoriesConfig: Record<string, PredefinedCategoryConfig> = {
+  1: {
+    id: '1',
+    name: 'Verbs',
+    predefined: true,
+    getWords: () => db.words.filter(item => item.type === WordTypes.Verb).toArray(),
+  },
+  2: {
+    id: '2',
+    name: 'Adjectives',
+    predefined: true,
+    getWords: () => db.words.filter(item => item.type === WordTypes.Adjective).toArray(),
+  },
+};
+
+export const isPredefinedCategory = (id: string) => {
+  return Boolean(predefinedCategoriesConfig[id]);
+};
+
+const getPredefinedCategory = (id: string) => {
+  const { name } = predefinedCategoriesConfig[id];
+
+  return {
+    id,
+    name,
+    predefined: true,
+  };
+};
+
+export const getCategories = async (): Promise<CategoryListEntry[]> => {
+  const predefined = Object.keys(predefinedCategoriesConfig).map(getPredefinedCategory);
+
+  const userCategories = await db.categories.toArray();
+
+  const categories = [...predefined, ...userCategories];
 
   return Promise.all(
     categories.map(async category => {
       const words = await getWordsByCategory(category.id);
-
-      return { ...category, length: words.length } as CategoryListEntry;
+      return { ...category, length: words.length };
     }),
   );
 };
 
-export const getCategory = async (id: string) => {
-  const category = await db.categories.get(id);
+export const getCategory = async (id: string): Promise<CategoryEntry> => {
+  let category;
+
+  if (isPredefinedCategory(id)) {
+    category = getPredefinedCategory(id);
+  } else {
+    category = await db.categories.get(id);
+  }
 
   if (!category) {
     throw new Error(`No category found with id: ${id}`);
@@ -46,6 +91,10 @@ export const createCategory = async (payload: UpsertCategoryPayload) => {
 };
 
 export const updateCategory = async (id: string, payload: UpsertCategoryPayload) => {
+  if (isPredefinedCategory(id)) {
+    return;
+  }
+
   await db.transaction('rw', db.categories, db.categories_words, async () => {
     await db.categories.update(id, {
       name: payload.name,
@@ -56,6 +105,10 @@ export const updateCategory = async (id: string, payload: UpsertCategoryPayload)
 };
 
 export const deleteCategory = async (id: string) => {
+  if (isPredefinedCategory(id)) {
+    return;
+  }
+
   await db.transaction('rw', db.categories, db.categories_words, async () => {
     await db.categories.delete(id);
     await setWordsForCategory(id, []);

@@ -2,6 +2,7 @@ import { createContext, useState, ReactNode, useMemo, useEffect, useContext } fr
 import { useLanguages } from '../storage/hooks/languages';
 import { Spinner } from '../kit';
 import LangSelector from '../components/LangSelector/LangSelector';
+import { getCurrentLang, setCurrentLang } from '../storage/currentLang';
 
 interface LanguageContextProps {
   lang: string;
@@ -23,12 +24,8 @@ interface Props {
   children: ReactNode;
 }
 
-const localStorageKey = 'current-lang-code';
-
 export const LanguageContextLayer = (props: Props) => {
-  const [lang, setLang] = useState(() => {
-    return localStorage.getItem(localStorageKey) ?? 'ES';
-  });
+  const [lang, setLang] = useState(getCurrentLang);
 
   const [isDrawerOpen, setDrawerOpen] = useState(false);
 
@@ -49,7 +46,7 @@ export const LanguageContextLayer = (props: Props) => {
 
   useEffect(() => {
     if (lang) {
-      localStorage.setItem(localStorageKey, lang);
+      setCurrentLang(lang);
     }
   }, [lang]);
 

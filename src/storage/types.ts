@@ -37,12 +37,14 @@ export enum WordTypes {
 export interface CategoryListEntry {
   id: string;
   name: string;
+  predefined?: boolean;
   length: number;
 }
 
 export interface CategoryEntry {
   id: string;
   name: string;
+  predefined?: boolean;
   words: {
     word_id: string;
     order_index: number | undefined;

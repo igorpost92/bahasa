@@ -1,15 +1,22 @@
 import React, { useMemo, useState } from 'react';
 import styles from './Categories.module.scss';
-import { Spinner, Button, Input } from '../../kit/';
+import { Button, Input } from '../../kit/';
 import { AppPage } from '../../components/AppPage/AppPage';
 import { useCategories } from '../../storage/hooks/categories';
 import CategoriesList from './CategoriesList/CategoriesList';
+import { Modals, useModal } from '../../modals/useModals';
 
 interface Props {}
 
 const Categories: React.FC<Props> = props => {
   const [searchInput, setSearchInput] = useState('');
   const request = useCategories();
+
+  const categoryModal = useModal(Modals.Category);
+
+  const openCategory = (id?: string) => {
+    categoryModal.open({ id });
+  };
 
   const data = useMemo(() => {
     if (!request.data) {
@@ -31,14 +38,14 @@ const Categories: React.FC<Props> = props => {
   } else if (!data.length) {
     content = <div>No data</div>;
   } else {
-    content = <CategoriesList data={data} />;
+    content = <CategoriesList data={data} onOpen={openCategory} />;
   }
 
   return (
     <AppPage
       showTabBar
       headerLeft={
-        <Button intent={'success'} url={'new'}>
+        <Button intent={'success'} onClick={openCategory}>
           Add
         </Button>
       }

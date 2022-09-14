@@ -5,9 +5,13 @@ import styles from './Card.module.scss';
 interface Props {
   className?: string;
   children: React.ReactNode;
-  // TODO: url?: string;
+  onClick?: () => void;
 }
 
 export const Card: React.FC<Props> = props => {
-  return <div className={cn(styles.wrap, props.className)}>{props.children}</div>;
+  return (
+    <div onClick={props.onClick} className={cn(styles.wrap, props.className)}>
+      {props.children}
+    </div>
+  );
 };

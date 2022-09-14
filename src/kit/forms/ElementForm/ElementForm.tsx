@@ -10,7 +10,6 @@ interface Actions {
 // TODO: confirm before leave
 
 interface Props<T, P> {
-  listUrl: string;
   children: React.ReactNode | ((actions: Actions) => React.ReactNode);
   isNew: boolean;
   getData: () => Promise<T>;
@@ -21,6 +20,7 @@ interface Props<T, P> {
   onSave: (handler: (data: P) => void) => () => void;
   onDelete: () => Promise<unknown>;
   onClose: () => void;
+  readOnly?: boolean;
 }
 
 export function ElementForm<T, P>(props: Props<T, P>) {
@@ -104,7 +104,7 @@ export function ElementForm<T, P>(props: Props<T, P>) {
     content = (
       <>
         <form className={styles.form}>{content}</form>
-        {!props.isNew && (
+        {!props.isNew && !props.readOnly && (
           <Button
             intent={'danger'}
             onClick={deletingRequest.send}
@@ -123,15 +123,17 @@ export function ElementForm<T, P>(props: Props<T, P>) {
     <div className={styles.wrap}>
       <div className={styles.header}>
         <Button onClick={props.onClose}>Back</Button>
-        <Button
-          intent={'success'}
-          onClick={onSave}
-          isLoading={savingRequest.isLoading}
-          // TODO: form invalid
-          isDisabled={deletingRequest.isLoading}
-        >
-          Save
-        </Button>
+        {!props.readOnly && (
+          <Button
+            intent={'success'}
+            onClick={onSave}
+            isLoading={savingRequest.isLoading}
+            // TODO: form invalid
+            isDisabled={deletingRequest.isLoading}
+          >
+            Save
+          </Button>
+        )}
       </div>
       <div className={styles.content}>{content}</div>
     </div>
