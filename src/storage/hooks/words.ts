@@ -73,7 +73,7 @@ export const useWords = (params: Params = {}) => {
     return () => {
       notifier.unsubscribe('words-update', listener);
     };
-  }, [live]);
+  }, [live, lang]);
 
   const { sort } = params;
 

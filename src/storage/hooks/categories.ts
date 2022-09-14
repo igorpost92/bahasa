@@ -27,7 +27,7 @@ export const useCategories = (live = true) => {
     return () => {
       notifier.unsubscribe('categories-update', listener);
     };
-  }, [live]);
+  }, [live, lang]);
 
   return { isLoading, data };
 };
