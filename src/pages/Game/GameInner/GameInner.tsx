@@ -11,7 +11,7 @@ import { markWordAsRepeated } from '../../../storage/methods/words';
 
 interface Props {
   words: WordListEntry[];
-  invertedMode: boolean;
+  invertedMode?: boolean;
   globalRepeatMode?: boolean;
 }
 
@@ -33,10 +33,9 @@ const GameInner: React.FC<Props> = props => {
 
     if (wrongWordsActions.has(prevWord)) {
       wrongWordsActions.remove(prevWord);
-    } else if (!props.globalRepeatMode) {
-      const step = prevWord.step ?? 0;
-      markWordAsRepeated(prevWord.id, step);
     }
+
+    markWordAsRepeated(prevWord.id, prevWord.step);
 
     setShowAnswer(false);
     setCounter(counter - 1);
@@ -86,8 +85,8 @@ const GameInner: React.FC<Props> = props => {
     };
 
     const currentWord = cards[counter];
-    const text = !props.invertedMode ? currentWord.text : currentWord.meaning;
-    const meaning = !props.invertedMode ? currentWord.meaning : currentWord.text;
+    const text = props.invertedMode ? currentWord.text : currentWord.meaning;
+    const meaning = props.invertedMode ? currentWord.meaning : currentWord.text;
 
     const goNext = () => {
       setCounter(counter + 1);
@@ -95,9 +94,8 @@ const GameInner: React.FC<Props> = props => {
     };
 
     const onSuccess = () => {
-      if (!props.globalRepeatMode) {
-        markWordAsRepeated(currentWord.id, (currentWord.step ?? -1) + 1);
-      }
+      let nextStep = props.globalRepeatMode ? currentWord.step : (currentWord.step ?? -1) + 1;
+      markWordAsRepeated(currentWord.id, nextStep);
       goNext();
     };
 

@@ -1,13 +1,22 @@
 import { db } from '../db';
-import { getCategoriesByWord, setCategoriesForWord } from './categoriesWords';
+import {
+  getCategoriesIdsByWord,
+  getWordsIdsByCategories,
+  setCategoriesForWord,
+} from './categoriesWords';
 import { notifier } from '../../services/notifier';
 import { v4 } from 'uuid';
 import { WordEntry, WordListEntry, WordTypes, WordUsageExample } from '../types';
 
-export const getWords = async (lang: string): Promise<WordListEntry[]> => {
-  const words = await db.words.where({ lang }).toArray();
+export const getWords = async (lang: string, categories?: string[]): Promise<WordListEntry[]> => {
+  let allWords = await db.words.where({ lang }).toArray();
 
-  return words.map(word => ({
+  if (categories?.length) {
+    const wordsIds = await getWordsIdsByCategories(categories);
+    allWords = allWords.filter(word => wordsIds.some(w => w.word_id === word.id));
+  }
+
+  return allWords.map(word => ({
     id: word.id,
     text: word.text,
     meaning: word.meaning,
@@ -25,7 +34,7 @@ export const getWord = async (id: string): Promise<WordEntry> => {
     throw new Error(`No word found with id: ${id}`);
   }
 
-  const categories = await getCategoriesByWord(id);
+  const categories = await getCategoriesIdsByWord(id);
   return { ...word, categories };
 };
 
@@ -94,7 +103,7 @@ export const deleteWord = async (id: string) => {
   notifier.notify('words-update');
 };
 
-export const markWordAsRepeated = async (id: string, step: number) => {
+export const markWordAsRepeated = async (id: string, step: number | null) => {
   await db.words.update(id, {
     step,
     last_date: new Date(),

@@ -1,6 +1,6 @@
 import { v4 } from 'uuid';
 import { db, WordEntryDB } from '../db';
-import { getWordsByCategory, setWordsForCategory } from './categoriesWords';
+import { getWordsIdsByCategory, setWordsForCategory } from './categoriesWords';
 import { CategoryEntry, CategoryListEntry, WordTypes } from '../types';
 
 interface PredefinedCategoryConfig {
@@ -48,7 +48,7 @@ export const getCategories = async (): Promise<CategoryListEntry[]> => {
 
   return Promise.all(
     categories.map(async category => {
-      const words = await getWordsByCategory(category.id);
+      const words = await getWordsIdsByCategory(category.id);
       return { ...category, length: words.length };
     }),
   );
@@ -67,7 +67,7 @@ export const getCategory = async (id: string): Promise<CategoryEntry> => {
     throw new Error(`No category found with id: ${id}`);
   }
 
-  const words = await getWordsByCategory(category.id);
+  const words = await getWordsIdsByCategory(category.id);
   return { ...category, words };
 };
 

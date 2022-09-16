@@ -1,0 +1,19 @@
+.categoryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & + & {
+    margin-top: 8px;
+  }
+}
+
+.startBtn {
+  margin-top: auto;
+}
+
+.wordsCount {
+  margin-top: 2px;
+  font-size: 14px;
+  color: gray;
+}

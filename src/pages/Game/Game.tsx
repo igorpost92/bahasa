@@ -1,21 +1,25 @@
 import React from 'react';
 import styles from './Game.module.scss';
-import { Button, Spinner } from '../../kit';
+import { Button } from '../../kit';
 import { useWords } from '../../storage/hooks/words';
 import GameInner from './GameInner/GameInner';
 import { AppPage } from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
+import { useLocation } from 'react-router-dom';
 
-interface Props {
+export interface GameLocationState {
+  from?: string;
+  categories?: string[];
   globalRepeatMode?: boolean;
+  invertedMode?: boolean;
 }
 
-const Game: React.FC<Props> = (props: Props) => {
+const Game: React.FC = () => {
+  const state = (useLocation().state as GameLocationState) || {};
+
   const { lang } = useCurrentLanguage();
-  // const [invertedMode, setInvertedMode] = useState(true);
 
-  const { isLoading, data } = useWords();
-
+  const { isLoading, data } = useWords({ categories: state.categories });
   const words = data ?? [];
 
   let content;
@@ -27,8 +31,8 @@ const Game: React.FC<Props> = (props: Props) => {
       <GameInner
         key={lang}
         words={words}
-        invertedMode={true}
-        globalRepeatMode={props.globalRepeatMode}
+        invertedMode={state.invertedMode}
+        globalRepeatMode={state.globalRepeatMode}
       />
     );
   }
@@ -39,7 +43,7 @@ const Game: React.FC<Props> = (props: Props) => {
       headerLeft={
         // TODO:
         <>
-          <Button url={'/learn'}>Back</Button>
+          <Button url={state.from || '/learn'}>Back</Button>
 
           {/*<Button onClick={() => setInvertedMode(!invertedMode)}>*/}
           {/*  inverted: {invertedMode ? 'true' : 'false'}*/}

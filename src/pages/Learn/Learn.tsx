@@ -23,7 +23,7 @@ const Learn: React.FC = () => {
         <div className={styles.info}>Only spanish supported at the moment</div>
       </div>
 
-      <Button fullWidth url={'/global-repeat'} className={styles.btnWrap}>
+      <Button fullWidth url={'/full-repeat'} className={styles.btnWrap}>
         Full repeat
       </Button>
     </AppPage>

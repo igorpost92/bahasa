@@ -1,5 +1,6 @@
 export * from './Button/Button';
 export * from './Card/Card';
+export * from './Checkbox/Checkbox';
 export * from './ContextMenu/ContextMenu';
 export * from './ControlGroup/ControlGroup';
 export * from './Drawer/Drawer';

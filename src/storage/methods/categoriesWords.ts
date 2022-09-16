@@ -3,7 +3,7 @@ import { isPredefinedCategory, predefinedCategoriesConfig } from './categories';
 import { CategoryEntry } from '../types';
 import { getCurrentLang } from '../currentLang';
 
-export const getWordsByCategory = async (id: string): Promise<CategoryEntry['words']> => {
+export const getWordsIdsByCategory = async (id: string): Promise<CategoryEntry['words']> => {
   if (isPredefinedCategory(id)) {
     const lang = getCurrentLang();
 
@@ -23,6 +23,13 @@ export const getWordsByCategory = async (id: string): Promise<CategoryEntry['wor
     word_id: w.word_id,
     order_index: w.order_index,
   }));
+};
+
+export const getWordsIdsByCategories = async (
+  categoriesIds: string[],
+): Promise<CategoryEntry['words']> => {
+  const byCategories = await Promise.all(categoriesIds.map(id => getWordsIdsByCategory(id)));
+  return byCategories.flat();
 };
 
 interface WordPayload {
@@ -47,7 +54,7 @@ export const setWordsForCategory = async (id: string, words: WordPayload[]) => {
   });
 };
 
-export const getCategoriesByWord = async (id: string) => {
+export const getCategoriesIdsByWord = async (id: string) => {
   const res = await db.categories_words.where({ word_id: id }).sortBy('order_index');
   return res.map(w => ({
     category_id: w.category_id,

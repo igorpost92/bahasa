@@ -12,6 +12,7 @@ import Learn from './pages/Learn/Learn';
 import { ModalContextLayer } from './kit/contexts/ModalContext';
 import Settings from './pages/Settings/Settings';
 import Login from './pages/Settings/Login/Login';
+import FullRepeat from './pages/FullRepeat/FullRepeat';
 
 function App() {
   const Router = isProd() ? MemoryRouter : BrowserRouter;
@@ -28,7 +29,7 @@ function App() {
 
             <Route path={'/learn'} element={<Learn />} />
             <Route path={'/repeat'} element={<Game />} />
-            <Route path={'/global-repeat'} element={<Game globalRepeatMode />} />
+            <Route path={'/full-repeat'} element={<FullRepeat />} />
             <Route path={'/verbs'} element={<VerbsTenses />} />
             <Route path={'/settings'} element={<Settings />} />
             <Route path={'/login'} element={<Login />} />

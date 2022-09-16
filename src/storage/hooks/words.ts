@@ -43,40 +43,8 @@ export const wordsSorts = [
 
 export type WordsSortTypes = typeof wordsSorts[number]['value'];
 
-interface Params {
-  live?: boolean;
-  sort?: WordsSortTypes;
-}
-
-export const useWords = (params: Params = {}) => {
-  const { lang } = useCurrentLanguage();
-
-  const { isLoading, data, send, sendSilent } = usePromise(() => getWords(lang));
-
-  useLayoutEffect(() => {
-    send();
-  }, [lang]);
-
-  const live = params.live ?? false;
-
-  useEffect(() => {
-    if (!live) {
-      return;
-    }
-
-    const listener = () => {
-      sendSilent();
-    };
-
-    notifier.subscribe('words-update', listener);
-
-    return () => {
-      notifier.unsubscribe('words-update', listener);
-    };
-  }, [live, lang]);
-
-  const { sort } = params;
-
+// TODO: move inside method?
+const useSortedData = (data: WordListEntry[] | null, sort?: WordsSortTypes) => {
   const sortedData = useMemo(() => {
     const words = data ?? [];
 
@@ -103,6 +71,45 @@ export const useWords = (params: Params = {}) => {
       return sortNumber * (sortRule.sortK ?? 1);
     });
   }, [data, sort]);
+
+  return sortedData;
+};
+
+interface Params {
+  live?: boolean;
+  sort?: WordsSortTypes;
+  categories?: string[];
+}
+
+export const useWords = (params: Params = {}) => {
+  const { lang } = useCurrentLanguage();
+
+  const { isLoading, data, send, sendSilent } = usePromise(() => getWords(lang, params.categories));
+
+  useLayoutEffect(() => {
+    send();
+  }, [lang]);
+
+  const live = params.live ?? false;
+
+  useEffect(() => {
+    if (!live) {
+      return;
+    }
+
+    const listener = () => {
+      sendSilent();
+    };
+
+    notifier.subscribe('words-update', listener);
+
+    return () => {
+      notifier.unsubscribe('words-update', listener);
+    };
+  }, [live, lang]);
+
+  const { sort } = params;
+  const sortedData = useSortedData(data, sort);
 
   return { isLoading, data: sortedData };
 };
