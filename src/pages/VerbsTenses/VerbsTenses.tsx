@@ -7,6 +7,7 @@ import Inner from './Inner/Inner';
 import { useVerbTenses } from '../../api/hooks/verbs/useVerbTenses';
 import VerbsList from './VerbsList/VerbsList';
 import { VerbData } from '../../api/methods/verbs';
+import BackButton from '../../components/BackButton/BackButton';
 
 interface Props {}
 
@@ -36,7 +37,7 @@ const VerbsTenses: React.FC<Props> = props => {
         showHeaderBorder={false}
         // TODO:
         // showLang={false}
-        headerLeft={<Button url={'/learn'}>Back</Button>}
+        headerLeft={<BackButton />}
         headerTitle={'Verbs'}
       >
         {content}

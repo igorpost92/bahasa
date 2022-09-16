@@ -7,6 +7,7 @@ import { AppPage } from '../../components/AppPage/AppPage';
 import cn from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { GameLocationState } from '../Game/Game';
+import BackButton from '../../components/BackButton/BackButton';
 
 interface CategoryRowProps {
   title: string;
@@ -57,7 +58,7 @@ const FullRepeat: React.FC = () => {
   }, [data]);
 
   return (
-    <AppPage headerTitle={'Full repeat'} headerLeft={<Button url={'/learn'}>Back</Button>}>
+    <AppPage headerTitle={'Full repeat'} headerLeft={<BackButton />}>
       <CategoryRow
         title={'Select categories'}
         length={totalWordsCount}
@@ -91,7 +92,6 @@ const FullRepeat: React.FC = () => {
           // TODO: keep state of current page
 
           const config: GameLocationState = {
-            from: '/full-repeat',
             categories: checkedCategories,
             globalRepeatMode: true,
             invertedMode,

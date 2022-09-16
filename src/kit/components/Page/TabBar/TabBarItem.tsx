@@ -12,6 +12,7 @@ export const TabBarItem: React.FC<Props> = props => {
   return (
     <NavLink
       to={props.url}
+      replace
       className={({ isActive }) => cn(styles.item, isActive && styles.active)}
     >
       {props.children}

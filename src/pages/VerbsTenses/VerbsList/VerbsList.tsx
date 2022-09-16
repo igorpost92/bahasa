@@ -5,6 +5,7 @@ import { Input, Button } from '../../../kit';
 import WordMini from '../../../components/WordMini/WordMini';
 import { AppPage } from '../../../components/AppPage/AppPage';
 import { shuffle } from '../../../utils/shuffle';
+import BackButton from '../../../components/BackButton/BackButton';
 
 interface Props {
   verbs: VerbData[];
@@ -30,7 +31,7 @@ const VerbsList: React.FC<Props> = props => {
 
   return (
     <AppPage
-      headerLeft={<Button url={'/learn'}>Back</Button>}
+      headerLeft={<BackButton />}
       headerTitle={'Verbs'}
       headerBottom={
         <>

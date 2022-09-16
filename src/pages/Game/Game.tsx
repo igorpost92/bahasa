@@ -1,14 +1,13 @@
 import React from 'react';
 import styles from './Game.module.scss';
-import { Button } from '../../kit';
 import { useWords } from '../../storage/hooks/words';
 import GameInner from './GameInner/GameInner';
 import { AppPage } from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 import { useLocation } from 'react-router-dom';
+import BackButton from '../../components/BackButton/BackButton';
 
 export interface GameLocationState {
-  from?: string;
   categories?: string[];
   globalRepeatMode?: boolean;
   invertedMode?: boolean;
@@ -38,19 +37,7 @@ const Game: React.FC = () => {
   }
 
   return (
-    <AppPage
-      showHeaderBorder={false}
-      headerLeft={
-        // TODO:
-        <>
-          <Button url={state.from || '/learn'}>Back</Button>
-
-          {/*<Button onClick={() => setInvertedMode(!invertedMode)}>*/}
-          {/*  inverted: {invertedMode ? 'true' : 'false'}*/}
-          {/*</Button>*/}
-        </>
-      }
-    >
+    <AppPage showHeaderBorder={false} headerLeft={<BackButton />}>
       {content}
     </AppPage>
   );
