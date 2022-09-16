@@ -17,6 +17,9 @@
 
 .content {
   padding: 12px;
+  padding-bottom: calc(var(--safe-area-inset-bottom) + 12px);
+  display: flex;
+  flex-direction: column;
   flex: auto;
   height: 1%;
 }

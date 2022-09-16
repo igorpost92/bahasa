@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+html {
+  /*
+  https://stackoverflow.com/questions/69589924/ios-15-minimized-address-bar-issue-with-fixed-position-full-screen-content
+   */
+  height: 100vh;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
