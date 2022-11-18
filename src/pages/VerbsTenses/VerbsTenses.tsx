@@ -4,9 +4,9 @@ import { AppPage } from '../../components/AppPage/AppPage';
 import { Button, Spinner } from '../../kit';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 import Inner from './Inner/Inner';
-import { useVerbTenses } from '../../api/hooks/verbs/useVerbTenses';
+import { useVerbsTenses } from '../../storage/hooks/verbs';
 import VerbsList from './VerbsList/VerbsList';
-import { VerbData } from '../../api/methods/verbs';
+import { VerbEntryData } from '../../storage/types';
 import BackButton from '../../components/BackButton/BackButton';
 
 interface Props {}
@@ -14,10 +14,10 @@ interface Props {}
 const VerbsTenses: React.FC<Props> = props => {
   const { lang } = useCurrentLanguage();
 
-  const { isLoading, data, error } = useVerbTenses();
+  const { isLoading, data, error } = useVerbsTenses();
   const words = data ?? [];
 
-  const [selectedData, setSelectedData] = useState<VerbData[]>();
+  const [selectedData, setSelectedData] = useState<VerbEntryData[]>();
 
   let content;
 

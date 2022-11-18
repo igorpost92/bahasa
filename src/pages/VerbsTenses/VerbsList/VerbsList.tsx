@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import styles from './VerbsList.module.scss';
-import { VerbData } from '../../../api/methods/verbs';
+import { VerbEntryData } from '../../../storage/types';
 import { Input, Button } from '../../../kit';
 import WordMini from '../../../components/WordMini/WordMini';
 import { AppPage } from '../../../components/AppPage/AppPage';
@@ -8,8 +8,8 @@ import { shuffle } from '../../../utils/shuffle';
 import BackButton from '../../../components/BackButton/BackButton';
 
 interface Props {
-  verbs: VerbData[];
-  onSelect: (verb: VerbData[]) => void;
+  verbs: VerbEntryData[];
+  onSelect: (verb: VerbEntryData[]) => void;
 }
 
 const VerbsList: React.FC<Props> = props => {

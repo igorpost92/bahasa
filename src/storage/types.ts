@@ -50,3 +50,11 @@ export interface CategoryEntry {
     order_index: number | undefined;
   }[];
 }
+
+export interface VerbEntryData {
+  word_id: string;
+  name: string;
+  data: TenseData;
+}
+
+type TenseData = Record<string, string[]>;

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styles from './Inner.module.scss';
-import { VerbData } from '../../../api/methods/verbs';
+import { VerbEntryData } from '../../../storage/types';
 import VerbValue from '../VerbValue/VerbValue';
 import { Button } from '../../../kit';
 import { AppPage } from '../../../components/AppPage/AppPage';
 
 interface Props {
-  words: VerbData[];
+  words: VerbEntryData[];
   onGoBack: () => void;
 }
 

@@ -1,5 +1,5 @@
 import Dexie, { Table } from 'dexie';
-import { WordTypes, WordUsageExample } from './types';
+import { VerbEntryData, WordTypes, WordUsageExample } from './types';
 
 export interface WordEntryDB {
   id: string;
@@ -27,6 +27,7 @@ export interface WordsInCategoriesDB {
 class DB extends Dexie {
   words!: Table<WordEntryDB, string>;
   categories!: Table<CategoryEntryDB, string>;
+  verbs!: Table<VerbEntryData, string>;
 
   categories_words!: Table<WordsInCategoriesDB>;
   categoriesOrderIndex: number = 0;
@@ -37,6 +38,10 @@ class DB extends Dexie {
       words: 'id,lang',
       categories: 'id',
       categories_words: '[category_id+word_id],category_id,word_id',
+    });
+
+    this.version(2).stores({
+      verbs: 'word_id',
     });
   }
 
