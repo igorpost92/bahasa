@@ -16,12 +16,29 @@ const VerbsList: React.FC<Props> = props => {
   const [searchInput, setSearchInput] = useState('');
 
   const data = useMemo(() => {
+    let data;
+
     if (!searchInput) {
-      return props.verbs;
+      data = props.verbs;
+    } else {
+      const searchString = searchInput.toLowerCase();
+      data = props.verbs.filter(({ name }) => name.toLowerCase().includes(searchString));
     }
 
-    const searchString = searchInput.toLowerCase();
-    return props.verbs.filter(({ name }) => name.toLowerCase().includes(searchString));
+    return data.sort((a, b) => {
+      // TODO: reuse fn
+      const valueA = a.name;
+      const valueB = b.name;
+
+      let sortNumber = 0;
+      if (valueA > valueB) {
+        sortNumber = 1;
+      } else if (valueB > valueA) {
+        sortNumber = -1;
+      }
+
+      return sortNumber;
+    });
   }, [props.verbs, searchInput]);
 
   const onShuffle = () => {
