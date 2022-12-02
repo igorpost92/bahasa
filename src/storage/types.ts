@@ -57,4 +57,4 @@ export interface VerbEntryData {
   data: TenseData;
 }
 
-type TenseData = Record<string, string[]>;
+type TenseData = Record<string, string[] | undefined>;

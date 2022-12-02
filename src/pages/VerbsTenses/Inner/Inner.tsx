@@ -4,32 +4,19 @@ import { VerbEntryData } from '../../../storage/types';
 import VerbValue from '../VerbValue/VerbValue';
 import { Button } from '../../../kit';
 import { AppPage } from '../../../components/AppPage/AppPage';
+import { verbsConfigByKeys } from '../../../../constants/verbsConfig';
 
 interface Props {
   words: VerbEntryData[];
   onGoBack: () => void;
 }
 
-const titlesMap = {
-  presente: 'Indicativo Presente',
-  preterito: 'Indicativo Pretérito perfecto simple',
-} as Record<string, string>;
-
-const pronouns = [
-  //
-  'yo',
-  'tú',
-  'el/ella/Ud.',
-  'nosotros',
-  'vosotros',
-  'ellos/ellas/Uds.',
-];
-
 const Inner: React.FC<Props> = props => {
   const { words } = props;
 
   const [counter, setCounter] = useState(0);
   const currentWord = words[counter];
+  const isReflexive = currentWord.name.endsWith('se');
 
   const goPrev = () => {
     setCounter(counter <= 0 ? words.length - 1 : counter - 1);
@@ -60,15 +47,17 @@ const Inner: React.FC<Props> = props => {
       )}
 
       <div key={String(counter)}>
-        {Object.keys(titlesMap).map(key => {
-          const title = titlesMap[key];
+        {Object.keys(verbsConfigByKeys).map(key => {
+          const config = verbsConfigByKeys[key];
+          const pronouns = isReflexive ? config.pronouns.reflexive : config.pronouns.regular;
+          const data = currentWord.data[key]?.slice(0, pronouns.length) ?? [];
 
           return (
             <div className={styles.tenseWrap} key={key}>
-              <div className={styles.tenseTitle}>{title}</div>
+              <div className={styles.tenseTitle}>{config.title}</div>
 
-              {currentWord.data[key].map((item, idx) => (
-                <VerbValue key={idx} title={pronouns[idx]} text={item} />
+              {data.map((item, idx) => (
+                <VerbValue key={idx} title={pronouns[idx].title} text={item} />
               ))}
             </div>
           );

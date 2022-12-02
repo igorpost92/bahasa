@@ -1,7 +1,6 @@
-// @ts-noche6ck
-
 import { JSDOM } from 'jsdom';
 import { privateSupabase } from './request';
+import { verbsConfigByTitles } from '../constants/verbsConfig';
 
 const getVerbs = async (full = false) => {
   let promise = privateSupabase
@@ -61,11 +60,6 @@ const markVerbs = async () => {
   return result.data;
 };
 
-const titlesMap = {
-  'Indicativo Presente': 'presente',
-  'Indicativo Pretérito perfecto simple': 'preterito',
-} as Record<string, string>;
-
 type WordItem = Record<string, string[]>;
 
 const getDataForVerb = async (verb: string) => {
@@ -82,32 +76,23 @@ const getDataForVerb = async (verb: string) => {
   const blocks = dom.window.document.querySelectorAll('.result-block-api .blue-box-wrap');
 
   blocks.forEach(block => {
-    const title = block.getAttribute('mobile-title');
-    const key = titlesMap[title ?? ''];
+    const title = block.getAttribute('mobile-title')?.trim();
+    const config = verbsConfigByTitles[title ?? ''];
 
-    if (!title || !key) {
+    if (!title || !config) {
       return;
     }
-
-    // console.log(title);
 
     const valueNodes = block.querySelectorAll('li .verbtxt');
-
-    if (valueNodes.length !== 6) {
-      // console.log('len', values.length);
-      return;
-    }
 
     const values = [...(valueNodes as any)].map(node => node.innerHTML);
 
     const isCorrect = values.every(Boolean);
 
     if (isCorrect) {
-      result[key] = values;
+      result[config.key] = values;
     }
   });
-
-  // console.log(result);
 
   return result;
 };
@@ -130,8 +115,8 @@ const syncData = async (data: TensesData[]) => {
   }
 };
 
-const prepareVerbs = async () => {
-  const verbs = await getVerbs();
+const prepareVerbs = async (full = false) => {
+  const verbs = await getVerbs(full);
 
   if (!verbs.length) {
     console.log('no verbs found');

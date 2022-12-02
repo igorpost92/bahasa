@@ -60,6 +60,8 @@ const methods = {
 };
 
 const Sync: React.FC<Props> = props => {
+  const isProduction = isProd();
+
   const upload = async () => {
     const email = getUser()?.email;
     if (!email) {
@@ -95,8 +97,8 @@ const Sync: React.FC<Props> = props => {
 
   return (
     <div className={styles.wrap}>
-      <Button onClick={upload}>Upload words</Button>
-      {!isProd() && <Button onClick={downloadWords}>Download words</Button>}
+      {isProduction && <Button onClick={upload}>Upload words</Button>}
+      {!isProduction && <Button onClick={downloadWords}>Download words</Button>}
       <Button onClick={downloadVerbs}>Download verbs</Button>
     </div>
   );
