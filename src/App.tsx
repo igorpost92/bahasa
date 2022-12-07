@@ -13,6 +13,7 @@ import { ModalContextLayer } from './kit/contexts/ModalContext';
 import Settings from './pages/Settings/Settings';
 import Login from './pages/Settings/Login/Login';
 import FullRepeat from './pages/FullRepeat/FullRepeat';
+import VerbsRandom from './pages/VerbsRandom/VerbsRandom';
 
 function App() {
   const Router = isProd() ? MemoryRouter : BrowserRouter;
@@ -31,6 +32,7 @@ function App() {
             <Route path={'/repeat'} element={<Game />} />
             <Route path={'/full-repeat'} element={<FullRepeat />} />
             <Route path={'/verbs'} element={<VerbsTenses />} />
+            <Route path={'/verbs-random'} element={<VerbsRandom />} />
             <Route path={'/settings'} element={<Settings />} />
             <Route path={'/login'} element={<Login />} />
 

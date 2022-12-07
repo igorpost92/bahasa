@@ -1,0 +1,52 @@
+.contentWrap {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.counter {
+  margin-bottom: 70px;
+}
+
+.verb {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin-top: 80px;
+  align-items: center;
+}
+
+.time {
+  margin-top: 40px;
+  padding: 8px 16px;
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.pronoun {
+  font-size: 26px;
+}
+
+.value {
+  margin-top: 20px;
+  font-size: 34px;
+}
+
+.btn {
+  margin-top: auto;
+}
+
+.listenBtn {
+  margin-top: 16px;
+}
+
+.hidden {
+  visibility: hidden;
+}

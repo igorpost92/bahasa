@@ -5,6 +5,7 @@ import VerbValue from '../VerbValue/VerbValue';
 import { Button } from '../../../kit';
 import { AppPage } from '../../../components/AppPage/AppPage';
 import { verbsConfigByKeys } from '../../../../constants/verbsConfig';
+import { isVerbReflexive } from '../../../utils/isVerbReflexive';
 
 interface Props {
   words: VerbEntryData[];
@@ -16,7 +17,7 @@ const Inner: React.FC<Props> = props => {
 
   const [counter, setCounter] = useState(0);
   const currentWord = words[counter];
-  const isReflexive = currentWord.name.endsWith('se');
+  const isReflexive = isVerbReflexive(currentWord.name);
 
   const goPrev = () => {
     setCounter(counter <= 0 ? words.length - 1 : counter - 1);

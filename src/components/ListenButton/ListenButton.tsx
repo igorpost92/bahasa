@@ -15,7 +15,10 @@ const ListenButton: React.FC<Props> = props => {
   const { lang } = useCurrentLanguage();
   const { iconSize = 24 } = props;
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+
     const text = typeof props.text === 'string' ? props.text : props.text();
     speak(text, lang);
   };

@@ -23,6 +23,13 @@ const Learn: React.FC = () => {
         <div className={styles.info}>Only spanish supported at the moment</div>
       </div>
 
+      <div className={cn(styles.btnWrap, !isSpanish && styles.disabledWrap)}>
+        <Button fullWidth url={'/verbs-random'}>
+          Verbs (random)
+        </Button>
+        <div className={styles.info}>Only spanish supported at the moment</div>
+      </div>
+
       <Button fullWidth url={'/full-repeat'} className={styles.btnWrap}>
         Full repeat
       </Button>
