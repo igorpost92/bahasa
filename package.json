@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "serv": "yarn nodemon serverUtils/prepareVerbs.ts",
     "preview": "vite preview",
-    "surge": "surge --domain ip92-bahasa.surge.sh --project ./dist",
+    "surge": "surge --domain https://ip92-bahasa.surge.sh --project ./dist",
     "pub": "npm run build && npm run surge"
   },
   "dependencies": {
@@ -35,6 +35,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^4.6.3",
     "vite": "^3.0.7",
+    "vite-plugin-pwa": "^0.13.3",
     "vite-plugin-svgr": "^2.2.1"
   },
   "nodemonConfig": {
