@@ -27,7 +27,7 @@ export const useData = () => {
           return [];
         }
 
-        const pronouns = isReflexive ? config.pronouns.reflexive : config.pronouns.regular;
+        const pronouns = isReflexive ? config.pronouns.reflexive : config.pronouns.normal;
 
         const dataByPronouns = pronouns.map((item, idx) => {
           return {

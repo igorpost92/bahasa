@@ -50,7 +50,7 @@ const Inner: React.FC<Props> = props => {
       <div key={String(counter)}>
         {Object.keys(verbsConfigByKeys).map(key => {
           const config = verbsConfigByKeys[key];
-          const pronouns = isReflexive ? config.pronouns.reflexive : config.pronouns.regular;
+          const pronouns = isReflexive ? config.pronouns.reflexive : config.pronouns.normal;
           const data = currentWord.data[key]?.slice(0, pronouns.length) ?? [];
 
           return (

@@ -2,7 +2,7 @@ interface PronounConfig {
   title: string;
 }
 
-const regularPronouns: PronounConfig[] = [
+const normalPronouns: PronounConfig[] = [
   { title: 'yo' },
   { title: 'tú' },
   { title: 'el/ella/Ud.' },
@@ -25,7 +25,7 @@ type ConfigByKeys = Record<
   {
     title: string;
     pronouns: {
-      regular: PronounConfig[];
+      normal: PronounConfig[];
       reflexive: PronounConfig[];
     };
   }
@@ -35,28 +35,28 @@ export const verbsConfigByKeys: ConfigByKeys = {
   presente: {
     title: 'Indicativo Presente',
     pronouns: {
-      regular: regularPronouns,
+      normal: normalPronouns,
       reflexive: reflexivePronouns,
     },
   },
   'preterito perfecto simple': {
     title: 'Indicativo Pretérito perfecto simple',
     pronouns: {
-      regular: regularPronouns,
+      normal: normalPronouns,
       reflexive: reflexivePronouns,
     },
   },
   'preterito imperfecto': {
     title: 'Indicativo Pretérito imperfecto',
     pronouns: {
-      regular: regularPronouns,
+      normal: normalPronouns,
       reflexive: reflexivePronouns,
     },
   },
   imperativo: {
     title: 'Imperativo',
     pronouns: {
-      regular: [
+      normal: [
         //
         { title: 'tú' },
         { title: 'Ud.' },
@@ -75,7 +75,7 @@ type ConfigByTitles = Record<
   {
     key: string;
     pronouns: {
-      regular: PronounConfig[];
+      normal: PronounConfig[];
       reflexive: PronounConfig[];
     };
   }
