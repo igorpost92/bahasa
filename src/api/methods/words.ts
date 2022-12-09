@@ -57,6 +57,4 @@ export const uploadWords = async (words: WordServer[]) => {
     alert(res2.error.message);
     throw res2.error;
   }
-
-  alert('ok');
 };
