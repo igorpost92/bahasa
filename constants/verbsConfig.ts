@@ -39,8 +39,16 @@ export const verbsConfigByKeys: ConfigByKeys = {
       reflexive: reflexivePronouns,
     },
   },
+  // TODO: rename
   'preterito perfecto simple': {
     title: 'Indicativo Pretérito perfecto simple',
+    pronouns: {
+      normal: normalPronouns,
+      reflexive: reflexivePronouns,
+    },
+  },
+  futuro: {
+    title: 'Indicativo Futuro',
     pronouns: {
       normal: normalPronouns,
       reflexive: reflexivePronouns,

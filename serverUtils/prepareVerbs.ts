@@ -2,6 +2,13 @@ import { JSDOM } from 'jsdom';
 import { privateSupabase } from './request';
 import { verbsConfigByTitles } from '../constants/verbsConfig';
 
+const logLine = (text: string) => {
+  // TODO:
+  process.stdout.clearLine(0);
+  process.stdout.cursorTo(0);
+  process.stdout.write(text);
+};
+
 const getVerbs = async (full = false) => {
   let promise = privateSupabase
     .from<{ id: string; text: string }>('words')
@@ -97,6 +104,7 @@ const getDataForVerb = async (verb: string) => {
   return result;
 };
 
+// TODO:
 interface TensesData {
   word_id: string;
   name: string;
@@ -134,16 +142,20 @@ const prepareVerbs = async (full = false) => {
   // TODO: run in parallel
   for (let i = 0; i < verbs.length; i++) {
     const { id, text } = verbs[i];
+
     try {
+      logLine(`${i + 1}/${verbs.length}: ${text}`);
       const data = await getDataForVerb(text);
       result.push({ word_id: id, name: text, data: JSON.stringify(data) });
     } catch (e) {
-      console.log('error when loading: ', text);
+      console.log('\n', 'error when loading: ', text);
     }
   }
 
+  console.log('');
+
   if (!result.length) {
-    console.log('no result after poquests');
+    console.log('no result after requests');
     return;
   }
 
