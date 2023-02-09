@@ -3,7 +3,7 @@ import { Page, Header, TabBar, TabBarItem } from '../../kit';
 import SelectedLangButton from '../SelectedLangButton/SelectedLangButton';
 import { getUser } from '../../api/methods/auth';
 import { FAKE_EMAIL } from '../../constants/fakeEmail';
-import { Settings } from '../../kit/icons';
+import { SettingsIcon } from '../../kit/icons';
 
 interface Props {
   children: React.ReactNode;
@@ -45,7 +45,7 @@ export const AppPage: React.FC<Props> = props => {
             <TabBarItem url={'/categories'}>Categories</TabBarItem>
             {user?.email !== FAKE_EMAIL && (
               <TabBarItem url={'/settings'}>
-                <Settings />
+                <SettingsIcon />
               </TabBarItem>
             )}
           </TabBar>

@@ -1,6 +1,6 @@
 import { createContext, useState, ReactNode, useMemo, useEffect, useContext } from 'react';
 import { useLanguages } from '../storage/hooks/languages';
-import { Spinner } from '../kit';
+import { SpinnerIcon } from '../kit';
 import LangSelector from '../components/LangSelector/LangSelector';
 import { getCurrentLang, setCurrentLang } from '../storage/currentLang';
 
@@ -62,7 +62,7 @@ export const LanguageContextLayer = (props: Props) => {
   return (
     <LanguageContext.Provider value={state}>
       {/*// TODO:why*/}
-      {!lang ? <Spinner /> : props.children}
+      {!lang ? <SpinnerIcon /> : props.children}
 
       <LangSelector
         isOpen={isDrawerOpen}

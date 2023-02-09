@@ -42,6 +42,8 @@ export const usePromise = <
     setLoading(false);
   };
 
+  // TODO: useCallback
+
   const sendSilent = async (...args: Parameters<T>) => {
     const currentId = ++callIdRef.current;
 

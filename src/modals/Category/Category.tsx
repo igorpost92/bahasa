@@ -12,7 +12,7 @@ import {
 import { useWords } from '../../storage/hooks/words';
 import styles from './Category.module.scss';
 import WordMini from '../../components/WordMini/WordMini';
-import { Close } from '../../kit/icons';
+import { CloseIcon } from '../../kit/icons';
 import { Modals, useModal } from '../useModals';
 
 type DataPayload = Omit<CategoryEntry, 'id'>;
@@ -101,7 +101,7 @@ const Category: React.FC<Props> = props => {
                     className={styles.deleteRowBtn}
                     onClick={() => wordsMethods.remove(idx)}
                   >
-                    <Close />
+                    <CloseIcon />
                   </Button>
                 )}
               </div>

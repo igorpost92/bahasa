@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ChevronDown } from '../../icons';
+import { ChevronDownIcon } from '../../icons';
 import cn from 'classnames';
 import { Drawer, Input, Radio } from '../';
 import styles from './Select.module.scss';
@@ -89,7 +89,7 @@ export function Select<T extends Option, M extends boolean = false>(props: Props
           onFocus={openModal}
           readOnly
         />
-        <ChevronDown className={styles.icon} />
+        <ChevronDownIcon className={styles.icon} />
       </div>
 
       <Drawer isOpen={isModalOpen} onClose={closeModal} size={props.searchable ? 'l' : undefined}>

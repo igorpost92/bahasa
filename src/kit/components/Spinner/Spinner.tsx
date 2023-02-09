@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Spinner.module.scss';
-import { Spinner as SpinnerIcon } from '../../icons';
+import { SpinnerIcon as SpinnerIcon } from '../../icons';
 import cn from 'classnames';
 
 interface Props {

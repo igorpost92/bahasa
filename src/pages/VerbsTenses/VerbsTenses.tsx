@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './VerbsTenses.module.scss';
 import { AppPage } from '../../components/AppPage/AppPage';
-import { Button, Spinner } from '../../kit';
+import { SpinnerIcon } from '../../kit';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 import Inner from './Inner/Inner';
 import { useVerbsTenses } from '../../storage/hooks/verbs';
@@ -24,7 +24,7 @@ const VerbsTenses: React.FC<Props> = props => {
   if (lang !== 'ES') {
     content = <div>Only spanish supported at the moment</div>;
   } else if (isLoading) {
-    content = <Spinner />;
+    content = <SpinnerIcon />;
   } else if (error) {
     content = <div>{error}</div>;
   } else if (!words.length) {

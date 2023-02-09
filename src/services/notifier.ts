@@ -1,4 +1,4 @@
-import { Notifier } from '../kit/services/Notifier';
+import { Notifier } from '../kit';
 
 type Events = 'words-update' | 'categories-update';
 
