@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { ChevronDownIcon } from '../../icons';
 import cn from 'classnames';
-import { Drawer, Input, Radio } from '../';
+import { Button, Drawer, Input, Radio } from '../';
 import styles from './Select.module.scss';
 import { smartSearch } from '../../utils';
 import { removeDiacritics } from '../../../utils/removeDiacritics';
@@ -22,6 +22,7 @@ interface Props<T extends Option, M extends boolean> {
   searchable?: boolean;
   multiple?: M;
   placeholder?: string;
+  onCreateNew?: (text: string, setValue: (value: string) => void) => void;
 }
 
 // todo creating new element
@@ -69,6 +70,14 @@ export function Select<T extends Option, M extends boolean = false>(props: Props
       props.onChange(value as ValueType<M>);
       closeModal();
     }
+  };
+
+  const onCreateNew = () => {
+    if (!searchInput) {
+      return;
+    }
+
+    props.onCreateNew?.(searchInput, onChange);
   };
 
   const options = useMemo(() => {
@@ -122,6 +131,10 @@ export function Select<T extends Option, M extends boolean = false>(props: Props
               />
             );
           })}
+
+          {!!searchInput.length && props.onCreateNew && (
+            <Button onClick={onCreateNew}>Create new</Button>
+          )}
         </div>
       </Drawer>
     </>
