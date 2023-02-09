@@ -5,11 +5,11 @@ import { sanitizeNumberInput } from './utils';
 const EMPTY_VALUE = '';
 
 export type NumericInputProps = Omit<InputProps, 'type' | 'value' | 'onChange'> & {
-  value: number | undefined;
-  onChange: (value: number | undefined) => void;
+  value: number | null;
+  onChange: (value: number | null) => void;
 };
 
-const stringifyNumber = (value?: number) => {
+const stringifyNumber = (value: number | null) => {
   if (value == null) {
     return EMPTY_VALUE;
   }
@@ -22,7 +22,7 @@ const stringifyNumber = (value?: number) => {
 };
 
 const parseNumber = (input: string) =>
-  input === EMPTY_VALUE ? undefined : Number(input.replace(/,/g, '.'));
+  input === EMPTY_VALUE ? null : Number(input.replace(/,/g, '.'));
 
 export const NumericInput: React.FC<NumericInputProps> = props => {
   const [pendingValue, setPendingValue] = useState<string>();

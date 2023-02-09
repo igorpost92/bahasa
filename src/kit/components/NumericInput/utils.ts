@@ -6,19 +6,21 @@ const MIDDLE_DASH = '–'; // &#8211
 const wrongMinusesPattern = `[${MINUS_SIGN}${LONG_DASH}${MIDDLE_DASH}]`;
 
 export const sanitizeNumberInput = (input: string) => {
-  return input
-    .replace(new RegExp(wrongMinusesPattern), HYPHEN)
-    .replace(/[./бю]/gi, ',')
-    .replace(/[^\d-,]/g, '')
-    .replace(/(?!^)-/g, '') // all minuses not at start
-    .replace(/^,/, '0,')
-    .replace(/^-,/, '-0,')
+  return (
+    input
+      .replace(new RegExp(wrongMinusesPattern), HYPHEN)
+      // replace leading zero
+      .replace(/^0(?=([0-9]|-))/, '-')
 
-    // replace all separators but first
-    .replace(',', '%%')
-    .replace(/,/g, '')
-    .replace(/%%/g, ',')
+      .replace(/[./бю]/gi, ',')
+      .replace(/[^\d\-,]/g, '')
+      .replace(/(?!^)-/g, '') // all minuses not at start
+      .replace(/^,/, '0,')
+      .replace(/^-,/, '-0,')
 
-    // replace leading zero
-    .replace(/^0(?=[0-9])/, '');
+      // replace all separators but first
+      .replace(',', '%%')
+      .replace(/,/g, '')
+      .replace(/%%/g, ',')
+  );
 };
