@@ -10,7 +10,8 @@ export const sanitizeNumberInput = (input: string) => {
     input
       .replace(new RegExp(wrongMinusesPattern), HYPHEN)
       // replace leading zero
-      .replace(/^0(?=([0-9]|-))/, '-')
+      .replace(/^0-/, '-')
+      .replace(/^0(?=[0-9])/, '')
 
       .replace(/[./бю]/gi, ',')
       .replace(/[^\d\-,]/g, '')

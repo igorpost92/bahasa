@@ -42,6 +42,7 @@ export const useModalAbstract = <T extends string, P>(type: T) => {
   const modal = modals.find(item => item.type === type);
 
   const open = useCallback(
+    // TODO: optional payload
     (payload: P) => {
       setModals(prev => {
         // TODO: if already opened

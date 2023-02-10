@@ -9,7 +9,7 @@ import VerbsTenses from './pages/VerbsTenses/VerbsTenses';
 import Categories from './pages/Categories/Categories';
 import CategoryModal from './modals/Category/Category';
 import Learn from './pages/Learn/Learn';
-import { ModalContextLayer } from './kit/contexts/ModalContext';
+import { ModalContextLayer } from './kit';
 import Settings from './pages/Settings/Settings';
 import Login from './pages/Settings/Login/Login';
 import FullRepeat from './pages/FullRepeat/FullRepeat';
