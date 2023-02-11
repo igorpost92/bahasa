@@ -11,7 +11,7 @@ export interface InputProps {
   value: string;
   onChange: (value: string) => void;
   type?: NativeElementProps['type'];
-  inputMode?: NativeElementProps['inputMode']; //todo not used
+  inputMode?: NativeElementProps['inputMode'];
   fullWidth?: boolean;
   readOnly?: boolean;
 }
@@ -30,6 +30,7 @@ export const Input: React.FC<InputProps> = props => {
       onChange={e => props.onChange(e.target.value)}
       type={props.type}
       readOnly={props.readOnly}
+      inputMode={props.inputMode}
     />
   );
 };
