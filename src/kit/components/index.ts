@@ -12,3 +12,4 @@ export * from './Radio/Radio';
 export * from './Select/Select';
 export * from './Spinner/Spinner';
 export * from './Tag/Tag';
+export * from './Textarea/Textarea';
