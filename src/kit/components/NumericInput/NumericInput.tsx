@@ -1,33 +1,16 @@
 import React, { useState } from 'react';
 import { Input, InputProps } from '../Input/Input';
-import { sanitizeNumberInput } from './utils';
-
-const EMPTY_VALUE = '';
+import { isDecimalNumberPending, parseNumber, sanitizeNumberInput, stringifyNumber } from './utils';
 
 export type NumericInputProps = Omit<InputProps, 'type' | 'value' | 'onChange'> & {
   value: number | null;
   onChange: (value: number | null) => void;
 };
 
-const stringifyNumber = (value: number | null) => {
-  if (value == null) {
-    return EMPTY_VALUE;
-  }
-
-  if (Object.is(value, -0)) {
-    return '-0';
-  }
-
-  return String(value).replace(/\./g, ',');
-};
-
-const parseNumber = (input: string) =>
-  input === EMPTY_VALUE ? null : Number(input.replace(/,/g, '.'));
-
 export const NumericInput: React.FC<NumericInputProps> = props => {
   const [pendingValue, setPendingValue] = useState<string>();
 
-  // TODO:
+  // TODO: if outside value chages during pending state
   // useDidUpdate(() => {
   //   if (!pendingValue) {
   //     return;
@@ -44,15 +27,11 @@ export const NumericInput: React.FC<NumericInputProps> = props => {
     const sanitizedInput = sanitizeNumberInput(inputValue);
 
     const isNegativePending = sanitizedInput.endsWith('-');
-    const isDecimalPending = sanitizedInput.endsWith(',');
+    const isDecimalPending = isDecimalNumberPending(sanitizedInput);
 
     if (isNegativePending || isDecimalPending) {
       setPendingValue(sanitizedInput);
-
-      if (isNegativePending) {
-        return;
-      }
-    } else if (pendingValue !== undefined) {
+    } else if (pendingValue) {
       setPendingValue(undefined);
     }
 
@@ -74,7 +53,6 @@ export const NumericInput: React.FC<NumericInputProps> = props => {
     <Input
       {...props}
       value={valueAsString}
-      // inputMode="numeric"
       inputMode="decimal" // todo prop
       onChange={handleInput}
     />
