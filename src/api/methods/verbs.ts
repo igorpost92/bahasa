@@ -2,7 +2,7 @@ import { supabase } from '../sendRequest';
 import { VerbEntryData } from '../../storage/types';
 
 const verbsTable = () => {
-  return supabase.from('verbs');
+  return supabase().from('verbs');
 };
 
 export const getAllVerbs = async () => {

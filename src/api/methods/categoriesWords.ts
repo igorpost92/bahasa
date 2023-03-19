@@ -1,7 +1,7 @@
 import { supabase } from '../sendRequest';
 import { WordsInCategoriesDB } from '../../storage/db';
 
-const table = () => supabase.from<WordsInCategoriesDB>('categories_words');
+const table = () => supabase().from<WordsInCategoriesDB>('categories_words');
 
 export const getCategoriesWords = async () => {
   const { data, error } = await table().select('*');

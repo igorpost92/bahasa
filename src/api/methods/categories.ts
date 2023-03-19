@@ -6,7 +6,7 @@ interface CategoryEntry {
   name: string;
 }
 
-const categoriesTable = () => supabase.from<CategoryEntry>('categories');
+const categoriesTable = () => supabase().from<CategoryEntry>('categories');
 
 export const getCategories = async () => {
   const { data, error } = await categoriesTable().select('id, name');

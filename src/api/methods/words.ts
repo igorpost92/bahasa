@@ -1,5 +1,4 @@
 import { supabase } from '../sendRequest';
-import { getUser } from './auth';
 import { WordTypes, WordUsageExample } from '../../storage/types';
 
 interface WordServerRaw {
@@ -8,7 +7,6 @@ interface WordServerRaw {
   meaning: string;
   type: WordTypes | null;
   lang: string;
-  email: string;
   created_at: string;
   last_date: string | null;
   step: number | null;
@@ -21,7 +19,7 @@ export interface WordServer extends Omit<WordServerRaw, 'created_at' | 'last_dat
 }
 
 const wordsTable = () => {
-  return supabase.from<WordServerRaw>('words');
+  return supabase().from<WordServerRaw>('words');
 };
 
 const parseWordFromServer = (wordRaw: WordServerRaw): WordServer => {
@@ -43,13 +41,11 @@ export const getWords = async () => {
 };
 
 export const uploadWords = async (words: WordServer[]) => {
-  const res1 = await wordsTable().delete().match({ email: getUser()?.email });
+  const res1 = await wordsTable().delete().not('id', 'is', null);
   if (res1.error) {
     alert(res1.error.message);
     throw res1.error;
   }
-
-  debugger;
 
   // TODO: type
   const res2 = await wordsTable().insert(words as any);

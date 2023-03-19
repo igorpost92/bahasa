@@ -1,16 +1,12 @@
 import { db } from '../../storage/db';
-import { uploadWords as uploadWordsServer, WordServer } from '../../api/methods/words';
+import { uploadWords as uploadWordsServer } from '../../api/methods/words';
 import { uploadCategories as uploadCategoriesServer } from '../../api/methods/categories';
 import { uploadCategoriesWords as uploadCategoriesWordsServer } from '../../api/methods/categoriesWords';
 
-const uploadWords = async (email: string) => {
+const uploadWords = async () => {
   const words = await db.words.toArray();
-  const serverWords: WordServer[] = words.map(w => ({
-    ...w,
-    email,
-  }));
-
-  await uploadWordsServer(serverWords);
+  // TODO: different types
+  await uploadWordsServer(words);
 };
 
 const uploadCategories = async () => {
@@ -23,10 +19,10 @@ const uploadCategoriesWords = async () => {
   await uploadCategoriesWordsServer(categoriesWords);
 };
 
-export const uploadWordsData = async (email: string) => {
+export const uploadWordsData = async () => {
   await Promise.all([
     //
-    uploadWords(email),
+    uploadWords(),
     uploadCategories(),
     uploadCategoriesWords(),
   ]);
