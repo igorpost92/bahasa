@@ -3,6 +3,7 @@ export * from './Card/Card';
 export * from './Checkbox/Checkbox';
 export * from './ContextMenu/ContextMenu';
 export * from './ControlGroup/ControlGroup';
+export * from './DateInput/DateInput';
 export * from './Drawer/Drawer';
 export * from './Input/Input';
 export * from './NumericInput/NumericInput';
