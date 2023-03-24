@@ -11,4 +11,5 @@ input, button, textarea {
 
 :root {
   --red: #DD524C;
+  --controls-border-color: gray;
 }

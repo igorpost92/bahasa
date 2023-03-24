@@ -21,9 +21,13 @@
 }
 
 .textarea, .autoresize::after {
-  border: 1px solid var(--controls-border-color);
-  border-radius: 4px;
-  padding: 8px 12px;
   font: inherit;
   word-break: break-word;
+
+  border: 1px solid var(--controls-border-color);
+  border-radius: 8px;
+
+  padding: 8px 12px;
+  font-size: 16px;
+  line-height: 20px;
 }

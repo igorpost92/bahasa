@@ -1,9 +1,12 @@
 .wrap {
-  padding: 8px 12px;
-  border: 1px solid gray;
+  border: 1px solid var(--controls-border-color);
+  border-radius: 8px;
+
+  //todo height
+  height: 38px;
   font-size: 16px;
   line-height: 20px;
-  border-radius: 8px;
+  padding: 8px 12px;
 }
 
 .fullWidth {
