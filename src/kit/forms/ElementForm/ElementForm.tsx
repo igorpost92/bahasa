@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './ElementForm.module.scss';
-import { Button } from '../../index';
+import { Button, Header } from '../../index';
 import { usePromise } from '../../hooks';
 
 interface Actions {
@@ -21,6 +21,7 @@ interface Props<T, P> {
   onDelete: () => Promise<unknown>;
   onClose: () => void;
   readOnly?: boolean;
+  title?: string;
 }
 
 export function ElementForm<T, P>(props: Props<T, P>) {
@@ -122,18 +123,24 @@ export function ElementForm<T, P>(props: Props<T, P>) {
   return (
     <div className={styles.wrap}>
       <div className={styles.header}>
-        <Button onClick={props.onClose}>Back</Button>
-        {!props.readOnly && (
-          <Button
-            intent={'success'}
-            onClick={onSave}
-            isLoading={savingRequest.isLoading}
-            // TODO: form invalid
-            isDisabled={deletingRequest.isLoading}
-          >
-            Save
-          </Button>
-        )}
+        <Header
+          showSeparator={false}
+          left={<Button onClick={props.onClose}>Back</Button>}
+          center={props.title}
+          right={
+            !props.readOnly && (
+              <Button
+                intent={'success'}
+                onClick={onSave}
+                isLoading={savingRequest.isLoading}
+                // TODO: form invalid
+                isDisabled={deletingRequest.isLoading}
+              >
+                Save
+              </Button>
+            )
+          }
+        />
       </div>
       <div className={styles.content}>{content}</div>
     </div>
