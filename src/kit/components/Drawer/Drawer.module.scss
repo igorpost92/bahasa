@@ -16,6 +16,7 @@
   flex-direction: column;
 
   padding: 12px;
+  padding-bottom: max(var(--safe-area-inset-bottom), 12px);
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -29,5 +30,5 @@
 }
 
 .xl {
-  height: calc(100% - var(--safe-area-inset-top) - 0px);
+  height: calc(100% - var(--safe-area-inset-top));
 }

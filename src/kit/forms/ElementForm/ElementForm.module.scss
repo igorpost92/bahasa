@@ -12,6 +12,8 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid lightgray;
+  //todo
+  border-radius: 12px 12px 0 0;
   padding: 12px;
   background: white;
   z-index: 10;
@@ -23,6 +25,7 @@
   flex-direction: column;
   gap: 12px;
   padding: 12px;
+  padding-bottom: max(var(--safe-area-inset-bottom), 12px);
 }
 
 .form {
