@@ -29,5 +29,5 @@
 }
 
 .xl {
-  height: calc(100% - 50px);
+  height: calc(100% - var(--safe-area-inset-top) - 0px);
 }

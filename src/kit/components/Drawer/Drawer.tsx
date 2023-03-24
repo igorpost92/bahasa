@@ -2,7 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import styles from './Drawer.module.scss';
 import { Portal } from '../Portal/Portal';
-import { useScrollLock } from '../../hooks';
+import { ALLOW_INSIDE_SCROLL_CLASSNAME, useScrollLock } from '../../hooks';
 
 interface Props {
   className?: string;
@@ -14,7 +14,10 @@ interface Props {
   // canClose?: boolean;
 
   // TODO: position left
+  // position?: 'left' | 'bottom'
 }
+
+// TODO: close with swipe
 
 export const Drawer: React.FC<Props> = props => {
   useScrollLock(props.isOpen);
@@ -37,7 +40,7 @@ export const Drawer: React.FC<Props> = props => {
           }}
         />
         <div
-          className={cn(styles.content, props.className, {
+          className={cn(styles.content, props.className, ALLOW_INSIDE_SCROLL_CLASSNAME, {
             [styles.l]: size === 'l',
             [styles.xl]: size === 'xl',
           })}

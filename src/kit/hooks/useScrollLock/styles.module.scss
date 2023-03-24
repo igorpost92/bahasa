@@ -1,7 +1,11 @@
 .preventBodyScroll {
   overflow: hidden;
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  //position: fixed;
+  //left: 0;
+  //right: 0;
+  //bottom: 0;
+}
+
+:global(.allow-inside-scroll-classname) {
+  overscroll-behavior-y: none;
 }
