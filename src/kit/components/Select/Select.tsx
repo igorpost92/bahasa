@@ -11,6 +11,7 @@ interface Option {
   name: string;
 }
 
+// TODO: use null instead of undefined
 type ValueType<M extends boolean> = M extends true ? string[] : string | undefined;
 
 interface Props<T extends Option, M extends boolean> {

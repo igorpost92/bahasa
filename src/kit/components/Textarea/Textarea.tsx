@@ -2,7 +2,8 @@ import React, { Ref, useRef } from 'react';
 import cn from 'classnames';
 import styles from './Textarea.module.scss';
 
-type Props = Omit<JSX.IntrinsicElements['textarea'], 'onChange'> & {
+type Props = Omit<JSX.IntrinsicElements['textarea'], 'value' | 'onChange'> & {
+  value: string;
   autoresize?: boolean;
   onChange?: (value: string) => void;
   textAreaClassName?: string;
@@ -26,17 +27,15 @@ export const Textarea: React.FC<Props> = props => {
   // const mergedRef = useMergeRefs(forwardedInputRef, inputRef);
 
   const onChange = (value: string) => {
-    if (autoresize) {
-      if (wrapRef.current) {
-        wrapRef.current.dataset.value = value;
-      }
-    }
-
     onChangeProp?.(value);
   };
 
   return (
-    <div ref={wrapRef} className={cn(styles.wrap, className, autoresize && styles.autoresize)}>
+    <div
+      ref={wrapRef}
+      data-value={props.value}
+      className={cn(styles.wrap, className, autoresize && styles.autoresize)}
+    >
       <textarea
         rows={rows}
         ref={props.inputRef}
