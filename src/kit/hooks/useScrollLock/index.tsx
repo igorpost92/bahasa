@@ -5,7 +5,6 @@ export const ALLOW_INSIDE_SCROLL_CLASSNAME = 'allow-inside-scroll-classname';
 
 const handler = (e: TouchEvent) => {
   const inModal = (e.target as HTMLElement).closest(`.${ALLOW_INSIDE_SCROLL_CLASSNAME}`);
-  console.log(e.target, (e.target as HTMLElement).parentElement, inModal);
   if (!inModal) {
     e.preventDefault();
   }

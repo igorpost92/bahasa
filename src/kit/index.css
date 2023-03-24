@@ -10,6 +10,7 @@ input, button, textarea {
 }
 
 :root {
+  /*todo del red?*/
   --red: #DD524C;
   --controls-border-color: gray;
 }
