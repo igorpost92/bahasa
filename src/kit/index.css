@@ -10,7 +10,64 @@ input, button, textarea {
 }
 
 :root {
-  /*todo del red?*/
-  --red: #DD524C;
-  --controls-border-color: gray;
+  --base-border-color: hsl(0, 0%, 27%);
+  --controls-border-color: hsl(0, 0%, 33%);
+
+  /*main bg color*/
+  --base-1: hsl(0, 0%, 8%);
+  /*header bg*/
+  --base-2: hsl(0, 0%, 13%);
+  /*modal bg*/
+  --base-3: hsl(0, 0%, 16%);
+
+  --base-8: black;
+
+  /*main text*/
+  --content-1: hsl(216, 9%, 89%);
+  /*secondary text*/
+  --content-2: hsl(0, 0%, 70%);
+
+  --inputs-bg: none;
+
+  /*todo old red, good as text maybe?*/
+  /*--content-danger: #DD524C;*/
+
+  /*--button-primary: #6B9AE0;*/
+  /*--button-primary: #5EC169;*/
+
+  --base-primary: #747bff;
+  --base-secondary: hsl(0, 0%, 26%);
+  --base-danger: #EB494F;
 }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --base-border-color: hsl(207, 12%, 85%);
+    --controls-border-color: hsl(210, 13%, 88%);
+
+    /*main bg color*/
+    --base-1: hsl(0, 0%, 100%);
+    /*header bg*/
+    --base-2: hsl(0, 0%, 100%);
+    /*modal bg*/
+    --base-3: hsl(0, 0%, 100%);
+
+    --base-8: gray;
+
+    /*main text*/
+    --content-1: hsl(0, 0%, 0%);
+    /*secondary text*/
+    --content-2: hsl(214, 9%, 55%);
+
+    --inputs-bg: none;
+
+    --base-secondary: hsl(220, 7%, 92%);
+  }
+}
+
+body {
+  background: var(--base-1);
+  color: var(--content-1);
+}
+
+

@@ -1,4 +1,6 @@
 .wrap {
+  color: var(--content-1);
+  background: var(--inputs-bg);
   border: 1px solid var(--controls-border-color);
   border-radius: 8px;
   appearance: none;
@@ -8,10 +10,9 @@
   font-size: 16px;
   line-height: 20px;
   padding: 8px 12px;
-  background: white;
 
   &::-webkit-date-and-time-value {
-    color: black;
+    color: inherit;
     text-align: start;
   }
 }

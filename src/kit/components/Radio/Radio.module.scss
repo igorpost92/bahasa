@@ -5,13 +5,13 @@
 }
 
 .marker {
-  --checked-bg: forestgreen;
+  --checked-bg: var(--base-primary);
 
   position: relative;
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 1px solid gray;
+  border: 1px solid var(--controls-border-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,7 +22,7 @@
     position: absolute;
     width: 10px;
     height: 10px;
-    border: 2px solid white;
+    border: 2px solid var(--base-1);
     border-radius: 50%;
   }
 

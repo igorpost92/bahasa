@@ -124,13 +124,13 @@ export function ElementForm<T, P>(props: Props<T, P>) {
     <div className={styles.wrap}>
       <div className={styles.header}>
         <Header
-          showSeparator={false}
+          showSeparator={true}
           left={<Button onClick={props.onClose}>Back</Button>}
           center={props.title}
           right={
             !props.readOnly && (
               <Button
-                intent={'success'}
+                intent={'primary'}
                 onClick={onSave}
                 isLoading={savingRequest.isLoading}
                 // TODO: form invalid

@@ -1,6 +1,8 @@
 .wrap {
   display: grid;
   grid-area: 1 / 1 / 2 / 2;
+  color: var(--content-1);
+  background: var(--inputs-bg);
 }
 
 .autoresize {

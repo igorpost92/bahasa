@@ -8,24 +8,19 @@
   font-size: 16px;
   line-height: 20px;
   cursor: pointer;
-  color: black;
+  color: var(--content-1);
 }
 
-.success {
-  //background: #5EC169;
-  background: #747bff;
-  //todo
-  //nice color
-  color: white;
+.primary {
+  background: var(--base-primary);
 }
 
 .danger {
-  background: #DD524C;
+  background: var(--base-danger);
 }
 
 .secondary {
-  //background: #cecece;
-  background: #e7e7e7;
+  background: var(--base-secondary);
 }
 
 .m {

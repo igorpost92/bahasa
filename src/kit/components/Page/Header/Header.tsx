@@ -20,7 +20,7 @@ export const Header: React.FC<Props> = props => {
     return null;
   }
 
-  const { showSeparator = true } = props;
+  const { showSeparator } = props;
 
   return (
     <div className={cn(styles.wrap, props.className, showSeparator && styles.separator)}>

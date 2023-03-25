@@ -8,20 +8,19 @@
   position: absolute;
   inset: 0;
   background: black;
-  opacity: 0.7;
+  opacity: 0.8;
 }
 
 .content {
   display: flex;
   flex-direction: column;
-
   padding: 12px;
   padding-bottom: max(var(--safe-area-inset-bottom), 12px);
   position: absolute;
   bottom: 0;
   width: 100%;
   border-radius: 12px 12px 0 0;
-  background: white;
+  background: var(--base-2);
   overflow: auto;
 }
 

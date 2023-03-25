@@ -4,10 +4,13 @@ import cn from 'classnames';
 import { Spinner } from '..';
 import styles from './Button.module.scss';
 
+// TODO:
+// type Variant = 'filled' | 'outlined' | 'minimal'
+
 type Props = {
   className?: string;
   style?: React.CSSProperties;
-  intent?: 'primary' | 'secondary' | 'success' | 'danger';
+  intent?: 'primary' | 'secondary' | 'danger';
   children: React.ReactNode;
   onClick?: () => void;
   size?: 'm' | 'l' | 'xl';

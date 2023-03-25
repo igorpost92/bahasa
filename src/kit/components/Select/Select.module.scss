@@ -1,6 +1,8 @@
 .wrap {
   display: flex;
   align-items: center;
+  color: var(--content-1);
+  background: var(--inputs-bg);
   border: 1px solid var(--controls-border-color);
   border-radius: 8px;
   cursor: pointer;
@@ -16,11 +18,12 @@
   flex: auto;
   width: 1%;
   cursor: inherit;
+  color: inherit;
+  background: inherit;
   border: none;
   outline: none;
   font-size: inherit;
   line-height: inherit;
-  background: none;
 }
 
 .icon {
