@@ -10,6 +10,7 @@ export * from './NumericInput/NumericInput';
 export * from './Page';
 export * from './Portal/Portal';
 export * from './Radio/Radio';
+export * from './SegmentedButtons/SegmentedButtons';
 export * from './Select/Select';
 export * from './Spinner/Spinner';
 export * from './Tag/Tag';
