@@ -17,6 +17,8 @@ interface Props {
 }
 
 export const DateInput: React.FC<Props> = props => {
+  const { inputRef, ...restProps } = props;
+
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
@@ -32,9 +34,9 @@ export const DateInput: React.FC<Props> = props => {
 
   return (
     <input
-      {...props}
+      {...restProps}
       value={valueAsString}
-      ref={props.inputRef}
+      ref={inputRef}
       className={cn(styles.wrap, props.className)}
       type={'datetime-local'}
       onChange={onChange}
