@@ -10,6 +10,11 @@ export default defineConfig({
     svgr({
       exportAsDefault: true,
     }),
-    VitePWA(),
+    VitePWA({
+      manifest: {
+        name: 'Espahasa',
+        short_name: 'Espahasa',
+      },
+    }),
   ],
 });
