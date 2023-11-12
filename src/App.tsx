@@ -14,6 +14,7 @@ import Settings from './pages/Settings/Settings';
 import Login from './pages/Settings/Login/Login';
 import FullRepeat from './pages/FullRepeat/FullRepeat';
 import VerbsRandom from './pages/VerbsRandom/VerbsRandom';
+import UpdateBanner from './components/UpdateBanner';
 
 function App() {
   const Router = isProd() ? MemoryRouter : BrowserRouter;
@@ -21,6 +22,7 @@ function App() {
   return (
     <ModalContextLayer>
       <LanguageContextLayer>
+        <UpdateBanner />
         <WordModal />
         <CategoryModal />
         <Router>
