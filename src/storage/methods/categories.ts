@@ -23,6 +23,18 @@ export const predefinedCategoriesConfig: Record<string, PredefinedCategoryConfig
     predefined: true,
     getWords: () => db.words.filter(item => item.type === WordTypes.Adjective).toArray(),
   },
+  3: {
+    id: '3',
+    name: 'Nouns',
+    predefined: true,
+    getWords: () => db.words.filter(item => item.type === WordTypes.Noun).toArray(),
+  },
+  4: {
+    id: '4',
+    name: 'Phrases',
+    predefined: true,
+    getWords: () => db.words.filter(item => item.type === WordTypes.Phrase).toArray(),
+  },
 };
 
 export const isPredefinedCategory = (id: string) => {
