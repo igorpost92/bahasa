@@ -101,7 +101,7 @@ const FullRepeat: React.FC = () => {
             state: config,
           });
         }}
-        intent={'success'}
+        intent={'primary'}
         size={'l'}
         className={styles.startBtn}
       >

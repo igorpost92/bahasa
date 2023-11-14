@@ -1,7 +1,7 @@
 .wrap {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid lightgray;
+  border-top: 1px solid var(--base-border-color);
   min-height: 50px;
 }
 
@@ -9,11 +9,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: gray;
+  color: var(--content-2);
   flex: 1 1 0;
 
   &.active {
-    color: black;
+    color: var(--content-1);
     font-weight: 600;
   }
 }

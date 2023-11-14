@@ -45,7 +45,7 @@ const Categories: React.FC<Props> = props => {
     <AppPage
       showTabBar
       headerLeft={
-        <Button intent={'success'} onClick={openCategory}>
+        <Button intent={'primary'} onClick={openCategory}>
           Add
         </Button>
       }

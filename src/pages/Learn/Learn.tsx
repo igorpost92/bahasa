@@ -12,7 +12,7 @@ const Learn: React.FC = () => {
 
   return (
     <AppPage showTabBar headerTitle={'Learn'} contentClassName={styles.wrap}>
-      <Button fullWidth intent={'success'} url={'/repeat'} className={styles.btnWrap}>
+      <Button fullWidth intent={'primary'} url={'/repeat'} className={styles.btnWrap}>
         Repeat
       </Button>
 

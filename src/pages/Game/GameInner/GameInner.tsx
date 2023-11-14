@@ -120,7 +120,7 @@ const GameInner: React.FC<Props> = props => {
               <Button size={'xl'} className={styles.btn} intent={'danger'} onClick={onWrong}>
                 Wrong
               </Button>
-              <Button size={'xl'} className={styles.btn} intent={'success'} onClick={onSuccess}>
+              <Button size={'xl'} className={styles.btn} intent={'primary'} onClick={onSuccess}>
                 Correct
               </Button>
             </>

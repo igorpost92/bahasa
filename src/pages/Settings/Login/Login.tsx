@@ -32,7 +32,7 @@ const Login: React.FC = () => {
           <Input value={key} onChange={setKey} />
         </ControlGroup>
       </div>
-      <Button className={styles.btnWrap} intent={'success'} onClick={save}>
+      <Button className={styles.btnWrap} intent={'primary'} onClick={save}>
         Login
       </Button>
     </AppPage>

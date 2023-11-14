@@ -58,7 +58,7 @@ const Words: React.FC = () => {
       showTabBar
       headerTitle={'Words'}
       headerLeft={
-        <Button intent={'success'} onClick={openWord}>
+        <Button intent={'primary'} onClick={openWord}>
           Add
         </Button>
       }

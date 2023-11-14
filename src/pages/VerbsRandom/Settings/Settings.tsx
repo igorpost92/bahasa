@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from './Settings.module.scss';
-import { Button, Checkbox } from '../../../kit';
+import { Button, Checkbox, useList } from '../../../kit';
 import cn from 'classnames';
-import { useList } from '../../../kit/hooks';
 import { verbsConfigByKeys } from '../../../../constants/verbsConfig';
 
 interface CategoryRowProps {
@@ -78,7 +77,7 @@ const Settings: React.FC<Props> = props => {
 
           props.onStart(checkedTenses);
         }}
-        intent={'success'}
+        intent={'primary'}
         size={'l'}
         className={styles.startBtn}
       >
