@@ -6,6 +6,9 @@ export const ALLOW_INSIDE_SCROLL_CLASSNAME = 'allow-inside-scroll-classname';
 const handler = (e: TouchEvent) => {
   const inModal = (e.target as HTMLElement).closest(`.${ALLOW_INSIDE_SCROLL_CLASSNAME}`);
   if (!inModal) {
+    // TODO:
+    // has scroll height
+
     e.preventDefault();
   }
 };

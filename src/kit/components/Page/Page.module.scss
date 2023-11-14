@@ -8,6 +8,7 @@
 
 .header {
   margin-top: calc(0px - var(--safe-area-inset-top));
+  //todo check in browser too
   padding-top: calc(var(--safe-area-inset-top) - 16px);
   position: sticky;
   background: var(--base-2);

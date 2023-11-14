@@ -29,13 +29,17 @@ input, button, textarea {
 
   --inputs-bg: none;
 
+  /*todo*/
+  --orange-1: hsl(34, 87%, 59%);
+  --orange-2: hsl(37, 66%, 16%);
+
   /*todo old red, good as text maybe?*/
   /*--content-danger: #DD524C;*/
 
-  /*--button-primary: #6B9AE0;*/
-  /*--button-primary: #5EC169;*/
-
+  --base-primary: #5EC169;
+  --base-primary: #6B9AE0;
   --base-primary: #747bff;
+  --base-primary: #F1A33B;
   --base-secondary: hsl(0, 0%, 26%);
   --base-danger: #EB494F;
 }
@@ -52,12 +56,12 @@ input, button, textarea {
     /*modal bg*/
     --base-3: hsl(0, 0%, 100%);
 
-    --base-8: gray;
+    --base-8: grey;
 
     /*main text*/
     --content-1: hsl(0, 0%, 0%);
     /*secondary text*/
-    --content-2: hsl(214, 9%, 55%);
+    --content-2: hsl(0, 0%, 55%);
 
     --inputs-bg: none;
 
