@@ -1,28 +1,16 @@
 import { supabase } from '../sendRequest';
-import { WordTypes, WordUsageExample } from '../../storage/types';
+import { WordEntryDB } from '../../storage/db';
 
-interface WordServerRaw {
-  id: string;
-  text: string;
-  meaning: string;
-  type: WordTypes | null;
-  lang: string;
+interface WordServerRaw extends Omit<WordEntryDB, 'created_at' | 'last_date'> {
   created_at: string;
   last_date: string | null;
-  step: number | null;
-  examples: WordUsageExample[] | null;
-}
-
-export interface WordServer extends Omit<WordServerRaw, 'created_at' | 'last_date'> {
-  created_at: Date;
-  last_date: Date | null;
 }
 
 const wordsTable = () => {
   return supabase().from<WordServerRaw>('words');
 };
 
-const parseWordFromServer = (wordRaw: WordServerRaw): WordServer => {
+const parseWordFromServer = (wordRaw: WordServerRaw): WordEntryDB => {
   return {
     ...wordRaw,
     created_at: new Date(wordRaw.created_at),
@@ -40,7 +28,7 @@ export const getWords = async () => {
   throw new Error(error.message ?? 'error getWords');
 };
 
-export const uploadWords = async (words: WordServer[]) => {
+export const uploadWords = async (words: WordEntryDB[]) => {
   const res1 = await wordsTable().delete().not('id', 'is', null);
   if (res1.error) {
     alert(res1.error.message);

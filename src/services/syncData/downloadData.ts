@@ -1,9 +1,9 @@
-import { db, WordsInCategoriesDB } from '../../storage/db';
-import { getWords, WordServer } from '../../api/methods/words';
-import { CategoryServer, getCategories } from '../../api/methods/categories';
+import { CategoryEntryDB, db, WordEntryDB, WordsInCategoriesDB } from '../../storage/db';
+import { getWords } from '../../api/methods/words';
+import { getCategories } from '../../api/methods/categories';
 import { getCategoriesWords } from '../../api/methods/categoriesWords';
 
-const saveWords = async (words: WordServer[]) => {
+const saveWords = async (words: WordEntryDB[]) => {
   await db.words.clear();
 
   await db.words.bulkAdd(
@@ -23,7 +23,7 @@ const saveWords = async (words: WordServer[]) => {
   );
 };
 
-const saveCategories = async (categories: CategoryServer[]) => {
+const saveCategories = async (categories: CategoryEntryDB[]) => {
   await db.categories.clear();
   await db.categories.bulkAdd(categories);
 };
