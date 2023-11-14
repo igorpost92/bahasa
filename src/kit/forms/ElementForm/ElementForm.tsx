@@ -4,10 +4,12 @@ import { Button, Header } from '../../index';
 import { usePromise } from '../../hooks';
 
 interface Actions {
-  save: (goBack: boolean) => void;
+  save: () => void;
 }
 
 // TODO: confirm before leave
+
+// TODO: to ElementFormModal
 
 interface Props<T, P> {
   children: React.ReactNode | ((actions: Actions) => React.ReactNode);
@@ -15,7 +17,6 @@ interface Props<T, P> {
   getData: () => Promise<T>;
   onDataLoaded: (data: T) => void;
   onCreate: (data: P) => Promise<unknown>;
-  // onCreate: (data: P) => Promise<{ id: string }>;
   onUpdate: (data: P) => Promise<unknown>;
   onSave: (handler: (data: P) => void) => () => void;
   onDelete: () => Promise<unknown>;
@@ -39,17 +40,9 @@ export function ElementForm<T, P>(props: Props<T, P>) {
     }
   }, [loadingRequest.data]);
 
-  const savingRequest = usePromise(async (data: P, goBack = true) => {
+  const savingRequest = usePromise(async (data: P) => {
     if (props.isNew) {
-      const result = await props.onCreate(data);
-
-      // TODO: 
-      // if (!goBack) {
-      //   const id = result[0].id;
-      //   navigate(`${props.listUrl}/${id}`, { replace: true });
-
-      // return;
-      // }
+      await props.onCreate(data);
     } else {
       await props.onUpdate(data);
     }
@@ -57,9 +50,9 @@ export function ElementForm<T, P>(props: Props<T, P>) {
     props.onClose();
   });
 
-  const onSave = (goBack = true) => {
+  const onSave = () => {
     const handler = props.onSave(data => {
-      savingRequest.send(data, goBack);
+      savingRequest.send(data);
     });
 
     handler();
@@ -70,7 +63,6 @@ export function ElementForm<T, P>(props: Props<T, P>) {
       return;
     }
 
-    // TODO:
     if (!confirm('Are you sure?')) {
       return;
     }
@@ -81,8 +73,7 @@ export function ElementForm<T, P>(props: Props<T, P>) {
   });
 
   useEffect(() => {
-    // TODO: alert
-
+    // TODO: use promise props onError
     if (savingRequest.error) {
       alert(savingRequest.error);
     } else if (deletingRequest.error) {
@@ -133,7 +124,7 @@ export function ElementForm<T, P>(props: Props<T, P>) {
                 intent={'primary'}
                 onClick={onSave}
                 isLoading={savingRequest.isLoading}
-                // TODO: form invalid
+                // TODO: if form invalid
                 isDisabled={deletingRequest.isLoading}
               >
                 Save

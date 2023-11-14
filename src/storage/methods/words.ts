@@ -43,8 +43,6 @@ interface CreateWordPayload extends UpdateWordPayload {
 }
 
 export const createWord = async (payload: CreateWordPayload) => {
-  let newId!: string;
-
   await db.transaction('rw', db.words, db.categories_words, async () => {
     const id = await db.words.add({
       id: v4(),
@@ -59,13 +57,9 @@ export const createWord = async (payload: CreateWordPayload) => {
     });
 
     await setCategoriesForWord(id, payload.categories);
-
-    // TODO: why need? if need, use in other places
-    newId = id;
   });
 
   notifier.notify('words-update');
-  return { id: newId };
 };
 
 interface UpdateWordPayload {
