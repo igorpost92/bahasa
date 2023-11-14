@@ -1,14 +1,13 @@
-import { db } from '../../storage/db';
-import { getWords } from '../../api/methods/words';
-import { getCategories } from '../../api/methods/categories';
+import { db, WordsInCategoriesDB } from '../../storage/db';
+import { getWords, WordServer } from '../../api/methods/words';
+import { CategoryServer, getCategories } from '../../api/methods/categories';
 import { getCategoriesWords } from '../../api/methods/categoriesWords';
 
-const downloadWords = async () => {
+const saveWords = async (words: WordServer[]) => {
   await db.words.clear();
 
-  const serverWords = await getWords();
   await db.words.bulkAdd(
-    serverWords.map(item => {
+    words.map(item => {
       return {
         id: item.id,
         text: item.text,
@@ -24,27 +23,35 @@ const downloadWords = async () => {
   );
 };
 
-const downloadCategories = async () => {
+const saveCategories = async (categories: CategoryServer[]) => {
   await db.categories.clear();
-
-  const serverData = await getCategories();
-  await db.categories.bulkAdd(serverData);
+  await db.categories.bulkAdd(categories);
 };
 
-const downloadCategoriesWords = async () => {
+const saveCategoriesWords = async (data: WordsInCategoriesDB[]) => {
   await db.categories_words.clear();
-
-  const serverData = await getCategoriesWords();
-  await db.categories_words.bulkAdd(serverData);
+  await db.categories_words.bulkAdd(data);
 };
 
 export const downloadWordsData = async () => {
+  const [
+    //
+    words,
+    categories,
+    categoriesWords,
+  ] = await Promise.all([
+    //
+    getWords(),
+    getCategories(),
+    getCategoriesWords(),
+  ]);
+
   await db.transaction('rw', db.words, db.categories, db.categories_words, async () => {
     await Promise.all([
       //
-      downloadWords(),
-      downloadCategories(),
-      downloadCategoriesWords(),
+      saveWords(words),
+      saveCategories(categories),
+      saveCategoriesWords(categoriesWords),
     ]);
   });
 };

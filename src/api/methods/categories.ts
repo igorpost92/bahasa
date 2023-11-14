@@ -1,12 +1,12 @@
 import { supabase } from '../sendRequest';
 
 // TODO:
-interface CategoryEntry {
+export interface CategoryServer {
   id: string;
   name: string;
 }
 
-const categoriesTable = () => supabase().from<CategoryEntry>('categories');
+const categoriesTable = () => supabase().from<CategoryServer>('categories');
 
 export const getCategories = async () => {
   const { data, error } = await categoriesTable().select('id, name');
@@ -18,7 +18,7 @@ export const getCategories = async () => {
   throw new Error(error.message ?? 'error getCategories');
 };
 
-export const uploadCategories = async (categories: CategoryEntry[]) => {
+export const uploadCategories = async (categories: CategoryServer[]) => {
   // TODO: transaction
   // TODO: filter
   const deleteResult = await categoriesTable().delete().not('id', 'is', null);

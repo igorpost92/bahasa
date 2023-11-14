@@ -25,7 +25,18 @@ export const supabase = () => {
     if (!key) {
       throw new Error('no key is provided!');
     }
-    instance = createClient(supabaseUrl, key ?? '');
+
+    const [id, innerKey] = key.split('$');
+    if (!innerKey) {
+      throw new Error('wrong key is provided!');
+    }
+
+    const url = supabaseUrl[id];
+    if (!url) {
+      throw new Error('wrong key is provided!');
+    }
+
+    instance = createClient(url, innerKey ?? '');
     keyUpdated = false;
   }
 

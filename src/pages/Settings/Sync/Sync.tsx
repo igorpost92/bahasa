@@ -14,7 +14,12 @@ const Sync: React.FC = () => {
       return;
     }
 
-    uploadWordsData();
+    try {
+      uploadWordsData();
+      alert('Done');
+    } catch (e) {
+      alert(e);
+    }
   };
 
   const download = async () => {
@@ -22,9 +27,12 @@ const Sync: React.FC = () => {
       return;
     }
 
-    await downloadWordsData();
-
-    alert('Done');
+    try {
+      await downloadWordsData();
+      alert('Done');
+    } catch (e) {
+      alert(e);
+    }
   };
 
   const downloadVerbs = async () => {
@@ -32,9 +40,12 @@ const Sync: React.FC = () => {
       return;
     }
 
-    await downloadVerbsData();
-
-    alert('Done');
+    try {
+      await downloadVerbsData();
+      alert('Done');
+    } catch (e) {
+      alert(e);
+    }
   };
 
   return (
