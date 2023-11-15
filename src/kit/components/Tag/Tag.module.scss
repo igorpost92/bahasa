@@ -3,8 +3,14 @@
   font-size: 12px;
   line-height: 16px;
   border-radius: 4px;
-  background: #cecece;
   display: flex;
   justify-content: center;
   align-items: center;
+
+  //todo
+  background: #cecece;
+
+  @media (prefers-color-scheme: dark) {
+    background: var(--base-3);
+  }
 }

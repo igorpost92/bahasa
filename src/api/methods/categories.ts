@@ -4,7 +4,7 @@ import { CategoryEntryDB } from '../../storage/db';
 const categoriesTable = () => supabase().from<CategoryEntryDB>('categories');
 
 export const getCategories = async () => {
-  const { data, error } = await categoriesTable().select('id, name');
+  const { data, error } = await categoriesTable().select('id, name, lang');
 
   if (data) {
     return data;

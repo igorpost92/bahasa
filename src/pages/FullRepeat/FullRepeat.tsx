@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './FullRepeat.module.scss';
 import { useCategories } from '../../storage/hooks/categories';
-import { Button, Checkbox } from '../../kit';
-import { useList } from '../../kit/hooks';
+import { Button, Checkbox, useList } from '../../kit';
 import { AppPage } from '../../components/AppPage/AppPage';
 import cn from 'classnames';
 import { useNavigate } from 'react-router-dom';

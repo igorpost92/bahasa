@@ -14,6 +14,7 @@ import styles from './Category.module.scss';
 import WordMini from '../../components/WordMini/WordMini';
 import { CloseIcon } from '../../kit/icons';
 import { Modals, useModal } from '../useModals';
+import { useCurrentLanguage } from '../../context/LanguageContext';
 
 type DataPayload = Omit<CategoryEntry, 'id'>;
 
@@ -23,6 +24,8 @@ interface Props {
 }
 
 const Category: React.FC<Props> = props => {
+  const { lang } = useCurrentLanguage();
+
   const wordsRequest = useWords({ sort: 'date-desc' });
 
   const { id = '' } = props;
@@ -47,7 +50,7 @@ const Category: React.FC<Props> = props => {
     });
   };
 
-  const onCreate = (data: DataPayload) => createCategory(data);
+  const onCreate = (data: DataPayload) => createCategory({ ...data, lang });
   const onUpdate = (data: DataPayload) => updateCategory(id, data);
   const onDelete = () => deleteCategory(id);
 

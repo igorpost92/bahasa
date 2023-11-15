@@ -16,6 +16,7 @@ export interface WordEntryDB {
 export interface CategoryEntryDB {
   id: string;
   name: string;
+  lang: string;
 }
 
 export interface WordsInCategoriesDB {
@@ -42,6 +43,10 @@ class DB extends Dexie {
 
     this.version(2).stores({
       verbs: 'word_id',
+    });
+
+    this.version(3).stores({
+      categories: 'id,lang',
     });
   }
 

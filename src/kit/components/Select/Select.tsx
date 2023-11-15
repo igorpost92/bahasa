@@ -56,6 +56,7 @@ export function Select<T extends Option, M extends boolean = false>(props: Props
   };
 
   const onChange = (value: string) => {
+    // TODO: multiple
     if (Array.isArray(props.value)) {
       const currentValue = props.value as string[];
 
