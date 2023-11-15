@@ -26,11 +26,12 @@ const CategoryRow = (props: CategoryRowProps) => {
 const tenses = Object.keys(verbsConfigByKeys);
 
 interface Props {
-  onStart: (tenses: string[]) => void;
+  initialValue?: string[];
+  onSave: (tenses: string[]) => void;
 }
 
 const Settings: React.FC<Props> = props => {
-  const [checkedTenses, actions] = useList<string>([]);
+  const [checkedTenses, actions] = useList<string>(props.initialValue || []);
 
   const allChecked = checkedTenses.length === tenses.length;
 
@@ -63,20 +64,7 @@ const Settings: React.FC<Props> = props => {
       <br />
 
       <Button
-        onClick={() => {
-          // TODO: keep state of current page
-          // const config: GameLocationState = {
-          // 	categories: checkedCategories,
-          // 	globalRepeatMode: true,
-          // 	invertedMode,
-          // };
-          //
-          // navigate('/repeat', {
-          // 	state: config,
-          // });
-
-          props.onStart(checkedTenses);
-        }}
+        onClick={() => props.onSave(checkedTenses)}
         intent={'primary'}
         size={'l'}
         className={styles.startBtn}
