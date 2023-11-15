@@ -18,19 +18,15 @@ export const Checkbox: React.FC<Props> = props => {
   const { labelPosition = 'right' } = props;
 
   return (
-    <div className={cn(styles.wrap, props.className)}>
-      {labelPosition === 'left' && props.children && (
-        <label htmlFor={elementId}>{props.children}</label>
-      )}
+    <label className={cn(styles.wrap, props.className)}>
+      {labelPosition === 'left' && <span className={styles.label}>{props.children}</span>}
       <input
         type={'checkbox'}
         id={elementId}
         checked={props.checked}
         onChange={() => props.onChange?.(!props.checked)}
       />
-      {labelPosition === 'right' && props.children && (
-        <label htmlFor={elementId}>{props.children}</label>
-      )}
-    </div>
+      {labelPosition === 'right' && <span className={styles.label}>{props.children}</span>}
+    </label>
   );
 };

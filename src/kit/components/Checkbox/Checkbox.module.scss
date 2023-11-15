@@ -1,7 +1,18 @@
 .wrap {
+  padding: 10px 0;
   display: flex;
+  align-items: center;
+  cursor: pointer;
+}
 
-  label {
-    flex: auto;
+.label {
+  flex: auto;
+
+  &:first-child {
+    margin-right: 8px;
+  }
+
+  &:last-child {
+    margin-left: 8px;
   }
 }
