@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import styles from './GameInner.module.scss';
 import WordCard from './WordCard/WordCard';
-import { Button } from '../../../kit';
+import { Button, RefreshIcon, useList } from '../../../kit';
 import { useWordCards } from './useWordCards';
 import WordMini from '../../../components/WordMini/WordMini';
-import { useList } from '../../../kit/hooks';
-import { Refresh } from '../../../icons';
 import { WordListEntry } from '../../../storage/types';
 import { markWordAsRepeated } from '../../../storage/methods/words';
 
@@ -74,7 +72,7 @@ const GameInner: React.FC<Props> = props => {
 
         <div className={styles.endStageButtons}>
           <Button fullWidth size={'l'} onClick={goToPrevWord}>
-            <Refresh />
+            <RefreshIcon />
           </Button>
         </div>
       </div>
@@ -127,7 +125,7 @@ const GameInner: React.FC<Props> = props => {
           ) : (
             <>
               <Button size={'xl'} className={styles.revertBtn} onClick={goToPrevWord}>
-                <Refresh />
+                <RefreshIcon />
               </Button>
               <Button size={'xl'} className={styles.btn} onClick={doShowAnswer}>
                 Show answer

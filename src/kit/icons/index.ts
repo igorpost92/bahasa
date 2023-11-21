@@ -6,5 +6,6 @@ export { default as CloseIcon } from './close.svg';
 export { default as CopyIcon } from './copy.svg';
 export { default as DoubleChevronLeftIcon } from './double-chevron-left.svg';
 export { default as DoubleChevronRightIcon } from './double-chevron-right.svg';
-export { default as SpinnerIcon } from './spinner.svg';
+export { default as RefreshIcon } from './refresh.svg';
 export { default as SettingsIcon } from './settings.svg';
+export { default as SpinnerIcon } from './spinner.svg';
