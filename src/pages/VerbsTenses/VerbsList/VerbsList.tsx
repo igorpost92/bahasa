@@ -3,10 +3,10 @@ import { sortBy } from 'lodash';
 import styles from './VerbsList.module.scss';
 import { VerbEntryData } from '../../../storage/types';
 import { Input, Button } from '../../../kit';
-import WordMini from '../../../components/WordMini/WordMini';
 import { AppPage } from '../../../components/AppPage/AppPage';
 import { shuffle } from '../../../utils/shuffle';
 import BackButton from '../../../components/BackButton/BackButton';
+import VerbCard from './VerbCard';
 
 interface Props {
   verbs: VerbEntryData[];
@@ -52,11 +52,28 @@ const VerbsList: React.FC<Props> = props => {
       <div>
         <div className={styles.subtitle}>Count: {data.length}</div>
 
-        {data.map(item => (
-          <div key={item.word_id} className={styles.word} onClick={() => props.onSelect([item])}>
-            <WordMini text={item.name} meaning={item.meaning} />
-          </div>
-        ))}
+        {data.map(item => {
+          const noData = !Object.keys(item.data).length;
+          return (
+            <div
+              key={item.word_id}
+              className={styles.word}
+              onClick={() => {
+                if (noData) {
+                  alert('Downloading will be available in the next release');
+                  return;
+                }
+                props.onSelect([item]);
+              }}
+            >
+              <VerbCard
+                name={item.name}
+                meaning={item.meaning}
+                noData={!Object.keys(item.data).length}
+              />
+            </div>
+          );
+        })}
       </div>
     </AppPage>
   );

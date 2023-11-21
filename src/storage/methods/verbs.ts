@@ -1,16 +1,21 @@
 import { db } from '../db';
-import { VerbEntryData } from '../types';
+import { VerbEntryData, WordTypes } from '../types';
 
 export const getVerbs = async () => {
-  const verbsList = await db.verbs.toArray();
+  const verbWords = await db.words
+    .toCollection()
+    .filter(item => item.type === WordTypes.Verb && item.lang === 'ES')
+    .toArray();
 
   const data = await Promise.all(
-    verbsList.map(async item => {
-      const word = await db.words.get(item.word_id);
+    verbWords.map(async item => {
+      const verb = await db.verbs.get(item.id);
 
       const verbFormData: VerbEntryData = {
-        ...item,
-        meaning: word?.meaning ?? '',
+        word_id: item.id,
+        name: item.text,
+        meaning: item.meaning,
+        data: verb?.data ?? {},
       };
 
       return verbFormData;
