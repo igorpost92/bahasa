@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { sortBy } from 'lodash';
 import styles from './VerbsList.module.scss';
 import { VerbEntryData } from '../../../storage/types';
 import { Input, Button } from '../../../kit';
@@ -22,23 +23,14 @@ const VerbsList: React.FC<Props> = props => {
       data = props.verbs;
     } else {
       const searchString = searchInput.toLowerCase();
-      data = props.verbs.filter(({ name }) => name.toLowerCase().includes(searchString));
+      data = props.verbs.filter(
+        item =>
+          item.name.toLowerCase().includes(searchString) ||
+          item.meaning.toLowerCase().includes(searchString),
+      );
     }
 
-    return data.sort((a, b) => {
-      // TODO: reuse fn
-      const valueA = a.name;
-      const valueB = b.name;
-
-      let sortNumber = 0;
-      if (valueA > valueB) {
-        sortNumber = 1;
-      } else if (valueB > valueA) {
-        sortNumber = -1;
-      }
-
-      return sortNumber;
-    });
+    return sortBy(data, item => item.name);
   }, [props.verbs, searchInput]);
 
   const onShuffle = () => {
@@ -62,7 +54,7 @@ const VerbsList: React.FC<Props> = props => {
 
         {data.map(item => (
           <div key={item.word_id} className={styles.word} onClick={() => props.onSelect([item])}>
-            <WordMini text={item.name} />
+            <WordMini text={item.name} meaning={item.meaning} />
           </div>
         ))}
       </div>

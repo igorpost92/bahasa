@@ -1,8 +1,8 @@
 import { supabase } from '../sendRequest';
-import { VerbEntryData } from '../../storage/types';
+import { VerbEntryDB } from '../../storage/db';
 
 const verbsTable = () => {
-  return supabase().from<VerbEntryData>('verbs');
+  return supabase().from<VerbEntryDB>('verbs');
 };
 
 export const getAllVerbs = async () => {
@@ -13,7 +13,7 @@ export const getAllVerbs = async () => {
       // TODO: refacto
       const dataItem = typeof item.data === 'string' ? JSON.parse(item.data) : item.data;
       return { ...item, data: dataItem };
-    }) as VerbEntryData[];
+    }) as VerbEntryDB[];
   }
 
   throw new Error('error getAllWords');

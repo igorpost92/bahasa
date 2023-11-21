@@ -1,4 +1,4 @@
-import { usePromise } from '../../kit/hooks';
+import { usePromise } from '../../kit';
 import { getVerbs } from '../methods/verbs';
 import { useLayoutEffect } from 'react';
 

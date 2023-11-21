@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styles from './VerbsTenses.module.scss';
 import { AppPage } from '../../components/AppPage/AppPage';
 import { SpinnerIcon } from '../../kit';
 import { useCurrentLanguage } from '../../context/LanguageContext';
@@ -46,6 +45,7 @@ const VerbsTenses: React.FC<Props> = props => {
   }
 
   if (selectedData) {
+    // todo modal
     return <Inner words={selectedData} onGoBack={() => setSelectedData(undefined)} />;
   }
 

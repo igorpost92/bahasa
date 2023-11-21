@@ -54,7 +54,8 @@ export interface CategoryEntry {
 export interface VerbEntryData {
   word_id: string;
   name: string;
+  meaning: string;
   data: TenseData;
 }
 
-type TenseData = Record<string, string[] | undefined>;
+export type TenseData = Record<string, string[] | undefined>;

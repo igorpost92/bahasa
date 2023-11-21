@@ -15,6 +15,7 @@
     "classnames": "^2.3.1",
     "date-fns": "^2.29.3",
     "dexie": "^3.2.2",
+    "lodash": "^4.17.21",
     "node-sass": "^7.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@types/jsdom": "^20.0.0",
+    "@types/lodash": "^4.14.201",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/uuid": "^8.3.4",
