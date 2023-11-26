@@ -15,7 +15,7 @@ const Sync: React.FC = () => {
     }
 
     try {
-      uploadWordsData();
+      await uploadWordsData();
       alert('Done');
     } catch (e) {
       alert(e);

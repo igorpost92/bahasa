@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.35.4",
+    "axios": "^1.6.2",
     "classnames": "^2.3.1",
     "date-fns": "^2.29.3",
     "dexie": "^3.2.2",
