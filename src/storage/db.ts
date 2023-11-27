@@ -21,6 +21,7 @@ export interface CategoryEntryDB {
 
 // TODO: name
 export interface WordsInCategoriesDB {
+  id: string;
   word_id: string;
   category_id: string;
   order_index: number;

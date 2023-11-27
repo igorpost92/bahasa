@@ -6,7 +6,7 @@ import {
   createCategory,
   deleteCategory,
   getCategory,
-  predefinedCategoriesConfig,
+  isPredefinedCategory,
   updateCategory,
 } from '../../storage/methods/categories';
 import { useWords } from '../../storage/hooks/words';
@@ -16,7 +16,14 @@ import { CloseIcon } from '../../kit/icons';
 import { Modals, useModal } from '../useModals';
 import { useCurrentLanguage } from '../../context/LanguageContext';
 
-type DataPayload = Omit<CategoryEntry, 'id'>;
+type ArrayElementType<T extends unknown[]> = T extends (infer E)[] ? E : never;
+
+// TODO: new rows id are undefined
+type DataPayload = Omit<CategoryEntry, 'id' | 'words'> & {
+  words: (Omit<ArrayElementType<CategoryEntry['words']>, 'id'> & {
+    id: string | undefined;
+  })[];
+};
 
 interface Props {
   id?: string | undefined;
@@ -31,8 +38,7 @@ const Category: React.FC<Props> = props => {
   const { id = '' } = props;
   const isNew = !id;
 
-  // TODO: refacto
-  const isPredefined = Object.keys(predefinedCategoriesConfig).includes(id);
+  const isPredefined = isPredefinedCategory(id);
 
   const { control, ...form } = useForm<DataPayload>({
     defaultValues: {
@@ -134,13 +140,15 @@ const Category: React.FC<Props> = props => {
                     // need to store prev orders
 
                     const newValue = value.map(word_id => {
-                      const order_index = field.value.find(
-                        word => word.word_id === word_id,
-                      )?.order_index;
+                      const wordRow = field.value.find(word => word.word_id === word_id);
 
-                      return { word_id, order_index };
+                      const id = wordRow?.id;
+                      const order_index = wordRow?.order_index;
+
+                      return { id, word_id, order_index };
                     });
 
+                    // TODO: new rows id are undefined
                     form.setValue('words', newValue);
                   }}
                 />

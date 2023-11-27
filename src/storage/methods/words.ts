@@ -68,6 +68,7 @@ interface UpdateWordPayload {
   type: WordTypes | null;
   examples: WordUsageExample[] | null;
   categories: {
+    id: string | undefined;
     category_id: string;
     order_index: number | undefined;
   }[];

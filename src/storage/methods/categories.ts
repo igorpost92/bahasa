@@ -107,6 +107,7 @@ interface CreateCategoryPayload extends UpdateCategoryPayload {
 interface UpdateCategoryPayload {
   name: string;
   words: {
+    id: string | undefined;
     word_id: string;
     order_index: number | undefined;
   }[];

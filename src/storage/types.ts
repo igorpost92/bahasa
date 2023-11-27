@@ -17,7 +17,10 @@ export interface WordEntry {
   step: number | null;
   examples: WordUsageExample[] | null;
   categories: {
+    // TODO: maybe undefined?
+    id: string;
     category_id: string;
+    // TODO: remove undefined
     order_index: number | undefined;
   }[];
 }
@@ -46,7 +49,10 @@ export interface CategoryEntry {
   name: string;
   predefined?: boolean;
   words: {
+    // TODO: maybe undefined?
+    id: string;
     word_id: string;
+    // TODO: remove undefined
     order_index: number | undefined;
   }[];
 }
