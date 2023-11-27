@@ -39,6 +39,7 @@ const Word: React.FC<Props> = props => {
       meaning: '',
       type: null,
       examples: [],
+      // TODO: select in form
       categories: [],
     },
   });

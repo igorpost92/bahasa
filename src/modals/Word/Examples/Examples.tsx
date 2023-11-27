@@ -49,7 +49,7 @@ const Examples: React.FC<Props> = props => {
                     <Controller
                       control={control}
                       name={`examples.${idx}.text`}
-                      render={({ field }) => (
+                      render={({ field: { ref, ...field } }) => (
                         <ControlGroup id={field.name}>
                           <Input {...field} placeholder={'Text'} />
                         </ControlGroup>
@@ -60,7 +60,7 @@ const Examples: React.FC<Props> = props => {
                   <Controller
                     control={control}
                     name={`examples.${idx}.meaning`}
-                    render={({ field }) => (
+                    render={({ field: { ref, ...field } }) => (
                       <ControlGroup id={field.name}>
                         <Input {...field} placeholder={'Translation'} />
                       </ControlGroup>

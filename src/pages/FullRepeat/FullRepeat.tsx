@@ -89,6 +89,7 @@ const FullRepeat: React.FC = () => {
       <Button
         onClick={() => {
           // TODO: keep state of current page
+          // TODO: local storage
 
           const config: GameLocationState = {
             categories: checkedCategories,
