@@ -2,6 +2,7 @@ import React from 'react';
 import { Page, Header, TabBar, TabBarItem } from '../../kit';
 import SelectedLangButton from '../SelectedLangButton/SelectedLangButton';
 import { SettingsIcon } from '../../kit/icons';
+import { useSuperModeActivator } from './useSuperModeActivator';
 
 interface Props {
   children: React.ReactNode;
@@ -18,6 +19,8 @@ interface Props {
 
 export const AppPage: React.FC<Props> = props => {
   const { showHeader = true, showLang = true } = props;
+
+  const onSettingsClick = useSuperModeActivator();
 
   return (
     <Page
@@ -39,7 +42,7 @@ export const AppPage: React.FC<Props> = props => {
             <TabBarItem url={'/words'}>Words</TabBarItem>
             <TabBarItem url={'/learn'}>Learn</TabBarItem>
             <TabBarItem url={'/categories'}>Categories</TabBarItem>
-            <TabBarItem url={'/settings'}>
+            <TabBarItem url={'/settings'} onClick={onSettingsClick}>
               <SettingsIcon />
             </TabBarItem>
           </TabBar>

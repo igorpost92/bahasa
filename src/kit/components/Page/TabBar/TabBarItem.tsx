@@ -6,6 +6,7 @@ import cn from 'classnames';
 interface Props {
   url: string;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
 export const TabBarItem: React.FC<Props> = props => {
@@ -14,6 +15,7 @@ export const TabBarItem: React.FC<Props> = props => {
       to={props.url}
       replace
       className={({ isActive }) => cn(styles.item, isActive && styles.active)}
+      onClick={props.onClick}
     >
       {props.children}
     </NavLink>
