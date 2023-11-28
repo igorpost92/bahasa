@@ -9,7 +9,12 @@
   align-items: center;
 
   &.selected {
-    background: lightblue;
+    background: var(--base-primary);
+
+    @media (prefers-color-scheme: dark) {
+      //todo
+      color: black;
+    }
   }
 }
 
