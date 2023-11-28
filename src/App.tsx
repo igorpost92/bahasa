@@ -15,10 +15,14 @@ import Login from './pages/Settings/Login/Login';
 import FullRepeat from './pages/FullRepeat/FullRepeat';
 import VerbsRandom from './pages/VerbsRandom/VerbsRandom';
 import UpdateBanner from './components/UpdateBanner';
+import { runMigrations } from './storage/migrations';
+
+runMigrations();
 
 function App() {
   const Router = isProd() ? MemoryRouter : BrowserRouter;
 
+  // TODO: wait until migrations
   return (
     <ModalContextLayer>
       <LanguageContextLayer>
