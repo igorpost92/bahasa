@@ -28,7 +28,7 @@ const Settings: React.FC = () => {
   );
 
   return (
-    <AppPage headerTitle={'Settings'} showTabBar>
+    <AppPage headerTitle={'Settings'} showTabBar showLang={false}>
       {content}
     </AppPage>
   );

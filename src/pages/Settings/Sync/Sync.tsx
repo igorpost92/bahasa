@@ -32,7 +32,7 @@ const Sync: React.FC = () => {
       <Button onClick={() => askAndDo(downloadFromSupabase)}>Download from Supabase</Button>
       <Button onClick={() => askAndDo(downloadFromNest)}>Download from Nest</Button>
       <br />
-      <Button onClick={() => askAndDo(downloadVerbsData)}>Download verbs (supabase)</Button>
+      <Button onClick={() => askAndDo(downloadVerbsData)}>Download verbs (nest)</Button>
     </div>
   );
 };

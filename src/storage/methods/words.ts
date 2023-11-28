@@ -46,6 +46,7 @@ export const createWord = async (payload: CreateWordPayload) => {
   await db.transaction('rw', db.words, db.categories_words, async () => {
     const id = await db.words.add({
       id: v4(),
+      // TODO: on back
       text: payload.text.trim(),
       meaning: payload.meaning.trim(),
       created_at: new Date(),

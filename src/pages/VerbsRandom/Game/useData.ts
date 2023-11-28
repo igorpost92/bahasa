@@ -21,6 +21,7 @@ export const useData = (filteredTenses?: string[]) => {
     const res = verbsRequest.data.flatMap(verb => {
       const isReflexive = isVerbReflexive(verb.name);
 
+      // TODO: name
       const rrrr = Object.values(verbsConfigByTitles)
         .filter(item => {
           if (!filteredTenses?.length) {
