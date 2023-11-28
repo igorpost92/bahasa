@@ -1,17 +1,21 @@
 import { db } from '../../storage/db';
-import { getAllVerbs } from '../../api/methods/verbs';
+import { verbsApi } from '../../api2';
 
 export const downloadVerbsData = async () => {
-  await db.verbs.clear();
-  const serverVerbs = await getAllVerbs();
+  await verbsApi.updateVerbsOnServer();
+  const serverVerbs = await verbsApi.getAllVerbs();
 
-  await db.verbs.bulkAdd(
-    serverVerbs.map(item => {
-      return {
-        word_id: item.word_id,
-        name: item.name,
-        data: item.data,
-      };
-    }),
-  );
+  await db.transaction('rw', db.verbs, async () => {
+    await db.verbs.clear();
+
+    await db.verbs.bulkAdd(
+      serverVerbs.map(item => {
+        return {
+          word_id: item.word_id,
+          name: item.name,
+          data: item.data,
+        };
+      }),
+    );
+  });
 };

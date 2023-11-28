@@ -36,15 +36,6 @@ class WordsApi {
     return response.data.map(parseFromServer);
   }
 
-  // async getWord(id: string) {
-  //   const response = await this.instance.get<WordServerRaw>(`${id}`);
-  //   return parseWordFromServer(response.data);
-  // }
-  //
-  // createWord(wordDto: WordEntryDB) {
-  //   return this.instance.post('', wordDto);
-  // }
-
   async uploadWords(words: WordEntryDB[]) {
     await this.instance.put('bulk', words.map(parseForNest));
   }

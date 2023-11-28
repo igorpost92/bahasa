@@ -1,17 +1,35 @@
 import React from 'react';
-import styles from './Settings.module.scss';
 import { Button } from '../../kit';
 import { AppPage } from '../../components/AppPage/AppPage';
 import Sync from './Sync/Sync';
+import { useMainStore } from '../../stores/mainStore';
 
 const Settings: React.FC = () => {
-  return (
-    <AppPage headerTitle={'Settings'} showTabBar>
+  const mainStore = useMainStore();
+
+  const content = mainStore.isSuperMode ? (
+    <>
       <Button url={'/login'} fullWidth>
-        Login
+        Login (Supabase)
       </Button>
       <br />
+      <br />
       <Sync />
+      <br />
+      <br />
+      <br />
+      <br />
+      <Button onClick={() => mainStore.setSuperMode(false)} intent={'danger'}>
+        Disable super mode
+      </Button>
+    </>
+  ) : (
+    <h4>Not allowed at the moment</h4>
+  );
+
+  return (
+    <AppPage headerTitle={'Settings'} showTabBar>
+      {content}
     </AppPage>
   );
 };

@@ -1,69 +1,38 @@
 import React from 'react';
 import styles from './Sync.module.scss';
 import { Button } from '../../../kit';
-import { downloadWordsData } from '../../../services/syncData/downloadData';
-import { uploadWordsData } from '../../../services/syncData/uploadData';
+import { downloadFromNest, downloadFromSupabase } from '../../../services/syncData/downloadData';
 import { downloadVerbsData } from '../../../services/syncData/downloadVerbs';
-import { useMainStore } from '../../../stores/mainStore';
+import {
+  uploadToNestHard,
+  uploadToSupabase,
+} from '../../../services/syncData/uploadData';
+
+const askAndDo = async (fn: () => Promise<void>) => {
+  if (!confirm('Are you sure? Operation is irreversible!')) {
+    return;
+  }
+
+  try {
+    await fn();
+    alert('Done');
+  } catch (e) {
+    alert(e);
+  }
+};
 
 const Sync: React.FC = () => {
-  const mainStore = useMainStore();
-
-  const upload = async () => {
-    if (!confirm('Are you sure? Operation is irreversible!')) {
-      return;
-    }
-
-    try {
-      await uploadWordsData();
-      alert('Done');
-    } catch (e) {
-      alert(e);
-    }
-  };
-
-  const download = async () => {
-    if (!confirm('Are you sure? Operation is irreversible!')) {
-      return;
-    }
-
-    try {
-      await downloadWordsData();
-      alert('Done');
-    } catch (e) {
-      alert(e);
-    }
-  };
-
-  const downloadVerbs = async () => {
-    if (!confirm('Are you sure? Operation is irreversible!')) {
-      return;
-    }
-
-    try {
-      await downloadVerbsData();
-      alert('Done');
-    } catch (e) {
-      alert(e);
-    }
-  };
-
-  const superModeContent = mainStore.isSuperMode && (
-    <>
-      <br />
-      <Button onClick={upload}>Upload data</Button>
-      <Button onClick={download}>Download data</Button>
-      <br />
-      <Button onClick={() => mainStore.setSuperMode(false)} intent={'danger'}>
-        Disable super mode
-      </Button>
-    </>
-  );
-
   return (
     <div className={styles.wrap}>
-      <Button onClick={downloadVerbs}>Download verbs</Button>
-      {superModeContent}
+      <Button onClick={() => askAndDo(uploadToSupabase)}>Upload to Supabase</Button>
+      <br />
+      <Button onClick={() => askAndDo(uploadToNestHard)}>!!! Upload to Nest HARD !!!</Button>
+      <div className={styles.info}>you will lose verbs conjugation data</div>
+      <br />
+      <Button onClick={() => askAndDo(downloadFromSupabase)}>Download from Supabase</Button>
+      <Button onClick={() => askAndDo(downloadFromNest)}>Download from Nest</Button>
+      <br />
+      <Button onClick={() => askAndDo(downloadVerbsData)}>Download verbs (supabase)</Button>
     </div>
   );
 };

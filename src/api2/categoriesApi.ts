@@ -9,15 +9,6 @@ class CategoriesApi {
     return response.data;
   }
 
-  // async getCategory(id: string) {
-  //   const response = await this.instance.get<CategoryEntryDB>(id);
-  //   return response.data;
-  // }
-  //
-  // createCategory(categoryDto: CategoryEntryDB) {
-  //   return this.instance.post('', categoryDto);
-  // }
-
   async uploadCategories(categories: CategoryEntryDB[]) {
     await this.instance.put('bulk', categories);
   }
