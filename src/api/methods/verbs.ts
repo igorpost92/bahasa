@@ -6,7 +6,7 @@ const verbsTable = () => {
 };
 
 export const getAllVerbs = async () => {
-  const { data, error } = await verbsTable().select('word_id, name, data');
+  const { data, error } = await verbsTable().select('word_id, data');
 
   if (data) {
     return data.map(item => {

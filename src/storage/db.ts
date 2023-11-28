@@ -29,7 +29,6 @@ export interface WordsInCategoriesDB {
 
 export interface VerbEntryDB {
   word_id: string;
-  name: string;
   data: TenseData;
 }
 
