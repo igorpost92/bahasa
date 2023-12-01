@@ -1,0 +1,9 @@
+FROM node:16
+WORKDIR /app
+COPY . .
+
+ARG VITE_MAIN_API
+ENV VITE_MAIN_API=$VITE_MAIN_API
+
+RUN yarn install
+RUN yarn build
