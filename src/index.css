@@ -36,7 +36,9 @@ body {
   flex-direction: column;
 }
 
-a, a:visited, a:hover {
+/*todo*/
+a {
+/*a, a:visited, a:hover {*/
   text-decoration: inherit;
   color: inherit;
 }
