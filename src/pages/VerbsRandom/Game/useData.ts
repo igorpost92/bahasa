@@ -2,7 +2,7 @@ import { useVerbsTenses } from '../../../storage/hooks/verbs';
 import { useMemo } from 'react';
 import { shuffle } from '../../../utils/shuffle';
 import { isVerbReflexive } from '../../../utils/isVerbReflexive';
-import { verbsConfigByTitles } from '../../../../constants/verbsConfig';
+import { verbsConfigByTitles } from '../../../constants/verbsConfig';
 import { useWords } from '../../../storage/hooks/words';
 
 export const useData = (filteredTenses?: string[]) => {

@@ -4,7 +4,7 @@ import { VerbEntryData } from '../../../storage/types';
 import VerbValue from '../VerbValue/VerbValue';
 import { Button } from '../../../kit';
 import { AppPage } from '../../../components/AppPage/AppPage';
-import { verbsConfigByKeys } from '../../../../constants/verbsConfig';
+import { verbsConfigByKeys } from '../../../constants/verbsConfig';
 import { isVerbReflexive } from '../../../utils/isVerbReflexive';
 
 interface Props {

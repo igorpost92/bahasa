@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Settings.module.scss';
 import { Button, Checkbox, useList } from '../../../kit';
 import cn from 'classnames';
-import { verbsConfigByKeys } from '../../../../constants/verbsConfig';
+import { verbsConfigByKeys } from '../../../constants/verbsConfig';
 
 interface CategoryRowProps {
   title: string;
