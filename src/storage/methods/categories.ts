@@ -114,7 +114,7 @@ interface UpdateCategoryPayload {
 }
 
 export const createCategory = async (payload: CreateCategoryPayload) => {
-  await db.transaction('rw', db.categories, db.categories_words, async () => {
+  await db.transaction('rw', db.categories, db.categories_words, db.sync, async () => {
     const id = await db.categories.add({
       id: v4(),
       name: payload.name,
@@ -132,7 +132,7 @@ export const updateCategory = async (id: string, payload: UpdateCategoryPayload)
     return;
   }
 
-  await db.transaction('rw', db.categories, db.categories_words, async () => {
+  await db.transaction('rw', db.categories, db.categories_words, db.sync, async () => {
     await db.categories.update(id, {
       name: payload.name,
     });
@@ -148,7 +148,7 @@ export const deleteCategory = async (id: string) => {
     return;
   }
 
-  await db.transaction('rw', db.categories, db.categories_words, async () => {
+  await db.transaction('rw', db.categories, db.categories_words, db.sync, async () => {
     await db.categories.delete(id);
     await setWordsForCategory(id, []);
   });

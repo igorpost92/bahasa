@@ -10,7 +10,7 @@ const Settings: React.FC = () => {
   const content = mainStore.isSuperMode ? (
     <>
       <Button url={'/login'} fullWidth>
-        Login (Supabase)
+        Login
       </Button>
       <br />
       <br />

@@ -4,6 +4,7 @@ import { Button } from '../../../kit';
 import { downloadFromNest, downloadFromSupabase } from '../../../services/syncData/downloadData';
 import { downloadVerbsData } from '../../../services/syncData/downloadVerbs';
 import {
+  uploadChangesToNest,
   uploadToNestHard,
   uploadToSupabase,
 } from '../../../services/syncData/uploadData';
@@ -25,6 +26,7 @@ const Sync: React.FC = () => {
   return (
     <div className={styles.wrap}>
       <Button onClick={() => askAndDo(uploadToSupabase)}>Upload to Supabase</Button>
+      <Button onClick={() => askAndDo(uploadChangesToNest)}>Sync to Nest </Button>
       <br />
       <Button onClick={() => askAndDo(uploadToNestHard)}>!!! Upload to Nest HARD !!!</Button>
       <div className={styles.info}>you will lose verbs conjugation data</div>
@@ -32,7 +34,7 @@ const Sync: React.FC = () => {
       <Button onClick={() => askAndDo(downloadFromSupabase)}>Download from Supabase</Button>
       <Button onClick={() => askAndDo(downloadFromNest)}>Download from Nest</Button>
       <br />
-      <Button onClick={() => askAndDo(downloadVerbsData)}>Download verbs (nest)</Button>
+      <Button onClick={() => askAndDo(downloadVerbsData)}>Download verbs</Button>
     </div>
   );
 };

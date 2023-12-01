@@ -5,33 +5,44 @@ import { getCategoriesWords } from '../../api/methods/categoriesWords';
 import { categoriesApi, categoriesWordsApi, wordsApi } from '../../api2';
 
 const saveWords = async (words: WordEntryDB[]) => {
-  await db.words.clear();
+  await db.transaction('rw', db.words, async tx => {
+    // TODO:
+    (tx as any).__sync__ = true;
 
-  await db.words.bulkAdd(
-    words.map(item => {
-      return {
-        id: item.id,
-        text: item.text,
-        meaning: item.meaning,
-        type: item.type,
-        created_at: item.created_at,
-        last_date: item.last_date,
-        step: item.step,
-        lang: item.lang,
-        examples: item.examples,
-      };
-    }),
-  );
+    await db.words.clear();
+
+    await db.words.bulkAdd(
+      words.map(item => {
+        return {
+          id: item.id,
+          text: item.text,
+          meaning: item.meaning,
+          type: item.type,
+          created_at: item.created_at,
+          last_date: item.last_date,
+          step: item.step,
+          lang: item.lang,
+          examples: item.examples,
+        };
+      }),
+    );
+  });
 };
 
 const saveCategories = async (categories: CategoryEntryDB[]) => {
-  await db.categories.clear();
-  await db.categories.bulkAdd(categories);
+  await db.transaction('rw', db.categories, async tx => {
+    (tx as any).__sync__ = true;
+    await db.categories.clear();
+    await db.categories.bulkAdd(categories);
+  });
 };
 
 const saveCategoriesWords = async (data: WordsInCategoriesDB[]) => {
-  await db.categories_words.clear();
-  await db.categories_words.bulkAdd(data);
+  await db.transaction('rw', db.categories_words, async tx => {
+    (tx as any).__sync__ = true;
+    await db.categories_words.clear();
+    await db.categories_words.bulkAdd(data);
+  });
 };
 
 export const downloadFromSupabase = async () => {

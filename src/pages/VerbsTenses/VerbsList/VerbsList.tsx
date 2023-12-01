@@ -7,6 +7,7 @@ import { AppPage } from '../../../components/AppPage/AppPage';
 import { shuffle } from '../../../utils/shuffle';
 import BackButton from '../../../components/BackButton/BackButton';
 import VerbCard from './VerbCard';
+import { downloadVerbsData } from '../../../services/syncData/downloadVerbs';
 
 interface Props {
   verbs: VerbEntryData[];
@@ -58,11 +59,14 @@ const VerbsList: React.FC<Props> = props => {
             <div
               key={item.word_id}
               className={styles.word}
-              onClick={() => {
+              onClick={async () => {
+                // TODO: spinner and notification
                 if (noData) {
-                  alert('Downloading will be available in the next release');
+                  await downloadVerbsData();
+                  alert('done');
                   return;
                 }
+
                 props.onSelect([item]);
               }}
             >

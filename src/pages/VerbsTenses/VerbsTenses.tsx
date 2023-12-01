@@ -13,7 +13,7 @@ interface Props {}
 const VerbsTenses: React.FC<Props> = props => {
   const { lang } = useCurrentLanguage();
 
-  const { isLoading, data, error } = useVerbsTenses();
+  const { isLoading, data } = useVerbsTenses();
   const words = data ?? [];
 
   const [selectedData, setSelectedData] = useState<VerbEntryData[]>();
@@ -24,8 +24,8 @@ const VerbsTenses: React.FC<Props> = props => {
     content = <div>Only spanish supported at the moment</div>;
   } else if (isLoading) {
     content = <SpinnerIcon />;
-  } else if (error) {
-    content = <div>{error}</div>;
+    // } else if (error) {
+    //   content = <div>{error}</div>;
   } else if (!words.length) {
     content = <div>No verbs found in dictionary</div>;
   }

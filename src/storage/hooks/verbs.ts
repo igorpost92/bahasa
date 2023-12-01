@@ -1,14 +1,31 @@
 import { usePromise } from '../../kit';
 import { getVerbs } from '../methods/verbs';
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
+import { notifier } from '../../services/notifier';
 
-export const useVerbsTenses = () => {
+export const useVerbsTenses = (live = true) => {
   // TODO: sort?
-  const { isLoading, data, send, error } = usePromise(getVerbs);
+  const { isLoading, data, send, sendSilent } = usePromise(getVerbs);
 
   useLayoutEffect(() => {
     send();
   }, []);
 
-  return { isLoading, data, error };
+  useEffect(() => {
+    if (!live) {
+      return;
+    }
+
+    const listener = () => {
+      sendSilent();
+    };
+
+    notifier.subscribe('verbs-update', listener);
+
+    return () => {
+      notifier.unsubscribe('verbs-update', listener);
+    };
+  }, [live]);
+
+  return { isLoading, data };
 };

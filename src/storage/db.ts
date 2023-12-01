@@ -1,5 +1,6 @@
 import Dexie, { Table } from 'dexie';
 import { TenseData, WordTypes, WordUsageExample } from './types';
+import { registerSync } from './sync';
 
 export interface WordEntryDB {
   id: string;
@@ -32,6 +33,16 @@ export interface VerbEntryDB {
   data: TenseData;
 }
 
+export interface SyncEntryDB {
+  id: string;
+  // TODO: make use of date
+  createdAt: Date;
+  messageId: number;
+  entryType: string;
+  entryId: string;
+  value: object | null;
+}
+
 class DB extends Dexie {
   words!: Table<WordEntryDB, string>;
   categories!: Table<CategoryEntryDB, string>;
@@ -40,20 +51,20 @@ class DB extends Dexie {
   categories_words!: Table<WordsInCategoriesDB>;
   categoriesOrderIndex: number = 0;
 
+  sync!: Table<SyncEntryDB, string>;
+
   constructor() {
     super('espahasa-database');
     this.version(1).stores({
       words: 'id,lang',
-      categories: 'id',
-      categories_words: '[category_id+word_id],category_id,word_id',
-    });
-
-    this.version(2).stores({
+      categories: 'id,lang',
+      categories_words: 'id,&[category_id+word_id],category_id,word_id',
       verbs: 'word_id',
     });
 
-    this.version(3).stores({
-      categories: 'id,lang',
+    this.version(2).stores({
+      sync: '[messageId+entryType+entryId],messageId',
+      // TODO: table for messageId
     });
   }
 
@@ -70,9 +81,12 @@ class DB extends Dexie {
   };
 }
 
+// TODO: promised
 const initDB = () => {
   const db = new DB();
   db.initCategoriesOrderIndex();
+  registerSync([db.words, db.categories, db.categories_words]);
+
   return db;
 };
 

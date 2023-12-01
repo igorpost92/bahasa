@@ -43,7 +43,7 @@ interface CreateWordPayload extends UpdateWordPayload {
 }
 
 export const createWord = async (payload: CreateWordPayload) => {
-  await db.transaction('rw', db.words, db.categories_words, async () => {
+  await db.transaction('rw', db.words, db.categories_words, db.sync, async () => {
     const id = await db.words.add({
       id: v4(),
       // TODO: on back
@@ -76,7 +76,7 @@ interface UpdateWordPayload {
 }
 
 export const updateWord = async (id: string, payload: UpdateWordPayload) => {
-  await db.transaction('rw', db.words, db.categories_words, async () => {
+  await db.transaction('rw', db.words, db.categories_words, db.sync, async () => {
     await db.words.update(id, {
       text: payload.text.trim(),
       meaning: payload.meaning.trim(),
@@ -91,7 +91,7 @@ export const updateWord = async (id: string, payload: UpdateWordPayload) => {
 };
 
 export const deleteWord = async (id: string) => {
-  await db.transaction('rw', db.words, db.categories_words, async () => {
+  await db.transaction('rw', db.words, db.categories_words, db.sync, async () => {
     await db.words.delete(id);
     await setCategoriesForWord(id, []);
   });
@@ -100,8 +100,10 @@ export const deleteWord = async (id: string) => {
 };
 
 export const markWordAsRepeated = async (id: string, step: number | null) => {
-  await db.words.update(id, {
-    step,
-    last_date: new Date(),
+  await db.transaction('rw', db.words, db.sync, async () => {
+    await db.words.update(id, {
+      step,
+      last_date: new Date(),
+    });
   });
 };

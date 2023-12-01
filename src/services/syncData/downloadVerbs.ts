@@ -1,7 +1,12 @@
 import { db } from '../../storage/db';
 import { verbsApi } from '../../api2';
+import { notifier } from '../notifier';
+import { uploadChangesToNest } from './uploadData';
 
 export const downloadVerbsData = async () => {
+  // TODO: need here?
+  await uploadChangesToNest();
+
   await verbsApi.updateVerbsOnServer();
   const serverVerbs = await verbsApi.getAllVerbs();
 
@@ -12,10 +17,11 @@ export const downloadVerbsData = async () => {
       serverVerbs.map(item => {
         return {
           word_id: item.word_id,
-          name: item.name,
           data: item.data,
         };
       }),
     );
   });
+
+  notifier.notify('verbs-update');
 };
