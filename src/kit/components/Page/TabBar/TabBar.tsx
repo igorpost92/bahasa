@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './TabBar.module.scss';
+import styles from './TabBar.module.css';
 import cn from 'classnames';
 
 interface Props {

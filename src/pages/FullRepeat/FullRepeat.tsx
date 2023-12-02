@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './FullRepeat.module.scss';
+import styles from './FullRepeat.module.css';
 import { useCategories } from '../../storage/hooks/categories';
 import { Button, Checkbox, useList } from '../../kit';
 import { AppPage } from '../../components/AppPage/AppPage';

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Sync.module.scss';
+import styles from './Sync.module.css';
 import { Button } from '../../../kit';
 import { downloadFromNest, downloadFromSupabase } from '../../../services/syncData/downloadData';
 import { downloadVerbsData } from '../../../services/syncData/downloadVerbs';

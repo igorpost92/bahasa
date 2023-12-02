@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ListenButton.module.scss';
+import styles from './ListenButton.module.css';
 import { speak } from '../../utils/speak';
 import cn from 'classnames';
 import { Listen } from '../../icons';

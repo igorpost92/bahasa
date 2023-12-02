@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Spinner.module.scss';
+import styles from './Spinner.module.css';
 import { SpinnerIcon } from '../../icons';
 import cn from 'classnames';
 

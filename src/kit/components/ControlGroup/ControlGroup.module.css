@@ -10,7 +10,7 @@
 .description {
   font-size: 12px;
   margin-top: 6px;
-  //todo
+  /*todo*/
   color: gray;
 
   &.danger {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Checkbox.module.scss';
+import styles from './Checkbox.module.css';
 import cn from 'classnames';
 
 interface Props {

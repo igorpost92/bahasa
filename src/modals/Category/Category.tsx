@@ -10,7 +10,7 @@ import {
   updateCategory,
 } from '../../storage/methods/categories';
 import { useWords } from '../../storage/hooks/words';
-import styles from './Category.module.scss';
+import styles from './Category.module.css';
 import WordMini from '../../components/WordMini/WordMini';
 import { CloseIcon } from '../../kit/icons';
 import { Modals, useModal } from '../useModals';

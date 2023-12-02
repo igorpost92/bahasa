@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from './SegmentedButtons.module.scss';
+import styles from './SegmentedButtons.module.css';
 
 interface Option {
   value: string;

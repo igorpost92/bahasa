@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Examples.module.scss';
+import styles from './Examples.module.css';
 import { Control, Controller, useFieldArray } from 'react-hook-form';
 import { DataPayload } from '../Word';
 import { Button, ControlGroup, Input } from '../../../kit';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './TabBar.module.scss';
+import styles from './TabBar.module.css';
 import cn from 'classnames';
 
 interface Props {

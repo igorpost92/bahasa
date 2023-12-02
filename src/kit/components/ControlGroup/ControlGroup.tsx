@@ -1,5 +1,5 @@
 import React, { cloneElement } from 'react';
-import styles from './ControlGroup.module.scss';
+import styles from './ControlGroup.module.css';
 import cn from 'classnames';
 
 interface Props {

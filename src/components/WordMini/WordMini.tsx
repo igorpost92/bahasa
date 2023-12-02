@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './WordMini.module.scss';
+import styles from './WordMini.module.css';
 import { WordTypes } from '../../storage/types';
 import { Link } from 'react-router-dom';
 import { Card, Tag } from '../../kit';

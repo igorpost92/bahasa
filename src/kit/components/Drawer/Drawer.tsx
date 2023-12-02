@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from './Drawer.module.scss';
+import styles from './Drawer.module.css';
 import { Portal } from '../Portal/Portal';
 import { ALLOW_INSIDE_SCROLL_CLASSNAME, useScrollLock } from '../../hooks';
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './VerbValue.module.scss';
+import styles from './VerbValue.module.css';
 import { useCurrentLanguage } from '../../../context/LanguageContext';
 import { speak } from '../../../utils/speak';
 import { Listen } from '../../../icons';

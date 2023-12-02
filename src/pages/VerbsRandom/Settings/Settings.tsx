@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Settings.module.scss';
+import styles from './Settings.module.css';
 import { Button, Checkbox, useList } from '../../../kit';
 import cn from 'classnames';
 import { verbsConfigByKeys } from '../../../constants/verbsConfig';

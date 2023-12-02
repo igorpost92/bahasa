@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Inner.module.scss';
+import styles from './Inner.module.css';
 import { VerbEntryData } from '../../../storage/types';
 import VerbValue from '../VerbValue/VerbValue';
 import { Button } from '../../../kit';

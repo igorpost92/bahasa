@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import cn from 'classnames';
 import { Spinner } from '..';
-import styles from './Button.module.scss';
+import styles from './Button.module.css';
 
 // TODO:
 // type Variant = 'filled' | 'outlined' | 'minimal'

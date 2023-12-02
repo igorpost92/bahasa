@@ -7,7 +7,7 @@
   border-radius: 8px;
   cursor: pointer;
 
-  //todo height
+  /*todo height*/
   height: 38px;
   font-size: 16px;
   line-height: 20px;
@@ -43,7 +43,7 @@
 }
 
 .optionWrap {
-  //todo +4 height without it
+  /*todo +4 height without it*/
   display: flex;
   padding: 10px 0;
 }

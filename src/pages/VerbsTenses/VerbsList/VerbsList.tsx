@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { sortBy } from 'lodash';
-import styles from './VerbsList.module.scss';
+import styles from './VerbsList.module.css';
 import { VerbEntryData } from '../../../storage/types';
 import { Input, Button } from '../../../kit';
 import { AppPage } from '../../../components/AppPage/AppPage';

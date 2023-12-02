@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Word.module.scss';
+import styles from './Word.module.css';
 import { ControlGroup, Drawer, ElementForm, Input, Select } from '../../kit';
 import ListenButton from '../../components/ListenButton/ListenButton';
 import { useCurrentLanguage } from '../../context/LanguageContext';

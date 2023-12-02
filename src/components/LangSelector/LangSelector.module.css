@@ -14,7 +14,7 @@
     background: var(--base-primary);
 
     @media (prefers-color-scheme: dark) {
-      //todo
+      /*todo*/
       color: black;
     }
   }

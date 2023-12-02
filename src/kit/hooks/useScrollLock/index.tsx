@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import styles from './styles.module.scss';
+import styles from './styles.module.css';
 
 export const ALLOW_INSIDE_SCROLL_CLASSNAME = 'allow-inside-scroll-classname';
 

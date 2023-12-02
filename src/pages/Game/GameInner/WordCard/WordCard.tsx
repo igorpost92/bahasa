@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from './WordCard.module.scss';
+import styles from './WordCard.module.css';
 import ListenButton from '../../../../components/ListenButton/ListenButton';
 
 interface Props {

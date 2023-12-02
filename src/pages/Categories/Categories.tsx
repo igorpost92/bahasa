@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import styles from './Categories.module.scss';
+import styles from './Categories.module.css';
 import { Button, Input } from '../../kit/';
 import { AppPage } from '../../components/AppPage/AppPage';
 import { useCategories } from '../../storage/hooks/categories';

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './LangSelector.module.scss';
+import styles from './LangSelector.module.css';
 import { Drawer } from '../../kit';
 import { useLanguages } from '../../storage/hooks/languages';
 import LangIcon from '../LangIcon/LangIcon';

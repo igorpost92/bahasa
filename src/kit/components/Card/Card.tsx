@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from './Card.module.scss';
+import styles from './Card.module.css';
 
 interface Props {
   className?: string;

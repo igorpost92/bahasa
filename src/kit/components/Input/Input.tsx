@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from './Input.module.scss';
+import styles from './Input.module.css';
 
 type NativeElementProps = JSX.IntrinsicElements['input'];
 

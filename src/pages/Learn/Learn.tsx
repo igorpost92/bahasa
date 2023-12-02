@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Learn.module.scss';
+import styles from './Learn.module.css';
 import { Button } from '../../kit';
 import { AppPage } from '../../components/AppPage/AppPage';
 import { useCurrentLanguage } from '../../context/LanguageContext';

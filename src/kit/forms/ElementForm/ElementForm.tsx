@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styles from './ElementForm.module.scss';
+import styles from './ElementForm.module.css';
 import { Button, Header } from '../../index';
 import { usePromise } from '../../hooks';
 

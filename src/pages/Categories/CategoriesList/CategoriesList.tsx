@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './CategoriesList.module.scss';
+import styles from './CategoriesList.module.css';
 import { Card, Tag } from '../../../kit';
 import { CategoryListEntry } from '../../../storage/types';
 

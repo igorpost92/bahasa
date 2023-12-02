@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import styles from './Page.module.scss';
+import styles from './Page.module.css';
 
 interface Props {
   className?: string;

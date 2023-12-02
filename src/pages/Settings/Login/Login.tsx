@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Login.module.scss';
+import styles from './Login.module.css';
 import { ControlGroup, Input, Button } from '../../../kit';
 import { AppPage } from '../../../components/AppPage/AppPage';
 import { useNavigate } from 'react-router-dom';

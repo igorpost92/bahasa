@@ -1,6 +1,6 @@
 import React, { Ref, useRef } from 'react';
 import cn from 'classnames';
-import styles from './Textarea.module.scss';
+import styles from './Textarea.module.css';
 
 type Props = Omit<JSX.IntrinsicElements['textarea'], 'value' | 'onChange'> & {
   value: string;

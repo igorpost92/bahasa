@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Game.module.scss';
+import styles from './Game.module.css';
 import { useWords } from '../../storage/hooks/words';
 import GameInner from './GameInner/GameInner';
 import { AppPage } from '../../components/AppPage/AppPage';

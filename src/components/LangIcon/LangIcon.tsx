@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './LangIcon.module.scss';
+import styles from './LangIcon.module.css';
 import Flags from './flags';
 import cn from 'classnames';
 

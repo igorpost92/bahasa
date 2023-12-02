@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './Game.module.scss';
+import styles from './Game.module.css';
 import { useData } from './useData';
 import ListenButton from '../../../components/ListenButton/ListenButton';
 import cn from 'classnames';

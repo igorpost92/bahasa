@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import styles from './Portal.module.scss';
+import styles from './Portal.module.css';
 
 interface Props {
   children: React.ReactNode;

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Button, Input, Select } from '../../kit';
 import WordMini from '../../components/WordMini/WordMini';
 import { AppPage } from '../../components/AppPage/AppPage';
-import styles from './Words.module.scss';
+import styles from './Words.module.css';
 import { useWords, wordsSorts } from '../../storage/hooks/words';
 import { smartSearch } from '../../kit/utils';
 import { removeDiacritics } from '../../utils/removeDiacritics';

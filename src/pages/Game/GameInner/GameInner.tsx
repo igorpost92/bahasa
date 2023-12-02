@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from './GameInner.module.scss';
+import styles from './GameInner.module.css';
 import WordCard from './WordCard/WordCard';
 import { Button, RefreshIcon, useList } from '../../../kit';
 import { useWordCards } from './useWordCards';

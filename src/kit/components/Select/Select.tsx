@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { ChevronDownIcon } from '../../icons';
 import cn from 'classnames';
 import { Button, Drawer, Input, Radio } from '../';
-import styles from './Select.module.scss';
+import styles from './Select.module.css';
 import { smartSearch } from '../../utils';
 import { removeDiacritics } from '../../../utils/removeDiacritics';
 

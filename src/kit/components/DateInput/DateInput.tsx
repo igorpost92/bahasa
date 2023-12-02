@@ -1,6 +1,6 @@
 import React, { ChangeEvent, Ref } from 'react';
 import { format } from 'date-fns';
-import styles from './DateInput.module.scss';
+import styles from './DateInput.module.css';
 import cn from 'classnames';
 
 const stringifyDate = (date: Date) => {

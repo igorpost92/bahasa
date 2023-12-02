@@ -18,7 +18,7 @@
     margin: 0;
   }
 
-  //todo refacto
+  todo refacto
 
   div:nth-child(1) div {
     flex: auto;
@@ -53,8 +53,8 @@
   margin-left: 4px;
   width: 40px;
   height: 40px;
-  //background: lightgray;
+  /*background: lightgray;*/
   border-radius: 50%;
-  //border: 1px solid var(--red);
-  //color: var(--red);
+  /*border: 1px solid var(--red);*/
+  /*color: var(--red);*/
 }
