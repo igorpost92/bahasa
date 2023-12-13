@@ -8,7 +8,7 @@ interface Props {
 
 // TODO: isOPen
 
-export const Portal: React.FC<Props> = (props) => {
+export const Portal: React.FC<Props> = props => {
   const container = useMemo(() => {
     const element = document.createElement('div');
     element.classList.add(styles.portal);
@@ -23,9 +23,5 @@ export const Portal: React.FC<Props> = (props) => {
     };
   }, []);
 
-  return createPortal(
-    props.children,
-    container,
-  );
+  return createPortal(props.children, container);
 };
-

@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { Button, Drawer, Input, Radio } from '../';
 import styles from './Select.module.css';
 import { smartSearch } from '../../utils';
+// TODO: remove from kit
 import { removeDiacritics } from '../../../utils/removeDiacritics';
 
 interface Option {
