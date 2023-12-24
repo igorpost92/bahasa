@@ -18,7 +18,7 @@
     margin: 0;
   }
 
-  todo refacto
+  /*todo refacto*/
 
   div:nth-child(1) div {
     flex: auto;
@@ -44,8 +44,6 @@
   height: 38px;
   width: 38px;
   border-radius: 0 8px 0 0;
-  border: 1px solid gray;
-  background: white;
   border-left-color: transparent;
 }
 

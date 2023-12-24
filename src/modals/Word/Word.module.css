@@ -15,9 +15,6 @@
 .listenBtn {
   height: 38px;
   width: 38px;
-  border-radius: 8px;
-  border: 1px solid gray;
-  background: white;
   align-self: flex-end;
   margin-left: 6px;
 }
