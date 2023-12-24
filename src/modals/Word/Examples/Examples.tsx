@@ -67,7 +67,7 @@ const Examples: React.FC<Props> = props => {
                     )}
                   />
                 </div>
-                <Button onClick={handleDelete} className={styles.deleteBtn}>
+                <Button size={'m'} className={styles.deleteBtn} onClick={handleDelete}>
                   <CloseIcon />
                 </Button>
               </div>
