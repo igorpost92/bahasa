@@ -13,9 +13,6 @@ dist
 dist-ssr
 *.local
 
-src/api/creds.ts
-serverUtils/privateCreds.ts
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

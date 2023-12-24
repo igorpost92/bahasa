@@ -1,8 +1,5 @@
 import { CategoryEntryDB, db, WordEntryDB, WordsInCategoriesDB } from '../../storage/db';
-import { getWords } from '../../api/methods/words';
-import { getCategories } from '../../api/methods/categories';
-import { getCategoriesWords } from '../../api/methods/categoriesWords';
-import { categoriesApi, categoriesWordsApi, wordsApi } from '../../api2';
+import { categoriesApi, categoriesWordsApi, wordsApi } from '../../api';
 
 const saveWords = async (words: WordEntryDB[]) => {
   await db.transaction('rw', db.words, async tx => {
@@ -42,29 +39,6 @@ const saveCategoriesWords = async (data: WordsInCategoriesDB[]) => {
     (tx as any).__sync__ = true;
     await db.categories_words.clear();
     await db.categories_words.bulkAdd(data);
-  });
-};
-
-export const downloadFromSupabase = async () => {
-  const [words, categories, categoriesWords] = await Promise.all([
-    getWords(),
-    getCategories(),
-    getCategoriesWords(),
-  ]);
-
-  console.log({
-    words,
-    categories,
-    categoriesWords,
-  });
-
-  await db.transaction('rw', db.words, db.categories, db.categories_words, async () => {
-    await Promise.all([
-      //
-      saveWords(words),
-      saveCategories(categories),
-      saveCategoriesWords(categoriesWords),
-    ]);
   });
 };
 

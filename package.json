@@ -5,13 +5,9 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "serv": "yarn nodemon serverUtils/prepareVerbs.ts",
-    "preview": "vite preview",
-    "surge": "surge --domain https://ip92-bahasa.surge.sh --project ./dist",
-    "pub": "npm run build && npm run surge"
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^1.35.4",
     "axios": "^1.6.2",
     "classnames": "^2.3.1",
     "date-fns": "^2.29.3",

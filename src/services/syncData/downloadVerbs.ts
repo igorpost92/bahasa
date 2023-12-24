@@ -1,5 +1,5 @@
 import { db } from '../../storage/db';
-import { verbsApi } from '../../api2';
+import { verbsApi } from '../../api';
 import { notifier } from '../notifier';
 import { uploadChangesToNest } from './uploadData';
 

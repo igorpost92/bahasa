@@ -3,24 +3,22 @@ import styles from './Login.module.css';
 import { ControlGroup, Input, Button } from '../../../kit';
 import { AppPage } from '../../../components/AppPage/AppPage';
 import { useNavigate } from 'react-router-dom';
-import { getSupabaseKey, updateSupabaseKey } from '../../../api/sendRequest';
 import { LocalStorageTokens } from '../../../constants/localStorageTokens';
-import { authApi } from '../../../api2';
+import { authApi } from '../../../api';
 import { AxiosError } from 'axios';
 
-const getKey = () => getSupabaseKey() ?? '';
 const getName = () => localStorage.getItem(LocalStorageTokens.UserName) ?? '';
 const getPassword = () => localStorage.getItem(LocalStorageTokens.UserPassword) ?? '';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
 
-  const [key, setKey] = useState(getKey);
   const [name, setName] = useState(getName);
   const [password, setPassword] = useState(getPassword);
 
   const save = async () => {
-    if (!key) {
+    if (!name || !password) {
+      alert('Provide data');
       return;
     }
 
@@ -29,7 +27,6 @@ const Login: React.FC = () => {
 
       localStorage.setItem(LocalStorageTokens.UserName, name);
       localStorage.setItem(LocalStorageTokens.UserPassword, password);
-      updateSupabaseKey(key);
       navigate('/settings');
     } catch (e) {
       let message;
@@ -46,11 +43,6 @@ const Login: React.FC = () => {
       headerRight={false}
       contentClassName={styles.pageWrap}
     >
-      <ControlGroup id={'key'} label={'Key'}>
-        <Input value={key} onChange={setKey} />
-      </ControlGroup>
-      <br />
-      <br />
       <ControlGroup id={'key'} label={'Username'}>
         <Input value={name} onChange={setName} />
       </ControlGroup>
