@@ -1,11 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Input, Select } from '../../kit';
+import { Button, Input, Select, smartSearch } from '../../kit';
 import WordMini from '../../components/WordMini/WordMini';
 import { AppPage } from '../../components/AppPage/AppPage';
 import styles from './Words.module.css';
 import { useWords, wordsSorts } from '../../storage/hooks/words';
-import { smartSearch } from '../../kit/utils';
-import { removeDiacritics } from '../../utils/removeDiacritics';
 import { Modals, useModal } from '../../modals/useModals';
 
 const Words: React.FC = () => {
@@ -20,11 +18,9 @@ const Words: React.FC = () => {
   };
 
   const data = useMemo(() => {
-    if (!searchInput) {
-      return wordsRequest.data;
-    }
-
-    return smartSearch(wordsRequest.data, ['text', 'meaning'], searchInput, removeDiacritics);
+    return smartSearch(wordsRequest.data, searchInput, ['text', 'meaning'], {
+      ignoreDiacritics: true,
+    });
   }, [searchInput, wordsRequest.data]);
 
   let content;

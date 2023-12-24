@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { sortBy } from 'lodash';
 import styles from './VerbsList.module.css';
 import { VerbEntryData } from '../../../storage/types';
-import { Input, Button } from '../../../kit';
+import { Input, Button, smartSearch } from '../../../kit';
 import { AppPage } from '../../../components/AppPage/AppPage';
 import { shuffle } from '../../../utils/shuffle';
 import BackButton from '../../../components/BackButton/BackButton';
@@ -18,20 +18,11 @@ const VerbsList: React.FC<Props> = props => {
   const [searchInput, setSearchInput] = useState('');
 
   const data = useMemo(() => {
-    let data;
+    const verbs = smartSearch(props.verbs, searchInput, ['name', 'meaning'], {
+      ignoreDiacritics: true,
+    });
 
-    if (!searchInput) {
-      data = props.verbs;
-    } else {
-      const searchString = searchInput.toLowerCase();
-      data = props.verbs.filter(
-        item =>
-          item.name.toLowerCase().includes(searchString) ||
-          item.meaning.toLowerCase().includes(searchString),
-      );
-    }
-
-    return sortBy(data, item => item.name);
+    return sortBy(verbs, item => item.name);
   }, [props.verbs, searchInput]);
 
   const onShuffle = () => {

@@ -1,14 +1,12 @@
 import React, { useMemo, useState } from 'react';
 import styles from './Categories.module.css';
-import { Button, Input } from '../../kit/';
+import { Button, Input, smartSearch } from '../../kit/';
 import { AppPage } from '../../components/AppPage/AppPage';
 import { useCategories } from '../../storage/hooks/categories';
 import CategoriesList from './CategoriesList/CategoriesList';
 import { Modals, useModal } from '../../modals/useModals';
 
-interface Props {}
-
-const Categories: React.FC<Props> = props => {
+const Categories: React.FC = () => {
   const [searchInput, setSearchInput] = useState('');
   const request = useCategories();
 
@@ -23,12 +21,7 @@ const Categories: React.FC<Props> = props => {
       return [];
     }
 
-    if (!searchInput) {
-      return request.data;
-    }
-
-    const search = searchInput.toLowerCase();
-    return request.data.filter(item => item.name.toLowerCase().includes(search));
+    return smartSearch(request.data, searchInput, ['name'], { ignoreDiacritics: true });
   }, [searchInput, request.data]);
 
   let content;

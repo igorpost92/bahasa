@@ -4,8 +4,6 @@ import cn from 'classnames';
 import { Button, Drawer, Input, Radio } from '../';
 import styles from './Select.module.css';
 import { smartSearch } from '../../utils';
-// TODO: remove from kit
-import { removeDiacritics } from '../../../utils/removeDiacritics';
 
 interface Option {
   value: string;
@@ -25,6 +23,7 @@ interface Props<T extends Option, M extends boolean> {
   searchBy?: (keyof T)[];
   multiple?: M;
   placeholder?: string;
+  ignoreDiacritics?: boolean;
   onCreateNew?: (text: string, setValue: (value: string) => void) => void;
   renderItem?: (option: T) => ReactElement;
 }
@@ -85,11 +84,9 @@ export function Select<T extends Option, M extends boolean = false>(props: Props
   };
 
   const options = useMemo(() => {
-    if (!searchInput) {
-      return props.options;
-    }
-
-    return smartSearch(props.options, searchBy, searchInput, removeDiacritics);
+    return smartSearch(props.options, searchInput, searchBy, {
+      ignoreDiacritics: props.ignoreDiacritics,
+    });
   }, [props.options, searchInput]);
 
   return (

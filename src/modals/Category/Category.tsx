@@ -136,6 +136,7 @@ const Category: React.FC<Props> = props => {
                   options={wordsOptions}
                   value={field.value.map(item => item.word_id)}
                   searchBy={['name', 'meaning']}
+                  ignoreDiacritics
                   onChange={value => {
                     // TODO:
                     // think of better way
