@@ -10,10 +10,10 @@
 .description {
   font-size: 12px;
   margin-top: 6px;
-  /*todo*/
-  color: gray;
+  color: var(--content-2);
 
   &.danger {
+    /*todo*/
     color: crimson;
   }
 }

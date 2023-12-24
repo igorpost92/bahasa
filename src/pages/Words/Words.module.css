@@ -13,7 +13,7 @@
   text-align: right;
   padding: 12px 7px;
   border: none;
-  color: gray;
+  color: var(--content-2);
 
   input {
     border: none;
@@ -29,7 +29,7 @@
 
 .subtitle {
   font-size: 14px;
-  color: gray;
+  color: var(--content-2);
   text-align: center;
   margin-bottom: 12px;
 }

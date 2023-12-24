@@ -10,5 +10,5 @@
 .wordsCount {
   margin-top: 2px;
   font-size: 14px;
-  color: gray;
+  color: var(--content-2);
 }

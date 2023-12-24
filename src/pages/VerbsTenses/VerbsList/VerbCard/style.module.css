@@ -18,6 +18,7 @@
 
 .meaning {
   margin-top: 2px;
+  color: var(--content-2);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
