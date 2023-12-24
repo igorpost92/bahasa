@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from './LangSelector.module.css';
-import { Drawer } from '../../kit';
+import { Drawer, usePromiseOnMount } from '../../kit';
 import { useLanguages } from '../../storage/hooks/languages';
 import LangIcon from '../LangIcon/LangIcon';
 import cn from 'classnames';
+import { db } from '../../storage/db';
 
 interface Props {
   isOpen: boolean;
-  // canClose?: boolean; todo
   onClose: () => void;
   selectedLang: string;
   onLangChange: (lang: string) => void;
@@ -15,6 +15,12 @@ interface Props {
 
 const LangSelector: React.FC<Props> = props => {
   const languages = useLanguages();
+
+  // TODO: put in settings
+  const { data: isIndonesianEnabled } = usePromiseOnMount(async () => {
+    const words = await db.words.where({ lang: 'ID' }).count();
+    return words > 0;
+  });
 
   if (!props.isOpen) {
     return null;
@@ -26,6 +32,10 @@ const LangSelector: React.FC<Props> = props => {
       <div className={styles.list}>
         {languages.map(lang => {
           const isSelected = lang.code === props.selectedLang;
+
+          if (lang.code === 'ID' && !isIndonesianEnabled) {
+            return null;
+          }
 
           return (
             <div

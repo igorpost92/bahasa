@@ -1,9 +1,9 @@
-const CURRENT_LANG_TOKEN = 'current-lang-code';
+import { LocalStorageTokens } from '../constants/localStorageTokens';
 
 export const getCurrentLang = () => {
-  return localStorage.getItem(CURRENT_LANG_TOKEN) ?? 'ES';
+  return localStorage.getItem(LocalStorageTokens.CurrentLang) ?? 'ES';
 };
 
 export const setCurrentLang = (lang: string) => {
-  localStorage.setItem(CURRENT_LANG_TOKEN, lang);
+  localStorage.setItem(LocalStorageTokens.CurrentLang, lang);
 };

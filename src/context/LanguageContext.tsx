@@ -1,6 +1,4 @@
 import { createContext, useState, ReactNode, useMemo, useEffect, useContext } from 'react';
-import { useLanguages } from '../storage/hooks/languages';
-import { SpinnerIcon } from '../kit';
 import LangSelector from '../components/LangSelector/LangSelector';
 import { getCurrentLang, setCurrentLang } from '../storage/currentLang';
 
@@ -9,8 +7,6 @@ interface LanguageContextProps {
   openSelector: () => void;
   setLang: (lang: string) => void;
 }
-
-// TODO: refacto
 
 const defaultValue = {
   lang: '',
@@ -25,24 +21,10 @@ interface Props {
 }
 
 export const LanguageContextLayer = (props: Props) => {
+  // TODO: useLocalStorage
   const [lang, setLang] = useState(getCurrentLang);
 
   const [isDrawerOpen, setDrawerOpen] = useState(false);
-
-  const languages = useLanguages();
-
-  useEffect(() => {
-    if (lang || !languages?.length) {
-      return;
-    }
-
-    if (languages.length === 1) {
-      setLang(languages[0].code);
-      return;
-    }
-
-    setDrawerOpen(true);
-  }, [lang, languages]);
 
   useEffect(() => {
     if (lang) {
@@ -61,8 +43,7 @@ export const LanguageContextLayer = (props: Props) => {
 
   return (
     <LanguageContext.Provider value={state}>
-      {/*// TODO:why*/}
-      {!lang ? <SpinnerIcon /> : props.children}
+      {props.children}
 
       <LangSelector
         isOpen={isDrawerOpen}
