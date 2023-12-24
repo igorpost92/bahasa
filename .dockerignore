@@ -4,6 +4,8 @@
 .dockerignore
 **/.DS_Store
 
+*.bash
+
 Dockerfile
 docker-compose.yaml
 
