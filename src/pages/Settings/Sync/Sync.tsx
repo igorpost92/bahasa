@@ -22,12 +22,10 @@ const Sync: React.FC = () => {
   return (
     <div className={styles.wrap}>
       <Button onClick={() => askAndDo(uploadChangesToNest)}>Sync to Nest </Button>
-      <br />
       <Button onClick={() => askAndDo(uploadToNestHard)}>!!! Upload to Nest HARD !!!</Button>
       <div className={styles.info}>you will lose verbs conjugation data</div>
       <br />
       <Button onClick={() => askAndDo(downloadFromNest)}>Download from Nest</Button>
-      <br />
       <Button onClick={() => askAndDo(downloadVerbsData)}>Download verbs</Button>
     </div>
   );
