@@ -64,6 +64,7 @@ const Category: React.FC<Props> = props => {
     wordsRequest.data?.map(item => ({
       value: String(item.id),
       name: item.text,
+      meaning: item.meaning,
     })) ?? [];
 
   return (
@@ -92,7 +93,7 @@ const Category: React.FC<Props> = props => {
       {/*// TODO: styles */}
       {!!words.length && (
         <div className={styles.wordsSection}>
-          <div>Words</div>
+          <div>Words ({words.length})</div>
           {words.map((wordField, idx) => {
             const word = wordsRequest.data?.find(i => i.id === wordField.word_id);
 
@@ -125,7 +126,7 @@ const Category: React.FC<Props> = props => {
           control={control}
           render={({ field: { ref, ...field } }) => {
             return (
-              <ControlGroup id={field.name} className={styles.wordWrap}>
+              <ControlGroup id={field.name} className={styles.selectorWrap}>
                 <Select
                   {...field}
                   searchable
@@ -134,6 +135,7 @@ const Category: React.FC<Props> = props => {
                   className={styles.wordsSelector}
                   options={wordsOptions}
                   value={field.value.map(item => item.word_id)}
+                  searchBy={['name', 'meaning']}
                   onChange={value => {
                     // TODO:
                     // think of better way
@@ -151,6 +153,12 @@ const Category: React.FC<Props> = props => {
                     // TODO: new rows id are undefined
                     form.setValue('words', newValue);
                   }}
+                  renderItem={option => (
+                    <div>
+                      <div>{option.name}</div>
+                      <div className={styles.optionMeaning}>{option.meaning}</div>
+                    </div>
+                  )}
                 />
               </ControlGroup>
             );

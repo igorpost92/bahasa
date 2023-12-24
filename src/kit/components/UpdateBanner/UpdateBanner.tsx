@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { registerSW } from 'virtual:pwa-register';
 
-const UpdateBanner: React.FC = () => {
+export const UpdateBanner: React.FC = () => {
   const [isShown, setIsShown] = useState(false);
 
   const updateSW = useMemo(
@@ -26,20 +26,15 @@ const UpdateBanner: React.FC = () => {
     updateSW(true);
   }, [isShown]);
 
-  return null;
+  if (!isShown) {
+    return null;
+  }
 
-  // // TODO:
-  // if (!isShown) {
-  //   return null;
-  // }
-  //
-  // return (
-  //   <div>
-  //     <div>Update is installed. Refresh?</div>
-  //     <button onClick={() => updateSW(true)}>YES</button>
-  //     <button onClick={() => setIsShown(false)}>NO</button>
-  //   </div>
-  // );
+  return (
+    <div>
+      <div>Update is installed. Refresh?</div>
+      <button onClick={() => updateSW(true)}>YES</button>
+      <button onClick={() => setIsShown(false)}>NO</button>
+    </div>
+  );
 };
-
-export default UpdateBanner;

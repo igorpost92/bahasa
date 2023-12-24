@@ -23,9 +23,9 @@ input, button, textarea {
   --base-8: black;
 
   /*main text*/
-  --content-1: hsl(216, 9%, 89%);
+  --content-1: hsl(0, 0%, 89%);
   /*secondary text*/
-  --content-2: hsl(0, 0%, 70%);
+  --content-2: hsl(0, 0%, 48%);
 
   --inputs-bg: none;
 

@@ -15,3 +15,4 @@ export * from './Select/Select';
 export * from './Spinner/Spinner';
 export * from './Tag/Tag';
 export * from './Textarea/Textarea';
+export * from './UpdateBanner/UpdateBanner';

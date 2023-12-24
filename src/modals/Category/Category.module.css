@@ -1,6 +1,12 @@
+.selectorWrap {
+  position: sticky;
+  bottom: 12px;
+}
+
 .wordsSelector {
   padding: 12px;
   border: none;
+  background: var(--base-secondary);
 
   input {
     text-align: center;
@@ -9,13 +15,11 @@
   svg {
     display: none;
   }
+}
 
-  /*todo*/
-  background: #e7e7e7;
-
-  @media (prefers-color-scheme: dark) {
-    background: var(--base-3);
-  }
+.optionMeaning {
+  margin-top: 2px;
+  color: var(--content-2);
 }
 
 .wordsSection {
@@ -30,7 +34,7 @@
 
 .wordWrap {
   flex: auto;
-  margin: 0;
+  min-width: 1%;
 }
 
 .deleteRowBtn {

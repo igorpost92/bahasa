@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { ReactElement, useEffect, useMemo, useState } from 'react';
 import { ChevronDownIcon } from '../../icons';
 import cn from 'classnames';
 import { Button, Drawer, Input, Radio } from '../';
@@ -22,16 +22,17 @@ interface Props<T extends Option, M extends boolean> {
   onChange: (value: ValueType<M>) => void;
   options: T[];
   searchable?: boolean;
+  searchBy?: (keyof T)[];
   multiple?: M;
   placeholder?: string;
   onCreateNew?: (text: string, setValue: (value: string) => void) => void;
+  renderItem?: (option: T) => ReactElement;
 }
 
 // todo creating new element
-// TODO: custom option format
 
 export function Select<T extends Option, M extends boolean = false>(props: Props<T, M>) {
-  const { placeholder = 'Select' } = props;
+  const { placeholder = 'Select', searchBy = ['name'] } = props;
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [searchInput, setSearchInput] = useState('');
@@ -88,7 +89,7 @@ export function Select<T extends Option, M extends boolean = false>(props: Props
       return props.options;
     }
 
-    return smartSearch(props.options, 'name', searchInput, removeDiacritics);
+    return smartSearch(props.options, searchBy, searchInput, removeDiacritics);
   }, [props.options, searchInput]);
 
   return (
@@ -107,6 +108,7 @@ export function Select<T extends Option, M extends boolean = false>(props: Props
       <Drawer isOpen={isModalOpen} onClose={closeModal} size={props.searchable ? 'l' : undefined}>
         {props.searchable && (
           <Input
+            placeholder={'Search'}
             className={styles.search}
             value={searchInput}
             onChange={setSearchInput}
@@ -131,7 +133,9 @@ export function Select<T extends Option, M extends boolean = false>(props: Props
                 isChecked={isChecked}
                 onChange={() => onChange(option.value)}
                 label={option.name}
-              />
+              >
+                {props.renderItem ? props.renderItem(option) : option.name}
+              </Radio>
             );
           })}
 

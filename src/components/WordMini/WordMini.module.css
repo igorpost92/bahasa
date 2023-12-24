@@ -27,6 +27,7 @@
 }
 
 .meaning {
+  color: var(--content-2);
   margin-top: 2px;
   overflow: hidden;
   white-space: nowrap;
