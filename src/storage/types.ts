@@ -34,7 +34,12 @@ export enum WordTypes {
   Noun = 'noun',
   Verb = 'verb',
   Adjective = 'adjective',
+  Adverb = 'adverb',
+  Preposition = 'preposition',
+  Pronoun = 'pronoun',
   Phrase = 'phrase',
+  Idiom = 'idiom',
+  Conjunction = 'conjunction',
 }
 
 export interface CategoryListEntry {

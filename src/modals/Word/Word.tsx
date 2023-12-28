@@ -13,7 +13,12 @@ const wordTypes = [
   { value: WordTypes.Noun, name: WordTypes.Noun },
   { value: WordTypes.Verb, name: WordTypes.Verb },
   { value: WordTypes.Adjective, name: WordTypes.Adjective },
+  { value: WordTypes.Adverb, name: WordTypes.Adverb },
+  { value: WordTypes.Preposition, name: WordTypes.Preposition },
+  { value: WordTypes.Conjunction, name: WordTypes.Conjunction },
+  { value: WordTypes.Pronoun, name: WordTypes.Pronoun },
   { value: WordTypes.Phrase, name: WordTypes.Phrase },
+  { value: WordTypes.Idiom, name: WordTypes.Idiom },
 ];
 
 export type DataPayload = Omit<WordEntry, 'id'>;

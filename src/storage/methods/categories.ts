@@ -11,46 +11,66 @@ interface PredefinedCategoryConfig {
   getWords: () => Promise<WordEntryDB[]>;
 }
 
+const getWordsForPredefinedCategory = (type: WordTypes) =>
+  db.words
+    .filter(item => item.type === type)
+    .reverse()
+    .sortBy('created_at');
+
 export const predefinedCategoriesConfig: Record<string, PredefinedCategoryConfig> = {
   1: {
     id: '1',
     name: 'Verbs',
     predefined: true,
-    getWords: () =>
-      db.words
-        .filter(item => item.type === WordTypes.Verb)
-        .reverse()
-        .sortBy('created_at'),
+    getWords: () => getWordsForPredefinedCategory(WordTypes.Verb),
   },
   2: {
     id: '2',
     name: 'Adjectives',
     predefined: true,
-    getWords: () =>
-      db.words
-        .filter(item => item.type === WordTypes.Adjective)
-        .reverse()
-        .sortBy('created_at'),
+    getWords: () => getWordsForPredefinedCategory(WordTypes.Adjective),
   },
   3: {
     id: '3',
     name: 'Nouns',
     predefined: true,
-    getWords: () =>
-      db.words
-        .filter(item => item.type === WordTypes.Noun)
-        .reverse()
-        .sortBy('created_at'),
+    getWords: () => getWordsForPredefinedCategory(WordTypes.Noun),
   },
   4: {
     id: '4',
+    name: 'Adverbs',
+    predefined: true,
+    getWords: () => getWordsForPredefinedCategory(WordTypes.Adverb),
+  },
+  5: {
+    id: '5',
+    name: 'Prepositions',
+    predefined: true,
+    getWords: () => getWordsForPredefinedCategory(WordTypes.Preposition),
+  },
+  6: {
+    id: '6',
+    name: 'Pronouns',
+    predefined: true,
+    getWords: () => getWordsForPredefinedCategory(WordTypes.Pronoun),
+  },
+  7: {
+    id: '7',
     name: 'Phrases',
     predefined: true,
-    getWords: () =>
-      db.words
-        .filter(item => item.type === WordTypes.Phrase)
-        .reverse()
-        .sortBy('created_at'),
+    getWords: () => getWordsForPredefinedCategory(WordTypes.Phrase),
+  },
+  8: {
+    id: '8',
+    name: 'Idioms',
+    predefined: true,
+    getWords: () => getWordsForPredefinedCategory(WordTypes.Idiom),
+  },
+  9: {
+    id: '9',
+    name: 'Conjunctions',
+    predefined: true,
+    getWords: () => getWordsForPredefinedCategory(WordTypes.Conjunction),
   },
 };
 
