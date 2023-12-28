@@ -15,8 +15,29 @@ interface Props {
   onClick?: () => void;
 }
 
+const clampType = (type?: WordTypes) => {
+  if (type === WordTypes.Adjective) {
+    return 'adj.';
+  }
+
+  if (type === WordTypes.Adverb) {
+    return 'adv.';
+  }
+
+  if (type === WordTypes.Conjunction) {
+    return 'conj.';
+  }
+
+  if (type === WordTypes.Preposition) {
+    return 'prep.';
+  }
+
+  return type;
+};
+
 const WordMini: React.FC<Props> = props => {
-  const tagLabel = props.tag ? (props.tag === WordTypes.Adjective ? 'adj.' : props.tag) : null;
+  // TODO: type prop
+  const tagLabel = clampType(props.tag as WordTypes);
 
   const content = (
     <Card>
