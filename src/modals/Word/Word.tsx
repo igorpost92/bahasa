@@ -69,6 +69,7 @@ const Word: React.FC<Props> = props => {
 
   return (
     <ElementForm
+      title="Word"
       isNew={isNew}
       getData={() => getWord(id)}
       onDataLoaded={onDataLoaded}

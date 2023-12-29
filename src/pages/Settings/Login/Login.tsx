@@ -7,7 +7,7 @@ import { LocalStorageTokens } from '../../../constants/localStorageTokens';
 import { authApi } from '../../../api';
 import { AxiosError } from 'axios';
 
-const getName = () => localStorage.getItem(LocalStorageTokens.UserName) ?? '';
+const getName = () => localStorage.getItem(LocalStorageTokens.Username) ?? '';
 const getPassword = () => localStorage.getItem(LocalStorageTokens.UserPassword) ?? '';
 
 const Login: React.FC = () => {
@@ -25,7 +25,7 @@ const Login: React.FC = () => {
     try {
       await authApi.signIn(name, password);
 
-      localStorage.setItem(LocalStorageTokens.UserName, name);
+      localStorage.setItem(LocalStorageTokens.Username, name);
       localStorage.setItem(LocalStorageTokens.UserPassword, password);
       navigate('/settings');
     } catch (e) {

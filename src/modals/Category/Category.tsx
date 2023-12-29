@@ -69,6 +69,7 @@ const Category: React.FC<Props> = props => {
 
   return (
     <ElementForm
+      title="Category"
       isNew={isNew}
       getData={() => getCategory(id)}
       onDataLoaded={onDataLoaded}
