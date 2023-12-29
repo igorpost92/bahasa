@@ -66,12 +66,6 @@ export const predefinedCategoriesConfig: Record<string, PredefinedCategoryConfig
     predefined: true,
     getWords: () => getWordsForPredefinedCategory(WordTypes.Idiom),
   },
-  9: {
-    id: '9',
-    name: 'Conjunctions',
-    predefined: true,
-    getWords: () => getWordsForPredefinedCategory(WordTypes.Conjunction),
-  },
 };
 
 export const isPredefinedCategory = (id: string) => {

@@ -24,10 +24,6 @@ const clampType = (type?: WordTypes) => {
     return 'adv.';
   }
 
-  if (type === WordTypes.Conjunction) {
-    return 'conj.';
-  }
-
   if (type === WordTypes.Preposition) {
     return 'prep.';
   }

@@ -39,7 +39,6 @@ export enum WordTypes {
   Pronoun = 'pronoun',
   Phrase = 'phrase',
   Idiom = 'idiom',
-  Conjunction = 'conjunction',
 }
 
 export interface CategoryListEntry {

@@ -15,7 +15,6 @@ const wordTypes = [
   { value: WordTypes.Adjective, name: WordTypes.Adjective },
   { value: WordTypes.Adverb, name: WordTypes.Adverb },
   { value: WordTypes.Preposition, name: WordTypes.Preposition },
-  { value: WordTypes.Conjunction, name: WordTypes.Conjunction },
   { value: WordTypes.Pronoun, name: WordTypes.Pronoun },
   { value: WordTypes.Phrase, name: WordTypes.Phrase },
   { value: WordTypes.Idiom, name: WordTypes.Idiom },
