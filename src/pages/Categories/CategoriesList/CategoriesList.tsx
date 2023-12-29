@@ -10,7 +10,7 @@ interface Props {
 
 const CategoriesList: React.FC<Props> = props => {
   return (
-    <div className={styles.wrap}>
+    <div>
       {props.data.map(item => (
         <Card
           key={item.id}

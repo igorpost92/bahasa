@@ -3,11 +3,18 @@ import { Button } from '../../kit';
 import { AppPage } from '../../components/AppPage/AppPage';
 import Sync from './Sync/Sync';
 import { useMainStore } from '../../stores/mainStore';
+import BackButton from '../../components/BackButton/BackButton';
+import { useSuperModeActivator } from '../../components/AppPage/useSuperModeActivator';
 
 const Settings: React.FC = () => {
-  const mainStore = useMainStore();
+  const isSuperMode = useMainStore(store => store.isSuperMode);
+  const setSuperMode = useMainStore(store => store.setSuperMode);
 
-  const content = mainStore.isSuperMode ? (
+  const onSettingsClick = useSuperModeActivator();
+
+  const pageTitle = <div onClick={onSettingsClick}>Settings</div>;
+
+  const content = isSuperMode ? (
     <>
       <Button url={'/login'} fullWidth>
         Login
@@ -19,7 +26,7 @@ const Settings: React.FC = () => {
       <br />
       <br />
       <br />
-      <Button onClick={() => mainStore.setSuperMode(false)} intent={'danger'}>
+      <Button onClick={() => setSuperMode(false)} intent={'danger'}>
         Disable super mode
       </Button>
     </>
@@ -28,7 +35,7 @@ const Settings: React.FC = () => {
   );
 
   return (
-    <AppPage headerTitle={'Settings'} showTabBar showLang={false}>
+    <AppPage headerLeft={<BackButton />} headerTitle={pageTitle} showTabBar showLang={false}>
       {content}
     </AppPage>
   );

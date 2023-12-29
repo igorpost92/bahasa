@@ -4,24 +4,54 @@
   align-items: center;
   border: none;
   border-radius: 8px;
-  padding: 12px;
-  font-size: 16px;
-  line-height: 20px;
   cursor: pointer;
   color: var(--content-1);
 }
 
+.minimal, .outline {
+  background: none;
+}
+
 .primary {
-  color: black;
-  background: var(--base-primary);
+  &.filled {
+    color: black;
+    background: var(--base-primary);
+  }
+
+  /*todo  bad in white*/
+  &.outline {
+    color: var(--base-primary);
+    border: 1px solid var(--base-primary);
+  }
+
+  &.minimal {
+    color: var(--base-primary);
+  }
 }
 
 .danger {
-  background: var(--base-danger);
+  &.filled {
+    background: var(--base-danger);
+  }
+
+  &.outline {
+    color: var(--base-danger);
+    border: 1px solid var(--base-danger);
+  }
+
+  &.minimal {
+    color: var(--base-danger);
+  }
 }
 
 .secondary {
-  background: var(--base-secondary);
+  &.filled {
+    background: var(--base-secondary);
+  }
+
+  &.outline {
+    border: 1px solid var(--base-secondary);
+  }
 }
 
 .m {
@@ -31,18 +61,23 @@
 }
 
 .l {
+  padding: 12px;
   font-size: 16px;
   line-height: 20px;
 }
 
 .xl {
-  padding: 30px;
+  padding: 20px;
   font-size: 20px;
   line-height: 24px;
 }
 
 .fullWidth {
   width: 100%;
+}
+
+.left {
+  justify-content: flex-start;
 }
 
 .spinner {

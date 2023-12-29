@@ -18,11 +18,15 @@
 
 .content {
   padding: 12px;
-  padding-bottom: max(var(--safe-area-inset-bottom), 12px);
   display: flex;
   flex-direction: column;
   flex: auto;
   height: 1%;
+  overflow: scroll;
+
+  &:not(:has(+ .footer)) {
+    padding-bottom: max(var(--safe-area-inset-bottom), 12px);
+  }
 }
 
 .footer {

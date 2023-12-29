@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Button, Input, Select, smartSearch } from '../../kit';
+import { Button, Input, PlusIcon, Select, smartSearch } from '../../kit';
 import WordMini from '../../components/WordMini/WordMini';
 import { AppPage } from '../../components/AppPage/AppPage';
 import styles from './Words.module.css';
@@ -53,11 +53,6 @@ const Words: React.FC = () => {
     <AppPage
       showTabBar
       headerTitle={'Words'}
-      headerLeft={
-        <Button intent={'primary'} onClick={openWord}>
-          Add
-        </Button>
-      }
       headerBottom={
         <div className={styles.searchRow}>
           <Input
@@ -76,6 +71,14 @@ const Words: React.FC = () => {
       }
     >
       {content}
+      <div className={styles.bottomButtons}>
+        <Button url={'/repeat'} className={styles.btn}>
+          Repeat
+        </Button>
+        <Button onClick={openWord} intent={'primary'} className={styles.btn}>
+          <PlusIcon /> Add
+        </Button>
+      </div>
     </AppPage>
   );
 };

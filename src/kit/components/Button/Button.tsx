@@ -4,24 +4,29 @@ import cn from 'classnames';
 import { Spinner } from '..';
 import styles from './Button.module.css';
 
-// TODO:
-// type Variant = 'filled' | 'outlined' | 'minimal'
-
-type Props = {
+export interface ButtonProps {
   className?: string;
   intent?: 'primary' | 'secondary' | 'danger';
+  variant?: 'filled' | 'outline' | 'minimal';
   children: React.ReactNode;
   onClick?: () => void;
   size?: 'm' | 'l' | 'xl';
+  alignContent?: 'left' | 'center';
   fullWidth?: boolean;
   isLoading?: boolean;
   isDisabled?: boolean;
   type?: JSX.IntrinsicElements['button']['type'];
   url?: string;
-};
+}
 
-export const Button: React.FC<Props> = props => {
-  const { intent = 'secondary', size = 'l', type = 'button' } = props;
+export const Button: React.FC<ButtonProps> = props => {
+  const {
+    intent = 'secondary',
+    size = 'l',
+    type = 'button',
+    variant = 'filled',
+    alignContent = 'center',
+  } = props;
 
   const onClick = () => {
     if (props.isLoading || props.isDisabled) {
@@ -32,11 +37,13 @@ export const Button: React.FC<Props> = props => {
   };
 
   const className = cn(
+    props.className,
     styles.wrap,
+    styles[variant],
     styles[intent],
     styles[size],
     props.fullWidth && styles.fullWidth,
-    props.className,
+    alignContent === 'left' && styles.left,
   );
 
   let content = (

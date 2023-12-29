@@ -7,6 +7,8 @@ export { default as CopyIcon } from './copy.svg';
 export { default as DoubleChevronLeftIcon } from './double-chevron-left.svg';
 export { default as DoubleChevronRightIcon } from './double-chevron-right.svg';
 export { default as DownloadIcon } from './download.svg';
+export { default as MenuIcon } from './menu.svg';
+export { default as PlusIcon } from './plus.svg';
 export { default as RefreshIcon } from './refresh.svg';
 export { default as SettingsIcon } from './settings.svg';
 export { default as SpinnerIcon } from './spinner.svg';
