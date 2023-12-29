@@ -4,7 +4,6 @@ import styles from './Page.module.css';
 
 interface Props {
   className?: string;
-  footerClassName?: string;
   contentClassName?: string;
   header?: React.ReactNode;
   footer?: React.ReactNode;

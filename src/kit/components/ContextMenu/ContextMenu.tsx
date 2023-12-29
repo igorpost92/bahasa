@@ -24,6 +24,7 @@ export const ContextMenu: React.FC<Props> = props => {
       return;
     }
 
+    // TODO: wtf?
     const startHandler = () => {
       timerId.current = setTimeout(() => {
         setMenuOpen(true);

@@ -1,8 +1,11 @@
 .wrap {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid var(--base-border-color);
   min-height: 50px;
+
+  @media (prefers-color-scheme: light) {
+    border-top: 1px solid var(--base-border-color);
+  }
 }
 
 .item {

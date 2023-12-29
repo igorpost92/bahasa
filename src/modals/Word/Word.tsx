@@ -86,7 +86,6 @@ const Word: React.FC<Props> = props => {
           name={'text'}
           render={({ field: { ref, ...field } }) => (
             <ControlGroup
-              className={'aaa'}
               id={field.name}
               label={'Text'}
               intent={errors.text && 'danger'}

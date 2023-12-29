@@ -8,6 +8,8 @@ interface Props {
 
 // TODO: isOPen
 
+// TODO: animate presence
+
 export const Portal: React.FC<Props> = props => {
   const container = useMemo(() => {
     const element = document.createElement('div');

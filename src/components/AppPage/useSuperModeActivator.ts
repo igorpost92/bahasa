@@ -5,13 +5,15 @@ const CLICKS_THRESHOLD = 10;
 const TIMEOUT = 1000;
 
 export const useSuperModeActivator = () => {
-  const mainStore = useMainStore();
+  const isSuperMode = useMainStore(store => store.isSuperMode);
+  const setSuperMode = useMainStore(store => store.setSuperMode);
+
   const [counter, setCounter] = useState(0);
   const timer = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => {
     if (counter === CLICKS_THRESHOLD) {
-      mainStore.setSuperMode(true);
+      setSuperMode(true);
     }
   }, [counter]);
 
@@ -20,7 +22,7 @@ export const useSuperModeActivator = () => {
   }, []);
 
   const handleClick = () => {
-    if (mainStore.isSuperMode) {
+    if (isSuperMode) {
       return;
     }
 
