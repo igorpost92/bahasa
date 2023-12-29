@@ -22,26 +22,22 @@ input, button, textarea {
 
   --base-8: black;
 
+  --base-primary: #6B9AE0;
+  --base-primary: #747bff;
+
+  --base-primary: #F1A33B;
+  --base-danger: #EB494F;
+  --base-success: #5EC169;
+  --base-secondary: hsl(0, 0%, 26%);
+
   /*main text*/
   --content-1: hsl(0, 0%, 89%);
   /*secondary text*/
   --content-2: hsl(0, 0%, 48%);
 
+  --content-4: hsl(0, 0%, 0%);
+
   --inputs-bg: none;
-
-  /*todo*/
-  --orange-1: hsl(34, 87%, 59%);
-  --orange-2: hsl(37, 66%, 16%);
-
-  /*todo old red, good as text maybe?*/
-  /*--content-danger: #DD524C;*/
-
-  --base-primary: #5EC169;
-  --base-primary: #6B9AE0;
-  --base-primary: #747bff;
-  --base-primary: #F1A33B;
-  --base-secondary: hsl(0, 0%, 26%);
-  --base-danger: #EB494F;
 }
 
 @media (prefers-color-scheme: light) {
@@ -63,8 +59,11 @@ input, button, textarea {
     /*secondary text*/
     --content-2: hsl(0, 0%, 55%);
 
+    --content-4: hsl(0, 0%, 100%);
+
     --inputs-bg: none;
 
+    --base-primary: #747bff;
     --base-secondary: hsl(220, 7%, 92%);
   }
 }

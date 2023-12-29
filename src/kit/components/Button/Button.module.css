@@ -2,56 +2,54 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border: none;
   border-radius: 8px;
   cursor: pointer;
-  color: var(--content-1);
-}
-
-.minimal, .outline {
-  background: none;
 }
 
 .primary {
-  &.filled {
-    color: black;
-    background: var(--base-primary);
-  }
-
-  /*todo  bad in white*/
-  &.outline {
-    color: var(--base-primary);
-    border: 1px solid var(--base-primary);
-  }
-
-  &.minimal {
-    color: var(--base-primary);
-  }
-}
-
-.danger {
-  &.filled {
-    background: var(--base-danger);
-  }
-
-  &.outline {
-    color: var(--base-danger);
-    border: 1px solid var(--base-danger);
-  }
-
-  &.minimal {
-    color: var(--base-danger);
-  }
+  --bg-color: var(--base-primary);
+  --color: var(--base-primary);
 }
 
 .secondary {
-  &.filled {
-    background: var(--base-secondary);
-  }
+  --bg-color: var(--base-secondary);
+  --color: var(--content-2);
 
-  &.outline {
-    border: 1px solid var(--base-secondary);
+  &.filled {
+    color: var(--content-1);
   }
+}
+
+.success {
+  --bg-color: var(--base-success);
+  --color: var(--base-success);
+}
+
+.danger {
+  --bg-color: var(--base-danger);
+  --color: var(--base-danger);
+}
+
+.filled {
+  border: none;
+  background: var(--bg-color);
+  color: black;
+
+  &.primary {
+      color: var(--content-4);
+  }
+}
+
+.outline {
+  border: 1px solid var(--color);
+  background: none;
+  color: var(--color);
+}
+
+.minimal {
+  border: none;
+  background: none;
+  color: var(--color);
 }
 
 .m {

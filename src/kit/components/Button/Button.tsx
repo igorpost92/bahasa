@@ -6,7 +6,7 @@ import styles from './Button.module.css';
 
 export interface ButtonProps {
   className?: string;
-  intent?: 'primary' | 'secondary' | 'danger';
+  intent?: 'primary' | 'secondary' | 'success' | 'danger';
   variant?: 'filled' | 'outline' | 'minimal';
   children: React.ReactNode;
   onClick?: () => void;

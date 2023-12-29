@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './GameInner.module.css';
 import WordCard from './WordCard/WordCard';
-import { Button, RefreshIcon, useList } from '../../../kit';
+import { Button, RefreshIcon, SkipBackIcon, useList } from '../../../kit';
 import { useWordCards } from './useWordCards';
 import WordMini from '../../../components/WordMini/WordMini';
 import { WordListEntry } from '../../../storage/types';
@@ -109,31 +109,48 @@ const GameInner: React.FC<Props> = props => {
     // TODO: next repeat interval
 
     content = (
-      <>
-        <WordCard className={styles.card} text={text} meaning={meaning} showAnswer={showAnswer} />
+      <div className={styles.card}>
+        <WordCard text={text} meaning={meaning} showAnswer={showAnswer} />
 
         <div className={styles.buttons}>
           {showAnswer ? (
             <>
-              <Button size={'xl'} className={styles.btn} intent={'danger'} onClick={onWrong}>
+              <Button
+                size={'xl'}
+                variant="outline"
+                className={styles.btn}
+                intent={'danger'}
+                onClick={onWrong}
+              >
                 Wrong
               </Button>
-              <Button size={'xl'} className={styles.btn} intent={'primary'} onClick={onSuccess}>
+              <Button
+                size={'xl'}
+                variant="outline"
+                className={styles.btn}
+                intent={'success'}
+                onClick={onSuccess}
+              >
                 Correct
               </Button>
             </>
           ) : (
             <>
-              <Button size={'xl'} className={styles.revertBtn} onClick={goToPrevWord}>
-                <RefreshIcon />
+              <Button
+                size={'xl'}
+                variant={'outline'}
+                className={styles.revertBtn}
+                onClick={goToPrevWord}
+              >
+                <SkipBackIcon />
               </Button>
-              <Button size={'xl'} className={styles.btn} onClick={doShowAnswer}>
+              <Button variant="outline" size={'xl'} className={styles.btn} onClick={doShowAnswer}>
                 Show answer
               </Button>
             </>
           )}
         </div>
-      </>
+      </div>
     );
   }
 

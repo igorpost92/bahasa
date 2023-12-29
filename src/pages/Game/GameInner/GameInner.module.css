@@ -12,6 +12,9 @@
 }
 
 .card {
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
   flex: auto;
 }
 
@@ -27,18 +30,18 @@
 .buttons {
   width: 100%;
   display: flex;
+  gap: 12px;
   padding-top: 20px;
   margin-top: auto;
   /*margin-bottom: 12px;*/
 }
 
 .btn {
-  margin: 6px;
   flex: auto;
 }
 
 .revertBtn {
-  margin: 6px;
+  width: 70px;
 }
 
 .doneLabel {
