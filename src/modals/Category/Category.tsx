@@ -174,7 +174,13 @@ const CategoryModalWrap = () => {
   const { isOpen, close, payload } = useModal(Modals.Category);
 
   return (
-    <Drawer isOpen={isOpen} onClose={close} size={'xl'} className={styles.modalWrap}>
+    <Drawer
+      isOpen={isOpen}
+      onClose={close}
+      size={'xl'}
+      position={'bottom'}
+      className={styles.modalWrap}
+    >
       <Category id={payload?.id} onClose={close} />
     </Drawer>
   );

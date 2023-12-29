@@ -8,7 +8,6 @@
   position: absolute;
   inset: 0;
   background: black;
-  opacity: 0.8;
 }
 
 .content {
@@ -17,9 +16,6 @@
   padding: 12px;
   padding-bottom: max(var(--safe-area-inset-bottom), 12px);
   position: absolute;
-  bottom: 0;
-  width: 100%;
-  border-radius: 12px 12px 0 0;
   background: var(--base-2);
   overflow: auto;
 }
@@ -30,4 +26,18 @@
 
 .xl {
   height: calc(100% - max(var(--safe-area-inset-top), 16px));
+}
+
+.bottom {
+  border-radius: 12px 12px 0 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.left {
+  left: 0;
+  width: 300px;
+  height: 100%;
+  padding-top: max(var(--safe-area-inset-top), 12px);
+  padding-bottom: max(var(--safe-area-inset-bottom), 12px);
 }

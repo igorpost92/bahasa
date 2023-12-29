@@ -102,7 +102,12 @@ export function Select<T extends Option, M extends boolean = false>(props: Props
         <ChevronDownIcon className={styles.icon} />
       </div>
 
-      <Drawer isOpen={isModalOpen} onClose={closeModal} size={props.searchable ? 'l' : undefined}>
+      <Drawer
+        position={'bottom'}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        size={props.searchable ? 'l' : undefined}
+      >
         {props.searchable && (
           <Input
             placeholder={'Search'}

@@ -51,7 +51,7 @@ export const ContextMenu: React.FC<Props> = props => {
   return (
     <>
       {React.cloneElement(props.children, { ref: targetRef })}
-      <Drawer isOpen={isMenuOpen} onClose={() => setMenuOpen(false)}>
+      <Drawer position={'bottom'} isOpen={isMenuOpen} onClose={() => setMenuOpen(false)}>
         {props.menu}
       </Drawer>
     </>

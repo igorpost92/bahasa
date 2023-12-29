@@ -22,12 +22,8 @@ const LangSelector: React.FC<Props> = props => {
     return words > 0;
   });
 
-  if (!props.isOpen) {
-    return null;
-  }
-
   return (
-    <Drawer isOpen={props.isOpen} onClose={props.onClose}>
+    <Drawer position={'bottom'} isOpen={props.isOpen} onClose={props.onClose}>
       <div className={styles.header}>Select language</div>
       <div className={styles.list}>
         {languages.map(lang => {

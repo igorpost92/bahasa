@@ -136,7 +136,13 @@ const WordModalWrap = () => {
 
   return (
     // TODO: shared style
-    <Drawer isOpen={isOpen} onClose={close} size={'xl'} className={styles.modalWrap}>
+    <Drawer
+      isOpen={isOpen}
+      onClose={close}
+      size={'xl'}
+      position={'bottom'}
+      className={styles.modalWrap}
+    >
       <Word id={payload?.id} onClose={close} />
     </Drawer>
   );
