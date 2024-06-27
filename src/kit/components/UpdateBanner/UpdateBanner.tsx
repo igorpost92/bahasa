@@ -26,6 +26,9 @@ export const UpdateBanner: React.FC = () => {
     updateSW(true);
   }, [isShown]);
 
+  // TODO: alert
+  return null;
+
   if (!isShown) {
     return null;
   }
